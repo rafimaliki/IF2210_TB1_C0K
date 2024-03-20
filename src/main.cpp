@@ -52,10 +52,10 @@ int main() {
     //     cout << line << endl;
     // }
 
-    cout << "\nRecipe data:" << endl;
-    for (const auto& line : recipe_data) {
-        cout << line << endl;
-    }
+    // cout << "\nRecipe data:" << endl;
+    // for (const auto& line : recipe_data) {
+    //     cout << line << endl;
+    // }
 
     Player player1("Rafi", 0);
     Player player2("Nicho", 1);
@@ -66,7 +66,7 @@ int main() {
     while (true){
 
         Player current_player = Player::getCurrentPlayer();
-        cout << "\nGiliran player " << current_player.getName() << endl;
+        cout << "\nGiliran playerssssss " << current_player.getName() << endl;
 
         string command;
 
