@@ -2,6 +2,8 @@
 #define PEMAIN_HPP
 
 #include "../../std.hpp"
+#include <vector>
+using namespace std;
 
 class Pemain {
     public:
@@ -43,7 +45,7 @@ class Pemain {
         int id;
         string nama;
         int uang;
-        // matriks penyimpanan
+        vector<vector<string>> penyimpanan;
         int berat_badan;
 };
 

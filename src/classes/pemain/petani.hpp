@@ -2,10 +2,12 @@
 #define PETANI_HPP
 
 #include "pemain.hpp"
+#include <vector>
+using namespace std;
 
 class Petani : public Pemain {
     private:
-        // matriks ladang
+        vector<vector<string>> ladang;
 
     public:
         void cetak_ladang();
