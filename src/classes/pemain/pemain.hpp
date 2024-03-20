@@ -26,8 +26,7 @@ class Pemain {
         }
 
         void cetak_penyimpanan(){
-            vector<vector<string>> penyimpanan = this->penyimpanan;
-            int jumlah_kolom = penyimpanan[0].size();
+            int jumlah_kolom = this->penyimpanan[0].size();
 
             cout << "    ";
             int kiri = (jumlah_kolom - 3)/2;
@@ -40,8 +39,8 @@ class Pemain {
                 cout << "======";
             }
             cout << endl;
-            for (int i = 0; i < penyimpanan.size()*2+2; i++){
-                for (int j = 0; j <= penyimpanan[0].size(); j++){
+            for (int i = 0; i < this->penyimpanan.size()*2+2; i++){
+                for (int j = 0; j <= this->penyimpanan[0].size(); j++){
                     if(i==0 && j==0){
                         cout << "     ";
                     }else if(i==0){
@@ -58,16 +57,16 @@ class Pemain {
                             cout<< " " << i / 2 << " |";
                         }
                     }else{
-                        cout << " " << penyimpanan[(i/2)-1][j-1]<< " |";
+                        cout << " " << this->penyimpanan[(i/2)-1][j-1]<< " |";
                     }
                 }
                 cout << endl;
             }
             cout << endl;
             int cnt= 0;
-            for (int i = 0; i < penyimpanan.size(); i++){
-                for (int j = 0; j < penyimpanan[0].size(); j++){
-                    if (penyimpanan[i][j] == "   "){
+            for (int i = 0; i < this->penyimpanan.size(); i++){
+                for (int j = 0; j < this->penyimpanan[0].size(); j++){
+                    if (this->penyimpanan[i][j] == "   "){
                         cnt++;
                     }
                 }

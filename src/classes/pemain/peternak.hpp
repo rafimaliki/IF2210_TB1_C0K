@@ -11,9 +11,20 @@ class Peternak : public Pemain {
 
     public:
         void cetak_peternakan(){
-            peternakan = this->peternakan;
-            for (int i = 0; i < peternakan.size()*2+2; i++){
-                for (int j = 0; j <= peternakan[0].size(); j++){
+            int jumlah_kolom = this->peternakan[0].size();
+            cout << "    ";
+            int kiri = (jumlah_kolom - 3)/2;
+            int kanan = jumlah_kolom - kiri - 3;
+            for (int i = 0; i< kiri; i++){
+                cout << "======";
+            }
+            cout << "==[ Peternakan ]==";
+            for (int i = 0; i< kanan; i++){
+                cout << "======";
+            }
+            cout << endl;
+            for (int i = 0; i < this->peternakan.size()*2+2; i++){
+                for (int j = 0; j <= this->peternakan[0].size(); j++){
                     if(i==0 && j==0){
                         cout << "     ";
                     }else if(i==0){
@@ -30,7 +41,7 @@ class Peternak : public Pemain {
                             cout<< " " << i / 2 << " |";
                         }
                     }else{
-                        cout << " " << peternakan[(i/2)-1][j-1]<< " |";
+                        cout << " " << this->peternakan[(i/2)-1][j-1]<< " |";
                     }
                 }
                 cout << endl;
