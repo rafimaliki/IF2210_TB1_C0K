@@ -5,7 +5,9 @@ bismillah gk di dunkin ampe jam 3
 
 ## note:
 
-gunakan konvensi snake case untuk nama file, variabel etc, thx
+gunakan konvensi snake case untuk nama file dan variabel (my_variable_name)
+gunakan pascal case untuk nama class (MyClassName),
+thx
 </br>
 
 ## cara compile dan run main:
