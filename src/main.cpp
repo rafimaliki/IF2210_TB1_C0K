@@ -2,7 +2,7 @@
 
 #include "std.hpp"
 #include "classes/config_reader/config_reader.hpp"
-#include "classes/player/player.hpp"
+#include "classes/pemain/pemain.hpp"
 
 int main() {
 
@@ -57,16 +57,16 @@ int main() {
     //     cout << line << endl;
     // }
 
-    Player player1("Rafi", 0);
-    Player player2("Nicho", 1);
-    Player player3("Hugo", 2);
-    Player player4("Zaki", 3);
-    Player player5("Onta", 4);
+    Pemain player1("Rafi", 0);
+    Pemain player2("Nicho", 1);
+    Pemain player3("Hugo", 2);
+    Pemain player4("Zaki", 3);
+    Pemain player5("Onta", 4);
 
     while (true){
 
-        Player current_player = Player::getCurrentPlayer();
-        cout << "\nGiliran playerssssss " << current_player.getName() << endl;
+        Pemain current_player = Pemain::getCurrentPlayer();
+        cout << "\nGiliran player " << current_player.getName() << endl;
 
         string command;
 
@@ -77,7 +77,7 @@ int main() {
             break;
         }
 
-        Player::nextPlayer();
+        Pemain::nextPlayer();
     };
 
     return 0;
