@@ -39,7 +39,7 @@ class Pemain {
                 cout << "======";
             }
             cout << endl;
-            for (int i = 0; i < this->penyimpanan.size()*2+2; i++){
+            for (int i = 0; i < int(this->penyimpanan.size())*2+2; i++){
                 for (int j = 0; j <= this->penyimpanan[0].size(); j++){
                     if(i==0 && j==0){
                         cout << "     ";

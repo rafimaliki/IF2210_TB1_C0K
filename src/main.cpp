@@ -37,10 +37,10 @@ int main() {
     //     cout << line << endl;
     // }
 
-    // cout << "\nMisc data:" << endl;
-    // for (const auto& line : misc_data) {
-    //     cout << line << endl;
-    // }
+    cout << "\nMisc data:" << endl;
+    for (const auto& line : misc_data) {
+        cout << line << endl;
+    }
 
     // cout << "\nPlant data:" << endl;
     // for (const auto& line : plant_data) {
@@ -64,7 +64,6 @@ int main() {
     Pemain player5("Onta", 4);
 
     while (true){
-
         Pemain current_player = Pemain::getCurrentPlayer();
         cout << "\nGiliran player " << current_player.getName() << endl;
 
