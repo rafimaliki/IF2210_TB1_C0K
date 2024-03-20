@@ -10,19 +10,11 @@ gunakan pascal case untuk nama class (MyClassName), </br>
 thx
 </br>
 
-## cara compile dan run main:
+## cara run:
 
-1. buka wsl
-2. set directory terminal ke src
-3. run command berikut
-
-```
-make
-../bin/main
-```
-
-4. untuk clean
+1. pastiin dir di root dit
+2. run command di terminal wsl
 
 ```
-make clean
+./run.sh
 ```

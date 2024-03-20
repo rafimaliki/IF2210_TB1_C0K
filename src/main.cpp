@@ -20,11 +20,11 @@ int main() {
 
 
 
-    ConfigReader animal_config("../config/animal.txt");
-    ConfigReader misc_config("../config/misc.txt");
-    ConfigReader plant_config("../config/plant.txt");
-    ConfigReader product_config("../config/product.txt");
-    ConfigReader recipe_config("../config/recipe.txt");
+    ConfigReader animal_config("config/animal.txt");
+    ConfigReader misc_config("config/misc.txt");
+    ConfigReader plant_config("config/plant.txt");
+    ConfigReader product_config("config/product.txt");
+    ConfigReader recipe_config("config/recipe.txt");
 
     vector<string> animal_data = animal_config.readLines();
     vector<string> misc_data = misc_config.readLines();
