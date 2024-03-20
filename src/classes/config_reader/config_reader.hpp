@@ -1,25 +1,30 @@
+#ifndef CONFIG_READER_HPP
+#define CONFIG_READER_HPP
+
 #include "../../std.hpp"
 #include <fstream>
 
+using std::ifstream;
+using std::ifstream;
+using std::getline;
+
 class ConfigReader {
 public:
-    ConfigReader(const std::string& filename) : filename(filename) {}
+    ConfigReader(const string& filename) : filename(filename) {}
 
-    std::vector<std::string> readLines() {
+    vector<string> readLines() {
 
+        vector<string> lines;
+        ifstream file(filename);
 
-        // Convert the path to a string and print it
-        // std::cout << "Current working directory: " << std::filesystem::current_path().string() << std::endl;
-
-        std::vector<std::string> lines;
-        std::ifstream file(filename);
         if (!file.is_open()) {
-            std::cerr << "Error opening file: " << filename << std::endl;
-            return lines; // Return empty vector if file cannot be opened
+            cout << "Error opening file: " << filename << endl;
+            return lines; 
         }
 
-        std::string line;
-        while (std::getline(file, line)) {
+        string line;
+
+        while (getline(file, line)) {
             lines.push_back(line);
         }
 
@@ -28,5 +33,7 @@ public:
     }
 
 private:
-    std::string filename;
+    string filename;
 };
+
+#endif
