@@ -12,6 +12,19 @@ class Petani : public Pemain {
     public:
         void cetak_ladang(){
             ladang = this->ladang;
+            int jumlah_kolom = ladang[0].size();
+
+            cout << "    ";
+            int kiri = (jumlah_kolom - 2)/2;
+            int kanan = jumlah_kolom - kiri - 2;
+            for (int i = 0; i< kiri; i++){
+                cout << "======";
+            }
+            cout << "=[ Ladang ]=";
+            for (int i = 0; i< kanan; i++){
+                cout << "======";
+            }
+            cout << endl;
             for (int i = 0; i < ladang.size()*2+2; i++){
                 for (int j = 0; j <= ladang[0].size(); j++){
                     if(i==0 && j==0){
