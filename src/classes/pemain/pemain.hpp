@@ -40,8 +40,8 @@ class Pemain {
         }
 
     protected:
-        int id;
         string nama;
+        int id;
         int uang;
         // matriks penyimpanan
         int berat_badan;

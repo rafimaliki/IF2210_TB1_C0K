@@ -7,7 +7,8 @@
 int main() {
 
     cout << "\033[2J\033[1;1H";
-    cout << " ██░ ██  ▄▄▄       ██▀███   ██▒   █▓▓█████   ██████ ▄▄▄█████▓    ███▄ ▄███▓ ▒█████   ▒█████   ███▄    █ \n"
+    cout << "\n                                                                                                      \n"
+            " ██░ ██  ▄▄▄       ██▀███   ██▒   █▓▓█████   ██████ ▄▄▄█████▓    ███▄ ▄███▓ ▒█████   ▒█████   ███▄    █ \n"
             "▓██░ ██▒▒████▄    ▓██ ▒ ██▒▓██░   █▒▓█   ▀ ▒██    ▒ ▓  ██▒ ▓▒   ▓██▒▀█▀ ██▒▒██▒  ██▒▒██▒  ██▒ ██ ▀█   █ \n"
             "▒██▀▀██░▒██  ▀█▄  ▓██ ░▄█ ▒ ▓██  █▒░▒███   ░ ▓██▄   ▒ ▓██░ ▒░   ▓██    ▓██░▒██░  ██▒▒██░  ██▒▓██  ▀█ ██▒\n"
             "░▓█ ░██ ░██▄▄▄▄██ ▒██▀▀█▄    ▒██ █░░▒▓█  ▄   ▒   ██▒░ ▓██▓ ░    ▒██    ▒██ ▒██   ██░▒██   ██░▓██▒  ▐▌██▒\n"
@@ -66,11 +67,11 @@ int main() {
     while (true){
 
         Pemain current_player = Pemain::getCurrentPlayer();
-        cout << "\nGiliran player " << current_player.getName() << endl;
+        cout << "\n\033[0mGiliran player " << current_player.getName() << endl;
 
         string command;
 
-        cout << "> ";
+        cout << "> \033[1;1m";
         cin >> command;
 
         if (command == "EXIT") {

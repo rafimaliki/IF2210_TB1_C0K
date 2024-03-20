@@ -12,7 +12,7 @@ thx
 
 ## cara run:
 
-1. pastiin dir di root dit
+1. pastiin dir di root dir
 2. run command di terminal wsl
 
 ```
