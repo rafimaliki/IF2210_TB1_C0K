@@ -25,7 +25,32 @@ class Pemain {
             return id;
         }
 
-        void cetak_penyimpanan();
+        void cetak_penyimpanan(){
+            penyimpanan = this->penyimpanan;
+            for (int i = 0; i < penyimpanan.size()*2+2; i++){
+                for (int j = 0; j <= penyimpanan[0].size(); j++){
+                    if(i==0 && j==0){
+                        cout << "     ";
+                    }else if(i==0){
+                        cout << "  " << char('A' + j-1) << "   ";
+                    }
+                    else if(i%2 ==1 && j == 0){
+                        cout << "    +";
+                    }else if(i%2 == 1){
+                        cout << "-----+";
+                    }else if(i%2 == 0 && j == 0){
+                        if(i/2 < 10){
+                            cout<< " 0" << i / 2 << " |";
+                        }else{
+                            cout<< " " << i / 2 << " |";
+                        }
+                    }else{
+                        cout << " " << penyimpanan[(i/2)-1][j-1]<< " |";
+                    }
+                }
+                cout << endl;
+            }
+        }
 
         void makan();
 
