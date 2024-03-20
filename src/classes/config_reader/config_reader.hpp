@@ -1,8 +1,5 @@
-#include <iostream>
+#include "../../std.hpp"
 #include <fstream>
-#include <vector>
-#include <string>
-#include <filesystem>
 
 class ConfigReader {
 public:

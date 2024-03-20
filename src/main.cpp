@@ -1,15 +1,7 @@
 // File: main.cpp
 
-#include <iostream>
-#include <vector>
-#include <string>
-
+#include "std.hpp"
 #include "classes/config_reader/config_reader.hpp"
-
-using std::cout;
-using std::endl;
-using std::vector;
-using std::string;
 
 int main() {
 
