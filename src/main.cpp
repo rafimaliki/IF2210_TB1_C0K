@@ -76,9 +76,11 @@ int main() {
 
         if (command == "EXIT") {
             break;
+        } else if (command == "NEXT"){
+            Pemain::nextPlayer();
+        } else {
+            cout << "\033[0mCommand not found!" << endl;
         }
-
-        Pemain::nextPlayer();
     };
 
     return 0;
