@@ -80,6 +80,8 @@ int main() {
         } else {
             cout << "\033[0mCommand not found!" << endl;
         }
+
+        // player1.cetak_penyimpanan();
     };
 
     return 0;
