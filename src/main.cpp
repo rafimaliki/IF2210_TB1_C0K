@@ -1,8 +1,8 @@
 // File: main.cpp
 
 #include "std.hpp"
-#include "classes/config_reader/config_reader.hpp"
-#include "classes/pemain/pemain.hpp"
+#include "class/muat/config_reader.hpp"
+#include "class/gameobject/pemain/pemain.hpp"
 
 int main() {
 

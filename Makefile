@@ -3,9 +3,9 @@ CXX := g++
 CXXFLAGS := -std=c++11 -Wall
 
 # Directories
-SRCDIR := .
-BUILDDIR := ../build
-BINDIR := ../bin
+SRCDIR := src
+BUILDDIR := build
+BINDIR := bin
 
 # Files
 SRCS := $(wildcard $(SRCDIR)/*.cpp)
