@@ -2,7 +2,8 @@
 
 #include "std.hpp"
 #include "class/muat/config_reader.hpp"
-#include "class/gameobject/pemain/pemain.hpp"
+#include "class/game/game.hpp"
+// #include "class/gameobject/pemain/pemain.hpp"
 
 int main() {
 
@@ -19,70 +20,85 @@ int main() {
             " ░  ░  ░      ░  ░   ░           ░     ░  ░      ░                     ░       ░ ░      ░ ░           ░ \n"
             "                                ░                                                                       \n";
 
-
+    Game game;
 
     ConfigReader animal_config("config/animal.txt");
-    ConfigReader misc_config("config/misc.txt");
-    ConfigReader plant_config("config/plant.txt");
-    ConfigReader product_config("config/product.txt");
-    ConfigReader recipe_config("config/recipe.txt");
 
-    vector<string> animal_data = animal_config.readLines();
-    vector<string> misc_data = misc_config.readLines();
-    vector<string> plant_data = plant_config.readLines();
-    vector<string> product_data = product_config.readLines();
-    vector<string> recipe_data = recipe_config.readLines();
-
-    // cout << "\nAnimal data:" << endl;
-    // for (const auto& line : animal_data) {
-    //     cout << line << endl;
-    // }
-
-    cout << "\nMisc data:" << endl;
-    for (const auto& line : misc_data) {
-        cout << line << endl;
+    vector<vector<string>> animal_data = animal_config.readConfig();
+    game.setAnimalData(AnimalData::ReadAnimalData(animal_data));
+    
+    cout << "\n\x1b[32mANIMAL DATA: \x1b[0m\n" << endl;
+    for (int i = 0; i < int(game.animalData.size()) ; i++){
+        game.animalData[i].print();
     }
 
-    // cout << "\nPlant data:" << endl;
-    // for (const auto& line : plant_data) {
-    //     cout << line << endl;
+    ConfigReader plant_config("config/plant.txt");
+
+    vector<vector<string>> plant_data = plant_config.readConfig();
+    game.setPlantData(PlantData::ReadPlantData(plant_data));
+
+    cout << "\n\x1b[32mPLANT DATA: \x1b[0m\n" << endl;
+    for (int i = 0; i < int(game.plantData.size()) ; i++){
+        game.plantData[i].print();
+    }
+
+    ConfigReader product_config("config/product.txt");
+
+    vector<vector<string>> product_data = product_config.readConfig();
+    game.setProductData(ProductData::ReadProductData(product_data));
+
+    cout << "\n\x1b[32mPRODUCT DATA: \x1b[0m\n" << endl;
+    for (int i = 0; i < int(game.productData.size()) ; i++){
+        game.productData[i].print();
+    }
+
+    ConfigReader recipe_config("config/recipe.txt");
+
+    cout << "\n\x1b[32mRECIPE DATA: \x1b[0m\n" << endl;
+    vector<vector<string>> recipe_data = recipe_config.readConfig();
+    game.setRecipeData(RecipeData::ReadRecipeData(recipe_data));
+
+    for (int i = 0; i < int(game.recipeData.size()) ; i++){
+        game.recipeData[i].print();
+    }
+
+    
+
+    // Pemain player1("Rafi", 0);
+    // Pemain player2("Nicho", 1);
+    // Pemain player3("Hugo", 2);
+    // Pemain player4("Zaki", 3);
+    // Pemain player5("Onta", 4);
+
+    // while (true){
+    //     Pemain current_player = Pemain::getCurrentPlayer();
+    //     cout << "\n\033[0mGiliran player " << current_player.getName() << endl;
+
+    //     string command;
+
+    //     cout << "> \033[1;1m";
+    //     cin >> command;
+
+    //     if (command == "EXIT") {
+    //         break;
+    //     } else if (command == "NEXT"){
+    //         Pemain::nextPlayer();
+    //     } else {
+    //         cout << "\033[0mCommand not found!" << endl;
+    //     }
+
+    //     // player1.cetak_penyimpanan();
+    // };
+
+    // Game game;
+    // game.start()
+
+    // while(game.isrunning()){
+
+    //     game.getinput();
+    //     game.runcommand();
+
     // }
-
-    // cout << "\nProduct data:" << endl;
-    // for (const auto& line : product_data) {
-    //     cout << line << endl;
-    // }
-
-    // cout << "\nRecipe data:" << endl;
-    // for (const auto& line : recipe_data) {
-    //     cout << line << endl;
-    // }
-
-    Pemain player1("Rafi", 0);
-    Pemain player2("Nicho", 1);
-    Pemain player3("Hugo", 2);
-    Pemain player4("Zaki", 3);
-    Pemain player5("Onta", 4);
-
-    while (true){
-        Pemain current_player = Pemain::getCurrentPlayer();
-        cout << "\n\033[0mGiliran player " << current_player.getName() << endl;
-
-        string command;
-
-        cout << "> \033[1;1m";
-        cin >> command;
-
-        if (command == "EXIT") {
-            break;
-        } else if (command == "NEXT"){
-            Pemain::nextPlayer();
-        } else {
-            cout << "\033[0mCommand not found!" << endl;
-        }
-
-        // player1.cetak_penyimpanan();
-    };
-
+  
     return 0;
 }

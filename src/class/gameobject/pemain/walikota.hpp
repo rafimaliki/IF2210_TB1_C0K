@@ -5,6 +5,7 @@
 
 class Walikota : public Pemain {
     public:
+        Walikota() : Pemain() {}
         void pungut_pajak();
 
         void bangun_bangunan();

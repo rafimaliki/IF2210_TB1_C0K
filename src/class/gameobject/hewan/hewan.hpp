@@ -1,7 +1,7 @@
 #ifndef HEWAN_HPP
 #define HEWAN_HPP
 
-#include "../../std.hpp"
+#include "../../../std.hpp"
 
 class Hewan {
     private:

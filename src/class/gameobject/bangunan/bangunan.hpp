@@ -1,7 +1,7 @@
 #ifndef BANGUNAN_HPP
 #define BANGUNAN_HPP
 
-#include "../../std.hpp"
+#include "../../../std.hpp"
 
 class Bangunan {
     private:

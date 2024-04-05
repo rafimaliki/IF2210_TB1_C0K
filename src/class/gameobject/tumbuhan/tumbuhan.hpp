@@ -1,7 +1,7 @@
 #ifndef TUMBUHAN_HPP
 #define TUMBUHAN_HPP
 
-#include "../../std.hpp"
+#include "../../../std.hpp"
 
 class Tumbuhan {
     private:
