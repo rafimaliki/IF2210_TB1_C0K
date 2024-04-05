@@ -3,6 +3,7 @@
 #include "std.hpp"
 #include "class/game/game.hpp"
 #include "class/gameobject/pemain/pemain.hpp"
+#include "class/gameobject/item/item.hpp"
 
 int main() {
 
@@ -29,6 +30,23 @@ int main() {
     // Pemain player3("Hugo", 2);
     // Pemain player4("Zaki", 3);
     // Pemain player5("Onta", 4);
+
+    // // debugging
+    // player1.addHewan("sapi1");
+    // player1.addHewan("sapi2");
+    // player1.addHewan("sapi3");
+    // player1.addTumbuhan("rumput");
+    // player1.addProduk("ganja");
+    // player1.cetakItem();
+
+    // player2.addHewan("sapi4");
+    // player2.addHewan("sapi5");
+    // player2.addHewan("sapi6");
+    // player2.addTumbuhan("rumput");
+    // player2.addProduk("ganja");
+    // player2.cetakItem();
+
+
 
     // while (true){
     //     Pemain current_player = Pemain::getCurrentPlayer();

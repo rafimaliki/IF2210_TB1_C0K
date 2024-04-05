@@ -1,19 +1,27 @@
 #ifndef TUMBUHAN_HPP
 #define TUMBUHAN_HPP
 
-#include "../../../std.hpp"
+#include "../item/item.hpp"
 
-class Tumbuhan {
-    private:
-        int id;
-        string kode_huruf;
-        string nama;
-        string tipe;
-        int waktu_panen;
-        int harga;
+class Tumbuhan : public Item
+{
+public:
+    Tumbuhan(string nama) : Item("Tumbuhan"), nama(nama)
+    {
+        tambahTumbuhan();
+    }
+    void printJenis() override
+    {
+        cout << "halo, saya item jenis Tumbuhan dengan nama " << nama << endl;
+    }
 
-    public:
-        void kurangi_waktu_panen();
+private:
+    int id;
+    string kode_huruf;
+    string nama;
+    int waktu_panen;
+    int umur_sekarang;
+    int harga;
 };
 
 #endif
