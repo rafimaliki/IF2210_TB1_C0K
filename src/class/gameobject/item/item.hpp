@@ -69,7 +69,7 @@ class ItemMap
 public:
     ItemMap() : last_key(0) {}
     ~ItemMap(){
-        
+
     }
 
     void addItem(Item *item)
@@ -151,98 +151,12 @@ private:
 
 
 
-//DISCLAIMER : SEMENTARA SUBCLASS ITEM DISINI SEMUA, INCLUDE GW GK JELAS - Hugo
-//DISCLAIMER : SEMENTARA SUBCLASS ITEM DISINI SEMUA, INCLUDE GW GK JELAS - Hugo
-//DISCLAIMER : SEMENTARA SUBCLASS ITEM DISINI SEMUA, INCLUDE GW GK JELAS - Hugo
-
 
 int Item::jumlahTumbuhan = 0;
 int Item::jumlahHewan = 0;
 int Item::jumlahBangunan = 0;
 int Item::jumlahProduk = 0;
 
-// class Bangunan : public Item
-// {
-// public:
-//     Bangunan() : Item("Bangunan")
-//     {
-//         tambahBangunan();
-//     }
-//     ~Bangunan();
-//     void printJenis() override
-//     {
-//         cout << "halo, saya item jenis Bangunan dengan nama " << endl;
-//     }
 
-// private:
-//     int id;
-//     string kode_huruf;
-//     int harga;
-// };
-
-// class Produk : public Item {
-// public:
-//     Produk() : Item("Produk") , nama("Unnamed"){}
-//     Produk( string nama) : Item("Produk"), nama(nama) 
-//     {
-//         tambahProduk();
-//     }
-//     ~Produk();
-//     void printJenis() override
-//     {
-//         cout << "halo, saya item jenis Produk dengan nama " << nama << endl;
-//     }
-
-// private:
-//     int id;
-//     string kode_huruf;
-//     string nama;
-//     string tipe;
-//     string tipe_asal;
-//     int beban_tambah;
-//     int harga;
-// };
-// class Tumbuhan : public Item
-// {
-// public:
-//     Tumbuhan( string nama) : Item("Tumbuhan"), nama(nama)
-//     {
-//         tambahTumbuhan();
-//     }
-//     ~Tumbuhan();
-//     void printJenis() override
-//     {
-//         cout << "halo, saya item jenis Tumbuhan dengan nama " << nama << endl;
-//     }
-
-// private:
-//     int id;
-//     string kode_huruf;
-//     string nama;
-//     int waktu_panen;
-//     int umur_sekarang;
-//     int harga;
-// };
-// class Hewan : public Item
-// {
-// public:
-//     Hewan( string nama) : Item("Hewan"), nama(nama)
-//     {
-//         tambahHewan();
-//     }
-//     ~Hewan();
-//     void printJenis() override
-//     {
-//         cout << "halo, saya item jenis Hewan dengan nama " << nama << endl;
-//     }
-
-// private:
-//     int id;
-//     string kode_huruf;
-//     string nama;
-//     string tipe;
-//     int berat_panen;
-//     int harga;
-// };
 
 #endif

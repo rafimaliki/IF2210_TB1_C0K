@@ -10,6 +10,7 @@ public:
     {
         tambahProduk();
     }
+    ~Produk(){}
     void printJenis() override
     {
         cout << "halo, saya item jenis Produk dengan nama " << nama << endl;
