@@ -9,6 +9,7 @@
 #include "../gameobject/tumbuhan/tumbuhan.hpp"
 #include "../muat/config_reader.hpp"
 
+
 class ItemData {
     public:
         int ID;
@@ -174,6 +175,55 @@ class Game {
 
         Game(){
             cout << "A GAME IS CREATED" << endl << endl;
+        }
+
+        void loadData(){
+
+            // Harus ditambah try catch, buat readernya
+
+            ConfigReader animal_config("config/animal.txt");
+
+            vector<vector<string>> animal_data = animal_config.readConfig();
+            this->setAnimalData(AnimalData::ReadAnimalData(animal_data));
+            
+            // cout << "\n\x1b[32mANIMAL DATA: \x1b[0m\n" << endl;
+            // for (int i = 0; i < int(this->animalData.size()) ; i++){
+            //     this->animalData[i].print();
+            // }
+            cout << "\x1b[32mANIMAL DATA IS LOADED \x1b[0m" << endl;
+
+            ConfigReader plant_config("config/plant.txt");
+
+            vector<vector<string>> plant_data = plant_config.readConfig();
+            this->setPlantData(PlantData::ReadPlantData(plant_data));
+
+            // cout << "\n\x1b[32mPLANT DATA: \x1b[0m\n" << endl;
+            // for (int i = 0; i < int(this->plantData.size()) ; i++){
+            //     this->plantData[i].print();
+            // }
+            cout << "\x1b[32mPLANT DATA IS LOADED \x1b[0m" << endl;
+
+            ConfigReader product_config("config/product.txt");
+
+            vector<vector<string>> product_data = product_config.readConfig();
+            this->setProductData(ProductData::ReadProductData(product_data));
+
+            // cout << "\n\x1b[32mPRODUCT DATA: \x1b[0m\n" << endl;
+            // for (int i = 0; i < int(this->productData.size()) ; i++){
+            //     this->productData[i].print();
+            // }
+            cout << "\x1b[32mPRODUCT DATA IS LOADED \x1b[0m" << endl;
+
+            ConfigReader recipe_config("config/recipe.txt");
+
+            vector<vector<string>> recipe_data = recipe_config.readConfig();
+            this->setRecipeData(RecipeData::ReadRecipeData(recipe_data));
+
+            // cout << "\n\x1b[32mRECIPE DATA: \x1b[0m\n" << endl;
+            // for (int i = 0; i < int(this->recipeData.size()) ; i++){
+            //     this->recipeData[i].print();
+            // }
+            cout << "\x1b[32mRECIPE DATA IS LOADED \x1b[0m" << endl;
         }
 
         void setPlantData(vector<PlantData> plantData){
