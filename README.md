@@ -12,9 +12,16 @@ thx
 
 ## cara run:
 
-1. pastiin dir di root dir
+install cmake dlu
+```
+sudo apt install cmake
+ ```
+</br>
+trus:
+</br>
+1. pastiin dir di root dir </br>
 2. run command di terminal wsl
 
 ```
-./run.sh
+./build.sh
 ```
