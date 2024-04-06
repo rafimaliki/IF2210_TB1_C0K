@@ -1,3 +1,0 @@
-/mnt/c/Files/Code/Kuliah/Sem4/ObjectOrientedProgramming/Tubes1/tubesOOP/build/CMakeFiles/main.dir
-/mnt/c/Files/Code/Kuliah/Sem4/ObjectOrientedProgramming/Tubes1/tubesOOP/build/CMakeFiles/edit_cache.dir
-/mnt/c/Files/Code/Kuliah/Sem4/ObjectOrientedProgramming/Tubes1/tubesOOP/build/CMakeFiles/rebuild_cache.dir
