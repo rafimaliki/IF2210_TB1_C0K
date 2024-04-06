@@ -16,7 +16,7 @@ void Game::start() {
 void Game::loadConfig() {
 
     cout << "Loading config...\n" << endl;
-    this->config.loadGameConfig();
+    GameConfig::loadGameConfig();
 }
 
 void Game::loadSaveFile() {

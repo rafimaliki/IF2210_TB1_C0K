@@ -37,8 +37,19 @@ int main() {
 
         game.executeCommand(game.inputCommand());
         game.checkWin();
-
+        
         /* Kalo win bakal ngubah state Running ke false dan set variabel winner : player& */
+
+
+        /* 
+           Tes print config dari main 
+           Semua file yang include item_config.hpp harusnya bisa akses ini 
+        */
+
+        // cout << "\n\x1b[32mRECIPE Config: \x1b[0m\n" << endl;
+        // for (int i = 0; i < int(GameConfig::recipeConfig.size()) ; i++){
+        //     GameConfig::recipeConfig[i].print();
+        // }
    }
 
    game.printWinner();

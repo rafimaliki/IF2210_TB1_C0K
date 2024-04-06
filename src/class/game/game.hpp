@@ -4,9 +4,10 @@
 class Game {
     private:
         bool is_running;
-        GameConfig config;
         // vector<Player> players;
         // Player& current_player;
+        
+        // GameConfig config; // GameConfig gw ubah jadi static member class GameConfig aja biar gak circular include
     public:
         Game();
 
