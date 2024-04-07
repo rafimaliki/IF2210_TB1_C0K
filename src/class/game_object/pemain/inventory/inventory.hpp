@@ -25,7 +25,6 @@ class InventoryEntry
     public:
         int amount; /* hanya 0 dan 1, ada dan tidak, gbs multiple*/
         T* item;
-        string code;
 
         InventoryEntry();
         InventoryEntry(T* item);
@@ -44,20 +43,21 @@ class Inventory
 
         Inventory(int width, int height, string title);
         void add(T* item);
-        void remove(int x, int y);
+        void remove(int i, int j);
         void print();
-        void printItem(int x, int y);
+        void printItem(int i, int j);
         int calcEmptySpace();
+        bool isEmpty(int j, int i);
 };
 
 
 /* IMPLEMENTATION */
 
 template <class T>
-InventoryEntry<T>::InventoryEntry(T* item) : amount(1), item(item), code(item->config.KODE_HURUF){}
+InventoryEntry<T>::InventoryEntry(T* item) : amount(1), item(item){}
 
 template <class T>
-InventoryEntry<T>::InventoryEntry() : amount(0), item(nullptr), code("   "){}
+InventoryEntry<T>::InventoryEntry() : amount(0), item(nullptr){}
 
 template <class T>
 Inventory<T>::Inventory(int width, int height, string title) {
@@ -81,7 +81,7 @@ void Inventory<T>::add(T* item) {
 }
 
 template <class T>
-void Inventory<T>::remove(int x, int y) {
+void Inventory<T>::remove(int i, int j) {
     // Implementation of remove function
 }
 
@@ -119,7 +119,13 @@ void Inventory<T>::print() {
             cout << SPACE_1 << i+1 << SPACE_1;
         }
         for (int j = 0; j < this->width; j++) {
-            cout << PIPE << SPACE_1 << this->grid[i][j].code << SPACE_1;
+            cout << PIPE << SPACE_1;
+            if (!this->isEmpty(i, j)){
+                cout << this->grid[i][j].item->config.KODE_HURUF;
+            } else {
+                cout << SPACE_3;
+            };
+            cout << SPACE_1;
         } cout << PIPE << endl; 
     }
     cout << SPACE_4;
@@ -136,7 +142,7 @@ int Inventory<T>::calcEmptySpace() {\
 
     for(int i = 0; i < this->height; i++) {
         for(int j = 0; j < this->width; j++) {
-            if (this->grid[i][j].amount == 0) {
+            if (this->isEmpty(i, j)) {
                 count++;
             }
         }
@@ -145,8 +151,13 @@ int Inventory<T>::calcEmptySpace() {\
 }
 
 template <class T>
-void Inventory<T>::printItem(int x, int y) {
-    this->grid[x][y].item->print();
+bool Inventory<T>::isEmpty(int i, int j) {\
+    return this->grid[i][j].amount == 0;
+}
+
+template <class T>
+void Inventory<T>::printItem(int i, int j) {
+    this->grid[i][j].item->print();
 }
 
 #endif

@@ -35,14 +35,14 @@ int main() {
     */
 
     cout << endl;
-    Plant p1(1);
-    Plant p2(2);
+    Plant* p1 = new Plant(1);
+    Plant* p2 = new Plant(2);
     cout << endl;
  
-    // Inventory<Plant> inv(GameConfig::miscConfig.INVENTORY_sIZE[0], GameConfig::miscConfig.INVENTORY_sIZE[1], "PENYIMPANAN");
-    Inventory<Plant> inv(5, 5, "PENYIMPANAN");
-    inv.add(&p1);
-    inv.add(&p2);
+    Inventory<Plant> inv(GameConfig::miscConfig.INVENTORY_sIZE[0], GameConfig::miscConfig.INVENTORY_sIZE[1], "PENYIMPANAN");
+    // Inventory<Plant> inv(5, 5, "PENYIMPANAN");
+    inv.add(p1);
+    inv.add(p2);
         
 
     while (game.isRunning()) {
