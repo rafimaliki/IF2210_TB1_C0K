@@ -14,5 +14,9 @@ class Item
         virtual void print();
         virtual ItemConfig* getConfig() = 0;
         virtual ~Item(); 
+
+        virtual void setPlanted(bool isPlanted);
+        virtual void printKODE_HURUF();
+        virtual bool isReadyToHarvest();
 };
 #endif

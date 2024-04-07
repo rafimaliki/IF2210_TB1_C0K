@@ -42,6 +42,7 @@ class Inventory
         int height;
         vector<vector<InventoryEntry<T>>> grid;
 
+        Inventory();
         Inventory(int width, int height, string title);
         void add(T* item);
         void remove(int i, int j);
@@ -59,6 +60,14 @@ InventoryEntry<T>::InventoryEntry(T* item) : amount(1), item(item){}
 
 template <class T>
 InventoryEntry<T>::InventoryEntry() : amount(0), item(nullptr){}
+
+template <class T>
+Inventory<T>::Inventory() {
+    this->title = "";
+    this->width = 0;
+    this->height = 0;
+    this->grid = vector<vector<InventoryEntry<T>>>(0, vector<InventoryEntry<T>>(0, InventoryEntry<T>()));
+}
 
 template <class T>
 Inventory<T>::Inventory(int width, int height, string title) {
@@ -122,7 +131,7 @@ void Inventory<T>::print() {
         for (int j = 0; j < this->width; j++) {
             cout << PIPE << SPACE_1;
             if (!this->isEmpty(i, j)){
-                cout << this->grid[i][j].getItem()->getConfig()->getKODE_HURUF();
+                this->grid[i][j].getItem()->printKODE_HURUF();
             } else {
                 cout << SPACE_3;
             };

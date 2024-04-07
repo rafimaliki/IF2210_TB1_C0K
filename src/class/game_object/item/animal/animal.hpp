@@ -20,6 +20,8 @@ public:
     // ~Animal();
     void print();
     ItemConfig* getConfig();
+    void printKODE_HURUF();
+    bool isReadyToHarvest();
 
     // void Feed(ProductConfig product);
 };

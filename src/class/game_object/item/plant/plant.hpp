@@ -11,6 +11,7 @@ private:
     /* data */
     ItemConfig* config;
     int Age;
+    bool isPlanted;
 public:
 
     static vector<Plant*> plants;
@@ -20,8 +21,12 @@ public:
     // ~Plant();
     void print();
     ItemConfig* getConfig();
+    void setPlanted(bool isPlanted);
+    void printKODE_HURUF();
+    bool isReadyToHarvest();
 
     static void AgeAllPlants();
+
 };
 
 

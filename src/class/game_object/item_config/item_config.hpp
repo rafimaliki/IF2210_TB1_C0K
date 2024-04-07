@@ -19,6 +19,9 @@ class ItemConfig {
         string getKODE_HURUF();
         string getNAME();
         int getPRICE();
+
+        virtual int getDURATION_TO_HARVEST();
+        virtual int getWEIGHT_TO_HARVEST();
 };
 
 

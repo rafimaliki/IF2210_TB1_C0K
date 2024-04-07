@@ -10,3 +10,7 @@ void Petani::printLahan(){
 void Petani::addPlant(Item* item){
     this->lahan.add(item);
 }
+
+Inventory<Item> Petani::getLahan(){
+    return this->lahan;
+}

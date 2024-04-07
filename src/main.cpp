@@ -48,11 +48,16 @@ int main() {
     // inv.add(p1);
     // inv.add(a1);
 
+    p1->setPlanted(true);
+
     Player::players[1]->addPlant(p1);
     Player::players[2]->addAnimal(a1);
         
 
     while (game.isRunning()) {
+        
+        Player::players[1]->getLahan().printItem(0, 0);
+        Player::players[1]->getLahan().print();
 
         /* 
                             NOTES

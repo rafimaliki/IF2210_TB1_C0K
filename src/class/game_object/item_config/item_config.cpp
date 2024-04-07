@@ -24,6 +24,14 @@ int ItemConfig::getPRICE(){
     return this->PRICE;
 }
 
+int ItemConfig::getDURATION_TO_HARVEST(){
+    return 0;
+}
+
+int ItemConfig::getWEIGHT_TO_HARVEST(){
+    return 0;
+}
+
 
 
 
@@ -58,7 +66,6 @@ string PlantConfig::getTYPE(){
 int PlantConfig::getDURATION_TO_HARVEST(){
     return this->DURATION_TO_HARVEST;
 }
-
 
 
 /* AnimalConfig */

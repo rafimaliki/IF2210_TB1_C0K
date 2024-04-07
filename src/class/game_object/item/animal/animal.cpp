@@ -17,3 +17,17 @@ void Animal::print(){
 ItemConfig* Animal::getConfig(){
     return this->config;
 }
+
+void Animal::printKODE_HURUF(){
+    if (this->isReadyToHarvest()){
+        cout << "\x1b[32m";
+        cout << this->config->getKODE_HURUF();
+        cout << "\x1b[0m";
+    } else {
+        cout << this->config->getKODE_HURUF();
+    }
+}
+
+bool Animal::isReadyToHarvest(){
+    return this->weight >= this->config->getWEIGHT_TO_HARVEST();
+}   
