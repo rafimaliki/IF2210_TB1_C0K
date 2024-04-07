@@ -36,11 +36,9 @@ ItemConfig* Plant::getConfig(){
 
 void Plant::printKODE_HURUF(){
     if (this->isReadyToHarvest()){
-        cout << "\x1b[32m";
-        cout << this->config->getKODE_HURUF();
-        cout << "\x1b[0m";
+        cout << GREEN << this->config->getKODE_HURUF() << RESETstring;
     } else {
-        cout << this->config->getKODE_HURUF();
+        cout << RED << this->config->getKODE_HURUF() << RESETstring;
     }
 }
 
