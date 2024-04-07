@@ -27,10 +27,11 @@ public:
     static void next();
 
     virtual void printLahan();
-    virtual Inventory<Item> getLahan();
     virtual void printPeternakan();
+    virtual Inventory<Item> getLahan();
 
-    virtual void addPlant(Item* item);
+    void addItem(Item* item);
+    virtual void addPlant(Item* item);  
     virtual void addAnimal(Item* item);
 
 

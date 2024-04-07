@@ -9,6 +9,7 @@ void Item::print(){}
 Item::~Item(){}
 
 void Item::setPlanted(bool isPlanted){}
+void Item::setIsInCage(bool isInCage){}
 void Item::printKODE_HURUF(){}
 bool Item::isReadyToHarvest(){
     return false;

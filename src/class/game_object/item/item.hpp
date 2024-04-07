@@ -16,6 +16,7 @@ class Item
         virtual ~Item(); 
 
         virtual void setPlanted(bool isPlanted);
+        virtual void setIsInCage(bool isInCage);
         virtual void printKODE_HURUF();
         virtual bool isReadyToHarvest();
 };

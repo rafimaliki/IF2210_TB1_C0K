@@ -46,6 +46,9 @@ Inventory<Item> Player::getLahan(){
 void Player::printPeternakan(){}
 void Player::addPlant(Item* item){}
 void Player::addAnimal(Item* item){}
+void Player::addItem(Item* item){
+    this->inventory.add(item);
+}
 
 
 /* Game command related methods */

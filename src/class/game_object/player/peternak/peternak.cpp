@@ -13,7 +13,7 @@ void Peternak::addAnimal(Item* item){
 
 /* Game command related methods */
 
-void Peternak::CETAK_PETERNAKAN(){
+void Peternak::CETAK_PETERNAKAN(){  /* BELUM DETAIL SESUAI SPEK */
     this->peternakan.print();
 }
 void Peternak::TERNAK(){  /* BELUM IMPLEMENTASI */

@@ -11,6 +11,7 @@ private:
     /* data */
     ItemConfig* config;
     int weight;
+    bool isInCage;
 public:
 
     static vector<Animal*> animals;
@@ -22,6 +23,7 @@ public:
     ItemConfig* getConfig();
     void printKODE_HURUF();
     bool isReadyToHarvest();
+    void setIsInCage(bool isInCage);
 
     // void Feed(ProductConfig product);
 };

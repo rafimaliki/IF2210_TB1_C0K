@@ -40,8 +40,14 @@ int main() {
     */
 
     cout << endl;
-    Item* p1 = new Plant(2);
-    Item* a1 = new Animal(4);
+    Item* p1 = new Plant(1);
+    Item* p2 = new Plant(2);
+    Item* p3 = new Plant(3);
+    Item* p4 = new Plant(4);
+    Item* a1 = new Animal(1);
+    Item* a2 = new Animal(2);
+    Item* a3 = new Animal(3);
+    Item* a4 = new Animal(4);
  
     // Inventory<Item> inv(GameConfig::miscConfig.INVENTORY_sIZE[0], GameConfig::miscConfig.INVENTORY_sIZE[1], "PENYIMPANAN");
     // Inventory<Item> inv(5, 5, "PENYIMPANAN");
@@ -49,9 +55,16 @@ int main() {
     // inv.add(a1);
 
     p1->setPlanted(true);
-
+    a1->setIsInCage(true);
+    
     Player::players[1]->addPlant(p1);
+    Player::players[1]->addItem(p2);
+    Player::players[1]->addItem(p3);
+    Player::players[1]->addItem(p4);
     Player::players[2]->addAnimal(a1);
+    Player::players[2]->addItem(a2);
+    Player::players[2]->addItem(a3);
+    Player::players[2]->addItem(a4);
         
 
     while (game.isRunning()) {

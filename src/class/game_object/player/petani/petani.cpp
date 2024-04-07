@@ -17,7 +17,7 @@ Inventory<Item> Petani::getLahan(){
 
 /* Game command related methods */
 
-void Petani::CETAK_LADANG(){
+void Petani::CETAK_LADANG(){ /* BELUM DETAIL SESUAI SPEK */
     this->lahan.print();
 }
 void Petani::TANAM(){  /* BELUM IMPLEMENTASI */
