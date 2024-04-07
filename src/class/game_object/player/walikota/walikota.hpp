@@ -1,18 +1,16 @@
 #ifndef WALIKOTA_HPP
 #define WALIKOTA_HPP
 
-#include "pemain.hpp"
+#include "../player.hpp"
 
-class Walikota : public Pemain {
+class Walikota : public Player {
     public:
-        Walikota() : Pemain() {}
-        void pungut_pajak();
+        Walikota(string name, int money, int body_weight);
 
-        void bangun_bangunan();
-
-        void tambah_pemain();
-
-        void jual();
+        // void pungut_pajak();
+        // void bangun_bangunan();
+        // void tambah_pemain();
+        // void jual();
 };
 
 #endif

@@ -12,8 +12,9 @@ void Game::start() {
     loadConfig();
     loadSaveFile();
 
-    Player* walikota = new Player(Player::player_count, "Walikota", 1000, 70);
-    Player* petani1 = new Player(Player::player_count, "Petani1", 50, 45);
+    Player* walikota = new Walikota("Walikota", 1000, 70);
+    Player* petani1 = new Petani("Petani1", 50, 45);
+    Player* peternak1 = new Peternak("Peternak1", 100, 55);
 }
 
 void Game::loadConfig() {
@@ -29,7 +30,7 @@ void Game::loadSaveFile() {
 
 string Game::inputCommand() {
     string command;
-    cout << "Enter command: ";
+    cout << "\nEnter command: ";
     cin >> command;
     return command;
 }
@@ -46,7 +47,12 @@ void Game::executeCommand(string command) {
         Player::getCurrentPlayer()->printInventory();
     } else if (command == "PRINT_STATS" || command == "print_stats") {
         Player::getCurrentPlayer()->printStats();
-    } else {
+    } else if (command == "PRINT_LAHAN" || command == "print_lahan") {
+        Player::getCurrentPlayer()->printLahan();
+    } else if (command == "PRINT_PETERNAKAN" || command == "print_peternakan") {
+        Player::getCurrentPlayer()->printPeternakan();
+    }
+    else {
         cout << "Invalid command" << endl;
     }
 }

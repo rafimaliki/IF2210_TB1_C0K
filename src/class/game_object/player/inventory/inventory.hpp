@@ -91,7 +91,7 @@ void Inventory<T>::print() {
     int left_space = total_lenght / 2;
     int right_space = total_lenght - left_space;
 
-    cout << SPACE_4;
+    cout << endl << SPACE_4;
     for (int i = 0; i < left_space; i++) {
         cout << EQUAL;
     } cout << "[ " << this->title << " ]";

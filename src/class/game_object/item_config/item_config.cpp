@@ -140,10 +140,10 @@ void RecipeConfig::print(){
 MiscConfig::MiscConfig(){
 }
 
-MiscConfig::MiscConfig(int WIN_GOLD_NUMBER, int WIN_WEIGHT_NUMBER, array<int, 2> INVENTORY_sIZE, array<int, 2> LAHAN_SIZE, array<int, 2> PETERNAKAN_SIZE){
+MiscConfig::MiscConfig(int WIN_GOLD_NUMBER, int WIN_WEIGHT_NUMBER, array<int, 2> INVENTORY_SIZE, array<int, 2> LAHAN_SIZE, array<int, 2> PETERNAKAN_SIZE){
     this->WIN_GOLD_NUMBER = WIN_GOLD_NUMBER;
     this->WIN_WEIGHT_NUMBER = WIN_WEIGHT_NUMBER;
-    this->INVENTORY_sIZE = INVENTORY_sIZE;
+    this->INVENTORY_SIZE = INVENTORY_SIZE;
     this->LAHAN_SIZE = LAHAN_SIZE;
     this->PETERNAKAN_SIZE = PETERNAKAN_SIZE;
 }
@@ -156,7 +156,7 @@ MiscConfig MiscConfig::ReadMiscConfig(vector<vector<string>> Config){
 void MiscConfig::print(){
     cout << "WIN_GOLD_NUMBER: " << this->WIN_GOLD_NUMBER << endl;
     cout << "WIN_WEIGHT_NUMBER: " << this->WIN_WEIGHT_NUMBER << endl;
-    cout << "INVENTORY_sIZE: " << this->INVENTORY_sIZE[0] << "x" << this->INVENTORY_sIZE[1] << endl;
+    cout << "INVENTORY_SIZE: " << this->INVENTORY_SIZE[0] << "x" << this->INVENTORY_SIZE[1] << endl;
     cout << "LAHAN_SIZE: " << this->LAHAN_SIZE[0] << "x" << this->LAHAN_SIZE[1] << endl;
     cout << "PETERNAKAN_SIZE: " << this->PETERNAKAN_SIZE[0] << "x" << this->PETERNAKAN_SIZE[1] << endl;
 }

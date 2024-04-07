@@ -80,12 +80,12 @@ class MiscConfig {
     public:
         int WIN_GOLD_NUMBER;
         int WIN_WEIGHT_NUMBER;
-        array<int, 2> INVENTORY_sIZE;
+        array<int, 2> INVENTORY_SIZE;
         array<int, 2> LAHAN_SIZE;
         array<int, 2> PETERNAKAN_SIZE;
 
         MiscConfig();
-        MiscConfig(int WIN_GOLD_NUMBER, int WIN_WEIGHT_NUMBER, array<int, 2> INVENTORY_sIZE, array<int, 2> LAHAN_SIZE, array<int, 2> PETERNAKAN_SIZE);
+        MiscConfig(int WIN_GOLD_NUMBER, int WIN_WEIGHT_NUMBER, array<int, 2> INVENTORY_SIZE, array<int, 2> LAHAN_SIZE, array<int, 2> PETERNAKAN_SIZE);
         static MiscConfig ReadMiscConfig(vector<vector<string>> Config);
         void print();
 };

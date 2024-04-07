@@ -11,7 +11,10 @@ set(SOURCE_FILES
     src/class/game_object/item/item.cpp
     src/class/game_object/item/plant/plant.cpp
     src/class/game_object/item/animal/animal.cpp
-    src/class/game_object/player/player.cpp)
+    src/class/game_object/player/player.cpp
+    src/class/game_object/player/walikota/walikota.cpp
+    src/class/game_object/player/petani/petani.cpp
+    src/class/game_object/player/peternak/peternak.cpp)
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 

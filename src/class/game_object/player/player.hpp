@@ -19,11 +19,18 @@ public:
     static int current_player_idx;
     static int player_count;
 
-    Player(int id, string name, int money, int body_weight);
+    Player(string name, int money, int body_weight);
+
     void printStats();
     void printInventory();
     static Player* getCurrentPlayer();
     static void next();
+
+    virtual void printLahan();
+    virtual void printPeternakan();
+
+    virtual void addPlant(Item* item);
+    virtual void addAnimal(Item* item);
 };
 
 #endif

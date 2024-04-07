@@ -3,6 +3,9 @@
 #include "../game_object/item/plant/plant.hpp"
 #include "../game_object/item/animal/animal.hpp"
 #include "../game_object/player/player.hpp"
+#include "../game_object/player/walikota/walikota.hpp"
+#include "../game_object/player/petani/petani.hpp"
+#include "../game_object/player/peternak/peternak.hpp"
 
 
 class Game {

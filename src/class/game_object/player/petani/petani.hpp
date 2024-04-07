@@ -1,15 +1,38 @@
 #ifndef PETANI_HPP
 #define PETANI_HPP
 
-#include "pemain.hpp"
-#include <vector>
-using namespace std;
+#include "../player.hpp"
 
-class Petani : public Pemain {
+class Petani : public Player {
+
     private:
-        vector<vector<string>> ladang;
-
     public:
+        Inventory<Item> lahan;
+        Petani(string name, int money, int body_weight);
+        void printLahan();
+        void addPlant(Item* item);
+
+        // void pungut_pajak();
+        // void bangun_bangunan();
+        // void tambah_pemain();
+        // void jual();
+};
+
+#endif
+
+
+// #ifndef PETANI_HPP
+// #define PETANI_HPP
+
+// #include "pemain.hpp"
+// #include <vector>
+// using namespace std;
+
+// class Petani : public Pemain {
+//     private:
+//         vector<vector<string>> ladang;
+
+//     public:
         // void cetak_ladang(){
         //     int jumlah_kolom = this->ladang[0].size();
 
@@ -49,12 +72,12 @@ class Petani : public Pemain {
         //     }
         // }
 
-        void tanam();
+//         void tanam();
 
-        void memanen();
+//         void memanen();
 
-        void jual();
+//         void jual();
 
-        void beli();
-};
-#endif
+//         void beli();
+// };
+// #endif

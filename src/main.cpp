@@ -6,9 +6,13 @@
 // #include "class/gameobject/pemain/pemain.hpp"
 // #include "class/gameobject/item/item.hpp"
 
-#include "class/game_object/item/plant/plant.hpp"
-#include "class/game_object/item/animal/animal.hpp"
-#include "class/game_object/player/inventory/inventory.hpp"
+// #include "class/game_object/item/plant/plant.hpp"
+// #include "class/game_object/item/animal/animal.hpp"
+// #include "class/game_object/player/inventory/inventory.hpp"
+// #include "class/game_object/player/player.hpp"
+// #include "class/game_object/player/walikota/walikota.hpp"
+// #include "class/game_object/player/petani/petani.hpp"
+// #include "class/game_object/player/peternak/peternak.hpp"
 
 int main() {
 
@@ -38,12 +42,14 @@ int main() {
     cout << endl;
     Item* p1 = new Plant(2);
     Item* a1 = new Animal(4);
-    cout << endl;
  
     // Inventory<Item> inv(GameConfig::miscConfig.INVENTORY_sIZE[0], GameConfig::miscConfig.INVENTORY_sIZE[1], "PENYIMPANAN");
-    Inventory<Item> inv(5, 5, "PENYIMPANAN");
-    inv.add(p1);
-    inv.add(a1);
+    // Inventory<Item> inv(5, 5, "PENYIMPANAN");
+    // inv.add(p1);
+    // inv.add(a1);
+
+    Player::players[1]->addPlant(p1);
+    Player::players[2]->addAnimal(a1);
         
 
     while (game.isRunning()) {
