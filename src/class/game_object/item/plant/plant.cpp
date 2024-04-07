@@ -15,6 +15,7 @@ void Plant::print(){
 }
 
 void Plant::AgeAllPlants(){
+    cout << "\033[1;33mAll plants have aged by a day\n\033[0m\n";
     for (int i = 0; i < Plant::plantCount; i++){
         Plant::plants[i]->Age++;
     }

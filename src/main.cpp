@@ -8,7 +8,7 @@
 
 #include "class/game_object/item/plant/plant.hpp"
 #include "class/game_object/item/animal/animal.hpp"
-#include "class/game_object/pemain/inventory/inventory.hpp"
+#include "class/game_object/player/inventory/inventory.hpp"
 
 int main() {
 
@@ -62,11 +62,11 @@ int main() {
         // cout << endl;
         // Plant::plants[1]->print();
 
-        inv.print();
-        cout << "\nInventory[0,0]: " << endl;
-        inv.printItem(0, 0);
-        cout << "\nInventory[0,1]: " << endl;
-        inv.printItem(0, 1);
+        // inv.print();
+        // cout << "\nInventory[0,0]: " << endl;
+        // inv.printItem(0, 0);
+        // cout << "\nInventory[0,1]: " << endl;
+        // inv.printItem(0, 1);
 
         game.executeCommand(game.inputCommand());
         game.checkWin();

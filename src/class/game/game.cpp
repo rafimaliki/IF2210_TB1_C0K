@@ -11,6 +11,9 @@ void Game::start() {
 
     loadConfig();
     loadSaveFile();
+
+    Player* walikota = new Player(Player::player_count, "Walikota", 1000, 70);
+    Player* petani1 = new Player(Player::player_count, "Petani1", 50, 45);
 }
 
 void Game::loadConfig() {
@@ -26,7 +29,7 @@ void Game::loadSaveFile() {
 
 string Game::inputCommand() {
     string command;
-    cout << "\nEnter command: ";
+    cout << "Enter command: ";
     cin >> command;
     return command;
 }
@@ -36,13 +39,20 @@ void Game::executeCommand(string command) {
     if (command == "EXIT" || command == "exit") {
         is_running = false;
     } else if (command == "NEXT" || command == "next") {
-        cout << "\033[1;33mAnother day has passed...\033[0m\n";
+        cout << "\033[1;33m\nAnother day has passed...\n\033[0m";
         Plant::AgeAllPlants();
-    } 
+        Player::next();
+    } else if (command == "PRINT_INVENTORY" || command == "print_inventory") {
+        Player::getCurrentPlayer()->printInventory();
+    } else if (command == "PRINT_STATS" || command == "print_stats") {
+        Player::getCurrentPlayer()->printStats();
+    } else {
+        cout << "Invalid command" << endl;
+    }
 }
 
 void Game::checkWin() {
-    cout << "\nChecking win...\n" << endl;
+    // cout << "\nChecking win...\n" << endl;
 }
 
 void Game::printWinner() {

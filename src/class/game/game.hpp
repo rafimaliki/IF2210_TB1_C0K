@@ -1,6 +1,9 @@
 #include "../../std.hpp"
 #include "../game_object/item_config/item_config.hpp"
 #include "../game_object/item/plant/plant.hpp"
+#include "../game_object/item/animal/animal.hpp"
+#include "../game_object/player/player.hpp"
+
 
 class Game {
     private:
