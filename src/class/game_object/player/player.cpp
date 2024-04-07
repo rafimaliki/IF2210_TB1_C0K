@@ -40,8 +40,8 @@ void Player::next(){
 }
 
 void Player::printLahan(){}
-Inventory<Item> Player::getLahan(){
-    return Inventory<Item>();
+Inventory<Item>* Player::getLahan(){
+    return nullptr;
 }
 void Player::printPeternakan(){}
 void Player::addPlant(Item* item){}

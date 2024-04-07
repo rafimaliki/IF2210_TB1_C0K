@@ -11,8 +11,8 @@ void Petani::addPlant(Item* item){
     this->lahan.add(item);
 }
 
-Inventory<Item> Petani::getLahan(){
-    return this->lahan;
+Inventory<Item>* Petani::getLahan(){
+    return &this->lahan;
 }
 
 /* Game command related methods */

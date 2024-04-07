@@ -28,7 +28,7 @@ public:
 
     virtual void printLahan();
     virtual void printPeternakan();
-    virtual Inventory<Item> getLahan();
+    virtual Inventory<Item>* getLahan();
 
     void addItem(Item* item);
     virtual void addPlant(Item* item);  

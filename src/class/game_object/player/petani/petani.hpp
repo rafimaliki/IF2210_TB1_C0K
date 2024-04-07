@@ -11,7 +11,7 @@ class Petani : public Player {
         Petani(string name, int money, int body_weight);
         void printLahan();
         void addPlant(Item* item);
-        Inventory<Item> getLahan();
+        Inventory<Item>* getLahan();
 
         // void pungut_pajak();
         // void bangun_bangunan();

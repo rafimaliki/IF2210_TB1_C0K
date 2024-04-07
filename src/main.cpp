@@ -55,16 +55,20 @@ int main() {
     // inv.add(a1);
 
     p1->setPlanted(true);
+    p2->setPlanted(true);
+    p3->setPlanted(true);
     a1->setIsInCage(true);
     
     Player::players[1]->addPlant(p1);
-    Player::players[1]->addItem(p2);
-    Player::players[1]->addItem(p3);
+    Player::players[1]->addPlant(p2);
+    Player::players[1]->addPlant(p3);
     Player::players[1]->addItem(p4);
     Player::players[2]->addAnimal(a1);
     Player::players[2]->addItem(a2);
     Player::players[2]->addItem(a3);
     Player::players[2]->addItem(a4);
+
+    Player::players[1]->getLahan()->remove(0,1);
         
 
     while (game.isRunning()) {
