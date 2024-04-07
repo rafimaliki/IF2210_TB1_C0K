@@ -84,6 +84,11 @@ void Inventory<T>::add(T* item) {
 template <class T>
 void Inventory<T>::remove(int i, int j) {
     // Implementation of remove function
+    if (this->isEmpty(i, j)) {
+        cout << "Slot kosong!" << endl;
+    } else {
+        this->grid[i][j] = InventoryEntry<T>();
+    }
 }
 
 template <class T>
