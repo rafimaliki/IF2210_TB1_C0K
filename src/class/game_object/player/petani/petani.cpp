@@ -20,9 +20,9 @@ Inventory<Item> Petani::getLahan(){
 void Petani::CETAK_LADANG(){
     this->lahan.print();
 }
-void Petani::TANAM(){
+void Petani::TANAM(){  /* BELUM IMPLEMENTASI */
     cout << YELLOW << "\nCommand TANAM belum diimplementasikan!\n" << RESETstring << endl;
 }
-void Petani::PANEN(){
+void Petani::PANEN(){  /* BELUM IMPLEMENTASI */
     cout << YELLOW << "\nCommand PANEN belum diimplementasikan!\n" << RESETstring << endl;
 }

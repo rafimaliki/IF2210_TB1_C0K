@@ -16,12 +16,12 @@ void Peternak::addAnimal(Item* item){
 void Peternak::CETAK_PETERNAKAN(){
     this->peternakan.print();
 }
-void Peternak::TERNAK(){
+void Peternak::TERNAK(){  /* BELUM IMPLEMENTASI */
     cout << YELLOW << "\nCommand TERNAK belum diimplementasikan!\n" << RESETstring << endl;
 }
-void Peternak::KASIH_MAKAN(){
+void Peternak::KASIH_MAKAN(){  /* BELUM IMPLEMENTASI */
     cout << YELLOW << "\nCommand KASIH_MAKAN belum diimplementasikan!\n" << RESETstring << endl;
 }
-void Peternak::PANEN(){
+void Peternak::PANEN(){  /* BELUM IMPLEMENTASI */
     cout << YELLOW << "\nCommand PANEN belum diimplementasikan!\n" << RESETstring << endl;
 }

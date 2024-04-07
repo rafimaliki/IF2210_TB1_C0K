@@ -85,23 +85,23 @@ void Player::TERNAK(){
 void Player::BANGUN(){
     cout << RED << "\nTidak memiliki akses ke command BANGUN!\n" << RESETstring << endl;
 }
-void Player::MAKAN(){
+void Player::MAKAN(){  /* BELUM IMPLEMENTASI */
     cout << YELLOW << "\nCommand MAKAN belum diimplementasikan!\n" << RESETstring << endl;
 }
 void Player::KASIH_MAKAN(){
     cout << RED << "\nTidak memiliki akses ke command KASIH_MAKAN!\n" << RESETstring << endl;
 }
-void Player::BELI(){
+void Player::BELI(){  /* BELUM IMPLEMENTASI (butuh class Toko) */
     cout << YELLOW << "\nCommand BELI belum diimplementasikan!\n" << RESETstring << endl;
 }
-void Player::JUAL(){
+void Player::JUAL(){  /* BELUM IMPLEMENTASI (butuh class Toko) */
     cout << YELLOW << "\nCommand JUAL belum diimplementasikan!\n" << RESETstring << endl;
 }
 void Player::PANEN(){
     cout << RED << "\nTidak memiliki akses ke command PANEN!\n" << RESETstring << endl;
 }
-// void Player::MUAT();
-void Player::SIMPAN(){
+
+void Player::SIMPAN(){  /* BELUM IMPLEMENTASI */
     cout << YELLOW << "\nCommand SIMPAN belum diimplementasikan!\n" << RESETstring << endl;
 }
 void Player::TAMBAH_PEMAIN(){
