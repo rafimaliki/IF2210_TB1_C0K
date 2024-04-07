@@ -34,14 +34,18 @@ int main() {
         dan ngubah state Running ke true
     */
 
-   cout << endl;
-   Plant p1(1);
-   Plant p2(2);
-   cout << endl;
+    cout << endl;
+    Plant p1(1);
+    Plant p2(2);
+    cout << endl;
+ 
+    // Inventory<Plant> inv(GameConfig::miscConfig.INVENTORY_sIZE[0], GameConfig::miscConfig.INVENTORY_sIZE[1], "PENYIMPANAN");
+    Inventory<Plant> inv(5, 5, "PENYIMPANAN");
+    inv.add(&p1);
+    inv.add(&p2);
+        
 
-   Inventory<Plant> inv(5, 5);
-
-   while (game.isRunning()) {
+    while (game.isRunning()) {
 
         
         // Plant::plants[0]->print();
@@ -49,8 +53,9 @@ int main() {
         // Plant::plants[1]->print();
 
         inv.print();
-        inv.add(&p1);
-        
+        cout << "\nItem [0,0]: " << endl;
+        inv.printItem(0, 0);
+
         game.executeCommand(game.inputCommand());
         game.checkWin();
 
