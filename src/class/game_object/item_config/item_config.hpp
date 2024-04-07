@@ -12,6 +12,7 @@ class ItemConfig {
         int PRICE;
 
         ItemConfig(int ID, string KODE_HURUF, string NAME, int PRICE);
+        virtual void print() = 0;
 };
 
 

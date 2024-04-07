@@ -11,5 +11,8 @@ class Item
     private:
     public:
         Item();
+        virtual void print();
+        virtual ItemConfig* getConfig() = 0;
+        virtual ~Item(); 
 };
 #endif

@@ -7,6 +7,7 @@
 // #include "class/gameobject/item/item.hpp"
 
 #include "class/game_object/item/plant/plant.hpp"
+#include "class/game_object/item/animal/animal.hpp"
 #include "class/game_object/pemain/inventory/inventory.hpp"
 
 int main() {
@@ -35,17 +36,26 @@ int main() {
     */
 
     cout << endl;
-    Plant* p1 = new Plant(1);
-    Plant* p2 = new Plant(2);
+    Item* p1 = new Plant(2);
+    Item* a1 = new Animal(4);
     cout << endl;
  
-    Inventory<Plant> inv(GameConfig::miscConfig.INVENTORY_sIZE[0], GameConfig::miscConfig.INVENTORY_sIZE[1], "PENYIMPANAN");
-    // Inventory<Plant> inv(5, 5, "PENYIMPANAN");
+    // Inventory<Item> inv(GameConfig::miscConfig.INVENTORY_sIZE[0], GameConfig::miscConfig.INVENTORY_sIZE[1], "PENYIMPANAN");
+    Inventory<Item> inv(5, 5, "PENYIMPANAN");
     inv.add(p1);
-    inv.add(p2);
+    inv.add(a1);
         
 
     while (game.isRunning()) {
+
+        /* 
+                            NOTES
+            Khusus plant dan animal perlu atribut tambahan yang membedakan apakah
+            dia udah di tanam/peternakan atau di inventory doang
+
+            Kalo di tanam/peternakan, dia bakal nge-age/bisa dikasi makan setiap turn
+            Kalo di inventory, dia gbs nge-age/dikasi makan
+        */
 
         
         // Plant::plants[0]->print();
@@ -53,8 +63,10 @@ int main() {
         // Plant::plants[1]->print();
 
         inv.print();
-        cout << "\nItem [0,0]: " << endl;
+        cout << "\nInventory[0,0]: " << endl;
         inv.printItem(0, 0);
+        cout << "\nInventory[0,1]: " << endl;
+        inv.printItem(0, 1);
 
         game.executeCommand(game.inputCommand());
         game.checkWin();

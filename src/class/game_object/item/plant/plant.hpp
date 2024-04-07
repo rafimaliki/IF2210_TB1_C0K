@@ -10,7 +10,7 @@ class Plant : public Item
 private:
     /* data */
 public:
-    PlantConfig& config;
+    ItemConfig* config;
     int Age;
 
     static vector<Plant*> plants;
@@ -19,6 +19,7 @@ public:
     Plant(int ID);
     // ~Plant();
     void print();
+    ItemConfig* getConfig();
 
     static void AgeAllPlants();
 };

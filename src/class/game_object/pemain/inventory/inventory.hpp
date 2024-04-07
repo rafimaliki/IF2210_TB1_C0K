@@ -13,7 +13,6 @@ const string DASH = "-----";
 const string PLUS = "+";
 const string PIPE = "|";
 const string EQUAL = "=";
-const string TITLE = "[ PENYIMPANAN ]";
 
 /* CLASS DEFINITON */
 
@@ -121,7 +120,7 @@ void Inventory<T>::print() {
         for (int j = 0; j < this->width; j++) {
             cout << PIPE << SPACE_1;
             if (!this->isEmpty(i, j)){
-                cout << this->grid[i][j].item->config.KODE_HURUF;
+                cout << this->grid[i][j].item->getConfig()->KODE_HURUF;
             } else {
                 cout << SPACE_3;
             };
