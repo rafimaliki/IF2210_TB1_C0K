@@ -35,11 +35,14 @@ void Game::executeCommand(string command) {
     cout << "Executing command: " << command << endl;
     if (command == "EXIT" || command == "exit") {
         is_running = false;
-    }
+    } else if (command == "NEXT" || command == "next") {
+        cout << "\033[1;33mAnother day has passed...\033[0m\n";
+        Plant::AgeAllPlants();
+    } 
 }
 
 void Game::checkWin() {
-    cout << "\nChecking win..." << endl;
+    cout << "\nChecking win...\n" << endl;
 }
 
 void Game::printWinner() {

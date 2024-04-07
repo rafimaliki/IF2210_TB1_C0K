@@ -31,7 +31,7 @@ void PlantConfig::print(){
     cout << "NAME: " << this->NAME << endl;
     cout << "TYPE: " << this->TYPE << endl;
     cout << "PRICE: " << this->PRICE << endl;
-    cout << "DURATION_TO_HARVEST: " << this->DURATION_TO_HARVEST << endl << endl;
+    cout << "DURATION_TO_HARVEST: " << this->DURATION_TO_HARVEST << endl;
 }
 
 
@@ -57,7 +57,7 @@ void AnimalConfig::print(){
     cout << "NAME: " << this->NAME << endl;
     cout << "TYPE: " << this->TYPE << endl;
     cout << "PRICE: " << this->PRICE << endl;
-    cout << "WEIGHT_TO_HARVEST: " << this->WEIGHT_TO_HARVEST << endl << endl;
+    cout << "WEIGHT_TO_HARVEST: " << this->WEIGHT_TO_HARVEST << endl;
 }
 
 
@@ -85,7 +85,7 @@ void ProductConfig::print(){
     cout << "TYPE: " << this->TYPE << endl;
     cout << "ORIGIN: " << this->ORIGIN << endl;
     cout << "ADDED_WEIGHT: " << this->ADDED_WEIGHT << endl;
-    cout << "PRICE: " << this->PRICE << endl << endl;
+    cout << "PRICE: " << this->PRICE << endl;
 }
 
 
@@ -135,12 +135,40 @@ void RecipeConfig::print(){
 
 
 
+/* Misc Config */
+
+MiscConfig::MiscConfig(){
+}
+
+MiscConfig::MiscConfig(int WIN_GOLD_NUMBER, int WIN_WEIGHT_NUMBER, array<int, 2> INVENTORY_sIZE, array<int, 2> LAHAN_SIZE, array<int, 2> PETERNAKAN_SIZE){
+    this->WIN_GOLD_NUMBER = WIN_GOLD_NUMBER;
+    this->WIN_WEIGHT_NUMBER = WIN_WEIGHT_NUMBER;
+    this->INVENTORY_sIZE = INVENTORY_sIZE;
+    this->LAHAN_SIZE = LAHAN_SIZE;
+    this->PETERNAKAN_SIZE = PETERNAKAN_SIZE;
+}
+
+MiscConfig MiscConfig::ReadMiscConfig(vector<vector<string>> Config){
+    MiscConfig miscConfig(stoi(Config[0][0]), stoi(Config[1][0]), {stoi(Config[2][0]), stoi(Config[2][1])}, {stoi(Config[3][0]), stoi(Config[3][1])}, {stoi(Config[4][0]), stoi(Config[4][1])});
+    return miscConfig;
+}
+
+void MiscConfig::print(){
+    cout << "WIN_GOLD_NUMBER: " << this->WIN_GOLD_NUMBER << endl;
+    cout << "WIN_WEIGHT_NUMBER: " << this->WIN_WEIGHT_NUMBER << endl;
+    cout << "INVENTORY_sIZE: " << this->INVENTORY_sIZE[0] << "x" << this->INVENTORY_sIZE[1] << endl;
+    cout << "LAHAN_SIZE: " << this->LAHAN_SIZE[0] << "x" << this->LAHAN_SIZE[1] << endl;
+    cout << "PETERNAKAN_SIZE: " << this->PETERNAKAN_SIZE[0] << "x" << this->PETERNAKAN_SIZE[1] << endl;
+}
+
+
 /* GameConfig */
 
 vector<PlantConfig> GameConfig::plantConfig;
 vector<AnimalConfig> GameConfig::animalConfig;
 vector<ProductConfig> GameConfig::productConfig;
 vector<RecipeConfig> GameConfig::recipeConfig;
+MiscConfig GameConfig::miscConfig;
 
 GameConfig::GameConfig(){
 }
@@ -148,6 +176,9 @@ GameConfig::GameConfig(){
 void GameConfig::loadGameConfig(){
 
     // Tambah try catch disini untuk setiap config file
+
+
+    /* Animal Config */
     ConfigReader animal_config("config/animal.txt");
 
     vector<vector<string>> animal_Config = animal_config.readConfig();
@@ -159,6 +190,8 @@ void GameConfig::loadGameConfig(){
     // }
     cout << "\x1b[32mANIMAL Config IS LOADED \x1b[0m" << endl;
 
+
+    /* Plant Config */
     ConfigReader plant_config("config/plant.txt");
 
     vector<vector<string>> plant_Config = plant_config.readConfig();
@@ -170,6 +203,8 @@ void GameConfig::loadGameConfig(){
     // }
     cout << "\x1b[32mPLANT Config IS LOADED \x1b[0m" << endl;
 
+
+    /* Product Config */
     ConfigReader product_config("config/product.txt");
 
     vector<vector<string>> product_Config = product_config.readConfig();
@@ -181,6 +216,8 @@ void GameConfig::loadGameConfig(){
     // }
     cout << "\x1b[32mPRODUCT Config IS LOADED \x1b[0m" << endl;
 
+
+    /* Recipe Config */
     ConfigReader recipe_config("config/recipe.txt");
 
     vector<vector<string>> recipe_Config = recipe_config.readConfig();
@@ -191,6 +228,18 @@ void GameConfig::loadGameConfig(){
     //     GameConfig::recipeConfig[i].print();
     // }
     cout << "\x1b[32mRECIPE Config IS LOADED \x1b[0m" << endl;
+
+
+    /* Misc Config */
+    ConfigReader misc_config("config/misc.txt");
+
+    vector<vector<string>> misc_Config = misc_config.readConfig();
+    GameConfig::setMiscConfig(MiscConfig::ReadMiscConfig(misc_Config));
+
+    // cout << "\n\x1b[32mMISC Config: \x1b[0m\n" << endl;
+    // GameConfig::miscConfig.print();
+
+    cout << "\x1b[32mMISC Config IS LOADED \x1b[0m" << endl;
 }
 void GameConfig::setPlantConfig(vector<PlantConfig> plantConfig){
     GameConfig::plantConfig = plantConfig;
@@ -205,4 +254,8 @@ void GameConfig::setProductConfig(vector<ProductConfig> productConfig){
 
 void GameConfig::setRecipeConfig(vector<RecipeConfig> recipeConfig){
     GameConfig::recipeConfig = recipeConfig;
+}
+
+void GameConfig::setMiscConfig(MiscConfig miscConfig){
+    GameConfig::miscConfig = miscConfig;
 }

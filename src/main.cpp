@@ -6,6 +6,8 @@
 // #include "class/gameobject/pemain/pemain.hpp"
 // #include "class/gameobject/item/item.hpp"
 
+#include "class/game_object/item/plant/plant.hpp"
+
 int main() {
 
     cout << "\033[2J\033[1;1H";
@@ -33,11 +35,21 @@ int main() {
         dan ngubah state Running ke true
     */
 
+   cout << endl;
+   Plant p1(1);
+   Plant p2(2);
+   cout << endl;
+
    while (game.isRunning()) {
 
+        
+        Plant::plants[0]->print();
+        cout << endl;
+        Plant::plants[1]->print();
+        
         game.executeCommand(game.inputCommand());
         game.checkWin();
-        
+
         /* Kalo win bakal ngubah state Running ke false dan set variabel winner : player& */
 
 

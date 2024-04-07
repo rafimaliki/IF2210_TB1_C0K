@@ -74,18 +74,37 @@ class RecipeConfig : public ItemConfig {
 };
 
 
+
+class MiscConfig {
+    public:
+        int WIN_GOLD_NUMBER;
+        int WIN_WEIGHT_NUMBER;
+        array<int, 2> INVENTORY_sIZE;
+        array<int, 2> LAHAN_SIZE;
+        array<int, 2> PETERNAKAN_SIZE;
+
+        MiscConfig();
+        MiscConfig(int WIN_GOLD_NUMBER, int WIN_WEIGHT_NUMBER, array<int, 2> INVENTORY_sIZE, array<int, 2> LAHAN_SIZE, array<int, 2> PETERNAKAN_SIZE);
+        static MiscConfig ReadMiscConfig(vector<vector<string>> Config);
+        void print();
+};
+
+
+
 class GameConfig {
     private:
         static void setPlantConfig(vector<PlantConfig> plantConfig);
         static void setAnimalConfig(vector<AnimalConfig> animalConfig);
         static void setProductConfig(vector<ProductConfig> productConfig);
         static void setRecipeConfig(vector<RecipeConfig> recipeConfig);
+        static void setMiscConfig(MiscConfig miscConfig);
         
     public:
         static vector<PlantConfig> plantConfig;
         static vector<AnimalConfig> animalConfig;
         static vector<ProductConfig> productConfig;
         static vector<RecipeConfig> recipeConfig;
+        static MiscConfig miscConfig;
 
         GameConfig();
         static void loadGameConfig();
