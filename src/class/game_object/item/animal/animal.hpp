@@ -9,9 +9,9 @@ class Animal : public Item
 {
 private:
     /* data */
-public:
     ItemConfig* config;
     int weight;
+public:
 
     static vector<Animal*> animals;
     static int animalCount;

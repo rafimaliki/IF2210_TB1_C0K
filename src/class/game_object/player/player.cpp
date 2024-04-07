@@ -9,7 +9,7 @@ Player::Player(string name, int money, int body_weight) :
     name(name),
     money(money), 
     body_weight(body_weight), 
-    inventory(GameConfig::miscConfig.INVENTORY_SIZE[0], GameConfig::miscConfig.INVENTORY_SIZE[1], "PENYIMPANAN") {
+    inventory(GameConfig::miscConfig.getINVENTORY_SIZE()[0], GameConfig::miscConfig.getINVENTORY_SIZE()[1], "PENYIMPANAN") {
     players.push_back(this);
     player_count++;
 }

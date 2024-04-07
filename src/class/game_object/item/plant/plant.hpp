@@ -9,9 +9,9 @@ class Plant : public Item
 {
 private:
     /* data */
-public:
     ItemConfig* config;
     int Age;
+public:
 
     static vector<Plant*> plants;
     static int plantCount;

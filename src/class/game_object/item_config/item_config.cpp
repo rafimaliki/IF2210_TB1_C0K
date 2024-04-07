@@ -8,6 +8,23 @@ ItemConfig::ItemConfig(int ID, string KODE_HURUF, string NAME, int PRICE){
     this->PRICE = PRICE;
 }
 
+int ItemConfig::getID(){
+    return this->ID;
+}
+
+string ItemConfig::getKODE_HURUF(){
+    return this->KODE_HURUF;
+}
+
+string ItemConfig::getNAME(){
+    return this->NAME;
+}
+
+int ItemConfig::getPRICE(){
+    return this->PRICE;
+}
+
+
 
 
 /* PlantConfig */
@@ -34,6 +51,14 @@ void PlantConfig::print(){
     cout << "DURATION_TO_HARVEST: " << this->DURATION_TO_HARVEST << endl;
 }
 
+string PlantConfig::getTYPE(){
+    return this->TYPE;
+}
+
+int PlantConfig::getDURATION_TO_HARVEST(){
+    return this->DURATION_TO_HARVEST;
+}
+
 
 
 /* AnimalConfig */
@@ -58,6 +83,14 @@ void AnimalConfig::print(){
     cout << "TYPE: " << this->TYPE << endl;
     cout << "PRICE: " << this->PRICE << endl;
     cout << "WEIGHT_TO_HARVEST: " << this->WEIGHT_TO_HARVEST << endl;
+}
+
+string AnimalConfig::getTYPE(){
+    return this->TYPE;
+}
+
+int AnimalConfig::getWEIGHT_TO_HARVEST(){
+    return this->WEIGHT_TO_HARVEST;
 }
 
 
@@ -88,6 +121,19 @@ void ProductConfig::print(){
     cout << "PRICE: " << this->PRICE << endl;
 }
 
+string ProductConfig::getTYPE(){
+    return this->TYPE;
+}
+
+string ProductConfig::getORIGIN(){
+    return this->ORIGIN;
+}
+
+int ProductConfig::getADDED_WEIGHT(){
+    return this->ADDED_WEIGHT;
+}
+
+
 
 
 /* Ingredient */
@@ -99,6 +145,14 @@ Ingredient::Ingredient(string NAME, int QUANTITY){
 void Ingredient::print(){
     cout << "  NAME: " << this->NAME << endl;
     cout << "  QUANTITY: " << this->QUANTITY << endl;
+}
+
+string Ingredient::getNAME(){
+    return this->NAME;
+}
+
+int Ingredient::getQUANTITY(){
+    return this->QUANTITY;
 }
 
 
@@ -133,6 +187,12 @@ void RecipeConfig::print(){
     cout << endl;
 }
 
+vector<Ingredient> RecipeConfig::getINGREDIENTS(){
+    return this->INGREDIENTS;
+}
+
+
+
 
 
 /* Misc Config */
@@ -159,6 +219,26 @@ void MiscConfig::print(){
     cout << "INVENTORY_SIZE: " << this->INVENTORY_SIZE[0] << "x" << this->INVENTORY_SIZE[1] << endl;
     cout << "LAHAN_SIZE: " << this->LAHAN_SIZE[0] << "x" << this->LAHAN_SIZE[1] << endl;
     cout << "PETERNAKAN_SIZE: " << this->PETERNAKAN_SIZE[0] << "x" << this->PETERNAKAN_SIZE[1] << endl;
+}
+
+int MiscConfig::getWIN_GOLD_NUMBER(){
+    return this->WIN_GOLD_NUMBER;
+}
+
+int MiscConfig::getWIN_WEIGHT_NUMBER(){
+    return this->WIN_WEIGHT_NUMBER;
+}
+
+array<int, 2> MiscConfig::getINVENTORY_SIZE(){
+    return this->INVENTORY_SIZE;
+}
+
+array<int, 2> MiscConfig::getLAHAN_SIZE(){
+    return this->LAHAN_SIZE;
+}
+
+array<int, 2> MiscConfig::getPETERNAKAN_SIZE(){
+    return this->PETERNAKAN_SIZE;
 }
 
 

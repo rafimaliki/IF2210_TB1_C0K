@@ -6,8 +6,8 @@
 class Petani : public Player {
 
     private:
-    public:
         Inventory<Item> lahan;
+    public:
         Petani(string name, int money, int body_weight);
         void printLahan();
         void addPlant(Item* item);

@@ -20,13 +20,15 @@ template <class T>
 class InventoryEntry
 {
     private:
-        /* data */
-    public:
         int amount; /* hanya 0 dan 1, ada dan tidak, gbs multiple*/
         T* item;
+    public:
 
         InventoryEntry();
         InventoryEntry(T* item);
+
+        int getAmount() { return this->amount; }
+        T* getItem() { return this->item; }
 };
 
 template <class T>
@@ -70,7 +72,7 @@ template <class T>
 void Inventory<T>::add(T* item) {
     for (int i = 0; i < this->height; i++) {
         for (int j = 0; j < this->width; j++) {
-            if (this->grid[i][j].amount == 0) {
+            if (this->grid[i][j].getAmount() == 0) {
                 this->grid[i][j] = InventoryEntry<T>(item);
                 return;
             }
@@ -120,7 +122,7 @@ void Inventory<T>::print() {
         for (int j = 0; j < this->width; j++) {
             cout << PIPE << SPACE_1;
             if (!this->isEmpty(i, j)){
-                cout << this->grid[i][j].item->getConfig()->KODE_HURUF;
+                cout << this->grid[i][j].getItem()->getConfig()->getKODE_HURUF();
             } else {
                 cout << SPACE_3;
             };
@@ -151,12 +153,12 @@ int Inventory<T>::calcEmptySpace() {\
 
 template <class T>
 bool Inventory<T>::isEmpty(int i, int j) {\
-    return this->grid[i][j].amount == 0;
+    return this->grid[i][j].getAmount() == 0;
 }
 
 template <class T>
 void Inventory<T>::printItem(int i, int j) {
-    this->grid[i][j].item->print();
+    this->grid[i][j].getItem()->print();
 }
 
 #endif

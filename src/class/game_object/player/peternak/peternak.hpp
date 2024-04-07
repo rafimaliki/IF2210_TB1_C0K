@@ -6,8 +6,8 @@
 class Peternak : public Player {
 
     private:
-    public:
         Inventory<Item> peternakan; 
+    public:
         Peternak(string name, int money, int body_weight);
 
         // void pungut_pajak();
