@@ -46,3 +46,64 @@ Inventory<Item> Player::getLahan(){
 void Player::printPeternakan(){}
 void Player::addPlant(Item* item){}
 void Player::addAnimal(Item* item){}
+
+
+/* Game command related methods */
+
+void Player::NEXT(){
+
+    cout << "\033[1;33m\nAnother day has passed...\n\033[0m";
+    Plant::AgeAllPlants();
+
+    cout << "Player " << getCurrentPlayer()->name << "'s turn ended" << endl;
+
+    current_player_idx++;
+    if (current_player_idx >= player_count){
+        current_player_idx = 0;
+    }
+
+    cout << "Player " << getCurrentPlayer()->name << "'s turn" << endl << endl;
+}
+void Player::CETAK_PENYIMPANAN(){
+    this->inventory.print();
+}
+void Player::PUNGUT_PAJAK(){
+    cout << RED << "\nTidak memiliki akses ke command PUNGUT_PAJAK!\n" << RESETstring << endl;
+}
+void Player::CETAK_LADANG(){
+    cout << RED << "\nTidak memiliki akses ke command CETAK_LADANG!\n" << RESETstring << endl;
+}
+void Player::CETAK_PETERNAKAN(){
+    cout << RED << "\nTidak memiliki akses ke command CETAK_PETERNAKAN!\n" << RESETstring << endl;
+}
+void Player::TANAM(){
+    cout << RED << "\nTidak memiliki akses ke command TANAM!\n" << RESETstring << endl;
+}
+void Player::TERNAK(){
+    cout << RED << "\nTidak memiliki akses ke command TERNAK!\n" << RESETstring << endl;
+}
+void Player::BANGUN(){
+    cout << RED << "\nTidak memiliki akses ke command BANGUN!\n" << RESETstring << endl;
+}
+void Player::MAKAN(){
+    cout << YELLOW << "\nCommand MAKAN belum diimplementasikan!\n" << RESETstring << endl;
+}
+void Player::KASIH_MAKAN(){
+    cout << RED << "\nTidak memiliki akses ke command KASIH_MAKAN!\n" << RESETstring << endl;
+}
+void Player::BELI(){
+    cout << YELLOW << "\nCommand BELI belum diimplementasikan!\n" << RESETstring << endl;
+}
+void Player::JUAL(){
+    cout << YELLOW << "\nCommand JUAL belum diimplementasikan!\n" << RESETstring << endl;
+}
+void Player::PANEN(){
+    cout << RED << "\nTidak memiliki akses ke command PANEN!\n" << RESETstring << endl;
+}
+// void Player::MUAT();
+void Player::SIMPAN(){
+    cout << YELLOW << "\nCommand SIMPAN belum diimplementasikan!\n" << RESETstring << endl;
+}
+void Player::TAMBAH_PEMAIN(){
+    cout << RED << "\nTidak memiliki akses ke command TAMBAH_PEMAIN!\n" << RESETstring << endl;
+}

@@ -103,9 +103,9 @@ void Inventory<T>::remove(int i, int j) {
 template <class T>
 void Inventory<T>::print() {
 
-    int total_lenght = this->width * 6 + 1 - (this->title.length() + 4);
-    int left_space = total_lenght / 2;
-    int right_space = total_lenght - left_space;
+    int total_length = this->width * 6 + 1 - (this->title.length() + 4);
+    int left_space = total_length / 2;
+    int right_space = total_length - left_space;
 
     cout << endl << SPACE_4;
     for (int i = 0; i < left_space; i++) {
@@ -148,7 +148,7 @@ void Inventory<T>::print() {
         cout << PLUS << DASH;
     } cout << PLUS << endl << endl;
 
-    cout << "Total slot kosong: " << this->calcEmptySpace() << endl;
+    cout << "Total slot kosong: " << this->calcEmptySpace() << endl << endl;
 }
 
 template <class T>

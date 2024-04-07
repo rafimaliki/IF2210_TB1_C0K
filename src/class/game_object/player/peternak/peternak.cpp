@@ -10,3 +10,18 @@ void Peternak::printPeternakan(){
 void Peternak::addAnimal(Item* item){
     peternakan.add(item);
 }
+
+/* Game command related methods */
+
+void Peternak::CETAK_PETERNAKAN(){
+    this->peternakan.print();
+}
+void Peternak::TERNAK(){
+    cout << YELLOW << "\nCommand TERNAK belum diimplementasikan!\n" << RESETstring << endl;
+}
+void Peternak::KASIH_MAKAN(){
+    cout << YELLOW << "\nCommand KASIH_MAKAN belum diimplementasikan!\n" << RESETstring << endl;
+}
+void Peternak::PANEN(){
+    cout << YELLOW << "\nCommand PANEN belum diimplementasikan!\n" << RESETstring << endl;
+}

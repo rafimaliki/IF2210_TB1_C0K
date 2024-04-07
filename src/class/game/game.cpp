@@ -30,30 +30,48 @@ void Game::loadSaveFile() {
 
 string Game::inputCommand() {
     string command;
-    cout << "\nEnter command: ";
+    cout << BOLD << "> ";
     cin >> command;
+    cout << RESETstring;
     return command;
 }
 
 void Game::executeCommand(string command) {
-    cout << "Executing command: " << command << endl;
+    // cout << "Executing command: " << command << endl;
     if (command == "EXIT" || command == "exit") {
         is_running = false;
-    } else if (command == "NEXT" || command == "next") {
-        cout << "\033[1;33m\nAnother day has passed...\n\033[0m";
-        Plant::AgeAllPlants();
-        Player::next();
-    } else if (command == "PRINT_INVENTORY" || command == "print_inventory") {
-        Player::getCurrentPlayer()->printInventory();
-    } else if (command == "PRINT_STATS" || command == "print_stats") {
-        Player::getCurrentPlayer()->printStats();
-    } else if (command == "PRINT_LAHAN" || command == "print_lahan") {
-        Player::getCurrentPlayer()->printLahan();
-    } else if (command == "PRINT_PETERNAKAN" || command == "print_peternakan") {
-        Player::getCurrentPlayer()->printPeternakan();
-    }
-    else {
-        cout << "Invalid command" << endl;
+    } else if (command == "NEXT") {
+        Player::getCurrentPlayer()->NEXT();
+    } else if (command == "CETAK_PENYIMPANAN"){
+        Player::getCurrentPlayer()->CETAK_PENYIMPANAN();
+    } else if (command == "PUNGUT_PAJAK"){
+        Player::getCurrentPlayer()->PUNGUT_PAJAK();
+    } else if (command == "CETAK_LADANG"){
+        Player::getCurrentPlayer()->CETAK_LADANG();
+    } else if (command == "CETAK_PETERNAKAN"){
+        Player::getCurrentPlayer()->CETAK_PETERNAKAN();
+    } else if (command == "TANAM"){
+        Player::getCurrentPlayer()->TANAM();
+    } else if (command == "TERNAK"){
+        Player::getCurrentPlayer()->TERNAK();
+    } else if (command == "BANGUN"){
+        Player::getCurrentPlayer()->BANGUN();
+    } else if (command == "MAKAN"){
+        Player::getCurrentPlayer()->MAKAN();
+    } else if (command == "KASIH_MAKAN"){
+        Player::getCurrentPlayer()->KASIH_MAKAN();
+    } else if (command == "BELI"){
+        Player::getCurrentPlayer()->BELI();
+    } else if (command == "JUAL"){
+        Player::getCurrentPlayer()->JUAL();
+    } else if (command == "PANEN"){
+        Player::getCurrentPlayer()->PANEN();
+    } else if (command == "SIMPAN"){
+        Player::getCurrentPlayer()->SIMPAN();
+    } else if (command == "TAMBAH_PEMAIN"){
+        Player::getCurrentPlayer()->TAMBAH_PEMAIN();
+    } else {
+        cout << RED << "\nCommand not found\n" << RESETstring << endl;
     }
 }
 

@@ -33,6 +33,25 @@ public:
     virtual void addPlant(Item* item);
     virtual void addAnimal(Item* item);
 
+
+    /* Game command related methods */
+    virtual void NEXT();
+    virtual void CETAK_PENYIMPANAN();
+    virtual void PUNGUT_PAJAK();
+    virtual void CETAK_LADANG();
+    virtual void CETAK_PETERNAKAN();
+    virtual void TANAM();
+    virtual void TERNAK();
+    virtual void BANGUN();
+    virtual void MAKAN();
+    virtual void KASIH_MAKAN();
+    virtual void BELI();
+    virtual void JUAL();
+    virtual void PANEN();
+    // virtual void MUAT();
+    virtual void SIMPAN();
+    virtual void TAMBAH_PEMAIN();
+
 };
 
 #endif

@@ -26,7 +26,7 @@ void Plant::AgeAllPlants(){
 }
 
 void Plant::setPlanted(bool isPlanted){
-    cout << "Plant is planted: " << isPlanted << endl;
+    // cout << "Plant is planted: " << isPlanted << endl;
     this->isPlanted = isPlanted;
 }
 

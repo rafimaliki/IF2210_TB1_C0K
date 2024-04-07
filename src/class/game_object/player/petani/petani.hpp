@@ -17,6 +17,11 @@ class Petani : public Player {
         // void bangun_bangunan();
         // void tambah_pemain();
         // void jual();
+        /* Game command related methods */
+        void CETAK_LADANG();
+        void TANAM();
+        void PANEN();
+        // void MUAT();
 };
 
 #endif

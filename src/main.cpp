@@ -56,8 +56,8 @@ int main() {
 
     while (game.isRunning()) {
         
-        Player::players[1]->getLahan().printItem(0, 0);
-        Player::players[1]->getLahan().print();
+        // Player::players[1]->getLahan().printItem(0, 0);
+        // Player::players[1]->getLahan().print();
 
         /* 
                             NOTES

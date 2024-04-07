@@ -17,6 +17,13 @@ class Peternak : public Player {
 
         void printPeternakan();
         void addAnimal(Item* item);
+
+        /* Game command related methods */
+        void CETAK_PETERNAKAN();
+        void TERNAK();
+        void KASIH_MAKAN();
+        void PANEN();
+        // void MUAT();
 };
 
 #endif

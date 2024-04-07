@@ -11,6 +11,12 @@ class Walikota : public Player {
         // void bangun_bangunan();
         // void tambah_pemain();
         // void jual();
+
+        /* Game command related methods */
+        void PUNGUT_PAJAK();
+        void BANGUN();
+        // void MUAT();
+        void TAMBAH_PEMAIN();
 };
 
 #endif
