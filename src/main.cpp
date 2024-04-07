@@ -7,12 +7,11 @@
 // #include "class/gameobject/item/item.hpp"
 
 #include "class/game_object/item/plant/plant.hpp"
+#include "class/game_object/pemain/inventory/inventory.hpp"
 
 int main() {
 
     cout << "\033[2J\033[1;1H";
-
-    cout << "Testing Git Ignore!";
     cout << "\n                                                                                                      \n"
             " ██░ ██  ▄▄▄       ██▀███   ██▒   █▓▓█████   ██████ ▄▄▄█████▓    ███▄ ▄███▓ ▒█████   ▒█████   ███▄    █ \n"
             "▓██░ ██▒▒████▄    ▓██ ▒ ██▒▓██░   █▒▓█   ▀ ▒██    ▒ ▓  ██▒ ▓▒   ▓██▒▀█▀ ██▒▒██▒  ██▒▒██▒  ██▒ ██ ▀█   █ \n"
@@ -40,12 +39,17 @@ int main() {
    Plant p2(2);
    cout << endl;
 
+   Inventory<Plant> inv(5, 5);
+
    while (game.isRunning()) {
 
         
-        Plant::plants[0]->print();
-        cout << endl;
-        Plant::plants[1]->print();
+        // Plant::plants[0]->print();
+        // cout << endl;
+        // Plant::plants[1]->print();
+
+        inv.print();
+        inv.add(&p1);
         
         game.executeCommand(game.inputCommand());
         game.checkWin();
