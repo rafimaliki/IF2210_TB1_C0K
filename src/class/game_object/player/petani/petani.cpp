@@ -1,5 +1,9 @@
 #include "petani.hpp"
 #include "petaniException.hpp"
+#include  <cctype>
+#include <limits>
+
+using namespace std;
 
 Petani::Petani(string name, int money, int body_weight) : Player(name, money, body_weight)
 , lahan(GameConfig::miscConfig.getLadang_SIZE()[0], GameConfig::miscConfig.getLadang_SIZE()[1], "LADANG"){}
@@ -195,25 +199,39 @@ void Petani::PANEN(){
     //Pilih Tanaman
     int pilihan_tanaman;
     int banyak_petak;
-
+    string input;
     bool valid = false;
 
+
+    
+
+    // OPSIONAL SELAIN LANGSUNG RETURN
     while(!valid){
         try{
             cout << "\nNomor tanaman yang ingin dipanen: ";
-            cin >> pilihan_tanaman;
+            cin >> input;
+
+            // Mengonversi input menjadi integer
+            pilihan_tanaman = stoi(input);
+
             
-            while(pilihan_tanaman < 1 || pilihan_tanaman > temp_siap_panen.size()){
+
+            if (pilihan_tanaman < 1 || pilihan_tanaman > temp_siap_panen.size()) {
                 cout << RED << "Pilihan tidak valid" << RESETstring << endl;
-                cout << "Nomor tanaman yang ingin dipanen: ";
-                cin >> pilihan_tanaman;
+                valid = false;
+            } else {
+                valid = true;
             }
 
-            valid = true;
         }
-        catch (...){
-            cout << RED << "Input tidak valid" << RESETstring << endl;
+        catch (const exception &e){
+            cout << RED << "Error: Input harus berupa integer" << RESETstring << endl;
         }
+
+        //Membersihkan input buffer
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
     }
 
 
@@ -236,23 +254,37 @@ void Petani::PANEN(){
     int ID = 0;
 
     valid = false;
+
+    //OPSIONAL TANPA RETURN LANGSUNG 
     while(!valid){
         try{
-            cout << "Berapa petak yang ingin dipanen: ";
-            cin >> banyak_petak;
+            cout << "\nBerapa petak yang ingin dipanen: ";
+            cin >> input;
 
-            while(banyak_petak < 1 || banyak_petak > nPetak){
+            // Mengonversi input menjadi integer
+            banyak_petak = stoi(input);
+
+            
+
+            if (banyak_petak < 1 || banyak_petak > nPetak) {
                 cout << RED << "Pilihan tidak valid" << RESETstring << endl;
-                cout << "Berapa petak yang ingin dipanen: ";
-                cin >> banyak_petak;
+                valid = false;
+            } else {
+                valid = true;
             }
 
-            valid = true;
         }
-        catch (...){
-            cout << RED << "Input tidak valid" << RESETstring << endl;
+        catch (const exception &e){
+            cout << RED << "Error: Input harus berupa integer" << RESETstring << endl;
         }
+
+        //Membersihkan input buffer
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
     }
+
+  
 
     //hitung inventory apakah cukup atau tidak
     try{
