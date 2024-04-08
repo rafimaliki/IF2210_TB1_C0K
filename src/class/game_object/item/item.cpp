@@ -15,14 +15,6 @@ bool Item::isReadyToHarvest(){
     return false;
 }
 
-string Item::getTYPE(){
-    return "";
-}
-
-int Item::getADDED_WEIGHT(){
-    return 0;
-}
-
 bool Item::isFood(){
     return (this->getTYPE() == "PRODUCT_FRUIT_PLANT" || this->getTYPE() == "PRODUCT_ANIMAL");
 }
@@ -30,4 +22,34 @@ bool Item::isFood(){
 bool Item::isPlant(){
     cout << "TYPE: " << this->getTYPE() << endl;
     return (this->getTYPE() == "MATERIAL_PLANT" || this->getTYPE() == "FRUIT_PLANT");
+}
+
+
+/* GETTER */
+int Item::getID(){
+    return this->getConfig()->getID();
+}
+string Item::getKODE_HURUF(){
+    return this->getConfig()->getKODE_HURUF();
+}
+string Item::getNAME(){
+    return this->getConfig()->getNAME();
+}
+int Item::getPRICE(){
+    return this->getConfig()->getPRICE();
+}
+string Item::getTYPE(){
+    return this->getConfig()->getTYPE();
+}
+int Item::getDURATION_TO_HARVEST(){
+    return this->getConfig()->getDURATION_TO_HARVEST();
+}
+int Item::getWEIGHT_TO_HARVEST(){
+    return this->getConfig()->getWEIGHT_TO_HARVEST();
+}
+string Item::getORIGIN(){
+    return this->getConfig()->getORIGIN();
+}
+int Item::getADDED_WEIGHT(){
+    return this->getConfig()->getADDED_WEIGHT();
 }
