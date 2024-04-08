@@ -1,5 +1,6 @@
 #include "player.hpp"
 
+
 vector<Player*> Player::players;
 int Player::current_player_idx = 0;
 int Player::player_count = 0;
@@ -153,9 +154,59 @@ void Player::MAKAN(){  /* BELUM IMPLEMENTASI */
 void Player::KASIH_MAKAN(){
     cout << RED << "\nTidak memiliki akses ke command KASIH_MAKAN!\n" << RESETstring << endl;
 }
-void Player::BELI(){  /* BELUM IMPLEMENTASI (butuh class Toko) */
-    cout << YELLOW << "\nCommand BELI belum diimplementasikan!\n" << RESETstring << endl;
+void Player::BELI() {
+    int amount,nomor;
+    bool valid = false;
+
+    Toko::displayToko();
+    cout << "Uang anda : " << this->money << endl;
+    cout << "Slot penyimpanan tersedia: " << inventory.calcEmptySpace() << endl;
+    cout << endl;
+
+    while (!valid) {
+        try {
+            cout << "Masukkan no. barang yang ingin dibeli : ";
+            cin >> nomor;
+
+            /*Handling tipe data*/
+            if (cin.fail()) { // nomor bukan integer
+                cin.clear(); // clear input buffer
+                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                throw std::invalid_argument("Input salah! tolong integer ya!");
+            }
+            cout << "Kuantitas : ";
+            cin >> amount;
+            if (cin.fail()) { 
+                cin.clear(); 
+                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                throw std::invalid_argument("Input salah! tolong integer ya!");
+            }
+            Item* beli = Toko::beliItemToko(nomor,amount,this->money);
+            for (int i = 0; i < amount; i++)
+            {
+                 inventory.add(beli);
+            }
+            inventory.print();
+            this->money -= (amount * beli->getPRICE());
+            cout << "Selamat Anda berhasil membeli " << amount << " " << beli->getNAME() <<". Uang Anda tersisa " << this->money << " gulden. "<< endl;
+
+            valid = true;
+        } catch (const std::invalid_argument& e) {
+            cout << e.what() << endl;
+        
+        }catch(const NumberNotValid& e){
+            cout << e.what() << endl;
+
+        } catch(const AmountNotValid& e ){
+            cout << e.what() << endl;
+
+        }catch(const GuldenInvalid &e){
+            cout << e.what() << " Ayo perbanyak gulden mu!" << endl;
+        }
+    }
+    
 }
+
 void Player::JUAL(){  /* BELUM IMPLEMENTASI (butuh class Toko) */
     cout << YELLOW << "\nCommand JUAL belum diimplementasikan!\n" << RESETstring << endl;
 }

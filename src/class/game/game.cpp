@@ -15,6 +15,9 @@ void Game::start() {
     Player* walikota = new Walikota("Walikota", 1000, 70);
     Player* petani1 = new Petani("Petani1", 50, 45);
     Player* peternak1 = new Peternak("Peternak1", 100, 55);
+
+    
+
 }
 
 void Game::loadConfig() {

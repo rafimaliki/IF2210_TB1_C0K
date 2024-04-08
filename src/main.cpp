@@ -82,15 +82,20 @@ int main() {
     // inv.add(p1);
     // inv.add(a1);
     
-    Item* i = new Product(2);
+    Item* i = new Product(1);
 
     Toko::addItem(i);
     Toko::addItem(i);
-    Toko::displayToko();
+    Toko::addItem(i);
+    Toko::addItem(pr3);
+    Toko::addItem(pr4);
+    // Toko::displayToko();
+    
     p1->setPlanted(true);
     p2->setPlanted(true);
     p3->setPlanted(true);
     a1->setIsInCage(true);
+
 
     Player::players[0]->addItem(pr1);
     Player::players[0]->addItem(pr2);
@@ -111,7 +116,7 @@ int main() {
     Player::players[1]->getLadang()->remove(0,1);
         
 
-    while (game.isRunning()) {
+        while (game.isRunning()) {
 
         // cout << "is food: " << pr1->isFood() << endl;
         // cout << "is food: " << pr2->isFood() << endl;

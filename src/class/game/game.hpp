@@ -10,7 +10,7 @@
 #include "../game_object/player/walikota/walikota.hpp"
 #include "../game_object/player/petani/petani.hpp"
 #include "../game_object/player/peternak/peternak.hpp"
-#include "../game_object/toko/toko.hpp"
+
 
 
 
