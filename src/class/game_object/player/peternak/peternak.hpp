@@ -23,6 +23,8 @@ class Peternak : public Player {
         void TERNAK();
         void KASIH_MAKAN();
         void PANEN();
+
+        string getType();
         // void MUAT();
 };
 

@@ -45,3 +45,7 @@ void Peternak::KASIH_MAKAN(){  /* BELUM IMPLEMENTASI */
 void Peternak::PANEN(){  /* BELUM IMPLEMENTASI */
     cout << YELLOW << "\nCommand PANEN belum diimplementasikan!\n" << RESETstring << endl;
 }
+
+string Peternak::getType(){
+    return "Peternak";
+}

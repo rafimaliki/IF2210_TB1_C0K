@@ -159,6 +159,10 @@ void Petani::PANEN(){  /* BELUM IMPLEMENTASI */
 
 }
 
+string Petani::getType(){
+    return "Petani";
+}
+
 void Petani::isLahanPenuh(){
     if(this->lahan.calcEmptySpace() == 0){
         throw LahanPenuhException();
