@@ -29,13 +29,21 @@ int main() {
 
     cout << endl;
     Plant* p1 = new Plant(1);
+    Item* p4 = new Plant(4);
+
+    
     Plant* p2 = new Plant(2);
     Plant* p3 = new Plant(3);
-    Item* p4 = new Plant(4);
     Item* a1 = new Animal(1);
     Item* a2 = new Animal(2);
     Item* a3 = new Animal(3);
     Item* a4 = new Animal(4);
+
+    Item* pr1 = new Product(1);
+    Item* pr2 = new Product(3);
+    Item* pr3 = new Product(6);
+    Item* pr4 = new Product(7);
+    Item* pr5 = new Product(17);
 
     // TOKO
 
@@ -57,6 +65,12 @@ int main() {
     p2->setPlanted(true);
     p3->setPlanted(true);
     a1->setIsInCage(true);
+
+    Player::players[0]->addItem(pr1);
+    Player::players[0]->addItem(pr2);
+    Player::players[0]->addItem(pr3);
+    Player::players[0]->addItem(pr4);
+    Player::players[0]->addItem(pr5);
     
     Player::players[1]->addPlant(p1);
     Player::players[1]->addPlant(p2);
@@ -68,13 +82,23 @@ int main() {
     Player::players[2]->addItem(a3);
     Player::players[2]->addItem(a4);
 
-    Player::players[1]->getLahan()->remove(0,1);
+    Player::players[1]->getLadang()->remove(0,1);
         
 
     while (game.isRunning()) {
+
+        // cout << "is food: " << pr1->isFood() << endl;
+        // cout << "is food: " << pr2->isFood() << endl;
+        // cout << "is food: " << pr3->isFood() << endl;
+
+        // pr1->print();
+        // pr2->print();
+        // pr3->print();
         
-        // Player::players[1]->getLahan().printItem(0, 0);
-        // Player::players[1]->getLahan().print();
+        // Player::players[1]->getLadang()->printItem(0, 0);
+        // Player::players[1]->getLadang()->getItem("A01")->print();
+        // Player::players[1]->getLadang()->getItem("B01")->print();
+        // Player::players[1]->getLadang()->print();
 
         /* 
                             NOTES

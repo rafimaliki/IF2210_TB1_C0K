@@ -14,3 +14,15 @@ void Item::printKODE_HURUF(){}
 bool Item::isReadyToHarvest(){
     return false;
 }
+
+string Item::getTYPE(){
+    return "";
+}
+
+int Item::getADDED_WEIGHT(){
+    return 0;
+}
+
+bool Item::isFood(){
+    return (this->getTYPE() == "PRODUCT_FRUIT_PLANT" || this->getTYPE() == "PRODUCT_ANIMAL");
+}

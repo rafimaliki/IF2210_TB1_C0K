@@ -26,6 +26,10 @@ void Player::printInventory(){
     this->inventory.print();
 }
 
+Inventory<Item>* Player::getInventory(){
+    return &this->inventory;
+}
+
 Player* Player::getCurrentPlayer(){
     return players[current_player_idx];
 }
@@ -40,7 +44,7 @@ void Player::next(){
 }
 
 void Player::printLahan(){}
-Inventory<Plant>* Player::getLahan(){
+Inventory<Plant>* Player::getLadang(){
     return nullptr;
 }
 void Player::printPeternakan(){}
@@ -48,6 +52,17 @@ void Player::addPlant(Plant* item){}
 void Player::addAnimal(Item* item){}
 void Player::addItem(Item* item){
     this->inventory.add(item);
+}
+
+bool Player::haveFood(){
+    for (int i = 0 ; i < GameConfig::miscConfig.getINVENTORY_SIZE()[0]; i++){
+        for (int j = 0 ; j < GameConfig::miscConfig.getINVENTORY_SIZE()[1]; j++){
+            if (!this->inventory.isEmpty(i, j) && this->inventory.getItem(i, j)->isFood()){
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 
@@ -89,8 +104,52 @@ void Player::BANGUN(){
     cout << RED << "\nTidak memiliki akses ke command BANGUN!\n" << RESETstring << endl;
 }
 void Player::MAKAN(){  /* BELUM IMPLEMENTASI */
-    cout << YELLOW << "\nCommand MAKAN belum diimplementasikan!\n" << RESETstring << endl;
+
+    if (!this->haveFood()){
+        cout << "Tidak ada makanan di penyimpanan\n" << endl;
+
+        return;
+    }
+
+    Inventory<Item>* inv = this->getInventory();
+
+    cout << "Pilih makanan dari penyimpanan" << endl;
+    inv->print();
+
+    string slot;
+    bool valid = false;
+
+    while (!valid){
+        try {
+
+            cout << "Slot: ";
+            cin >> slot;
+
+            while (inv->isEmpty(slot) || !inv->getItem(slot)->isFood()){
+                if (inv->isEmpty(slot)){
+                    cout << "\nKamu mengambil harapan kosong dari penyimpanan." << endl;
+                } else {
+                    cout << "\nApa yang kamu lakukan?!! Kamu mencoba untuk memakan itu?!!" << endl;
+                }
+                cout << "Silahkan masukan slot yang berisi makanan." << endl;
+
+                cout << "\nSlot: ";
+                cin >> slot;
+            }
+            valid = true;
+        } catch (IndexNotValidException& e){
+            cout << RED << e.what() << RESETstring << endl << endl; ;
+        }
+    }
+
+    this->body_weight += inv->getItem(slot)->getADDED_WEIGHT();
+
+    cout << "\nDengan lahapnya, kamu memakanan hidangan itu" << endl;
+    cout << "Alhasil, berat badan kamu naik menjadi " << this->body_weight << endl << endl;
+
+    inv->remove(slot);
 }
+
 void Player::KASIH_MAKAN(){
     cout << RED << "\nTidak memiliki akses ke command KASIH_MAKAN!\n" << RESETstring << endl;
 }

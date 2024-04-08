@@ -21,11 +21,11 @@ class ItemConfig {
         string getNAME();
         int getPRICE();
 
-        // virtual string getTYPE();
+        virtual string getTYPE();
         virtual int getDURATION_TO_HARVEST();
         virtual int getWEIGHT_TO_HARVEST();
-        // virtual string getORIGIN();
-        // virtual int getADDED_WEIGHT();
+        virtual string getORIGIN();
+        virtual int getADDED_WEIGHT();
         // virtual vector<Ingredient> getINGREDIENTS();
 };
 
@@ -127,7 +127,7 @@ class MiscConfig {
         int getWIN_GOLD_NUMBER();
         int getWIN_WEIGHT_NUMBER();
         array<int, 2> getINVENTORY_SIZE();
-        array<int, 2> getLAHAN_SIZE();
+        array<int, 2> getLadang_SIZE();
         array<int, 2> getPETERNAKAN_SIZE();
 };
 

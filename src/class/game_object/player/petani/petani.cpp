@@ -1,7 +1,7 @@
 #include "petani.hpp"
 
 Petani::Petani(string name, int money, int body_weight) : Player(name, money, body_weight)
-, lahan(GameConfig::miscConfig.getLAHAN_SIZE()[0], GameConfig::miscConfig.getLAHAN_SIZE()[1], "LADANG"){}
+, lahan(GameConfig::miscConfig.getLadang_SIZE()[0], GameConfig::miscConfig.getLadang_SIZE()[1], "LADANG"){}
 
 void Petani::printLahan(){
     this->lahan.print();
@@ -11,7 +11,7 @@ void Petani::addPlant(Plant* item){
     this->lahan.add(item);
 }
 
-Inventory<Plant>* Petani::getLahan(){
+Inventory<Plant>* Petani::getLadang(){
     return &this->lahan;
 }
 

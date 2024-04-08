@@ -4,8 +4,6 @@
 #include "../../../std.hpp"
 #include "../item_config/item_config.hpp"
 
-#include <map> 
-
 class Item
 {
     private:
@@ -19,5 +17,12 @@ class Item
         virtual void setIsInCage(bool isInCage);
         virtual void printKODE_HURUF();
         virtual bool isReadyToHarvest();
+
+        virtual string getTYPE();
+        virtual int getADDED_WEIGHT();
+
+        bool isFood();
+
+
 };
 #endif
