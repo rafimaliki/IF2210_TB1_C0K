@@ -24,12 +24,28 @@ int ItemConfig::getPRICE(){
     return this->PRICE;
 }
 
+string getTYPE(){
+    return "";
+}
+
 int ItemConfig::getDURATION_TO_HARVEST(){
     return 0;
 }
 
 int ItemConfig::getWEIGHT_TO_HARVEST(){
     return 0;
+}
+
+string getORIGIN(){
+    return "";
+}
+
+int getADDED_WEIGHT(){
+    return 0;
+}
+
+vector<Ingredient> getINGREDIENTS(){
+    return {};
 }
 
 

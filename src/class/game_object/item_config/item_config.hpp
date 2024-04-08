@@ -20,8 +20,12 @@ class ItemConfig {
         string getNAME();
         int getPRICE();
 
+        virtual string getTYPE();
         virtual int getDURATION_TO_HARVEST();
         virtual int getWEIGHT_TO_HARVEST();
+        virtual string getORIGIN();
+        virtual int getADDED_WEIGHT();
+        virtual vector<Ingredient> getINGREDIENTS();
 };
 
 

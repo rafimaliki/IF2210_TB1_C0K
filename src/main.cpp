@@ -1,18 +1,6 @@
 // File: main.cpp
 
-#include "std.hpp"
-
 #include "class/game/game.hpp"
-// #include "class/gameobject/pemain/pemain.hpp"
-// #include "class/gameobject/item/item.hpp"
-
-// #include "class/game_object/item/plant/plant.hpp"
-// #include "class/game_object/item/animal/animal.hpp"
-// #include "class/game_object/player/inventory/inventory.hpp"
-// #include "class/game_object/player/player.hpp"
-// #include "class/game_object/player/walikota/walikota.hpp"
-// #include "class/game_object/player/petani/petani.hpp"
-// #include "class/game_object/player/peternak/peternak.hpp"
 
 int main() {
 

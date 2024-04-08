@@ -1,3 +1,6 @@
+#ifndef GAME_HPP
+#define GAME_HPP
+
 #include "../../std.hpp"
 #include "../game_object/item_config/item_config.hpp"
 #include "../game_object/item/plant/plant.hpp"
@@ -33,3 +36,5 @@ class Game {
         /* MUAT */ /* BELUM IMPLEMENTASI */
         // void MUAT();
 };
+
+#endif
