@@ -7,11 +7,11 @@ void Petani::printLahan(){
     this->lahan.print();
 }
 
-void Petani::addPlant(Item* item){
+void Petani::addPlant(Plant* item){
     this->lahan.add(item);
 }
 
-Inventory<Item>* Petani::getLahan(){
+Inventory<Plant>* Petani::getLahan(){
     return &this->lahan;
 }
 

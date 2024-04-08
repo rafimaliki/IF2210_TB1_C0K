@@ -6,12 +6,12 @@
 class Petani : public Player {
 
     private:
-        Inventory<Item> lahan;
+        Inventory<Plant> lahan;
     public:
         Petani(string name, int money, int body_weight);
         void printLahan();
-        void addPlant(Item* item);
-        Inventory<Item>* getLahan();
+        void addPlant(Plant* item);
+        Inventory<Plant>* getLahan();
 
         // void pungut_pajak();
         // void bangun_bangunan();

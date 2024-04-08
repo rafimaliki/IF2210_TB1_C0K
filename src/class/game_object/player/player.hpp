@@ -4,6 +4,8 @@
 #include "../../../std.hpp"
 #include "inventory/inventory.hpp"
 #include "../item/item.hpp"
+
+#include "../item/plant/plant.hpp"
 // #include "../item/animal/animal.hpp"
 // #include "../item/animal/.hpp"
 
@@ -28,10 +30,10 @@ public:
 
     virtual void printLahan();
     virtual void printPeternakan();
-    virtual Inventory<Item>* getLahan();
+    virtual Inventory<Plant>* getLahan();
 
     void addItem(Item* item);
-    virtual void addPlant(Item* item);  
+    virtual void addPlant(Plant* item);  
     virtual void addAnimal(Item* item);
 
 

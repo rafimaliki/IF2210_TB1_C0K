@@ -28,14 +28,25 @@ int main() {
     */
 
     cout << endl;
-    Item* p1 = new Plant(1);
-    Item* p2 = new Plant(2);
-    Item* p3 = new Plant(3);
+    Plant* p1 = new Plant(1);
+    Plant* p2 = new Plant(2);
+    Plant* p3 = new Plant(3);
     Item* p4 = new Plant(4);
     Item* a1 = new Animal(1);
     Item* a2 = new Animal(2);
     Item* a3 = new Animal(3);
     Item* a4 = new Animal(4);
+
+    // TOKO
+
+    // PETANI BELI TUMBUHAN ID 1
+
+    // item* p = new Plant(1); -> masukin ke Inventory Petani
+
+    // saat petani mau TANAM 
+
+    // get id = 1
+    // plant* p = new Plant(1); -> masukin ke ladang 
  
     // Inventory<Item> inv(GameConfig::miscConfig.INVENTORY_sIZE[0], GameConfig::miscConfig.INVENTORY_sIZE[1], "PENYIMPANAN");
     // Inventory<Item> inv(5, 5, "PENYIMPANAN");
@@ -51,6 +62,7 @@ int main() {
     Player::players[1]->addPlant(p2);
     Player::players[1]->addPlant(p3);
     Player::players[1]->addItem(p4);
+
     Player::players[2]->addAnimal(a1);
     Player::players[2]->addItem(a2);
     Player::players[2]->addItem(a3);
