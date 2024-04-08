@@ -22,6 +22,9 @@ class Petani : public Player {
         void TANAM();
         void PANEN();
         void isLahanPenuh();
+        void isPanenAvailable();
+        void isInventoryMemadai(int n);
+        
         // void MUAT();
 };
 
