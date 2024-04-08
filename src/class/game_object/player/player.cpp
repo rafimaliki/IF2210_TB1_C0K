@@ -169,3 +169,79 @@ void Player::SIMPAN(){  /* BELUM IMPLEMENTASI */
 void Player::TAMBAH_PEMAIN(){
     cout << RED << "\nTidak memiliki akses ke command TAMBAH_PEMAIN!\n" << RESETstring << endl;
 }
+
+/* Cheat Commands */
+
+void Player::SET(){
+    
+    cout << "\nAtribut:" << endl;
+    cout << "1. Money" << endl;
+    cout << "2. Body Weight" << endl;
+
+    int choice;
+    cout << "\nPilih (1-2): ";
+    cin >> choice;
+
+    if (choice == 1){
+        cout << "Masukan jumlah uang: ";
+        cin >> this->money;
+    } else if (choice == 2){
+        cout << "Masukan berat badan: ";
+        cin >> this->body_weight;
+    }
+
+    cout << "Sukses!\n" << endl;
+}
+
+void Player::GIVE(){
+    if (this->inventory.isFull()){
+        cout << "\nInventory penuh\n" << endl;
+        return;
+    }
+
+    cout << "\nTipe item:" << endl;
+    cout << "1. Plant" << endl;
+    cout << "2. Animal" << endl;
+    cout << "3. Product" << endl;
+
+    int choice;
+    cout << "\nPilih (1-3): ";
+    cin >> choice;
+    Item* item;
+
+    if (choice == 1){
+        cout << "\nDaftar tanaman:" << endl;
+        for (int i = 0; i < int(GameConfig::plantConfig.size()); i++){
+            cout << i+1 << ". " << GameConfig::plantConfig[i].getNAME() << endl;
+        }
+        cout << "\nPilih (1-" << GameConfig::plantConfig.size() << "): ";
+        cin >> choice;
+        item = new Plant(choice);
+
+    } else if (choice == 2){
+        cout << "\nDaftar hewan:" << endl;
+        for (int i = 0; i < int(GameConfig::animalConfig.size()); i++){
+            cout << i+1 << ". " << GameConfig::animalConfig[i].getNAME() << endl;
+        }
+        cout << "\nPilih (1-" << GameConfig::animalConfig.size() << "): ";
+        cin >> choice;
+        item = new Plant(choice);
+
+    } else if (choice == 3){
+        cout << "\nDaftar produk:" << endl;
+        for (int i = 0; i < int(GameConfig::productConfig.size()); i++){
+            cout << i+1 << ". " << GameConfig::productConfig[i].getNAME() << endl;
+        }
+        cout << "\nPilih (1-" << GameConfig::productConfig.size() << "): ";
+        cin >> choice;
+        item = new Plant(choice);
+    }
+
+    Player::getCurrentPlayer()->addItem(item);
+
+    cout << "\nSukses!\n" << endl;
+}
+
+void Player::STATS(){
+    this->printStats();
+}

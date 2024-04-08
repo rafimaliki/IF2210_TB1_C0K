@@ -6,6 +6,8 @@
 #include "../item/item.hpp"
 
 #include "../item/plant/plant.hpp"
+#include "../item/animal/animal.hpp"
+#include "../item/product/product.hpp"
 // #include "../item/animal/animal.hpp"
 // #include "../item/animal/.hpp"
 
@@ -56,6 +58,11 @@ public:
     // virtual void MUAT();
     virtual void SIMPAN();
     virtual void TAMBAH_PEMAIN();
+
+    /* Cheat Commands */
+    virtual void SET();
+    virtual void GIVE();
+    virtual void STATS();
 
 
 

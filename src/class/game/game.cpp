@@ -70,7 +70,14 @@ void Game::executeCommand(string command) {
         Player::getCurrentPlayer()->SIMPAN();
     } else if (command == "TAMBAH_PEMAIN"){
         Player::getCurrentPlayer()->TAMBAH_PEMAIN();
-    } else {
+    } else if (command == "SET"){
+        Player::getCurrentPlayer()->SET();
+    } else if (command == "GIVE"){
+        Player::getCurrentPlayer()->GIVE();
+    } else if (command == "STATS"){
+        Player::getCurrentPlayer()->STATS();
+    }
+    else {
         cout << RED << "\nCommand not found\n" << RESETstring << endl;
     }
 }
