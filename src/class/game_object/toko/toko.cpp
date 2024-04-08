@@ -116,7 +116,7 @@ void Toko::checkEmptyItem(){
     for (int i = 0; i < n_product; i++)
     {
         if(list_item[i].getAmount() == 0){
-            list_item.erase(list_item.begin() + i -1);
+            list_item.erase(list_item.begin() + i );
             n_product --;
         }
     }
