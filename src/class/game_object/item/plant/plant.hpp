@@ -24,6 +24,7 @@ public:
     void setPlanted(bool isPlanted);
     void printKODE_HURUF();
     bool isReadyToHarvest();
+    string getTYPE();
 
     static void AgeAllPlants();
 

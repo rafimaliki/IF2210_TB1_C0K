@@ -54,6 +54,7 @@ class Inventory
         int calcEmptySpace();
         bool isEmpty(int j, int i);
         bool isEmpty(string idx);
+        bool isFull();
 
         T* getItem(int i, int j);
         T* getItem(string idx);
@@ -230,6 +231,11 @@ bool Inventory<T>::isEmpty(string idx) {
     } catch (...) {
         throw IndexNotValidException();
     }
+}
+
+template <class T> 
+bool Inventory<T>::isFull() {
+    return this->calcEmptySpace() == 0;
 }
 
 

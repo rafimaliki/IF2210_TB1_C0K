@@ -50,3 +50,7 @@ void Plant::printKODE_HURUF(){
 bool Plant::isReadyToHarvest(){
     return this->Age >= this->config->getDURATION_TO_HARVEST();
 }
+
+string Plant::getTYPE(){
+    return this->config->getTYPE();
+}

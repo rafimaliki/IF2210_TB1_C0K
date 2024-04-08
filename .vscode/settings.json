@@ -40,7 +40,10 @@
     "streambuf": "cpp",
     "typeinfo": "cpp",
     "filesystem": "cpp",
-    "typeindex": "cpp"
+    "typeindex": "cpp",
+    "bitset": "cpp",
+    "regex": "cpp",
+    "valarray": "cpp"
   },
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",

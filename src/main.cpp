@@ -30,7 +30,6 @@ int main() {
     cout << endl;
     Plant* p1 = new Plant(1);
     Item* p4 = new Plant(4);
-
     
     Plant* p2 = new Plant(2);
     Plant* p3 = new Plant(3);
