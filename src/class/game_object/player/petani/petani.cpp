@@ -1,4 +1,5 @@
 #include "petani.hpp"
+#include "petaniException.hpp"
 
 Petani::Petani(string name, int money, int body_weight) : Player(name, money, body_weight)
 , lahan(GameConfig::miscConfig.getLadang_SIZE()[0], GameConfig::miscConfig.getLadang_SIZE()[1], "LADANG"){}
@@ -51,22 +52,87 @@ void Petani::CETAK_LADANG(){ /* BELUM DETAIL SESUAI SPEK */
     // CNT -> Coconut Tree
 }
 void Petani::TANAM(){  /* BELUM IMPLEMENTASI */
-    cout << YELLOW << "\nCommand TANAM belum diimplementasikan!\n" << RESETstring << endl;
+    // cout << YELLOW << "\nCommand TANAM belum diimplementasikan!\n" << RESETstring << endl;
     
-    //Pilih Tanaman Dari Inventory
-        //Cek dulu ada tanaman atau engga di inventory
-            //Throw Exception
+    //Cek Apakah Lahan sudah Penuh
+    try{
+        this->isLahanPenuh();
+    } catch (LahanPenuhException& e){
+        cout << RED << e.what() << RESETstring << endl;
+    }
+    
+
     cout << "Pilih tanaman dari penyimpanan " << endl;
 
-    //print inventory
 
-    
-    //Memilih Lokasi Dari Lahan
-        //Cek dulu lahannya sudah penuh atau belum
-            //Throw exception
+    //Print Inventory
+    this->inventory.print();
+
+    string slot;
+    bool valid = false;
+
+    while (!valid){
+        try {
+
+            cout << "Slot: ";
+            cin >> slot;
+
+            while (this->inventory.isEmpty(slot) || !this->inventory.getItem(slot)->isPlant()){
+                if (this->inventory.isEmpty(slot)){
+                    cout << "\nKamu mengambil harapan kosong dari penyimpanan." << endl;
+                } else {
+                    cout << "\nApa yang kamu lakukan?!! Kamu mencoba untuk menanam itu?!!" << endl;
+                }
+                cout << "Silahkan masukan slot yang berisi tanaman." << endl;
+
+                cout << "\nSlot: ";
+                cin >> slot;
+            }
+            valid = true;
+        } catch (IndexNotValidException& e){
+            cout << RED << e.what() << RESETstring << endl << endl; ;
+        }
+    }
+
+
+    //get ID from slot
+    int ID = this->inventory.getItem(slot)->getConfig()->getID();
+
+
+
+    //Pilih lokasi tanam
+    string slot_tanah;
+    valid = false;
+
+    while (!valid){
+        try {
+
+            cout << "Petak tanah: ";
+            cin >> slot_tanah;
+
+            while (!this->lahan.isEmpty(slot_tanah)){
+                cout << "\n Lahan itu sudah ditanami ! ." << endl;
+                
+                cout << "Silahkan masukan petak tanah yang masih kosong." << endl;
+
+                cout << "\nPetak tanah: ";
+                cin >> slot_tanah;
+            }
+            valid = true;
+        } catch (IndexNotValidException& e){
+            cout << RED << e.what() << RESETstring << endl << endl; ;
+        }
+    }
+
+    //Tanam Tanamannya
+    Plant *tanaman = new Plant(ID);
+    tanaman->setPlanted(true);
+
+    this->lahan.add(tanaman,slot_tanah);
+
 
     //Hilangin tanaman dari inventory
-
+    this->inventory.remove(slot);
 }
 void Petani::PANEN(){  /* BELUM IMPLEMENTASI */
     cout << YELLOW << "\nCommand PANEN belum diimplementasikan!\n" << RESETstring << endl;
@@ -91,4 +157,10 @@ void Petani::PANEN(){  /* BELUM IMPLEMENTASI */
         //Validasi Inventory Cukup Atau Tidak
 
 
+}
+
+void Petani::isLahanPenuh(){
+    if(this->lahan.calcEmptySpace() == 0){
+        throw LahanPenuhException();
+    }
 }
