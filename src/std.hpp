@@ -5,6 +5,8 @@
 #include <vector>
 #include <string>
 #include <array>
+#include <map>
+
 
 using std::cout;
 using std::cin;
@@ -12,6 +14,7 @@ using std::endl;
 using std::vector;
 using std::string;
 using std::array;
+using std::map;
 using std::exception;
 
 const string BOLD = "\x1b[1m";

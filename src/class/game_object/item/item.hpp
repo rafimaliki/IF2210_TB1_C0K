@@ -22,6 +22,7 @@ class Item
         virtual int getADDED_WEIGHT();
 
         bool isFood();
+        bool isPlant();
 
 
 };
