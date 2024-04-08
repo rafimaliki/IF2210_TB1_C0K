@@ -21,6 +21,7 @@ class Petani : public Player {
         void CETAK_LADANG();
         void TANAM();
         void PANEN();
+        void isLahanPenuh();
         // void MUAT();
 };
 

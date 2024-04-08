@@ -46,6 +46,7 @@ class Inventory
         Inventory();
         Inventory(int width, int height, string title);
         void add(T* item);
+        void add(T* item, string idx);
         void remove(int i, int j);
         void remove(string idx);
         void print();
@@ -96,6 +97,28 @@ void Inventory<T>::add(T* item) {
     }
     cout << "Inventory is full!" << endl;
 }
+
+template <class T>
+void Inventory<T>::add(T* item, string idx) {
+    try {
+        int j = idx[0] - 'A';
+        int i = stoi(idx.substr(1)) - 1;
+
+        if (i >= this->height || j >= this->width || i < 0 || j < 0){
+            throw IndexNotValidException();
+        }
+
+        if (this->grid[i][j].getAmount() == 0) {
+            this->grid[i][j] = InventoryEntry<T>(item);
+        } else {
+            cout << "Slot sudah terisi!" << endl;
+        }
+    } catch (...) {
+        throw IndexNotValidException();
+    }
+}
+
+
 
 template <class T>
 void Inventory<T>::remove(int i, int j) {

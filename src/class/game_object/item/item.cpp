@@ -26,3 +26,8 @@ int Item::getADDED_WEIGHT(){
 bool Item::isFood(){
     return (this->getTYPE() == "PRODUCT_FRUIT_PLANT" || this->getTYPE() == "PRODUCT_ANIMAL");
 }
+
+bool Item::isPlant(){
+    cout << "TYPE: " << this->getTYPE() << endl;
+    return (this->getTYPE() == "MATERIAL_PLANT" || this->getTYPE() == "FRUIT_PLANT");
+}
