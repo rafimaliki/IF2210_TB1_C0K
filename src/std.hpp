@@ -5,6 +5,8 @@
 #include <vector>
 #include <string>
 #include <array>
+#include <map>
+
 
 using std::cout;
 using std::cin;
@@ -12,6 +14,8 @@ using std::endl;
 using std::vector;
 using std::string;
 using std::array;
+using std::map;
+
 
 const string BOLD = "\x1b[1m";
 const string RED = "\033[1;31m";
