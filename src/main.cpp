@@ -81,7 +81,12 @@ int main() {
     // Inventory<Item> inv(5, 5, "PENYIMPANAN");
     // inv.add(p1);
     // inv.add(a1);
+    
+    Item* i = new Product(2);
 
+    Toko::addItem(i);
+    Toko::addItem(i);
+    Toko::displayToko();
     p1->setPlanted(true);
     p2->setPlanted(true);
     p3->setPlanted(true);
