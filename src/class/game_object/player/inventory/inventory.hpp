@@ -111,12 +111,12 @@ void Inventory<T>::remove(string idx) {
     try {
         int j = idx[0] - 'A';
         int i = stoi(idx.substr(1)) - 1;
-        this->remove(i, j);
 
         if (i >= this->height || j >= this->width || i < 0 || j < 0){
             throw IndexNotValidException();
         }
         
+        this->remove(i, j);
     } catch (...) {
         throw IndexNotValidException();
     }
