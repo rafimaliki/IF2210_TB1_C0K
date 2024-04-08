@@ -17,7 +17,7 @@ class Item
         virtual void setIsInCage(bool isInCage);
         virtual void printKODE_HURUF();
         virtual bool isReadyToHarvest();
-
+        
         virtual string getTYPE();
         virtual int getADDED_WEIGHT();
 
