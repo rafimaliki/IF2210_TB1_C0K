@@ -4,6 +4,7 @@
 #include "../../../std.hpp"
 #include "../../muat/config_reader.hpp"
 
+
 class ItemConfig {
     protected:
         int ID;
@@ -20,12 +21,12 @@ class ItemConfig {
         string getNAME();
         int getPRICE();
 
-        virtual string getTYPE();
+        // virtual string getTYPE();
         virtual int getDURATION_TO_HARVEST();
         virtual int getWEIGHT_TO_HARVEST();
-        virtual string getORIGIN();
-        virtual int getADDED_WEIGHT();
-        virtual vector<Ingredient> getINGREDIENTS();
+        // virtual string getORIGIN();
+        // virtual int getADDED_WEIGHT();
+        // virtual vector<Ingredient> getINGREDIENTS();
 };
 
 
@@ -104,7 +105,7 @@ class RecipeConfig : public ItemConfig {
         static vector<RecipeConfig> ReadRecipeConfig(vector<vector<string>> Config);
         void print();
 
-        vector<Ingredient> getINGREDIENTS();
+        // vector<Ingredient> getINGREDIENTS();
 };
 
 

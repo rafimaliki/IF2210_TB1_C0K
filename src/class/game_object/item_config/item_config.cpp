@@ -24,9 +24,9 @@ int ItemConfig::getPRICE(){
     return this->PRICE;
 }
 
-string getTYPE(){
-    return "";
-}
+// string ItemConfig::getTYPE(){
+//     return "";
+// }
 
 int ItemConfig::getDURATION_TO_HARVEST(){
     return 0;
@@ -36,17 +36,17 @@ int ItemConfig::getWEIGHT_TO_HARVEST(){
     return 0;
 }
 
-string getORIGIN(){
-    return "";
-}
+    // string ItemConfig::getORIGIN(){
+    //     return "";
+    // }
 
-int getADDED_WEIGHT(){
-    return 0;
-}
+    // int ItemConfig::getADDED_WEIGHT(){
+    //     return 0;
+    // }
 
-vector<Ingredient> getINGREDIENTS(){
-    return {};
-}
+// vector<Ingredient> ItemConfig::getINGREDIENTS(){
+//     return vector<Ingredient>();
+// }
 
 
 
@@ -210,9 +210,9 @@ void RecipeConfig::print(){
     cout << endl;
 }
 
-vector<Ingredient> RecipeConfig::getINGREDIENTS(){
-    return this->INGREDIENTS;
-}
+// vector<Ingredient> RecipeConfig::getINGREDIENTS(){
+//     return this->INGREDIENTS;
+// }
 
 
 
