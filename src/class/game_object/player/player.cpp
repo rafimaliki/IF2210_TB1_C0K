@@ -54,6 +54,17 @@ void Player::addItem(Item* item){
     this->inventory.add(item);
 }
 
+bool Player::haveFood(){
+    for (int i = 0 ; i < GameConfig::miscConfig.getINVENTORY_SIZE()[0]; i++){
+        for (int j = 0 ; j < GameConfig::miscConfig.getINVENTORY_SIZE()[1]; j++){
+            if (!this->inventory.isEmpty(i, j) && this->inventory.getItem(i, j)->isFood()){
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 
 /* Game command related methods */
 
@@ -94,6 +105,12 @@ void Player::BANGUN(){
 }
 void Player::MAKAN(){  /* BELUM IMPLEMENTASI */
 
+    if (!this->haveFood()){
+        cout << "Tidak ada makanan di penyimpanan\n" << endl;
+
+        return;
+    }
+
     Inventory<Item>* inv = this->getInventory();
 
     cout << "Pilih makanan dari penyimpanan" << endl;
@@ -120,8 +137,8 @@ void Player::MAKAN(){  /* BELUM IMPLEMENTASI */
                 cin >> slot;
             }
             valid = true;
-        } catch (...){
-            cout << RED << "Invalid slot!\n" << RESETstring << endl;
+        } catch (IndexNotValidException& e){
+            cout << RED << e.what() << RESETstring << endl << endl; ;
         }
     }
 

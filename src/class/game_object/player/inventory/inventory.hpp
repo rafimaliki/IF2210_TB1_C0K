@@ -3,6 +3,7 @@
 
 #include "../../../../std.hpp"
 #include "../../item/plant/plant.hpp"
+#include "inventoryException.hpp"
 
 const string LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const string SPACE_1 = " ";
@@ -111,8 +112,13 @@ void Inventory<T>::remove(string idx) {
         int j = idx[0] - 'A';
         int i = stoi(idx.substr(1)) - 1;
         this->remove(i, j);
+
+        if (i >= this->height || j >= this->width || i < 0 || j < 0){
+            throw IndexNotValidException();
+        }
+        
     } catch (...) {
-        cout << RED << "Invalid index!" << RESETstring << endl;
+        throw IndexNotValidException();
     }
 }
 
@@ -189,9 +195,18 @@ bool Inventory<T>::isEmpty(int i, int j) {
 
 template <class T>
 bool Inventory<T>::isEmpty(string idx) {
-    int j = idx[0] - 'A';
-    int i = stoi(idx.substr(1)) - 1;
-    return this->grid[i][j].getAmount() == 0;
+    try {
+        int j = idx[0] - 'A';
+        int i = stoi(idx.substr(1)) - 1;
+
+        if (i >= this->height || j >= this->width || i < 0 || j < 0){
+            throw IndexNotValidException();
+        }
+
+        return this->grid[i][j].getAmount() == 0;
+    } catch (...) {
+        throw IndexNotValidException();
+    }
 }
 
 
@@ -207,9 +222,18 @@ T* Inventory<T>::getItem(int i, int j) {
 
 template <class T>
 T* Inventory<T>::getItem(string idx) {
-    int j = idx[0] - 'A';
-    int i = stoi(idx.substr(1)) - 1;
-    return this->grid[i][j].getItem();
+    try {
+        int j = idx[0] - 'A';
+        int i = stoi(idx.substr(1)) - 1;
+
+        if (i >= this->height || j >= this->width || i < 0 || j < 0){
+            throw IndexNotValidException();
+        }
+
+        return this->grid[i][j].getItem();
+    } catch (...) {
+        throw IndexNotValidException();
+    }
 }
 
 #endif

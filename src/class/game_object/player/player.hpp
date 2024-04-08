@@ -36,6 +36,8 @@ public:
     virtual void addPlant(Plant* item);  
     virtual void addAnimal(Item* item);
 
+    bool haveFood();
+
 
     /* Game command related methods */
     virtual void NEXT();
