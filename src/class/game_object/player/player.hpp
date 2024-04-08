@@ -26,11 +26,11 @@ public:
     void printStats();
     void printInventory();
     static Player* getCurrentPlayer();
-    static void next();
 
     virtual void printLahan();
     virtual void printPeternakan();
-    virtual Inventory<Plant>* getLahan();
+    Inventory<Item>* getInventory();
+    virtual Inventory<Plant>* getLadang();
 
     void addItem(Item* item);
     virtual void addPlant(Plant* item);  
@@ -55,6 +55,10 @@ public:
     virtual void SIMPAN();
     virtual void TAMBAH_PEMAIN();
 
+
+
+
+    static void next();
 };
 
 #endif

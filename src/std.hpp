@@ -12,6 +12,7 @@ using std::endl;
 using std::vector;
 using std::string;
 using std::array;
+using std::exception;
 
 const string BOLD = "\x1b[1m";
 const string RED = "\033[1;31m";

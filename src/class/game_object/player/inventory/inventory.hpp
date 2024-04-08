@@ -46,10 +46,15 @@ class Inventory
         Inventory(int width, int height, string title);
         void add(T* item);
         void remove(int i, int j);
+        void remove(string idx);
         void print();
         void printItem(int i, int j);
         int calcEmptySpace();
         bool isEmpty(int j, int i);
+        bool isEmpty(string idx);
+
+        T* getItem(int i, int j);
+        T* getItem(string idx);
 };
 
 
@@ -92,11 +97,22 @@ void Inventory<T>::add(T* item) {
 
 template <class T>
 void Inventory<T>::remove(int i, int j) {
-     // Implementation of remove function
     if (this->isEmpty(i, j)) {
         cout << "Slot kosong!" << endl;
     } else {
         this->grid[i][j] = InventoryEntry<T>();
+    }
+}
+
+template <class T>
+void Inventory<T>::remove(string idx) {
+
+    try {
+        int j = idx[0] - 'A';
+        int i = stoi(idx.substr(1)) - 1;
+        this->remove(i, j);
+    } catch (...) {
+        cout << RED << "Invalid index!" << RESETstring << endl;
     }
 }
 
@@ -166,13 +182,34 @@ int Inventory<T>::calcEmptySpace() {\
 }
 
 template <class T>
-bool Inventory<T>::isEmpty(int i, int j) {\
+bool Inventory<T>::isEmpty(int i, int j) {
     return this->grid[i][j].getAmount() == 0;
 }
+
+
+template <class T>
+bool Inventory<T>::isEmpty(string idx) {
+    int j = idx[0] - 'A';
+    int i = stoi(idx.substr(1)) - 1;
+    return this->grid[i][j].getAmount() == 0;
+}
+
 
 template <class T>
 void Inventory<T>::printItem(int i, int j) {
     this->grid[i][j].getItem()->print();
+}
+
+template <class T>
+T* Inventory<T>::getItem(int i, int j) {
+    return this->grid[i][j].getItem();
+}
+
+template <class T>
+T* Inventory<T>::getItem(string idx) {
+    int j = idx[0] - 'A';
+    int i = stoi(idx.substr(1)) - 1;
+    return this->grid[i][j].getItem();
 }
 
 #endif

@@ -24,9 +24,9 @@ int ItemConfig::getPRICE(){
     return this->PRICE;
 }
 
-// string ItemConfig::getTYPE(){
-//     return "";
-// }
+string ItemConfig::getTYPE(){
+    return "";
+}
 
 int ItemConfig::getDURATION_TO_HARVEST(){
     return 0;
@@ -36,13 +36,13 @@ int ItemConfig::getWEIGHT_TO_HARVEST(){
     return 0;
 }
 
-    // string ItemConfig::getORIGIN(){
-    //     return "";
-    // }
+string ItemConfig::getORIGIN(){
+    return "";
+}
 
-    // int ItemConfig::getADDED_WEIGHT(){
-    //     return 0;
-    // }
+int ItemConfig::getADDED_WEIGHT(){
+    return 0;
+}
 
 // vector<Ingredient> ItemConfig::getINGREDIENTS(){
 //     return vector<Ingredient>();
@@ -256,7 +256,7 @@ array<int, 2> MiscConfig::getINVENTORY_SIZE(){
     return this->INVENTORY_SIZE;
 }
 
-array<int, 2> MiscConfig::getLAHAN_SIZE(){
+array<int, 2> MiscConfig::getLadang_SIZE(){
     return this->LAHAN_SIZE;
 }
 
