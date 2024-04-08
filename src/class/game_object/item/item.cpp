@@ -24,6 +24,9 @@ bool Item::isPlant(){
     return (this->getTYPE() == "MATERIAL_PLANT" || this->getTYPE() == "FRUIT_PLANT");
 }
 
+bool Item::isAnimal(){
+    return (this->getTYPE() == "CARNIVORE" || this->getTYPE() == "HERBIVORE");
+}
 
 /* GETTER */
 int Item::getID(){
