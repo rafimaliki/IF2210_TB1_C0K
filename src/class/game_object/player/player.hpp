@@ -40,6 +40,10 @@ public:
 
     bool haveFood();
 
+    virtual string getType();
+    int getMoney();
+    void setMoney(int money);
+    string getName();
 
     /* Game command related methods */
     virtual void NEXT();

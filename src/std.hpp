@@ -6,6 +6,7 @@
 #include <string>
 #include <array>
 #include <map>
+#include <exception>
 
 
 using std::cout;

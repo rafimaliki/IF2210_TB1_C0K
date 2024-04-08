@@ -25,6 +25,8 @@ class Petani : public Player {
         void isPanenAvailable();
         void isInventoryMemadai(int n);
         
+
+        string getType();
         // void MUAT();
 };
 

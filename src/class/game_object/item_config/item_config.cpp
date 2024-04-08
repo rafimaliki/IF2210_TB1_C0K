@@ -44,9 +44,9 @@ int ItemConfig::getADDED_WEIGHT(){
     return 0;
 }
 
-// vector<Ingredient> ItemConfig::getINGREDIENTS(){
-//     return vector<Ingredient>();
-// }
+vector<Ingredient> ItemConfig::getINGREDIENTS(){
+    return vector<Ingredient>();
+}
 
 
 
@@ -210,9 +210,9 @@ void RecipeConfig::print(){
     cout << endl;
 }
 
-// vector<Ingredient> RecipeConfig::getINGREDIENTS(){
-//     return this->INGREDIENTS;
-// }
+vector<Ingredient> RecipeConfig::getINGREDIENTS(){
+    return this->INGREDIENTS;
+}
 
 
 

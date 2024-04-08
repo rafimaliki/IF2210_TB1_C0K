@@ -44,6 +44,28 @@ int main() {
     Item* pr4 = new Product(7);
     Item* pr5 = new Product(17);
 
+    // cout << "Id: " << p1->getID() << endl;
+    // cout << "Kode Huruf: " << p1->getKODE_HURUF() << endl;
+    // cout << "Nama: " << p1->getNAME() << endl;
+    // cout << "Harga: " << p1->getPRICE() << endl;
+    // cout << "Tipe: " << p1->getTYPE() << endl;
+    // cout << "Durasi Panen: " << p1->getDURATION_TO_HARVEST() << endl;
+    // cout << endl;
+    // cout << "Id: " << a1->getID() << endl;
+    // cout << "Kode Huruf: " << a1->getKODE_HURUF() << endl;
+    // cout << "Nama: " << a1->getNAME() << endl;
+    // cout << "Harga: " << a1->getPRICE() << endl;
+    // cout << "Tipe: " << a1->getTYPE() << endl;
+    // cout << "Berat harvest: " << a1->getWEIGHT_TO_HARVEST() << endl;
+    // cout << endl;
+    // cout << "Id: " << pr1->getID() << endl;
+    // cout << "Kode Huruf: " << pr1->getKODE_HURUF() << endl;
+    // cout << "Nama: " << pr1->getNAME() << endl;
+    // cout << "Harga: " << pr1->getPRICE() << endl;
+    // cout << "Tipe: " << pr1->getTYPE() << endl;
+    // cout << "Origin: " << pr1->getORIGIN() << endl;
+    // cout << "Added Weight: " << pr1->getADDED_WEIGHT() << endl;
+
     // TOKO
 
     // PETANI BELI TUMBUHAN ID 1
