@@ -45,15 +45,8 @@ void Petani::CETAK_LADANG(){
 
     //Print tanaman yang unik
     for(auto it = temp_tanaman_unik.begin(); it != temp_tanaman_unik.end();it++){
-            cout << it->first << " -> " << it->second << endl;
+            cout << "- " << it->first << ": " << it->second << endl;
         }
-
-
-    
-    //Detail Seperti 
-    // ALT -> Aloe Tree
-    // BNT -> Banana Tree
-    // CNT -> Coconut Tree
 }
 void Petani::TANAM(){  
    
@@ -102,6 +95,8 @@ void Petani::TANAM(){
     //get ID from slot
     int ID = this->inventory.getItem(slot)->getConfig()->getID();
 
+    cout << "\nKamu memilih " << this->inventory.getItem(slot)->getConfig()->getNAME() << endl;
+
 
 
 
@@ -140,7 +135,7 @@ void Petani::TANAM(){
 
     this->lahan.add(tanaman,slot_tanah);
 
-    cout << "Cangkul, cangkul, cangkul yang dalam~!" << endl;
+    cout << "\nCangkul, cangkul, cangkul yang dalam~!" << endl;
     cout << tanaman->getConfig()->getNAME() << " berhasil ditanam!" << endl;
 
     //Hilangin tanaman dari inventory
