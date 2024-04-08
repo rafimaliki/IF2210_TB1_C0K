@@ -234,12 +234,12 @@ void Player::GIVE(){
         }
         cout << "\nPilih (1-" << GameConfig::productConfig.size() << "): ";
         cin >> choice;
-        item = new Plant(choice);
+        item = new Product(choice);
     }
 
     Player::getCurrentPlayer()->addItem(item);
 
-    cout << "\nSukses!\n" << endl;
+    cout << "Sukses!\n" << endl;
 }
 
 void Player::STATS(){
