@@ -1,37 +1,76 @@
 #include "game.hpp"
 
-Game::Game() {
+Game::Game()
+{
     this->is_running = false;
 }
 
-void Game::start() {
-    this->is_running = true;
+void Game::start()
+{
 
-    cout << "Game started!\n" << endl;
+    try
+    {
 
-    loadConfig();
-    loadSaveFile();
+        loadConfig();
+        Command::initCommand();
 
-    Player* walikota = new Walikota("Walikota", 1000, 70);
-    Player* petani1 = new Petani("Petani1", 50, 45);
-    Player* peternak1 = new Peternak("Peternak1", 100, 55);
+        Util::printTitle();
 
-    
+        string choice;
+        do
+        {
+            cout << "\nApakah Anda ingin memuat state? (Y/N): ";
+            cin >> choice;
 
+            if (choice == "Y" or choice == "y")
+            {
+                Game::loadSaveFile();
+            }
+            else
+            {
+                Game::startNewGame();
+            }
+
+        } while (!(choice == "Y" or choice == "y") && !(choice == "N" or choice == "n"));
+
+        this->is_running = true;
+    }
+    catch (FailReadFileException &e)
+    {
+        cout << RED << e.what() << RESET << endl;
+    }
 }
 
-void Game::loadConfig() {
+void Game::startNewGame()
+{
+    Player *walikota = new Walikota("Walikota", 50, 40);
+    Player *petani1 = new Petani("Pak Tani", 50, 40);
+    Player *peternak1 = new Peternak("Tukang Sapi", 50, 40);
 
-    cout << "Loading config...\n" << endl;
+    cout << "Memulai New Game!" << endl;
+    cout << "\nGiliran player " << Player::players[0]->getName() << endl;
+}
+
+void Game::loadConfig()
+{
+    // cout << "Loading config...\n" << endl;
     GameConfig::loadGameConfig();
 }
 
-void Game::loadSaveFile() {
-    cout << "\nLoading save file..." << endl;
-    cout << "No save file found" << endl;
+void Game::loadSaveFile()
+{
+
+    cout << "Masukkan lokasi berkas state : ";
+
+    string lokasi;
+    cin >> lokasi;
+
+    cout << "\nFile tidak ditemukan!" << endl;
+    Game::startNewGame();
 }
 
-string Game::inputCommand() {
+string Game::inputCommand()
+{
     string command;
     cout << BOLD << "> ";
     cin >> command;
@@ -39,60 +78,45 @@ string Game::inputCommand() {
     return command;
 }
 
-void Game::executeCommand(string command) {
-    // cout << "Executing command: " << command << endl;
-    if (command == "EXIT" || command == "exit") {
-        is_running = false;
-    } else if (command == "NEXT") {
-        Player::getCurrentPlayer()->NEXT();
-    } else if (command == "CETAK_PENYIMPANAN"){
-        Player::getCurrentPlayer()->CETAK_PENYIMPANAN();
-    } else if (command == "PUNGUT_PAJAK"){
-        Player::getCurrentPlayer()->PUNGUT_PAJAK();
-    } else if (command == "CETAK_LADANG"){
-        Player::getCurrentPlayer()->CETAK_LADANG();
-    } else if (command == "CETAK_PETERNAKAN"){
-        Player::getCurrentPlayer()->CETAK_PETERNAKAN();
-    } else if (command == "TANAM"){
-        Player::getCurrentPlayer()->TANAM();
-    } else if (command == "TERNAK"){
-        Player::getCurrentPlayer()->TERNAK();
-    } else if (command == "BANGUN"){
-        Player::getCurrentPlayer()->BANGUN();
-    } else if (command == "MAKAN"){
-        Player::getCurrentPlayer()->MAKAN();
-    } else if (command == "KASIH_MAKAN"){
-        Player::getCurrentPlayer()->KASIH_MAKAN();
-    } else if (command == "BELI"){
-        Player::getCurrentPlayer()->BELI();
-    } else if (command == "JUAL"){
-        Player::getCurrentPlayer()->JUAL();
-    } else if (command == "PANEN"){
-        Player::getCurrentPlayer()->PANEN();
-    } else if (command == "SIMPAN"){
-        Player::getCurrentPlayer()->SIMPAN();
-    } else if (command == "TAMBAH_PEMAIN"){
-        Player::getCurrentPlayer()->TAMBAH_PEMAIN();
-    } else if (command == "SET"){
-        Player::getCurrentPlayer()->SET();
-    } else if (command == "GIVE"){
-        Player::getCurrentPlayer()->GIVE();
-    } else if (command == "STATS"){
-        Player::getCurrentPlayer()->STATS();
+void Game::executeCommand(string command)
+{
+
+    if (command == "EXIT")
+    {
+        this->is_running = false;
+        return;
     }
-    else {
-        cout << RED << "\nCommand not found\n" << RESET << endl;
+
+    try
+    {
+        Command::execute(command);
+    }
+    catch (NoPermissionException &e)
+    {
+        cout << RED << e.what() << command << "\n"
+             << RESET << endl;
+    }
+    catch (InvalidCommandException &e)
+    {
+        cout << RED << e.what() << RESET << endl;
+    }
+    catch (const exception &e)
+    {
+        cout << e.what() << endl;
     }
 }
 
-void Game::checkWin() {
+void Game::checkWin()
+{
     // cout << "\nChecking win...\n" << endl;
 }
 
-void Game::printWinner() {
+void Game::printWinner()
+{
     cout << "Printing winner..." << endl;
 }
 
-bool Game::isRunning() {
+bool Game::isRunning()
+{
     return is_running;
 }

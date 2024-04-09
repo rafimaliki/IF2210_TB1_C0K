@@ -32,12 +32,12 @@ vector<string> Util::split(string str, char delimiter)
 
     for (int i = 0; i < strLen; i++)
     {
-        if (str[i] == delimiter)
+        if (str[i] == delimiter && temp != "")
         {
             splitted.push_back(temp);
             temp = "";
         }
-        else
+        else if (str[i] != delimiter)
         {
             temp += str[i];
         }
@@ -99,8 +99,8 @@ vector<int> Util::idxToInt(string idx)
 
     try
     {
-        result.push_back(letter - 'A');
         result.push_back(stoi(number) - 1);
+        result.push_back(letter - 'A');
     }
     catch (...)
     {
@@ -108,4 +108,16 @@ vector<int> Util::idxToInt(string idx)
     }
 
     return result;
+}
+
+int Util::stringToInt(string num)
+{
+    try
+    {
+        return stoi(num);
+    }
+    catch (...)
+    {
+        throw NotNumberException();
+    }
 }

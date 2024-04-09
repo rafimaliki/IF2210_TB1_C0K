@@ -45,19 +45,24 @@ public:
 
     Inventory();
     Inventory(int width, int height, string title);
+
     void add(T *item);
     void add(T *item, string idx);
+
     void remove(int i, int j);
     void remove(string idx);
+
     void print();
     void printItem(int i, int j);
-    int calcEmptySpace();
+
     bool isEmpty(int j, int i);
     bool isEmpty(string idx);
-    bool isFull();
 
     T *getItem(int i, int j);
     T *getItem(string idx);
+
+    int calcEmptySpace();
+    bool isFull();
 };
 
 /* IMPLEMENTATION */
@@ -300,6 +305,14 @@ void Inventory<T>::printItem(int i, int j)
 template <class T>
 T *Inventory<T>::getItem(int i, int j)
 {
+    if (i >= this->height || j >= this->width || i < 0 || j < 0)
+    {
+        throw InvalidIndexException();
+    }
+    else if (this->isEmpty(i, j))
+    {
+        throw IsEmptySlotException();
+    }
     return this->grid[i][j].getItem();
 }
 

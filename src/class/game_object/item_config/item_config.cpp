@@ -278,10 +278,14 @@ GameConfig::GameConfig(){
 
 void GameConfig::loadGameConfig(){
 
+    string SUCCESS = GREEN + "SUCCES!\n" + RESET; 
+
     // Tambah try catch disini untuk setiap config file
 
 
     /* Animal Config */
+
+    cout << "\nReading Animal Config ";
     ConfigReader animal_config("config/animal.txt");
 
     vector<vector<string>> animal_Config = animal_config.readConfig();
@@ -291,10 +295,11 @@ void GameConfig::loadGameConfig(){
     // for (int i = 0; i < int(GameConfig::animalConfig.size()) ; i++){
     //     GameConfig::animalConfig[i].print();
     // }
-    cout << "\x1b[32mANIMAL Config IS LOADED \x1b[0m" << endl;
+    cout << SUCCESS;
 
 
     /* Plant Config */
+    cout << "Reading Plant Config ";
     ConfigReader plant_config("config/plant.txt");
 
     vector<vector<string>> plant_Config = plant_config.readConfig();
@@ -304,23 +309,25 @@ void GameConfig::loadGameConfig(){
     // for (int i = 0; i < int(GameConfig::plantConfig.size()) ; i++){
     //     GameConfig::plantConfig[i].print();
     // }
-    cout << "\x1b[32mPLANT Config IS LOADED \x1b[0m" << endl;
+    cout << SUCCESS;
 
 
     /* Product Config */
+    cout << "Reading Product Config ";
     ConfigReader product_config("config/product.txt");
 
     vector<vector<string>> product_Config = product_config.readConfig();
+
     GameConfig::setProductConfig(ProductConfig::ReadProductConfig(product_Config));
 
     // cout << "\n\x1b[32mPRODUCT Config: \x1b[0m\n" << endl;
     // for (int i = 0; i < int(GameConfig::productConfig.size()) ; i++){
     //     GameConfig::productConfig[i].print();
     // }
-    cout << "\x1b[32mPRODUCT Config IS LOADED \x1b[0m" << endl;
-
+    cout << SUCCESS;
 
     /* Recipe Config */
+    cout << "Reading Recipe Config ";
     ConfigReader recipe_config("config/recipe.txt");
 
     vector<vector<string>> recipe_Config = recipe_config.readConfig();
@@ -330,10 +337,10 @@ void GameConfig::loadGameConfig(){
     // for (int i = 0; i < int(GameConfig::recipeConfig.size()) ; i++){
     //     GameConfig::recipeConfig[i].print();
     // }
-    cout << "\x1b[32mRECIPE Config IS LOADED \x1b[0m" << endl;
-
+    cout << SUCCESS;
 
     /* Misc Config */
+    cout << "Reading Misc Config ";
     ConfigReader misc_config("config/misc.txt");
 
     vector<vector<string>> misc_Config = misc_config.readConfig();
@@ -342,7 +349,7 @@ void GameConfig::loadGameConfig(){
     // cout << "\n\x1b[32mMISC Config: \x1b[0m\n" << endl;
     // GameConfig::miscConfig.print();
 
-    cout << "\x1b[32mMISC Config IS LOADED \x1b[0m" << endl;
+    cout << SUCCESS;
 }
 void GameConfig::setPlantConfig(vector<PlantConfig> plantConfig){
     GameConfig::plantConfig = plantConfig;
