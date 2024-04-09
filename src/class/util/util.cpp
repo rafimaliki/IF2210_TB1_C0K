@@ -28,10 +28,10 @@ vector<string> Util::split(string str, char delimiter) {
    int strLen = str.length();
 
     for (int i = 0; i < strLen; i++) {
-         if (str[i] == delimiter) {
+         if (str[i] == delimiter && temp != "") {
               splitted.push_back(temp);
               temp = "";
-         } else {
+         } else if (str[i] != delimiter) {
               temp += str[i];
          }
     }

@@ -4,8 +4,6 @@
 
 int main() {
 
-    Util::printTitle();
-
     Game game;
     game.start();
 

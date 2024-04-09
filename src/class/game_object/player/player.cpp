@@ -18,10 +18,11 @@ Player::~Player(){}
 
 void Player::printStats(){
     cout << "\nPlayer stats: " << endl;
-    cout << "  Id: " << this->id << endl;
-    cout << "  Name: " << this->name << endl;
-    cout << "  Money: " << this->money << endl;
-    cout << "  Body Weight: " << this->body_weight << endl << endl;
+    cout << "  Id    : " << this->id << endl;
+    cout << "  Nama  : " << this->name << endl;
+    cout << "  Role  : " << this->getType() << endl;
+    cout << "  Uang  : " << this->money << " gulden" <<endl;
+    cout << "  Berat : " << this->body_weight << " kg" << endl << endl;
 }
 
 void Player::printInventory(){
@@ -37,12 +38,12 @@ Player* Player::getCurrentPlayer(){
 }
 
 void Player::next(){   
-    cout << "Player " << getCurrentPlayer()->name << "'s turn ended" <<endl; 
+    cout << "Turn player " << getCurrentPlayer()->name << "berakhir" <<endl; 
     current_player_idx++;
     if (current_player_idx >= player_count){
         current_player_idx = 0;
     }
-    cout << "Player " << getCurrentPlayer()->name << "'s turn" << endl << endl; 
+    cout << "Giliran player " << getCurrentPlayer()->name << endl << endl; 
 }
 
 void Player::printLahan(){}
@@ -94,17 +95,17 @@ string Player::getName(){
 
 void Player::NEXT(){
 
-    cout << "\033[1;33m\nAnother day has passed...\n\033[0m";
+    cout << "\033[1;33m\nHari telah berlalu...\n\n\033[0m";
     Plant::AgeAllPlants();
 
-    cout << "Player " << getCurrentPlayer()->name << "'s turn ended" << endl;
+     cout << "Turn player " << getCurrentPlayer()->name << " berakhir" <<endl; 
 
     current_player_idx++;
     if (current_player_idx >= player_count){
         current_player_idx = 0;
     }
 
-    cout << "Player " << getCurrentPlayer()->name << "'s turn" << endl << endl;
+    cout << "Giliran player " << getCurrentPlayer()->name << endl << endl; 
 }
 void Player::CETAK_PENYIMPANAN(){
     this->inventory.print();

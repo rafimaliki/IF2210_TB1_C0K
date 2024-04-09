@@ -27,6 +27,7 @@ class Game {
         void start();
         void loadConfig();
         void loadSaveFile();
+        void startNewGame();
 
         string inputCommand();
         void executeCommand(string command);

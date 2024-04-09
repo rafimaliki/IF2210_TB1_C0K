@@ -5,28 +5,57 @@ Game::Game() {
 }
 
 void Game::start() {
-    this->is_running = true;
 
-    cout << "Game started!\n" << endl;
+    try {
 
-    loadConfig();
-    loadSaveFile();
-    Command::initCommand();
+        loadConfig();
+        Command::initCommand();
 
-    Player* walikota = new Walikota("Walikota", 1000, 70);
-    Player* petani1 = new Petani("Petani1", 50, 45);
-    Player* peternak1 = new Peternak("Peternak1", 100, 55);
+        Util::printTitle();
+
+        string choice;
+        do {
+            cout << "\nApakah Anda ingin memuat state? (Y/N): ";
+            cin >> choice;
+
+            if (choice == "Y" or choice == "y"){
+                Game::loadSaveFile();
+            } else {
+                Game::startNewGame();
+            }
+
+        } while (!(choice == "Y" or choice == "y") && !(choice == "N" or choice == "n"));
+
+        this->is_running = true;
+
+    } catch (FailReadFileException &e) {
+        cout << RED << e.what() << RESET << endl;
+    }
+}
+
+void Game::startNewGame(){
+    Player* walikota = new Walikota("Walikota", 50, 40);
+    Player* petani1 = new Petani("Pak Tani", 50, 40);
+    Player* peternak1 = new Peternak("Tukang Sapi", 50, 40);
+
+    cout << "Memulai New Game!" << endl;
+    cout << "\nGiliran player " << Player::players[0]->getName() << endl; 
 }
 
 void Game::loadConfig() {
-
-    cout << "Loading config...\n" << endl;
+    // cout << "Loading config...\n" << endl;
     GameConfig::loadGameConfig();
 }
 
 void Game::loadSaveFile() {
-    cout << "\nLoading save file..." << endl;
-    cout << "No save file found" << endl;
+
+    cout << "Masukkan lokasi berkas state : ";
+
+    string lokasi;
+    cin >> lokasi;
+
+    cout << "\nFile tidak ditemukan!" << endl;
+    Game::startNewGame();
 }
 
 string Game::inputCommand() {
