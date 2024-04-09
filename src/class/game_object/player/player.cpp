@@ -227,7 +227,8 @@ void Player::BELI()
     }
     else
     {
-        int amount, nomor;
+        string input;
+        int nomor, amount;
         bool valid = false;
 
         Toko::displayToko();
@@ -239,32 +240,22 @@ void Player::BELI()
             try
             {
                 cout << "Masukkan no. barang yang ingin dibeli : ";
-                cin >> nomor;
+                cin >> input;
+                nomor = Util::stringToInt(input);
 
-                /*Handling tipe data*/
-                // if (cin.fail())
-                // {                // nomor bukan integer
-                //     cin.clear(); // clear input buffer
-                //     cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                //     throw std::invalid_argument("Input salah! tolong integer ya!");
-                // }
                 cout << "Kuantitas : ";
-                cin >> amount;
-                // if (cin.fail())
-                // {
-                //     cin.clear();
-                //     cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                //     throw std::invalid_argument("Input salah! tolong integer ya!");
-                // }
+                cin >> input;
+                amount = Util::stringToInt(input);
+
+                /*Gk muat invent*/
                 if (amount > this->inventory.calcEmptySpace())
                     throw InventorySizeNotValidException();
+                /*Walikota beli buiding*/
+
+                if (Toko::getItemToko(nomor)->getTYPE() == "" && this->id == 1)
+                    throw RoleNotValid();
                 Item *beli = Toko::beliItemToko(nomor, amount, this->money);
 
-                /* Masih butuh handling restriksi pembelian , ex : walikota gk bisa beli bangunan
-                if (this.id == 1 && beli.isBangunan())
-                    throw RoleNotValid();
-
-                /* Barang terbeli */
                 for (int i = 0; i < amount; i++)
                 {
                     inventory.add(beli);
@@ -274,6 +265,14 @@ void Player::BELI()
                 cout << "Selamat Anda berhasil membeli " << amount << " " << beli->getNAME() << ". Uang Anda tersisa " << this->money << " gulden. " << endl;
 
                 valid = true;
+            }
+            catch (RoleNotValid &e)
+            {
+                cout << e.what() << endl;
+            }
+            catch (GuldenInvalid &e)
+            {
+                cout << e.what() << endl;
             }
             catch (...)
             {

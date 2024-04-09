@@ -30,9 +30,9 @@ void TokoEntry::tambahAmount(int i)
 {
     this->amount += i;
 }
-void TokoEntry::kurangAmount(int i)
+void TokoEntry::setAmount(int i)
 {
-    this->amount -= i;
+    this->amount = i;
 }
 
 void Toko::displayToko()
@@ -70,6 +70,10 @@ bool Toko::checkValidItem(Item *item)
 bool Toko::isInfiniteItem(Item *item)
 {
     return (item->isAnimal() || item->isPlant());
+}
+int Toko::getAmountEntry(int id)
+{
+    return list_item[id - n_plant - n_animal - 1].getAmount();
 }
 void Toko::addItem(Item *item)
 {
@@ -111,38 +115,69 @@ void Toko::deleteItem(int idx)
         n_product--;
     }
 }
-Item *Toko::beliItemToko(int i, int amount, int gulden)
-{
-    if (i > n_animal + n_plant + n_product + n_bangunan || i <= 0)
-        throw InvalidIndexException();
 
-    if (i <= n_plant)
-    { // tumbuhan (infinite)
-        Item *plant = new Plant(i);
-        if (gulden - (amount * plant->getPRICE()) < 0)
-            throw GuldenInvalid();
+Item *Toko::getItemToko(int id)
+{
+    int offset_id = id - n_plant - n_animal - 1;
+    if (id > n_animal + n_plant + n_product + n_bangunan || id <= 0)
+        throw InvalidIndexException();
+    if (id <= n_plant) // tumbuhan (infinite)
+    {
+        Item *plant = new Plant(id);
         return plant;
     }
-    else if (n_plant < i && i <= n_animal + n_plant) // hewan (infinite)
+    else if (n_plant < id && id <= n_animal + n_plant) // hewan (infinite)
     {
-
-        Item *animal = new Animal(i - n_plant);
-        if (gulden - (amount * animal->getPRICE()) < 0)
-            throw GuldenInvalid();
+        Item *animal = new Animal(id - n_plant);
         return animal;
     }
     else
     {
-        int total_price = list_item[i - n_plant - n_animal - 1].getItem()->getPRICE() * amount;
-        if (list_item[i - n_plant - n_animal - 1].getAmount() - amount < 0 || amount <= 0)
-            throw AmountNotValid();
-        if (gulden - total_price < 0)
-            throw GuldenInvalid();
-        Item *temp = list_item[i - n_plant - n_animal - 1].getItem();
-        list_item[i - n_plant - n_animal - 1].kurangAmount(amount);
-        checkEmptyItem();
-        return temp;
+        return (list_item[offset_id].getItem());
     }
+}
+TokoEntry Toko::getItemEntry(int id)
+{
+    return list_item[id - n_plant - n_animal - 1];
+}
+Item *Toko::beliItemToko(int i, int amount, int gulden)
+{
+    // if (i <= n_plant)
+    // { // tumbuhan (infinite)
+    //     Item *plant = getItemToko(i);
+    //     if (gulden - (amount * plant->getPRICE()) < 0)
+    //         throw GuldenInvalid();
+    //     return plant;
+    // }
+    // else if (n_plant < i && i <= n_animal + n_plant) // hewan (infinite)
+    // {
+    //     Item *animal = getItemToko(i);
+    //     if (gulden - (amount * animal->getPRICE()) < 0)
+    //         throw GuldenInvalid();
+    //     return animal;
+    // }
+    // else
+    // {
+    Item *bought_item = getItemToko(i);
+    int total_price = getItemToko(i)->getPRICE() * amount;
+    if (!isInfiniteItem(bought_item))
+    {
+        if (getAmountEntry(i) - amount < 0 || amount <= 0)
+            throw AmountNotValid();
+    }
+    if (gulden - total_price < 0)
+        throw GuldenInvalid();
+    if (!isInfiniteItem(bought_item))
+    {
+        setItemEntryAmount(i, getItemEntry(i).getAmount() - amount);
+    }
+    checkEmptyItem();
+    return bought_item;
+}
+
+void Toko::setItemEntryAmount(int id, int amount)
+{
+    list_item[id - n_plant - n_animal - 1].setAmount(amount);
 }
 void Toko::checkEmptyItem()
 {

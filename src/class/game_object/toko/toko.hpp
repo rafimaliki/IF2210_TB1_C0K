@@ -22,7 +22,7 @@ public:
 
     int getAmount() const;
     void tambahAmount(int i);
-    void kurangAmount(int i);
+    void setAmount(int i);
 };
 
 class Toko
@@ -40,8 +40,12 @@ public:
     static void displayToko();
     static void addItem(Item *i);
     static Item *beliItemToko(int i, int amount, int gulden);
+    static Item *getItemToko(int id);
+    static int getAmountEntry(int id);
     static void deleteItem(int idx);
     static bool checkValidItem(Item *i);
     static bool isInfiniteItem(Item *i);
+    static void setItemEntryAmount(int id, int amount);
+    static TokoEntry getItemEntry(int id);
     static void checkEmptyItem();
 };
