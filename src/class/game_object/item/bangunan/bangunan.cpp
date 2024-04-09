@@ -16,7 +16,7 @@ ItemConfig* Bangunan::getConfig(){
     return this->config;
 }
 
-void Bangunan::printKodeHuruf(){
+void Bangunan::printKODE_HURUF(){
     cout << this->config->getKODE_HURUF();
 }
 
