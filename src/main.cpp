@@ -44,6 +44,11 @@ int main() {
     Item* pr4 = new Product(7);
     Item* pr5 = new Product(17);
 
+    Item* bg1 = new Bangunan(1);
+    Item* bg2 = new Bangunan(2);
+    Item* bg3 = new Bangunan(3);
+    Item* bg4 = new Bangunan(4);
+
     // cout << "Id: " << p1->getID() << endl;
     // cout << "Kode Huruf: " << p1->getKODE_HURUF() << endl;
     // cout << "Nama: " << p1->getNAME() << endl;
@@ -104,7 +109,6 @@ int main() {
     Player::players[2]->addItem(a4);
 
     Player::players[1]->getLadang()->remove(0,1);
-        
 
     while (game.isRunning()) {
 

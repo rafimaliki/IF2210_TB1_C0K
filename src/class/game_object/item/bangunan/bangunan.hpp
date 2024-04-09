@@ -1,25 +1,25 @@
 #ifndef BANGUNAN_HPP
 #define BANGUNAN_HPP
 
+#include "../../../../std.hpp"
+#include "../item.hpp"
+#include "../../item_config/item_config.hpp"
 
-#include "../item/item.hpp"
 class Bangunan : public Item
 {
-public:
-    Bangunan() : Item("Bangunan")
-    {
-        tambahBangunan();
-    }
-    ~Bangunan();
-    void printJenis() override
-    {
-        cout << "halo, saya item jenis Bangunan dengan nama " << endl;
-    }
-
 private:
-    int id;
-    string kode_huruf;
-    int harga;
+    ItemConfig* config;
+
+public:
+    static vector<Bangunan*> daftar_bangunan;
+    static int bangunanCount;
+
+    Bangunan(int ID);
+    void print();
+    ItemConfig* getConfig();
+    void printKodeHuruf();
+    string getType();
+
 };
 
 

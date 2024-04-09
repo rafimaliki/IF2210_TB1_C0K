@@ -4,6 +4,8 @@
 #include "../player.hpp"
 
 class Walikota : public Player {
+    
+
     public:
         Walikota(string name, int money, int body_weight);
 
