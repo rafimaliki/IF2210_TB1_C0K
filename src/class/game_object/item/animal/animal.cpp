@@ -38,3 +38,7 @@ bool Animal::isReadyToHarvest(){
 void Animal::setIsInCage(bool isInCage){
     this->isInCage = isInCage;
 }
+
+void Animal::Feed(Item* product){
+    this->weight += product->getADDED_WEIGHT();
+}
