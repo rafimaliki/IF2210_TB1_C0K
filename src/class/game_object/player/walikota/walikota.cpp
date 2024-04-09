@@ -30,9 +30,9 @@ void Walikota::PUNGUT_PAJAK(){
 }
 
 void Walikota::BANGUN(){  /* BELUM IMPLEMENTASI */
-    string namaBangunan;
+    string namaBangunan, cekLanjut;
     vector<Bangunan*> daftar_bangunan = getDaftarBangunan();
-    bool valid = false;
+    bool valid = false, lanjut = false;
     int price = 0;
 
     cout << "Resep bangunan yang ada adalah sebagai berikut." << endl;
@@ -40,12 +40,18 @@ void Walikota::BANGUN(){  /* BELUM IMPLEMENTASI */
 
     while (!valid){
         try {
-            namaBangunan = inputNama(daftar_bangunan);
-            price = getBangunanPrice(namaBangunan, daftar_bangunan);
-            useMoney(price);
-            useIngredients(namaBangunan, daftar_bangunan);
-            bangunBangunan(namaBangunan, daftar_bangunan);
-            cout << namaBangunan << " berhasil dibangun dan telah menjadi hak milik walikota!" << endl << endl;
+            cout << "Apakah ingin melanjutkan membangun bangunan? (YA/TIDAK)" << endl;
+            cin >> cekLanjut;
+            if (cekLanjut == "YA"){
+                namaBangunan = inputNama(daftar_bangunan);
+                price = getBangunanPrice(namaBangunan, daftar_bangunan);
+                useMoney(price);
+                useIngredients(namaBangunan, daftar_bangunan);
+                bangunBangunan(namaBangunan, daftar_bangunan);
+                cout << namaBangunan << " berhasil dibangun dan telah menjadi hak milik walikota!" << endl << endl;
+            } else {
+                cout << "Batal membangun bangunan..." << endl << endl;
+            }
             valid = true;
         } catch (InvalidBuildingNameException& e){
             cout << e.what() << endl << endl;
