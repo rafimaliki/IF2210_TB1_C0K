@@ -17,6 +17,9 @@ class Walikota : public Player {
         void BANGUN();
         // void MUAT();
         void TAMBAH_PEMAIN();
+        int HITUNG_PAJAK(int idx);
+
+        string getType();
 };
 
 #endif

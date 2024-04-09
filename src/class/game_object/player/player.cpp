@@ -79,6 +79,26 @@ bool Player::haveFood()
     return false;
 }
 
+string Player::getType()
+{
+    return "";
+}
+
+int Player::getMoney()
+{
+    return money;
+}
+
+void Player::setMoney(int money)
+{
+    this->money = money;
+}
+
+string Player::getName()
+{
+    return name;
+}
+
 /* Game command related methods */
 
 void Player::NEXT()
