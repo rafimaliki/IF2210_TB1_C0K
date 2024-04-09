@@ -10,13 +10,9 @@ class Peternak : public Player {
     public:
         Peternak(string name, int money, int body_weight);
 
-        // void pungut_pajak();
-        // void bangun_bangunan();
-        // void tambah_pemain();
-        // void jual();
-
         void printPeternakan();
         void addAnimal(Animal* item);
+        Inventory<Animal>* getPeternakan();
 
         /* Game command related methods */
         void CETAK_PETERNAKAN();
@@ -27,6 +23,8 @@ class Peternak : public Player {
         void isPeternakanKosong();
         void isFoodEmpty();
         void isAnimalEmpty();
+        void isHarvestReady();
+        void isInventoryMemadai(int n);
 
         string getType();
         // void MUAT();

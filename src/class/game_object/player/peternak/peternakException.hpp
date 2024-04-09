@@ -37,17 +37,31 @@ public:
 
 
 // peternakan cuma punya hewan herbivora sedangkan makanan yang ada adalah makanan karnivora
-class JustHaveHerbivoreAnimalDontHaveFood : public std::exception {
+class HerbivoreAnimalDontHaveFood : public std::exception {
 public:
     const char* what() const noexcept override {
-        return "Inventory hanya memiliki hewan herbivora sedangkan makanan yang ada adalah makanan karnivora";
+        return "Peternakan hanya memiliki hewan herbivora sedangkan makanan yang ada adalah makanan karnivora";
     }
 };
 
 // peternakan cuma punya hewan karnivora sedangkan makanan yang ada adalah makanan herbivora
-class JustHaveCarnivoreAnimalDontHaveFood : public std::exception {
+class CarnivoreAnimalDontHaveFood : public std::exception {
 public:
     const char* what() const noexcept override {
-        return "Inventory hanya memiliki hewan karnivora sedangkan makanan yang ada adalah makanan herbivora";
+        return "Peternakan hanya memiliki hewan karnivora sedangkan makanan yang ada adalah makanan herbivora";
+    }
+};
+
+class PanenHewanTidakTersediaException : public std::exception {
+public:
+    const char* what() const noexcept override {
+        return "Tidak ada hewan yang siap dipanen";
+    }
+};
+
+class InventoryTidakMemadaiException : public std::exception {
+public:
+    const char* what() const noexcept override {
+        return "Inventory tidak memadai";
     }
 };

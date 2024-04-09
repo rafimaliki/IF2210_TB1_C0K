@@ -42,3 +42,7 @@ void Animal::setIsInCage(bool isInCage){
 void Animal::Feed(Item* product){
     this->weight += product->getADDED_WEIGHT();
 }
+
+int Animal::getWeight(){
+    return this->weight;
+}
