@@ -14,6 +14,8 @@ Player::Player(string name, int money, int body_weight) :
     player_count++;
 }
 
+Player::~Player(){}
+
 void Player::printStats(){
     cout << "\nPlayer stats: " << endl;
     cout << "  Id: " << this->id << endl;
@@ -155,7 +157,7 @@ void Player::MAKAN(){
             this->inventory.remove(idx[0], idx[1]);
 
             valid = true;
-            
+
         } catch (InvalidIndexException& e){
             cout << RED << e.what() << RESET << endl;
         } catch (IsEmptySlotException& e){

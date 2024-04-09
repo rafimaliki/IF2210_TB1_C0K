@@ -25,6 +25,7 @@ public:
     static int player_count;
 
     Player(string name, int money, int body_weight);
+    virtual ~Player() = 0;
 
     void printStats();
     void printInventory();
