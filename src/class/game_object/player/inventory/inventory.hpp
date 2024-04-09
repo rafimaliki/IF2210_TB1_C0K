@@ -20,57 +20,57 @@ const string EQUAL = "=";
 template <class T>
 class InventoryEntry
 {
-    private:
-        int amount; /* hanya 0 dan 1, ada dan tidak, gbs multiple*/
-        T* item;
-    public:
+private:
+    int amount; /* hanya 0 dan 1, ada dan tidak, gbs multiple*/
+    T *item;
 
-        InventoryEntry();
-        InventoryEntry(T* item);
+public:
+    InventoryEntry();
+    InventoryEntry(T *item);
 
-        int getAmount() { return this->amount; }
-        T* getItem() { return this->item; }
+    int getAmount() { return this->amount; }
+    T *getItem() { return this->item; }
 };
 
 template <class T>
 class Inventory
 {
-    private:
-        /* data */
-    public:
-        string title;
-        int width;
-        int height;
-        vector<vector<InventoryEntry<T>>> grid;
+private:
+    /* data */
+public:
+    string title;
+    int width;
+    int height;
+    vector<vector<InventoryEntry<T>>> grid;
 
-        Inventory();
-        Inventory(int width, int height, string title);
-        void add(T* item);
-        void add(T* item, string idx);
-        void remove(int i, int j);
-        void remove(string idx);
-        void print();
-        void printItem(int i, int j);
-        int calcEmptySpace();
-        bool isEmpty(int j, int i);
-        bool isEmpty(string idx);
-        bool isFull();
+    Inventory();
+    Inventory(int width, int height, string title);
+    void add(T *item);
+    void add(T *item, string idx);
+    void remove(int i, int j);
+    void remove(string idx);
+    void print();
+    void printItem(int i, int j);
+    int calcEmptySpace();
+    bool isEmpty(int j, int i);
+    bool isEmpty(string idx);
+    bool isFull();
 
-        T* getItem(int i, int j);
-        T* getItem(string idx);
+    T *getItem(int i, int j);
+    T *getItem(string idx);
 };
-
 
 /* IMPLEMENTATION */
 
 template <class T>
-InventoryEntry<T>::InventoryEntry(T* item) : amount(1), item(item){}
+InventoryEntry<T>::InventoryEntry(T *item) : amount(1), item(item) {}
 
 template <class T>
-InventoryEntry<T>::InventoryEntry() : amount(0), item(nullptr){}
+InventoryEntry<T>::InventoryEntry() : amount(0), item(nullptr) {}
 
 template <class T>
-Inventory<T>::Inventory() {
+Inventory<T>::Inventory()
+{
     this->title = "";
     this->width = 0;
     this->height = 0;
@@ -78,7 +78,8 @@ Inventory<T>::Inventory() {
 }
 
 template <class T>
-Inventory<T>::Inventory(int width, int height, string title) {
+Inventory<T>::Inventory(int width, int height, string title)
+{
     this->title = title;
     this->width = width;
     this->height = height;
@@ -86,10 +87,14 @@ Inventory<T>::Inventory(int width, int height, string title) {
 }
 
 template <class T>
-void Inventory<T>::add(T* item) {
-    for (int i = 0; i < this->height; i++) {
-        for (int j = 0; j < this->width; j++) {
-            if (this->grid[i][j].getAmount() == 0) {
+void Inventory<T>::add(T *item)
+{
+    for (int i = 0; i < this->height; i++)
+    {
+        for (int j = 0; j < this->width; j++)
+        {
+            if (this->grid[i][j].getAmount() == 0)
+            {
                 this->grid[i][j] = InventoryEntry<T>(item);
                 return;
             }
@@ -99,111 +104,153 @@ void Inventory<T>::add(T* item) {
 }
 
 template <class T>
-void Inventory<T>::add(T* item, string idx) {
-    try {
+void Inventory<T>::add(T *item, string idx)
+{
+    try
+    {
         int j = idx[0] - 'A';
         int i = stoi(idx.substr(1)) - 1;
 
-        if (i >= this->height || j >= this->width || i < 0 || j < 0){
+        if (i >= this->height || j >= this->width || i < 0 || j < 0)
+        {
             throw IndexNotValidException();
         }
 
-        if (this->grid[i][j].getAmount() == 0) {
+        if (this->grid[i][j].getAmount() == 0)
+        {
             this->grid[i][j] = InventoryEntry<T>(item);
-        } else {
+        }
+        else
+        {
             cout << "Slot sudah terisi!" << endl;
         }
-    } catch (...) {
+    }
+    catch (...)
+    {
         throw IndexNotValidException();
     }
 }
 
-
-
 template <class T>
-void Inventory<T>::remove(int i, int j) {
-    if (this->isEmpty(i, j)) {
+void Inventory<T>::remove(int i, int j)
+{
+    if (this->isEmpty(i, j))
+    {
         cout << "Slot kosong!" << endl;
-    } else {
+    }
+    else
+    {
         this->grid[i][j] = InventoryEntry<T>();
     }
 }
 
 template <class T>
-void Inventory<T>::remove(string idx) {
+void Inventory<T>::remove(string idx)
+{
 
-    try {
+    try
+    {
         int j = idx[0] - 'A';
         int i = stoi(idx.substr(1)) - 1;
 
-        if (i >= this->height || j >= this->width || i < 0 || j < 0){
+        if (i >= this->height || j >= this->width || i < 0 || j < 0)
+        {
             throw IndexNotValidException();
         }
-        
+
         this->remove(i, j);
-    } catch (...) {
+    }
+    catch (...)
+    {
         throw IndexNotValidException();
     }
 }
 
 template <class T>
-void Inventory<T>::print() {
+void Inventory<T>::print()
+{
 
     int total_length = this->width * 6 + 1 - (this->title.length() + 4);
     int left_space = total_length / 2;
     int right_space = total_length - left_space;
 
-    cout << endl << SPACE_4;
-    for (int i = 0; i < left_space; i++) {
+    cout << endl
+         << SPACE_4;
+    for (int i = 0; i < left_space; i++)
+    {
         cout << EQUAL;
-    } cout << "[ " << this->title << " ]";
-    for (int i = 0; i < right_space; i++) {
+    }
+    cout << "[ " << this->title << " ]";
+    for (int i = 0; i < right_space; i++)
+    {
         cout << EQUAL;
-    } cout << endl;
-
+    }
+    cout << endl;
 
     cout << SPACE_4;
-    for (int i = 0; i < this->width; i++) {
+    for (int i = 0; i < this->width; i++)
+    {
         cout << SPACE_3 << LETTERS[i] << SPACE_2;
-    } cout << endl;
+    }
+    cout << endl;
 
-    for (int i = 0; i < this->height; i++){
+    for (int i = 0; i < this->height; i++)
+    {
 
         cout << SPACE_4;
-        for (int j = 0; j < this->width; j++) {
+        for (int j = 0; j < this->width; j++)
+        {
             cout << PLUS << DASH;
-        } cout << PLUS << endl;;
-
-        if(i < 9){
-            cout << SPACE_1 << 0 << i+1 << SPACE_1;
-        } else {
-            cout << SPACE_1 << i+1 << SPACE_1;
         }
-        for (int j = 0; j < this->width; j++) {
+        cout << PLUS << endl;
+        ;
+
+        if (i < 9)
+        {
+            cout << SPACE_1 << 0 << i + 1 << SPACE_1;
+        }
+        else
+        {
+            cout << SPACE_1 << i + 1 << SPACE_1;
+        }
+        for (int j = 0; j < this->width; j++)
+        {
             cout << PIPE << SPACE_1;
-            if (!this->isEmpty(i, j)){
+            if (!this->isEmpty(i, j))
+            {
                 this->grid[i][j].getItem()->printKODE_HURUF();
-            } else {
+            }
+            else
+            {
                 cout << SPACE_3;
             };
             cout << SPACE_1;
-        } cout << PIPE << endl; 
+        }
+        cout << PIPE << endl;
     }
     cout << SPACE_4;
-    for (int j = 0; j < this->width; j++) {
+    for (int j = 0; j < this->width; j++)
+    {
         cout << PLUS << DASH;
-    } cout << PLUS << endl << endl;
+    }
+    cout << PLUS << endl
+         << endl;
 
-    cout << "Total slot kosong: " << this->calcEmptySpace() << endl << endl;
+    cout << "Total slot kosong: " << this->calcEmptySpace() << endl
+         << endl;
 }
 
 template <class T>
-int Inventory<T>::calcEmptySpace() {\
+int Inventory<T>::calcEmptySpace()
+{
     int count = 0;
 
-    for(int i = 0; i < this->height; i++) {
-        for(int j = 0; j < this->width; j++) {
-            if (this->isEmpty(i, j)) {
+    for (int i = 0; i < this->height; i++)
+    {
+        for (int j = 0; j < this->width; j++)
+        {
+            if (this->isEmpty(i, j))
+            {
                 count++;
             }
         }
@@ -212,55 +259,67 @@ int Inventory<T>::calcEmptySpace() {\
 }
 
 template <class T>
-bool Inventory<T>::isEmpty(int i, int j) {
+bool Inventory<T>::isEmpty(int i, int j)
+{
     return this->grid[i][j].getAmount() == 0;
 }
 
-
 template <class T>
-bool Inventory<T>::isEmpty(string idx) {
-    try {
+bool Inventory<T>::isEmpty(string idx)
+{
+    try
+    {
         int j = idx[0] - 'A';
         int i = stoi(idx.substr(1)) - 1;
 
-        if (i >= this->height || j >= this->width || i < 0 || j < 0){
+        if (i >= this->height || j >= this->width || i < 0 || j < 0)
+        {
             throw IndexNotValidException();
         }
 
         return this->grid[i][j].getAmount() == 0;
-    } catch (...) {
+    }
+    catch (...)
+    {
         throw IndexNotValidException();
     }
 }
 
-template <class T> 
-bool Inventory<T>::isFull() {
+template <class T>
+bool Inventory<T>::isFull()
+{
     return this->calcEmptySpace() == 0;
 }
 
-
 template <class T>
-void Inventory<T>::printItem(int i, int j) {
+void Inventory<T>::printItem(int i, int j)
+{
     this->grid[i][j].getItem()->print();
 }
 
 template <class T>
-T* Inventory<T>::getItem(int i, int j) {
+T *Inventory<T>::getItem(int i, int j)
+{
     return this->grid[i][j].getItem();
 }
 
 template <class T>
-T* Inventory<T>::getItem(string idx) {
-    try {
+T *Inventory<T>::getItem(string idx)
+{
+    try
+    {
         int j = idx[0] - 'A';
         int i = stoi(idx.substr(1)) - 1;
 
-        if (i >= this->height || j >= this->width || i < 0 || j < 0){
+        if (i >= this->height || j >= this->width || i < 0 || j < 0)
+        {
             throw IndexNotValidException();
         }
 
         return this->grid[i][j].getItem();
-    } catch (...) {
+    }
+    catch (...)
+    {
         throw IndexNotValidException();
     }
 }

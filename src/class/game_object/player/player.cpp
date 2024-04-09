@@ -300,19 +300,75 @@ void Player::BELI()
 
 void Player::JUAL()
 {
-    bool valid = false;
-    cout << "Berikut penyimpanan anda" >> endl;
-    this->inventory.print();
-    while (!valid)
+    if (this->inventory.calcEmptySpace() == this->inventory.height * this->inventory.width)
     {
-        try
+        cout << "Lu miskin gk punya apa apa di inventory, mau jual apa" << endl;
+    }
+    else
+    {
+        bool valid = false;
+        string slotstring;
+        vector<string> slotstemp;
+        char opsi;
+        vector<string> finalslots;
+        cout << "Berikut penyimpanan anda" << endl;
+        this->inventory.print();
+        while (!valid)
         {
-        }
-        catch (const IndexNotValidException &e)
+            cout << "Silakan pilih petak yang ingin anda jual!" << endl;
+            cout << "Petak  : ";
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            getline(cin, slotstring);
+            cout << "Yakin mau jual? (Y/N) : ";
+            cin >> opsi;
+            if (opsi == 'N')
+            {
+                cout << "Jual batal!" << endl;
+                break;
+            }
 
-            valid = true;
+            slotstemp = Util::split(slotstring, ',');
+            finalslots.clear();
+            try
+            {
+                for (const auto &slot : slotstemp)
+                {
+                    vector<string> tempresult = Util::split(slot, ' ');
+                    if (tempresult.size() != 1)
+                    {
+                        finalslots.push_back(tempresult[1]);
+                        if (this->inventory.isEmpty(tempresult[1]))
+                            throw SlotEmptyException();
+                    }
+                    else
+                    {
+                        finalslots.push_back(tempresult[0]);
+                        if (this->inventory.isEmpty(tempresult[0]))
+                            throw SlotEmptyException();
+                    }
+                }
+
+                for (int i = 0; i < finalslots.size(); i++)
+                {
+
+                    Item *newitem = this->inventory.getItem(finalslots[i]);
+                    Toko::addItem(newitem);
+                    this->inventory.remove(finalslots[i]);
+                }
+                valid = true;
+            }
+            catch (const IndexNotValidException &e)
+            {
+                cout << e.what() << '\n';
+            }
+            catch (const SlotEmptyException &e)
+            {
+                cout << e.what() << "\n";
+            }
+        }
     }
 }
+
 void Player::PANEN()
 {
     cout << RED << "\nTidak memiliki akses ke command PANEN!\n"
