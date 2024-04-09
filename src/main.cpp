@@ -1,7 +1,6 @@
 // File: main.cpp
 
 #include "class/game/game.hpp"
-#include "class/util/util.hpp"
 
 int main() {
 

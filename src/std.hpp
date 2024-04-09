@@ -8,7 +8,6 @@
 #include <map>
 #include <exception>
 
-
 using std::cout;
 using std::cin;
 using std::endl;
@@ -17,6 +16,8 @@ using std::string;
 using std::array;
 using std::map;
 using std::exception;
+
+#include "class/util/util.hpp"
 
 const string BOLD = "\x1b[1m";
 const string RED = "\033[1;31m";
