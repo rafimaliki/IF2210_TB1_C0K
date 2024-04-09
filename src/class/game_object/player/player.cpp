@@ -258,7 +258,11 @@ void Player::BELI()
                 if (amount > this->inventory.calcEmptySpace())
                     throw InventorySizeNotValidException();
                 Item *beli = Toko::beliItemToko(nomor, amount, this->money);
+                /* Masih butuh handling restriksi pembelian , ex : walikota gk bisa beli bangunan
+                if (this.id == 1 && beli.isBangunan())
+                    throw RoleNotValid();
 
+                /* Barang terbeli */
                 for (int i = 0; i < amount; i++)
                 {
                     inventory.add(beli);
@@ -294,9 +298,19 @@ void Player::BELI()
 }
 
 void Player::JUAL()
-{ /* BELUM IMPLEMENTASI (butuh class Toko) */
-    cout << YELLOW << "\nCommand JUAL belum diimplementasikan!\n"
-         << RESETstring << endl;
+{
+    bool valid = false;
+    cout << "Berikut penyimpanan anda" >> endl;
+    this->inventory.print();
+    while (!valid)
+    {
+        try
+        {
+        }
+        catch (const IndexNotValidException &e)
+
+            valid = true;
+    }
 }
 void Player::PANEN()
 {
