@@ -17,9 +17,10 @@ public:
     Bangunan(int ID);
     void print();
     ItemConfig* getConfig();
-    void printKodeHuruf();
+    void printKODE_HURUF();
     string getType();
 
+    friend vector<Bangunan*> getDaftarBangunan();
 };
 
 

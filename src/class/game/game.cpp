@@ -39,6 +39,10 @@ void Game::start()
     {
         cout << RED << e.what() << RESET << endl;
     }
+    catch (...)
+    {
+        cout << RED << "FAIL!" << RESET << endl;
+    }
 }
 
 void Game::startNewGame()
