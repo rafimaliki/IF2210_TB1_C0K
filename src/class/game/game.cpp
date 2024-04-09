@@ -32,7 +32,7 @@ string Game::inputCommand() {
     string command;
     cout << BOLD << "> ";
     cin >> command;
-    cout << RESETstring;
+    cout << RESET;
     return command;
 }
 
@@ -78,7 +78,7 @@ void Game::executeCommand(string command) {
         Player::getCurrentPlayer()->STATS();
     }
     else {
-        cout << RED << "\nCommand not found\n" << RESETstring << endl;
+        cout << RED << "\nCommand not found\n" << RESET << endl;
     }
 }
 

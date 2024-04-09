@@ -22,9 +22,9 @@ ItemConfig* Animal::getConfig(){
 void Animal::printKODE_HURUF(){
     if (this->isInCage){
         if (this->isReadyToHarvest()){
-            cout << GREEN << this->config->getKODE_HURUF() << RESETstring;
+            cout << GREEN << this->config->getKODE_HURUF() << RESET;
         } else {
-            cout << RED << this->config->getKODE_HURUF() << RESETstring;
+            cout << RED << this->config->getKODE_HURUF() << RESET;
         } 
     } else {
         cout << this->config->getKODE_HURUF();

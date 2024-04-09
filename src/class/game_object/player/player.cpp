@@ -101,22 +101,22 @@ void Player::CETAK_PENYIMPANAN(){
     this->inventory.print();
 }
 void Player::PUNGUT_PAJAK(){
-    cout << RED << "\nTidak memiliki akses ke command PUNGUT_PAJAK!\n" << RESETstring << endl;
+    cout << RED << "\nTidak memiliki akses ke command PUNGUT_PAJAK!\n" << RESET << endl;
 }
 void Player::CETAK_LADANG(){
-    cout << RED << "\nTidak memiliki akses ke command CETAK_LADANG!\n" << RESETstring << endl;
+    cout << RED << "\nTidak memiliki akses ke command CETAK_LADANG!\n" << RESET << endl;
 }
 void Player::CETAK_PETERNAKAN(){
-    cout << RED << "\nTidak memiliki akses ke command CETAK_PETERNAKAN!\n" << RESETstring << endl;
+    cout << RED << "\nTidak memiliki akses ke command CETAK_PETERNAKAN!\n" << RESET << endl;
 }
 void Player::TANAM(){
-    cout << RED << "\nTidak memiliki akses ke command TANAM!\n" << RESETstring << endl;
+    cout << RED << "\nTidak memiliki akses ke command TANAM!\n" << RESET << endl;
 }
 void Player::TERNAK(){
-    cout << RED << "\nTidak memiliki akses ke command TERNAK!\n" << RESETstring << endl;
+    cout << RED << "\nTidak memiliki akses ke command TERNAK!\n" << RESET << endl;
 }
 void Player::BANGUN(){
-    cout << RED << "\nTidak memiliki akses ke command BANGUN!\n" << RESETstring << endl;
+    cout << RED << "\nTidak memiliki akses ke command BANGUN!\n" << RESET << endl;
 }
 void Player::MAKAN(){  /* BELUM IMPLEMENTASI */
 
@@ -153,7 +153,7 @@ void Player::MAKAN(){  /* BELUM IMPLEMENTASI */
             }
             valid = true;
         } catch (IndexNotValidException& e){
-            cout << RED << e.what() << RESETstring << endl << endl; ;
+            cout << RED << e.what() << RESET << endl << endl; ;
         }
     }
 
@@ -166,23 +166,23 @@ void Player::MAKAN(){  /* BELUM IMPLEMENTASI */
 }
 
 void Player::KASIH_MAKAN(){
-    cout << RED << "\nTidak memiliki akses ke command KASIH_MAKAN!\n" << RESETstring << endl;
+    cout << RED << "\nTidak memiliki akses ke command KASIH_MAKAN!\n" << RESET << endl;
 }
 void Player::BELI(){  /* BELUM IMPLEMENTASI (butuh class Toko) */
-    cout << YELLOW << "\nCommand BELI belum diimplementasikan!\n" << RESETstring << endl;
+    cout << YELLOW << "\nCommand BELI belum diimplementasikan!\n" << RESET << endl;
 }
 void Player::JUAL(){  /* BELUM IMPLEMENTASI (butuh class Toko) */
-    cout << YELLOW << "\nCommand JUAL belum diimplementasikan!\n" << RESETstring << endl;
+    cout << YELLOW << "\nCommand JUAL belum diimplementasikan!\n" << RESET << endl;
 }
 void Player::PANEN(){
-    cout << RED << "\nTidak memiliki akses ke command PANEN!\n" << RESETstring << endl;
+    cout << RED << "\nTidak memiliki akses ke command PANEN!\n" << RESET << endl;
 }
 
 void Player::SIMPAN(){  /* BELUM IMPLEMENTASI */
-    cout << YELLOW << "\nCommand SIMPAN belum diimplementasikan!\n" << RESETstring << endl;
+    cout << YELLOW << "\nCommand SIMPAN belum diimplementasikan!\n" << RESET << endl;
 }
 void Player::TAMBAH_PEMAIN(){
-    cout << RED << "\nTidak memiliki akses ke command TAMBAH_PEMAIN!\n" << RESETstring << endl;
+    cout << RED << "\nTidak memiliki akses ke command TAMBAH_PEMAIN!\n" << RESET << endl;
 }
 
 /* Cheat Commands */

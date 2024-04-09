@@ -42,7 +42,7 @@ void Peternak::TERNAK(){
     try{
         this->isPeternakanPenuh();
     } catch (PeternakanPenuhException& e){
-        cout << RED << e.what() << RESETstring <<endl;
+        cout << RED << e.what() << RESET <<endl;
         return;
     }
 
@@ -71,7 +71,7 @@ void Peternak::TERNAK(){
             }
             valid = true;
         } catch (IndexNotValidException& e){
-            cout << RED << e.what() << RESETstring << endl << endl; ;
+            cout << RED << e.what() << RESET << endl << endl; ;
         }
     }
 
@@ -102,7 +102,7 @@ void Peternak::TERNAK(){
             }
             valid = true;
         } catch (IndexNotValidException& e){
-            cout << RED << e.what() << RESETstring << endl << endl; ;
+            cout << RED << e.what() << RESET << endl << endl; ;
         }
     }
 
@@ -118,10 +118,10 @@ void Peternak::TERNAK(){
     CETAK_PETERNAKAN();
 }
 void Peternak::KASIH_MAKAN(){  /* BELUM IMPLEMENTASI */
-    cout << YELLOW << "\nCommand KASIH_MAKAN belum diimplementasikan!\n" << RESETstring << endl;
+    cout << YELLOW << "\nCommand KASIH_MAKAN belum diimplementasikan!\n" << RESET << endl;
 }
 void Peternak::PANEN(){  /* BELUM IMPLEMENTASI */
-    cout << YELLOW << "\nCommand PANEN belum diimplementasikan!\n" << RESETstring << endl;
+    cout << YELLOW << "\nCommand PANEN belum diimplementasikan!\n" << RESET << endl;
 }
 
 string Peternak::getType(){
