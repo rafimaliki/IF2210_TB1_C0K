@@ -28,7 +28,7 @@ int main() {
     Item* a4 = new Animal(4);
 
     Item* pr1 = new Product(1);
-    Item* pr2 = new Product(3);
+    Item* pr2 = new Product(5);
     Item* pr3 = new Product(6);
     Item* pr4 = new Product(7);
     Item* pr5 = new Product(17);
@@ -83,9 +83,9 @@ int main() {
 
     Player::players[0]->addItem(pr1);
     Player::players[0]->addItem(pr2);
-    Player::players[0]->addItem(pr3);
-    Player::players[0]->addItem(pr4);
-    Player::players[0]->addItem(pr5);
+    // Player::players[0]->addItem(pr3);
+    // Player::players[0]->addItem(pr4);
+    // Player::players[0]->addItem(pr5);
     
     Player::players[1]->addPlant(p1);
     Player::players[1]->addPlant(p2);

@@ -80,8 +80,8 @@ vector<int> Util::idxToInt(string idx) {
     vector<int> result;
 
     try {
-        result.push_back(letter - 'A');
         result.push_back(stoi(number)-1);
+        result.push_back(letter - 'A');
     } catch (...) {
         throw InvalidIndexException();
     }

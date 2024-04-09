@@ -40,6 +40,7 @@ public:
     virtual void addAnimal(Item* item);
 
     bool haveFood();
+    void eat(Item* food);
 
     virtual string getType();
     int getMoney();

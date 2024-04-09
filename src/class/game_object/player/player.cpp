@@ -65,6 +65,13 @@ bool Player::haveFood(){
     return false;
 }
 
+void Player::eat(Item* food){
+    if (!food->isFood()){
+        throw NotFoodException();
+    }
+    this->body_weight += food->getADDED_WEIGHT();
+}
+
 string Player::getType(){
     return "";
 }
@@ -118,51 +125,45 @@ void Player::TERNAK(){
 void Player::BANGUN(){
     throw NoPermissionException();
 }
-void Player::MAKAN(){  /* BELUM IMPLEMENTASI */
+void Player::MAKAN(){ 
 
     if (!this->haveFood()){
-        cout << "Tidak ada makanan di penyimpanan\n" << endl;
-
-        return;
+       throw DontHaveFoodException();
     }
 
-    Inventory<Item>* inv = this->getInventory();
-
     cout << "Pilih makanan dari penyimpanan" << endl;
-    inv->print();
+    this->inventory.print();
+
+    string msg = "Silahkan masukan slot yang berisi makanan.\n";
 
     string slot;
     bool valid = false;
 
     while (!valid){
         try {
-
             cout << "Slot: ";
             cin >> slot;
 
-            while (inv->isEmpty(slot) || !inv->getItem(slot)->isFood()){
-                if (inv->isEmpty(slot)){
-                    cout << "\nKamu mengambil harapan kosong dari penyimpanan." << endl;
-                } else {
-                    cout << "\nApa yang kamu lakukan?!! Kamu mencoba untuk memakan itu?!!" << endl;
-                }
-                cout << "Silahkan masukan slot yang berisi makanan." << endl;
+            vector<int> idx = Util::idxToInt(slot);
+            Item* food = this->inventory.getItem(idx[0], idx[1]);
 
-                cout << "\nSlot: ";
-                cin >> slot;
-            }
+            this->eat(food);
+
+            cout << "\nDengan lahapnya, kamu memakanan hidangan itu" << endl;
+            cout << "Alhasil, berat badan kamu naik menjadi " << this->body_weight << endl << endl;
+
+            this->inventory.remove(idx[0], idx[1]);
+
             valid = true;
-        } catch (IndexNotValidException& e){
-            cout << RED << e.what() << RESET << endl << endl; ;
+            
+        } catch (InvalidIndexException& e){
+            cout << RED << e.what() << RESET << endl;
+        } catch (IsEmptySlotException& e){
+            cout << endl << e.what() << endl << msg << endl;
+        } catch (NotFoodException& e){
+            cout << endl << e.what() << endl << msg << endl;
         }
     }
-
-    this->body_weight += inv->getItem(slot)->getADDED_WEIGHT();
-
-    cout << "\nDengan lahapnya, kamu memakanan hidangan itu" << endl;
-    cout << "Alhasil, berat badan kamu naik menjadi " << this->body_weight << endl << endl;
-
-    inv->remove(slot);
 }
 
 void Player::KASIH_MAKAN(){
