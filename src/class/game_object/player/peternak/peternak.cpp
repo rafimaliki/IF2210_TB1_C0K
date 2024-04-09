@@ -1,8 +1,8 @@
 #include "peternak.hpp"
 #include "peternakException.hpp"
-#include <vector>
 #include <cctype>
 #include <limits>
+using namespace std;
 
 Peternak::Peternak(string name, int money, int body_weight) : Player(name, money, body_weight)
 , peternakan(GameConfig::miscConfig.getPETERNAKAN_SIZE()[0], GameConfig::miscConfig.getPETERNAKAN_SIZE()[1], "PETERNAKAN"){}
@@ -13,6 +13,10 @@ void Peternak::printPeternakan(){
 
 void Peternak::addAnimal(Animal* item){
     peternakan.add(item);
+}
+
+Inventory<Animal>* Peternak::getPeternakan(){
+    return &this->peternakan;
 }
 
 /* Game command related methods */
@@ -121,6 +125,8 @@ void Peternak::TERNAK(){
     Animal* animal = new Animal(ID);
     this->peternakan.add(animal, slot_tanah);
 
+    animal->setIsInCage(true);
+
     // hilangin animal dari inventory
     this->inventory.remove(slot);
 
@@ -186,14 +192,14 @@ void Peternak::KASIH_MAKAN(){
     // Cek apakah inventory hanya berisi makanan herbivora atau karnivora
     try{
         if (herbivore_food && !herbivore && !omnivore && !carnivore_food && carnivore){
-            throw JustHaveCarnivoreAnimalDontHaveFood();
+            throw CarnivoreAnimalDontHaveFood();
         } else if (carnivore_food && !herbivore_food && !carnivore && !omnivore && herbivore){
-            throw JustHaveHerbivoreAnimalDontHaveFood();
+            throw HerbivoreAnimalDontHaveFood();
         }
-    } catch (JustHaveCarnivoreAnimalDontHaveFood& e){
+    } catch (CarnivoreAnimalDontHaveFood& e){
         cout << RED << e.what() << RESET <<endl;
         return;
-    } catch (JustHaveHerbivoreAnimalDontHaveFood& e){
+    } catch (HerbivoreAnimalDontHaveFood& e){
         cout << RED << e.what() << RESET <<endl;
         return;
     }
@@ -254,7 +260,7 @@ void Peternak::KASIH_MAKAN(){
         }
     }
 
-    //get ID from slot
+    // Pilih hewan
     Animal* animal = this->peternakan.getItem(slot_tanah);
     
     cout << "Kamu memilih " << animal->getNAME() << " untuk diberi makan" << endl;
@@ -327,12 +333,195 @@ void Peternak::KASIH_MAKAN(){
     animal->Feed(food);
 
 
-    cout << animal->getNAME() << " sudah diberi makan dan beratnya menjadi " << animal->getWEIGHT_TO_HARVEST() << endl;
+    cout << animal->getNAME() << " sudah diberi makan dan beratnya menjadi " << animal->getWeight() << endl;
 
     
 }
-void Peternak::PANEN(){  /* BELUM IMPLEMENTASI */
-    cout << YELLOW << "\nCommand PANEN belum diimplementasikan!\n" << RESET << endl;
+void Peternak::PANEN(){ 
+    // Temp map untuk menyimpan hewan yang siap dipanen
+    map<string, int> temp_siap_panen;
+
+    //CEK INVENTORY
+    if(this->inventory.isFull()){
+        cout << RED << "Inventory Penuh ! Silahkan kosongkan terlebih dahulu" << RESET << endl;
+        return;
+    }
+
+    CETAK_PETERNAKAN();
+
+    try{
+        isHarvestReady();
+    } catch (PanenHewanTidakTersediaException& e){
+        cout << RED << e.what() << RESET <<endl;
+        return;
+    }
+
+    //Cari hewan yang siap di panen
+    for(int i = 0 ; i < this->peternakan.height; i++){
+        for(int j = 0 ; j < this->peternakan.width; j++){
+            if(this->peternakan.grid[i][j].getItem() != nullptr){
+                if(this->peternakan.grid[i][j].getItem()->isReadyToHarvest()){
+                    string kode_tanaman = this->peternakan.grid[i][j].getItem()->getConfig()->getKODE_HURUF();
+                    if(temp_siap_panen.find(kode_tanaman) == temp_siap_panen.end()){
+                    temp_siap_panen[kode_tanaman] = 1;
+                    }else{
+                        temp_siap_panen[kode_tanaman]++;
+                    }
+                }
+            }
+        }
+    }
+
+    // Cetak hewan yang siap dipanen
+    cout << "Pilih hewan yang siap panen yang kamu miliki" << endl;
+    
+    int i = 1;
+    for(auto it = temp_siap_panen.begin(); it != temp_siap_panen.end();it++){
+            cout << i << ". " << it->first << " (" << it->second << " petak siap panen)" << endl;
+            i++;
+        }
+
+    // pilih hewan
+    int hewan_pilihan;
+    int banyak_petak;
+    string input;
+    bool valid = false;
+
+    // OPSIONAL SELAIN LANGSUNG RETURN
+    while(!valid){
+        try{
+            cout << "\nNomor hewan yang ingin dipanen: ";
+            cin >> input;
+
+            // Mengonversi input menjadi integer
+            hewan_pilihan = stoi(input);
+
+            
+
+            if (hewan_pilihan < 1 || hewan_pilihan > temp_siap_panen.size()) {
+                cout << RED << "Pilihan tidak valid" << RESET << endl;
+                valid = false;
+            } else {
+                valid = true;
+            }
+
+        }
+        catch (const exception &e){
+            cout << RED << "Error: Input harus berupa integer" << RESET << endl;
+        }
+
+        //Membersihkan input buffer
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    }
+
+    //Pilih Petak
+    int count = 0;
+    int nPetak;
+    string kode_hewan;
+
+    for(auto it = temp_siap_panen.begin(); it != temp_siap_panen.end();it++){
+        if(count == hewan_pilihan - 1){
+            nPetak = it->second;
+            kode_hewan = it->first;
+            break;
+        }
+        count++;
+    }
+
+
+     //get id dari tanaman untuk mapping dari tanaman ke produk tanaman
+    int ID = 0;
+
+    valid = false;
+    //OPSIONAL TANPA RETURN LANGSUNG 
+    while(!valid){
+        try{
+            cout << "\nBerapa petak yang ingin dipanen: ";
+            cin >> input;
+
+            // Mengonversi input menjadi integer
+            banyak_petak = stoi(input);
+
+            
+
+            if (banyak_petak < 1 || banyak_petak > nPetak) {
+                cout << RED << "Pilihan tidak valid" << RESET << endl;
+                valid = false;
+            } else {
+                valid = true;
+            }
+
+        }
+        catch (const exception &e){
+            cout << RED << "Error: Input harus berupa integer" << RESET << endl;
+        }
+
+        //Membersihkan input buffer
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    }
+
+  
+
+    //hitung inventory apakah cukup atau tidak
+    try{
+        this->isInventoryMemadai(banyak_petak);
+    } catch (InventoryTidakMemadaiException& e){
+        cout << RED << e.what() << RESET << endl;
+    }
+
+
+    string petak_to_harvest;
+    string letak_panen[nPetak];
+
+
+    cout << "\nPilih petak yang ingin dipanen" << endl;
+    for(int i  = 0 ; i < banyak_petak ; i++){
+        valid = false;
+        while(!valid){
+            try{
+                cout << "Petak ke-"  << i+1 << " : ";
+                cin >> petak_to_harvest;
+
+                while((this->peternakan.isEmpty(petak_to_harvest)) || this->peternakan.getItem(petak_to_harvest)->getConfig()->getKODE_HURUF() != kode_hewan ||!this->peternakan.getItem(petak_to_harvest)->isReadyToHarvest()){
+                    cout << RED << "Petak tidak valid" << RESET << endl;
+                    cout << "Petak ke-"  << i+1 << " : ";
+                    cin >> petak_to_harvest;
+                }
+
+
+                //add item ke inventory
+                ID = this->peternakan.getItem(petak_to_harvest)->getConfig()->getID();
+                Item *item = new Product(ID);
+
+                this->addItem(item);
+
+                this->getPeternakan()->remove(petak_to_harvest);
+
+
+                //Simpan kordinat panen
+                letak_panen[i] = petak_to_harvest;
+                
+
+                valid = true;
+            }
+            catch (...){
+                cout << RED << "Input tidak valid" << RESET << endl;
+            }
+        }
+    }
+    
+
+    cout << nPetak << " petak Hewan " << kode_hewan << " pada petak ";
+    for (int i = 0; i < nPetak-1; i++)
+    {
+        cout << letak_panen[i] << ", ";
+    }
+    cout << letak_panen[nPetak-1] << " telah dipanen!" << endl << endl;
+
 }
 
 string Peternak::getType(){
@@ -372,4 +561,30 @@ void Peternak::isAnimalEmpty(){
         }
     }
     throw InventoryNoFoodException();
+}
+
+void Peternak::isHarvestReady(){
+    //Cek apakah ada tanaman yang bisa dipanen
+    bool flag = false;
+    for(int i = 0 ; i < this->peternakan.height; i++){
+        for(int j = 0 ; j < this->peternakan.width; j++){
+            if(this->peternakan.grid[i][j].getItem() != nullptr){
+                if(this->peternakan.grid[i][j].getItem()->isReadyToHarvest()){
+                    flag = true;
+                    break;
+                }
+            }
+        }
+    }
+
+    if(!flag){
+        throw PanenHewanTidakTersediaException();
+    }
+}
+
+
+void Peternak::isInventoryMemadai(int n){
+    if(this->inventory.calcEmptySpace() < n){
+        throw InventoryTidakMemadaiException();
+    }
 }
