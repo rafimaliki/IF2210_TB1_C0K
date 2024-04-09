@@ -24,6 +24,7 @@ class Peternak : public Player {
         void KASIH_MAKAN();
         void PANEN();
         void isPeternakanPenuh();
+        void isPeternakanKosong();
 
         string getType();
         // void MUAT();

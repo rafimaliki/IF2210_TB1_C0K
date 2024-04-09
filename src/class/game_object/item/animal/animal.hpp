@@ -25,7 +25,7 @@ public:
     bool isReadyToHarvest();
     void setIsInCage(bool isInCage);
 
-    // void Feed(ProductConfig product);
+    void Feed(Item* product);
 };
 
 

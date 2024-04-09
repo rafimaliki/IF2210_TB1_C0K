@@ -13,3 +13,10 @@ public:
         return "Peternakan penuh";
     }
 };
+
+class PeternakanKosongException : public std::exception {
+public:
+    const char* what() const noexcept override {
+        return "Peternakan kosong";
+    }
+};
