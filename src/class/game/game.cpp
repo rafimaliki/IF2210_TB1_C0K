@@ -79,7 +79,7 @@ void Game::executeCommand(string command) {
         cout << RED << e.what() << command << "\n" << RESET << endl;
     } catch (InvalidCommandException& e) {
         cout << RED << e.what() << RESET << endl;
-    } catch (const std::exception& e){
+    } catch (const exception& e){
         cout << e.what() << endl;
     }
 }

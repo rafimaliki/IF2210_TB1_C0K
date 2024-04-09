@@ -1,13 +1,13 @@
 #include "../../../../std.hpp"
 
-// class IndexNotValidException : public std::exception {
+// class IndexNotValidException : public exception {
 // public:
 //     const char* what() const noexcept override {
 //         return "Index not valid";
 //     }
 // };
 
-class PeternakanPenuhException : public std::exception {
+class PeternakanPenuhException : public exception {
 public:
     const char* what() const noexcept override {
         return "Peternakan penuh";
