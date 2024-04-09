@@ -9,18 +9,21 @@
 #include "../item/plant/plant.hpp"
 #include "../item/animal/animal.hpp"
 #include "../item/product/product.hpp"
+#include "../toko/toko.hpp"
 // #include "../item/animal/animal.hpp"
 // #include "../item/animal/.hpp"
 
-class Player {
+class Player
+{
 protected:
     int id;
     string name;
     int money;
     Inventory<Item> inventory;
     int body_weight;
+
 public:
-    static vector<Player*> players;
+    static vector<Player *> players;
     static int current_player_idx;
     static int player_count;
 
@@ -29,20 +32,20 @@ public:
 
     void printStats();
     void printInventory();
-    static Player* getCurrentPlayer();
+    static Player *getCurrentPlayer();
 
     virtual void printLahan();
     virtual void printPeternakan();
-    Inventory<Item>* getInventory();
-    virtual Inventory<Plant>* getLadang();
-    virtual Inventory<Animal>* getPeternakan();
+    Inventory<Item> *getInventory();
+    virtual Inventory<Plant> *getLadang();
+    virtual Inventory<Animal> *getPeternakan();
 
-    void addItem(Item* item);
-    virtual void addPlant(Plant* item);  
-    virtual void addAnimal(Item* item);
+    void addItem(Item *item);
+    virtual void addPlant(Plant *item);
+    virtual void addAnimal(Item *item);
 
     bool haveFood();
-    void eat(Item* food);
+    void eat(Item *food);
 
     virtual string getType();
     int getMoney();
@@ -71,9 +74,6 @@ public:
     virtual void SET();
     virtual void GIVE();
     virtual void STATS();
-
-
-
 
     static void next();
 };
