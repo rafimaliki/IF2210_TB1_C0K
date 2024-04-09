@@ -273,7 +273,7 @@ void Player::GIVE(){
             return;
         }
 
-        item = new Plant(choice);
+        item = new Animal(choice);
 
     } else if (choice == 3){
         cout << "\nDaftar produk:" << endl;

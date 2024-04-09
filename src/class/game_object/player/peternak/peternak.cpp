@@ -171,10 +171,13 @@ void Peternak::KASIH_MAKAN(){
             if (!this->peternakan.isEmpty(i, j)){
                 if (this->peternakan.getItem(i, j)->getTYPE() == "HERBIVORE"){
                     herbivore = true;
+                    cout << "HERBIVORE" << endl;
                 } else if (this->peternakan.getItem(i, j)->getTYPE() == "CARNIVORE"){
                     carnivore = true;
+                    cout << "CARNIVORE" << endl;
                 }else if (this->peternakan.getItem(i, j)->getTYPE() == "OMNIVORE"){
                     omnivore = true;
+                    cout << "OMNIVORE" << endl;
                 }
             }
         }

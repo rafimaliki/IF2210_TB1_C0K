@@ -30,6 +30,8 @@ void Game::start() {
 
     } catch (FailReadFileException &e) {
         cout << RED << e.what() << RESET << endl;
+    } catch (...) {
+        cout << RED << "Terjadi kesalahan saat memulai game!" << RESET << endl;
     }
 }
 
