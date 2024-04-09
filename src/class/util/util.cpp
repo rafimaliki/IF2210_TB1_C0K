@@ -50,7 +50,27 @@ vector<string> Util::split(string str, char delimiter)
 
     return splitted;
 }
+vector<string> Util::inputMultiplePetak(const string &str)
+{
+    std::vector<std::string> results;
 
+    auto parts = split(str, ',');
+    for (const auto &part : parts)
+    {
+
+        std::string cleanPart;
+        for (char ch : part)
+        {
+            if (ch != ' ')
+            {
+                cleanPart += ch;
+            }
+        }
+        results.push_back(cleanPart);
+    }
+
+    return results;
+}
 bool Util::isNumber(char c)
 {
     return (c >= '0' && c <= '9');

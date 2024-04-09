@@ -142,22 +142,6 @@ TokoEntry Toko::getItemEntry(int id)
 }
 Item *Toko::beliItemToko(int i, int amount, int gulden)
 {
-    // if (i <= n_plant)
-    // { // tumbuhan (infinite)
-    //     Item *plant = getItemToko(i);
-    //     if (gulden - (amount * plant->getPRICE()) < 0)
-    //         throw GuldenInvalid();
-    //     return plant;
-    // }
-    // else if (n_plant < i && i <= n_animal + n_plant) // hewan (infinite)
-    // {
-    //     Item *animal = getItemToko(i);
-    //     if (gulden - (amount * animal->getPRICE()) < 0)
-    //         throw GuldenInvalid();
-    //     return animal;
-    // }
-    // else
-    // {
     Item *bought_item = getItemToko(i);
     int total_price = getItemToko(i)->getPRICE() * amount;
     if (!isInfiniteItem(bought_item))
