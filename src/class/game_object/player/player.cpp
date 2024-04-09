@@ -125,32 +125,32 @@ void Player::CETAK_PENYIMPANAN()
 void Player::PUNGUT_PAJAK()
 {
     cout << RED << "\nTidak memiliki akses ke command PUNGUT_PAJAK!\n"
-         << RESETstring << endl;
+         << RESET << endl;
 }
 void Player::CETAK_LADANG()
 {
     cout << RED << "\nTidak memiliki akses ke command CETAK_LADANG!\n"
-         << RESETstring << endl;
+         << RESET << endl;
 }
 void Player::CETAK_PETERNAKAN()
 {
     cout << RED << "\nTidak memiliki akses ke command CETAK_PETERNAKAN!\n"
-         << RESETstring << endl;
+         << RESET << endl;
 }
 void Player::TANAM()
 {
     cout << RED << "\nTidak memiliki akses ke command TANAM!\n"
-         << RESETstring << endl;
+         << RESET << endl;
 }
 void Player::TERNAK()
 {
     cout << RED << "\nTidak memiliki akses ke command TERNAK!\n"
-         << RESETstring << endl;
+         << RESET << endl;
 }
 void Player::BANGUN()
 {
     cout << RED << "\nTidak memiliki akses ke command BANGUN!\n"
-         << RESETstring << endl;
+         << RESET << endl;
 }
 void Player::MAKAN()
 { /* BELUM IMPLEMENTASI */
@@ -198,7 +198,7 @@ void Player::MAKAN()
         }
         catch (IndexNotValidException &e)
         {
-            cout << RED << e.what() << RESETstring << endl
+            cout << RED << e.what() << RESET << endl
                  << endl;
             ;
         }
@@ -216,8 +216,9 @@ void Player::MAKAN()
 void Player::KASIH_MAKAN()
 {
     cout << RED << "\nTidak memiliki akses ke command KASIH_MAKAN!\n"
-         << RESETstring << endl;
+         << RESET << endl;
 }
+
 void Player::BELI()
 {
     if (this->inventory.isFull())
@@ -315,18 +316,18 @@ void Player::JUAL()
 void Player::PANEN()
 {
     cout << RED << "\nTidak memiliki akses ke command PANEN!\n"
-         << RESETstring << endl;
+         << RESET << endl;
 }
 
 void Player::SIMPAN()
 { /* BELUM IMPLEMENTASI */
     cout << YELLOW << "\nCommand SIMPAN belum diimplementasikan!\n"
-         << RESETstring << endl;
+         << RESET << endl;
 }
 void Player::TAMBAH_PEMAIN()
 {
     cout << RED << "\nTidak memiliki akses ke command TAMBAH_PEMAIN!\n"
-         << RESETstring << endl;
+         << RESET << endl;
 }
 
 /* Cheat Commands */

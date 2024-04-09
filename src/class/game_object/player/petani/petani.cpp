@@ -55,7 +55,7 @@ void Petani::TANAM(){
     try{
         this->isLahanPenuh();
     } catch (LahanPenuhException& e){
-        cout << RED << e.what() << RESETstring << endl;
+        cout << RED << e.what() << RESET << endl;
     }
     
 
@@ -87,7 +87,7 @@ void Petani::TANAM(){
             }
             valid = true;
         } catch (IndexNotValidException& e){
-            cout << RED << e.what() << RESETstring << endl << endl; ;
+            cout << RED << e.what() << RESET << endl << endl; ;
         }
     }
 
@@ -125,7 +125,7 @@ void Petani::TANAM(){
             }
             valid = true;
         } catch (IndexNotValidException& e){
-            cout << RED << e.what() << RESETstring << endl << endl; ;
+            cout << RED << e.what() << RESET << endl << endl; ;
         }
     }
 
@@ -149,7 +149,7 @@ void Petani::PANEN(){
 
     //CEK INVENTORY
     if(this->inventory.isFull()){
-        cout << RED << "Inventory Penuh ! Silahkan kosongkan terlebih dahulu" << RESETstring << endl;
+        cout << RED << "Inventory Penuh ! Silahkan kosongkan terlebih dahulu" << RESET << endl;
         return;
     }
 
@@ -161,7 +161,7 @@ void Petani::PANEN(){
     try{
         this->isPanenAvailable();
     } catch (PanenTidakTersediaException& e){
-        cout << RED << e.what() << RESETstring << endl;
+        cout << RED << e.what() << RESET << endl;
         return;
     }
 
@@ -212,7 +212,7 @@ void Petani::PANEN(){
             
 
             if (pilihan_tanaman < 1 || pilihan_tanaman > temp_siap_panen.size()) {
-                cout << RED << "Pilihan tidak valid" << RESETstring << endl;
+                cout << RED << "Pilihan tidak valid" << RESET << endl;
                 valid = false;
             } else {
                 valid = true;
@@ -220,7 +220,7 @@ void Petani::PANEN(){
 
         }
         catch (const exception &e){
-            cout << RED << "Error: Input harus berupa integer" << RESETstring << endl;
+            cout << RED << "Error: Input harus berupa integer" << RESET << endl;
         }
 
         //Membersihkan input buffer
@@ -262,7 +262,7 @@ void Petani::PANEN(){
             
 
             if (banyak_petak < 1 || banyak_petak > nPetak) {
-                cout << RED << "Pilihan tidak valid" << RESETstring << endl;
+                cout << RED << "Pilihan tidak valid" << RESET << endl;
                 valid = false;
             } else {
                 valid = true;
@@ -270,7 +270,7 @@ void Petani::PANEN(){
 
         }
         catch (const exception &e){
-            cout << RED << "Error: Input harus berupa integer" << RESETstring << endl;
+            cout << RED << "Error: Input harus berupa integer" << RESET << endl;
         }
 
         //Membersihkan input buffer
@@ -285,7 +285,7 @@ void Petani::PANEN(){
     try{
         this->isInventoryMemadai(banyak_petak);
     } catch (InventoryTidakMemadaiException& e){
-        cout << RED << e.what() << RESETstring << endl;
+        cout << RED << e.what() << RESET << endl;
     }
 
 
@@ -302,7 +302,7 @@ void Petani::PANEN(){
                 cin >> petak_to_harvest;
 
                 while((this->lahan.isEmpty(petak_to_harvest)) || this->lahan.getItem(petak_to_harvest)->getConfig()->getKODE_HURUF() != kode_tanaman ||!this->lahan.getItem(petak_to_harvest)->isReadyToHarvest()){
-                    cout << RED << "Petak tidak valid" << RESETstring << endl;
+                    cout << RED << "Petak tidak valid" << RESET << endl;
                     cout << "Petak ke-"  << i+1 << " : ";
                     cin >> petak_to_harvest;
                 }
@@ -324,7 +324,7 @@ void Petani::PANEN(){
                 valid = true;
             }
             catch (...){
-                cout << RED << "Input tidak valid" << RESETstring << endl;
+                cout << RED << "Input tidak valid" << RESET << endl;
             }
         }
     }
