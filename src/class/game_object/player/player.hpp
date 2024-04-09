@@ -38,6 +38,7 @@ public:
     virtual void printPeternakan();
     Inventory<Item> *getInventory();
     virtual Inventory<Plant> *getLadang();
+    virtual Inventory<Animal> *getPeternakan();
 
     void addItem(Item *item);
     virtual void addPlant(Plant *item);

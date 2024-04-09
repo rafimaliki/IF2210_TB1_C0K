@@ -61,6 +61,10 @@ Inventory<Plant> *Player::getLadang()
     return nullptr;
 }
 void Player::printPeternakan() {}
+Inventory<Animal> *Player::getPeternakan()
+{
+    return nullptr;
+}
 void Player::addPlant(Plant *item) {}
 void Player::addAnimal(Item *item) {}
 void Player::addItem(Item *item)

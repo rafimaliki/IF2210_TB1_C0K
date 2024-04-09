@@ -26,6 +26,7 @@ public:
     void setIsInCage(bool isInCage);
 
     void Feed(Item* product);
+    int getWeight();
 };
 
 
