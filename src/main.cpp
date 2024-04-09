@@ -33,6 +33,11 @@ int main() {
     Item* pr4 = new Product(7);
     Item* pr5 = new Product(17);
 
+    Item* bg1 = new Bangunan(1);
+    Item* bg2 = new Bangunan(2);
+    Item* bg3 = new Bangunan(3);
+    Item* bg4 = new Bangunan(4);
+
     // cout << "Id: " << p1->getID() << endl;
     // cout << "Kode Huruf: " << p1->getKODE_HURUF() << endl;
     // cout << "Nama: " << p1->getNAME() << endl;
@@ -98,6 +103,10 @@ int main() {
     // cout << GameConfig::recipeConfig[0].getINGREDIENTS()[0].getNAME() << endl;
     // cout << GameConfig::recipeConfig[0].getINGREDIENTS()[0].getQUANTITY() << endl;
         
+    // bg1->print();
+    // bg2->print();
+    // bg3->print();
+    // bg4->print();
 
     while (game.isRunning()) {
 
