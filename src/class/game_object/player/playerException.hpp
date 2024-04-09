@@ -1,3 +1,6 @@
+#ifndef PLAYEREXCEPTION_HPP
+#define PLAYEREXCEPTION_HPP
+
 #include "../../../std.hpp"
 
 class NoPermissionException : public exception {
@@ -20,3 +23,5 @@ public:
         return "Tidak ada makanan di penyimpanan\n";
     }
 };
+
+#endif

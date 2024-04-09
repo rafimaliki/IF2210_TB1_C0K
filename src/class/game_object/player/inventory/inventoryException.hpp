@@ -1,3 +1,6 @@
+#ifndef INVENTORYEXCEPTION_HPP
+#define INVENTORYEXCEPTION_HPP
+
 #include "../../../../std.hpp"
 
 class IndexNotValidException : public exception {
@@ -13,3 +16,5 @@ class IsEmptySlotException : public exception {
             return "Kamu mengambil harapan kosong dari penyimpanan.";
         }
 };
+
+#endif

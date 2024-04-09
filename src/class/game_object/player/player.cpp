@@ -192,27 +192,35 @@ void Player::TAMBAH_PEMAIN(){
 /* Cheat Commands */
 
 void Player::SET(){
-    
+
     cout << "\nAtribut:" << endl;
     cout << "1. Money" << endl;
     cout << "2. Body Weight" << endl;
 
-    int choice;
+    string input;
     cout << "\nPilih (1-2): ";
-    cin >> choice;
+    cin >> input;
+
+    int choice = Util::stringToInt(input);
 
     if (choice == 1){
         cout << "Masukan jumlah uang: ";
-        cin >> this->money;
+        cin >> input;
+        this->money = Util::stringToInt(input);
     } else if (choice == 2){
         cout << "Masukan berat badan: ";
-        cin >> this->body_weight;
+        cin >> input;
+        this->body_weight = Util::stringToInt(input);
+    } else {
+        cout << "Gagal!\n" << endl;
+        return;
     }
 
     cout << "Sukses!\n" << endl;
 }
 
 void Player::GIVE(){
+
     if (this->inventory.isFull()){
         cout << "\nInventory penuh\n" << endl;
         return;
@@ -224,8 +232,15 @@ void Player::GIVE(){
     cout << "3. Product" << endl;
 
     int choice;
+    string input;
     cout << "\nPilih (1-3): ";
-    cin >> choice;
+    cin >> input;
+    choice = Util::stringToInt(input);
+
+    if (choice < 1 || choice > 3){
+        cout << "Gagal!\n" << endl;
+        return;
+    }
     Item* item;
 
     if (choice == 1){
@@ -234,7 +249,14 @@ void Player::GIVE(){
             cout << i+1 << ". " << GameConfig::plantConfig[i].getNAME() << endl;
         }
         cout << "\nPilih (1-" << GameConfig::plantConfig.size() << "): ";
-        cin >> choice;
+        cin >> input;
+        choice = Util::stringToInt(input);
+
+        if (choice < 0 || choice > int(GameConfig::plantConfig.size())){
+            cout << "Gagal!\n" << endl;
+            return;
+        }
+
         item = new Plant(choice);
 
     } else if (choice == 2){
@@ -243,7 +265,14 @@ void Player::GIVE(){
             cout << i+1 << ". " << GameConfig::animalConfig[i].getNAME() << endl;
         }
         cout << "\nPilih (1-" << GameConfig::animalConfig.size() << "): ";
-        cin >> choice;
+        cin >> input;
+        choice = Util::stringToInt(input);
+
+        if (choice < 0 || choice > int(GameConfig::animalConfig.size())){
+            cout << "Gagal!\n" << endl;
+            return;
+        }
+
         item = new Plant(choice);
 
     } else if (choice == 3){
@@ -252,7 +281,14 @@ void Player::GIVE(){
             cout << i+1 << ". " << GameConfig::productConfig[i].getNAME() << endl;
         }
         cout << "\nPilih (1-" << GameConfig::productConfig.size() << "): ";
-        cin >> choice;
+        cin >> input;
+        choice = Util::stringToInt(input);
+
+        if (choice < 0 || choice > int(GameConfig::productConfig.size())){
+            cout << "Gagal!\n" << endl;
+            return;
+        }
+
         item = new Product(choice);
     }
 

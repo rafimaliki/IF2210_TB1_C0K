@@ -285,7 +285,7 @@ void GameConfig::loadGameConfig(){
 
     /* Animal Config */
 
-    cout << "Reading Animal Config ";
+    cout << "\nReading Animal Config ";
     ConfigReader animal_config("config/animal.txt");
 
     vector<vector<string>> animal_Config = animal_config.readConfig();

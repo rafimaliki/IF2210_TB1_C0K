@@ -89,3 +89,10 @@ vector<int> Util::idxToInt(string idx) {
     return result;
 }
 
+int Util::stringToInt(string num) {
+    try {
+        return stoi(num);
+    } catch (...) {
+        throw NotNumberException();
+    }
+}
