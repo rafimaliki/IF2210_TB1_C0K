@@ -11,6 +11,7 @@ void Game::start() {
 
     loadConfig();
     loadSaveFile();
+    Command::initCommand();
 
     Player* walikota = new Walikota("Walikota", 1000, 70);
     Player* petani1 = new Petani("Petani1", 50, 45);
@@ -37,48 +38,18 @@ string Game::inputCommand() {
 }
 
 void Game::executeCommand(string command) {
-    // cout << "Executing command: " << command << endl;
-    if (command == "EXIT" || command == "exit") {
-        is_running = false;
-    } else if (command == "NEXT") {
-        Player::getCurrentPlayer()->NEXT();
-    } else if (command == "CETAK_PENYIMPANAN"){
-        Player::getCurrentPlayer()->CETAK_PENYIMPANAN();
-    } else if (command == "PUNGUT_PAJAK"){
-        Player::getCurrentPlayer()->PUNGUT_PAJAK();
-    } else if (command == "CETAK_LADANG"){
-        Player::getCurrentPlayer()->CETAK_LADANG();
-    } else if (command == "CETAK_PETERNAKAN"){
-        Player::getCurrentPlayer()->CETAK_PETERNAKAN();
-    } else if (command == "TANAM"){
-        Player::getCurrentPlayer()->TANAM();
-    } else if (command == "TERNAK"){
-        Player::getCurrentPlayer()->TERNAK();
-    } else if (command == "BANGUN"){
-        Player::getCurrentPlayer()->BANGUN();
-    } else if (command == "MAKAN"){
-        Player::getCurrentPlayer()->MAKAN();
-    } else if (command == "KASIH_MAKAN"){
-        Player::getCurrentPlayer()->KASIH_MAKAN();
-    } else if (command == "BELI"){
-        Player::getCurrentPlayer()->BELI();
-    } else if (command == "JUAL"){
-        Player::getCurrentPlayer()->JUAL();
-    } else if (command == "PANEN"){
-        Player::getCurrentPlayer()->PANEN();
-    } else if (command == "SIMPAN"){
-        Player::getCurrentPlayer()->SIMPAN();
-    } else if (command == "TAMBAH_PEMAIN"){
-        Player::getCurrentPlayer()->TAMBAH_PEMAIN();
-    } else if (command == "SET"){
-        Player::getCurrentPlayer()->SET();
-    } else if (command == "GIVE"){
-        Player::getCurrentPlayer()->GIVE();
-    } else if (command == "STATS"){
-        Player::getCurrentPlayer()->STATS();
+
+    if (command == "EXIT") {
+        this->is_running = false;
+        return;
     }
-    else {
-        cout << RED << "\nCommand not found\n" << RESET << endl;
+    
+    try {
+        Command::execute(command);
+    } catch (NoPermissionException& e) {
+        cout << RED << e.what() << command << "\n" << RESET << endl;
+    } catch (InvalidCommandException& e) {
+        cout << RED << e.what() << RESET << endl;
     }
 }
 

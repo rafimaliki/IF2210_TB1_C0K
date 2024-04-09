@@ -101,22 +101,22 @@ void Player::CETAK_PENYIMPANAN(){
     this->inventory.print();
 }
 void Player::PUNGUT_PAJAK(){
-    cout << RED << "\nTidak memiliki akses ke command PUNGUT_PAJAK!\n" << RESET << endl;
+    throw NoPermissionException();
 }
 void Player::CETAK_LADANG(){
-    cout << RED << "\nTidak memiliki akses ke command CETAK_LADANG!\n" << RESET << endl;
+    throw NoPermissionException();
 }
 void Player::CETAK_PETERNAKAN(){
-    cout << RED << "\nTidak memiliki akses ke command CETAK_PETERNAKAN!\n" << RESET << endl;
+    throw NoPermissionException();
 }
 void Player::TANAM(){
-    cout << RED << "\nTidak memiliki akses ke command TANAM!\n" << RESET << endl;
+    throw NoPermissionException();
 }
 void Player::TERNAK(){
-    cout << RED << "\nTidak memiliki akses ke command TERNAK!\n" << RESET << endl;
+    throw NoPermissionException();
 }
 void Player::BANGUN(){
-    cout << RED << "\nTidak memiliki akses ke command BANGUN!\n" << RESET << endl;
+    throw NoPermissionException();
 }
 void Player::MAKAN(){  /* BELUM IMPLEMENTASI */
 
@@ -166,7 +166,7 @@ void Player::MAKAN(){  /* BELUM IMPLEMENTASI */
 }
 
 void Player::KASIH_MAKAN(){
-    cout << RED << "\nTidak memiliki akses ke command KASIH_MAKAN!\n" << RESET << endl;
+    throw NoPermissionException();
 }
 void Player::BELI(){  /* BELUM IMPLEMENTASI (butuh class Toko) */
     cout << YELLOW << "\nCommand BELI belum diimplementasikan!\n" << RESET << endl;
@@ -175,14 +175,14 @@ void Player::JUAL(){  /* BELUM IMPLEMENTASI (butuh class Toko) */
     cout << YELLOW << "\nCommand JUAL belum diimplementasikan!\n" << RESET << endl;
 }
 void Player::PANEN(){
-    cout << RED << "\nTidak memiliki akses ke command PANEN!\n" << RESET << endl;
+    throw NoPermissionException();
 }
 
 void Player::SIMPAN(){  /* BELUM IMPLEMENTASI */
     cout << YELLOW << "\nCommand SIMPAN belum diimplementasikan!\n" << RESET << endl;
 }
 void Player::TAMBAH_PEMAIN(){
-    cout << RED << "\nTidak memiliki akses ke command TAMBAH_PEMAIN!\n" << RESET << endl;
+    throw NoPermissionException();
 }
 
 /* Cheat Commands */

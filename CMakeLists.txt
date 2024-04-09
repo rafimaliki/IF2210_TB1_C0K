@@ -7,6 +7,7 @@ set(SOURCE_FILES
     src/main.cpp
     src/class/util/util.cpp
     src/class/game/game.cpp
+    src/class/command/command.cpp
     src/class/muat/config_reader.cpp
     src/class/game_object/item_config/item_config.cpp
     src/class/game_object/item/item.cpp
