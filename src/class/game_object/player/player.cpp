@@ -267,14 +267,12 @@ void Player::BELI()
                 /*Sesi Pemilihan Petak*/
                 bool petak_valid = false;
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
                 while (!petak_valid)
                 {
 
                     try
                     {
                         cout << "Petak: ";
-
                         getline(cin, slotstring);
                         vector<string> result_petak = Util::inputMultiplePetak(slotstring);
                         bool valid_slot = true; // Atur menjadi true agar masuk ke loop pertama
@@ -357,33 +355,18 @@ void Player::JUAL()
                 cout << "Jual batal!" << endl;
                 break;
             }
-
-            slotstemp = Util::split(slotstring, ',');
             finalslots.clear();
+            finalslots = Util::inputMultiplePetak(slotstring);
             try
             {
-                for (const auto &slot : slotstemp)
+                for (int i = 0; i < finalslots.size(); i++)
                 {
-                    vector<string> tempresult = Util::split(slot, ' ');
-                    if (tempresult.size() != 1)
-                    {
-                        finalslots.push_back(tempresult[1]);
-                        if (this->inventory.isEmpty(tempresult[1]))
-                            throw SlotEmptyException();
-                        if (this->inventory.getItem(tempresult[1])->getTYPE() == "" && this->id != 1)
-                            throw RoleNotValid();
-                    }
-                    else
-                    {
-                        finalslots.push_back(tempresult[0]);
-                        if (this->inventory.isEmpty(tempresult[0]))
-                            throw SlotEmptyException();
-                        if (this->inventory.getItem(tempresult[0])->getTYPE() == "" && this->id != 1)
-                            throw RoleNotValid();
-                    }
+                    if (this->inventory.isEmpty(finalslots[i]))
+                        throw SlotEmptyException();
+                    if (this->inventory.getItem(finalslots[i])->getTYPE() == "" && this->id != 1)
+                        throw RoleNotValid();
                 }
                 int total_money = 0;
-
                 for (int i = 0; i < finalslots.size(); i++)
                 {
                     Item *newitem = this->inventory.getItem(finalslots[i]);
@@ -393,7 +376,7 @@ void Player::JUAL()
                 }
                 valid = true;
                 setMoney(this->money += total_money);
-                cout << "Barang anda berhasil terjual! Uang anda bertambah " << total_money << " gulden! gacor!!!" << endl;
+                cout << GREEN << "Barang anda berhasil terjual! Uang anda bertambah " << total_money << " gulden! gacor!!!" << RESET << endl;
             }
             catch (InvalidIndexException &e)
             {
