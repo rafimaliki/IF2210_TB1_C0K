@@ -2,6 +2,8 @@
 #define WALIKOTA_HPP
 
 #include "../player.hpp"
+#include "../../item/bangunan/bangunan.hpp"
+#include "walikotaexception.hpp"
 
 class Walikota : public Player {
     public:
@@ -18,6 +20,14 @@ class Walikota : public Player {
         // void MUAT();
         void TAMBAH_PEMAIN();
         int HITUNG_PAJAK(int idx);
+        vector<Bangunan*> getDaftarBangunan();
+        void showRecipe(vector<Bangunan*> daftar_bangunan);
+        string inputNama(vector<Bangunan*> daftar_bangunan);
+        int getBangunanPrice(string nama, vector<Bangunan*> daftar_bangunan);
+        void useMoney(int amount);
+        void cancelUseMoney(int amount);
+        void useIngredients(string nama, vector<Bangunan*> daftar_bangunan);
+        void bangunBangunan(string nama, vector<Bangunan*> daftar_bangunan);
 
         string getType();
 };

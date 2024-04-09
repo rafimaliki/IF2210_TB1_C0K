@@ -12,7 +12,7 @@ class Command {
     public:
         static void addCommand(const string& command, void (Player::*function)());
         static void initCommand();
-        static void execute(const std::string& command);
+        static void execute(const string& command);
 };
 
 #endif

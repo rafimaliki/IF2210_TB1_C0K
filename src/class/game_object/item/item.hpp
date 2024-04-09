@@ -9,10 +9,11 @@ class Item
     private:
     public:
         Item();
-        virtual void print();
-        virtual ItemConfig* getConfig() = 0;
-        virtual ~Item(); 
+        virtual ~Item() = 0; 
 
+        virtual void print();
+
+        virtual ItemConfig* getConfig() = 0;
         virtual void setPlanted(bool isPlanted);
         virtual void setIsInCage(bool isInCage);
         virtual void printKODE_HURUF();

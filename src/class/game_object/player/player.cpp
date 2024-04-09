@@ -14,12 +14,15 @@ Player::Player(string name, int money, int body_weight) :
     player_count++;
 }
 
+Player::~Player(){}
+
 void Player::printStats(){
     cout << "\nPlayer stats: " << endl;
-    cout << "  Id: " << this->id << endl;
-    cout << "  Name: " << this->name << endl;
-    cout << "  Money: " << this->money << endl;
-    cout << "  Body Weight: " << this->body_weight << endl << endl;
+    cout << "  Id    : " << this->id << endl;
+    cout << "  Nama  : " << this->name << endl;
+    cout << "  Role  : " << this->getType() << endl;
+    cout << "  Uang  : " << this->money << " gulden" <<endl;
+    cout << "  Berat : " << this->body_weight << " kg" << endl << endl;
 }
 
 void Player::printInventory(){
@@ -35,12 +38,12 @@ Player* Player::getCurrentPlayer(){
 }
 
 void Player::next(){   
-    cout << "Player " << getCurrentPlayer()->name << "'s turn ended" <<endl; 
+    cout << "Turn player " << getCurrentPlayer()->name << "berakhir" <<endl; 
     current_player_idx++;
     if (current_player_idx >= player_count){
         current_player_idx = 0;
     }
-    cout << "Player " << getCurrentPlayer()->name << "'s turn" << endl << endl; 
+    cout << "Giliran player " << getCurrentPlayer()->name << endl << endl; 
 }
 
 void Player::printLahan(){}
@@ -65,6 +68,13 @@ bool Player::haveFood(){
     return false;
 }
 
+void Player::eat(Item* food){
+    if (!food->isFood()){
+        throw NotFoodException();
+    }
+    this->body_weight += food->getADDED_WEIGHT();
+}
+
 string Player::getType(){
     return "";
 }
@@ -85,17 +95,17 @@ string Player::getName(){
 
 void Player::NEXT(){
 
-    cout << "\033[1;33m\nAnother day has passed...\n\033[0m";
+    cout << "\033[1;33m\nHari telah berlalu...\n\n\033[0m";
     Plant::AgeAllPlants();
 
-    cout << "Player " << getCurrentPlayer()->name << "'s turn ended" << endl;
+     cout << "Turn player " << getCurrentPlayer()->name << " berakhir" <<endl; 
 
     current_player_idx++;
     if (current_player_idx >= player_count){
         current_player_idx = 0;
     }
 
-    cout << "Player " << getCurrentPlayer()->name << "'s turn" << endl << endl;
+    cout << "Giliran player " << getCurrentPlayer()->name << endl << endl; 
 }
 void Player::CETAK_PENYIMPANAN(){
     this->inventory.print();
@@ -118,51 +128,45 @@ void Player::TERNAK(){
 void Player::BANGUN(){
     throw NoPermissionException();
 }
-void Player::MAKAN(){  /* BELUM IMPLEMENTASI */
+void Player::MAKAN(){ 
 
     if (!this->haveFood()){
-        cout << "Tidak ada makanan di penyimpanan\n" << endl;
-
-        return;
+       throw DontHaveFoodException();
     }
 
-    Inventory<Item>* inv = this->getInventory();
-
     cout << "Pilih makanan dari penyimpanan" << endl;
-    inv->print();
+    this->inventory.print();
+
+    string msg = "Silahkan masukan slot yang berisi makanan.\n";
 
     string slot;
     bool valid = false;
 
     while (!valid){
         try {
-
             cout << "Slot: ";
             cin >> slot;
 
-            while (inv->isEmpty(slot) || !inv->getItem(slot)->isFood()){
-                if (inv->isEmpty(slot)){
-                    cout << "\nKamu mengambil harapan kosong dari penyimpanan." << endl;
-                } else {
-                    cout << "\nApa yang kamu lakukan?!! Kamu mencoba untuk memakan itu?!!" << endl;
-                }
-                cout << "Silahkan masukan slot yang berisi makanan." << endl;
+            vector<int> idx = Util::idxToInt(slot);
+            Item* food = this->inventory.getItem(idx[0], idx[1]);
 
-                cout << "\nSlot: ";
-                cin >> slot;
-            }
+            this->eat(food);
+
+            cout << "\nDengan lahapnya, kamu memakanan hidangan itu" << endl;
+            cout << "Alhasil, berat badan kamu naik menjadi " << this->body_weight << endl << endl;
+
+            this->inventory.remove(idx[0], idx[1]);
+
             valid = true;
-        } catch (IndexNotValidException& e){
-            cout << RED << e.what() << RESET << endl << endl; ;
+
+        } catch (InvalidIndexException& e){
+            cout << RED << e.what() << RESET << endl;
+        } catch (IsEmptySlotException& e){
+            cout << endl << e.what() << endl << msg << endl;
+        } catch (NotFoodException& e){
+            cout << endl << e.what() << endl << msg << endl;
         }
     }
-
-    this->body_weight += inv->getItem(slot)->getADDED_WEIGHT();
-
-    cout << "\nDengan lahapnya, kamu memakanan hidangan itu" << endl;
-    cout << "Alhasil, berat badan kamu naik menjadi " << this->body_weight << endl << endl;
-
-    inv->remove(slot);
 }
 
 void Player::KASIH_MAKAN(){
@@ -188,27 +192,35 @@ void Player::TAMBAH_PEMAIN(){
 /* Cheat Commands */
 
 void Player::SET(){
-    
+
     cout << "\nAtribut:" << endl;
     cout << "1. Money" << endl;
     cout << "2. Body Weight" << endl;
 
-    int choice;
+    string input;
     cout << "\nPilih (1-2): ";
-    cin >> choice;
+    cin >> input;
+
+    int choice = Util::stringToInt(input);
 
     if (choice == 1){
         cout << "Masukan jumlah uang: ";
-        cin >> this->money;
+        cin >> input;
+        this->money = Util::stringToInt(input);
     } else if (choice == 2){
         cout << "Masukan berat badan: ";
-        cin >> this->body_weight;
+        cin >> input;
+        this->body_weight = Util::stringToInt(input);
+    } else {
+        cout << "Gagal!\n" << endl;
+        return;
     }
 
     cout << "Sukses!\n" << endl;
 }
 
 void Player::GIVE(){
+
     if (this->inventory.isFull()){
         cout << "\nInventory penuh\n" << endl;
         return;
@@ -220,8 +232,15 @@ void Player::GIVE(){
     cout << "3. Product" << endl;
 
     int choice;
+    string input;
     cout << "\nPilih (1-3): ";
-    cin >> choice;
+    cin >> input;
+    choice = Util::stringToInt(input);
+
+    if (choice < 1 || choice > 3){
+        cout << "Gagal!\n" << endl;
+        return;
+    }
     Item* item;
 
     if (choice == 1){
@@ -230,7 +249,14 @@ void Player::GIVE(){
             cout << i+1 << ". " << GameConfig::plantConfig[i].getNAME() << endl;
         }
         cout << "\nPilih (1-" << GameConfig::plantConfig.size() << "): ";
-        cin >> choice;
+        cin >> input;
+        choice = Util::stringToInt(input);
+
+        if (choice < 0 || choice > int(GameConfig::plantConfig.size())){
+            cout << "Gagal!\n" << endl;
+            return;
+        }
+
         item = new Plant(choice);
 
     } else if (choice == 2){
@@ -239,8 +265,15 @@ void Player::GIVE(){
             cout << i+1 << ". " << GameConfig::animalConfig[i].getNAME() << endl;
         }
         cout << "\nPilih (1-" << GameConfig::animalConfig.size() << "): ";
-        cin >> choice;
-        item = new Plant(choice);
+        cin >> input;
+        choice = Util::stringToInt(input);
+
+        if (choice < 0 || choice > int(GameConfig::animalConfig.size())){
+            cout << "Gagal!\n" << endl;
+            return;
+        }
+
+        item = new Animal(choice);
 
     } else if (choice == 3){
         cout << "\nDaftar produk:" << endl;
@@ -248,7 +281,14 @@ void Player::GIVE(){
             cout << i+1 << ". " << GameConfig::productConfig[i].getNAME() << endl;
         }
         cout << "\nPilih (1-" << GameConfig::productConfig.size() << "): ";
-        cin >> choice;
+        cin >> input;
+        choice = Util::stringToInt(input);
+
+        if (choice < 0 || choice > int(GameConfig::productConfig.size())){
+            cout << "Gagal!\n" << endl;
+            return;
+        }
+
         item = new Product(choice);
     }
 

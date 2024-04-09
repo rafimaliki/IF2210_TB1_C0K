@@ -17,6 +17,7 @@ class Util {
 
         // A01 -> {0, 0}
         static vector<int> idxToInt(string idx);
+        static int stringToInt(string num);
 };
 
 #endif

@@ -25,6 +25,7 @@ public:
     static int player_count;
 
     Player(string name, int money, int body_weight);
+    virtual ~Player() = 0;
 
     void printStats();
     void printInventory();
@@ -40,6 +41,7 @@ public:
     virtual void addAnimal(Item* item);
 
     bool haveFood();
+    void eat(Item* food);
 
     virtual string getType();
     int getMoney();
