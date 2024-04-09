@@ -1,13 +1,12 @@
-// File: main.cpp
+#include "util.hpp"
 
-#include "std.hpp"
-#include "class/game/game.hpp"
-#include "class/gameobject/pemain/pemain.hpp"
-#include "class/gameobject/item/item.hpp"
-
-int main() {
-
+void Util::clearScreen() {
     cout << "\033[2J\033[1;1H";
+}
+
+void Util::printTitle(){
+
+    Util::clearScreen();
     cout << "\n                                                                                                      \n"
             " ██░ ██  ▄▄▄       ██▀███   ██▒   █▓▓█████   ██████ ▄▄▄█████▓    ███▄ ▄███▓ ▒█████   ▒█████   ███▄    █ \n"
             "▓██░ ██▒▒████▄    ▓██ ▒ ██▒▓██░   █▒▓█   ▀ ▒██    ▒ ▓  ██▒ ▓▒   ▓██▒▀█▀ ██▒▒██▒  ██▒▒██▒  ██▒ ██ ▀█   █ \n"
@@ -19,64 +18,74 @@ int main() {
             " ░  ░░ ░  ░   ▒     ░░   ░      ░░     ░   ░  ░  ░    ░         ░      ░   ░ ░ ░ ▒  ░ ░ ░ ▒     ░   ░ ░ \n"
             " ░  ░  ░      ░  ░   ░           ░     ░  ░      ░                     ░       ░ ░      ░ ░           ░ \n"
             "                                ░                                                                       \n";
-
-    Game game;
-    game.loadData();
-
-    
-
-    // Pemain player1("Rafi", 0);
-    // Pemain player2("Nicho", 1);
-    // Pemain player3("Hugo", 2);
-    // Pemain player4("Zaki", 3);
-    // Pemain player5("Onta", 4);
-
-    // // debugging
-    // player1.addHewan("sapi1");
-    // player1.addHewan("sapi2");
-    // player1.addHewan("sapi3");
-    // player1.addTumbuhan("rumput");
-    // player1.addProduk("ganja");
-    // player1.cetakItem();
-
-    // player2.addHewan("sapi4");
-    // player2.addHewan("sapi5");
-    // player2.addHewan("sapi6");
-    // player2.addTumbuhan("rumput");
-    // player2.addProduk("ganja");
-    // player2.cetakItem();
-
-
-
-    // while (true){
-    //     Pemain current_player = Pemain::getCurrentPlayer();
-    //     cout << "\n\033[0mGiliran player " << current_player.getName() << endl;
-
-    //     string command;
-
-    //     cout << "> \033[1;1m";
-    //     cin >> command;
-
-    //     if (command == "EXIT") {
-    //         break;
-    //     } else if (command == "NEXT"){
-    //         Pemain::nextPlayer();
-    //     } else {
-    //         cout << "\033[0mCommand not found!" << endl;
-    //     }
-
-    //     // player1.cetak_penyimpanan();
-    // };
-
-    // Game game;
-    // game.start()
-
-    // while(game.isrunning()){
-
-    //     game.getinput();
-    //     game.runcommand();
-
-    // }
-  
-    return 0;
 }
+
+vector<string> Util::split(string str, char delimiter) {
+
+   vector<string> splitted;
+   string temp = "";
+
+   int strLen = str.length();
+
+    for (int i = 0; i < strLen; i++) {
+         if (str[i] == delimiter) {
+              splitted.push_back(temp);
+              temp = "";
+         } else {
+              temp += str[i];
+         }
+    }
+
+    if (temp != "") {
+        splitted.push_back(temp);
+    }
+
+    return splitted;
+}
+
+bool Util::isNumber(char c) {
+    return (c >= '0' && c <= '9');
+}
+
+bool Util::isLetterLower(char c) {
+    return (c >= 'a' && c <= 'z');
+}
+
+bool Util::isLetterUpper(char c) {
+    return (c >= 'A' && c <= 'Z');
+}
+
+vector<int> Util::idxToInt(string idx) {
+    
+    int strLen = idx.length();
+    if (strLen < 3) {
+        throw InvalidIndexException();
+    }
+
+    if (!isLetterUpper(idx[0]) || !isNumber(idx[1])) {
+        throw InvalidIndexException();
+    }
+
+    char letter = idx[0];
+    string number = "";
+
+    for (int i = 1; i < strLen; i++) {
+        if (isNumber(idx[i])) {
+            number += idx[i];
+        } else {
+            throw InvalidIndexException();
+        }
+    }
+
+    vector<int> result;
+
+    try {
+        result.push_back(letter - 'A');
+        result.push_back(stoi(number)-1);
+    } catch (...) {
+        throw InvalidIndexException();
+    }
+   
+    return result;
+}
+

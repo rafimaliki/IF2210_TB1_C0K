@@ -31,6 +31,7 @@ class Item
 
         bool isFood();
         bool isPlant();
+        bool isAnimal();
 
 
 };

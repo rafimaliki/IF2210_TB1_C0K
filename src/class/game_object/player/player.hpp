@@ -2,9 +2,10 @@
 #define PLAYER_HPP
 
 #include "../../../std.hpp"
+#include "playerException.hpp"
 #include "inventory/inventory.hpp"
-#include "../item/item.hpp"
 
+#include "../item/item.hpp"
 #include "../item/plant/plant.hpp"
 #include "../item/animal/animal.hpp"
 #include "../item/product/product.hpp"

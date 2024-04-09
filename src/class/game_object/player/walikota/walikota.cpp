@@ -34,7 +34,7 @@ void Walikota::BANGUN(){  /* BELUM IMPLEMENTASI */
 }
 
 void Walikota::TAMBAH_PEMAIN(){  /* BELUM IMPLEMENTASI */
-    cout << YELLOW << "\nCommand TAMBAH_PEMAIN belum diimplementasikan!\n" << RESETstring << endl;
+    cout << YELLOW << "\nCommand TAMBAH_PEMAIN belum diimplementasikan!\n" << RESET << endl;
 }
 
 int Walikota::HITUNG_PAJAK(int idx){

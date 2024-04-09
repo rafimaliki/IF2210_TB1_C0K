@@ -38,9 +38,9 @@ void Plant::printKODE_HURUF(){
     if (this->isPlanted)
     {
         if (this->isReadyToHarvest()){
-            cout << GREEN << this->config->getKODE_HURUF() << RESETstring;
+            cout << GREEN << this->config->getKODE_HURUF() << RESET;
         } else {
-            cout << RED << this->config->getKODE_HURUF() << RESETstring;
+            cout << RED << this->config->getKODE_HURUF() << RESET;
         }
     } else {
         cout << this->config->getKODE_HURUF();

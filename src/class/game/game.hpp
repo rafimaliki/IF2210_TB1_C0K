@@ -2,6 +2,7 @@
 #define GAME_HPP
 
 #include "../../std.hpp"
+#include "../command/command.hpp"
 #include "../game_object/item_config/item_config.hpp"
 #include "../game_object/item/plant/plant.hpp"
 #include "../game_object/item/animal/animal.hpp"

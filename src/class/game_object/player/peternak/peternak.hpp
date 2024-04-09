@@ -6,7 +6,7 @@
 class Peternak : public Player {
 
     private:
-        Inventory<Item> peternakan; 
+        Inventory<Animal> peternakan; 
     public:
         Peternak(string name, int money, int body_weight);
 
@@ -16,13 +16,14 @@ class Peternak : public Player {
         // void jual();
 
         void printPeternakan();
-        void addAnimal(Item* item);
+        void addAnimal(Animal* item);
 
         /* Game command related methods */
         void CETAK_PETERNAKAN();
         void TERNAK();
         void KASIH_MAKAN();
         void PANEN();
+        void isPeternakanPenuh();
 
         string getType();
         // void MUAT();
