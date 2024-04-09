@@ -4,6 +4,7 @@
 int Toko::n_plant = 0;
 int Toko::n_animal = 0;
 int Toko::n_product = 0;
+int Toko::n_bangunan = 0;
 vector<TokoEntry> Toko::list_item;
 
 TokoEntry::TokoEntry()
@@ -49,8 +50,8 @@ void Toko::displayToko()
     {
         cout << n_plant + i + 1 << ". " << GameConfig::animalConfig[i].getNAME() << " - " << GameConfig::animalConfig[i].getPRICE() << endl;
     }
-    cout << "[========SECTION PRODUK======]" << endl;
-    for (int i = 0; i < n_product; i++)
+    cout << "[========SECTION PRODUK&BANGUNAN ======]" << endl;
+    for (int i = 0; i < n_product + n_bangunan; i++)
     {
         cout << n_animal + n_plant + 1 + i << ". " << list_item[i].getItem()->getNAME() << " - " << list_item[i].getItem()->getPRICE() << "(" << list_item[i].getAmount() << ")" << endl;
     }
@@ -66,33 +67,54 @@ bool Toko::checkValidItem(Item *item)
     }
     return false;
 }
+bool Toko::isInfiniteItem(Item *item)
+{
+    return (item->isAnimal() || item->isPlant());
+}
 void Toko::addItem(Item *item)
 {
-    if (Toko::checkValidItem(item))
+    if (!isInfiniteItem(item))
     {
-        for (int i = 0; i < list_item.size(); i++)
+        if (Toko::checkValidItem(item))
         {
-            if (list_item[i].getItem()->getKODE_HURUF() == item->getKODE_HURUF())
+            for (int i = 0; i < list_item.size(); i++)
             {
-                list_item[i].tambahAmount(1);
+                if (list_item[i].getItem()->getKODE_HURUF() == item->getKODE_HURUF())
+                {
+                    list_item[i].tambahAmount(1);
+                }
             }
         }
-    }
-    else
-    {
-        list_item.push_back(TokoEntry(item));
-        n_product++;
+        else
+        {
+            list_item.push_back(TokoEntry(item));
+            if (item->getTYPE() == "")
+            {
+                n_bangunan++;
+            }
+            else
+            {
+                n_product++;
+            }
+        }
     }
 }
 void Toko::deleteItem(int idx)
 {
     list_item.erase(list_item.begin() + idx);
-    n_product--;
+    if (list_item[idx].getItem()->getTYPE() == "")
+    {
+        n_bangunan--;
+    }
+    else
+    {
+        n_product--;
+    }
 }
 Item *Toko::beliItemToko(int i, int amount, int gulden)
 {
-    if (i > n_animal + n_plant + n_product || i <= 0)
-        throw NumberNotValid();
+    if (i > n_animal + n_plant + n_product + n_bangunan || i <= 0)
+        throw InvalidIndexException();
 
     if (i <= n_plant)
     { // tumbuhan (infinite)
@@ -124,7 +146,7 @@ Item *Toko::beliItemToko(int i, int amount, int gulden)
 }
 void Toko::checkEmptyItem()
 {
-    for (int i = 0; i < n_product; i++)
+    for (int i = 0; i < n_product + n_bangunan; i++)
     {
         if (list_item[i].getAmount() == 0)
         {

@@ -76,12 +76,15 @@ int main()
     // inv.add(a1);
 
     Item *i = new Product(1);
+    Item *b = new Bangunan(2);
 
     Toko::addItem(i);
     Toko::addItem(i);
     Toko::addItem(i);
     Toko::addItem(pr3);
     Toko::addItem(pr4);
+    Toko::addItem(b);
+    Toko::addItem(b);
     // Toko::displayToko();
 
     p1->setPlanted(true);

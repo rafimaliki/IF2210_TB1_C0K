@@ -1,5 +1,6 @@
 #include "player.hpp"
-
+#include <limits>    //perlu buat cin sama spasi
+#include <algorithm> //perlu buat cin sama spasi
 vector<Player *> Player::players;
 int Player::current_player_idx = 0;
 int Player::player_count = 0;
@@ -13,8 +14,6 @@ Player::Player(string name, int money, int body_weight) : id(Player::player_coun
     players.push_back(this);
     player_count++;
 }
-
-Player::~Player() {}
 
 Player::~Player() {}
 
@@ -82,15 +81,6 @@ bool Player::haveFood()
         }
     }
     return false;
-}
-
-void Player::eat(Item *food)
-{
-    if (!food->isFood())
-    {
-        throw NotFoodException();
-    }
-    this->body_weight += food->getADDED_WEIGHT();
 }
 
 void Player::eat(Item *food)
@@ -252,23 +242,24 @@ void Player::BELI()
                 cin >> nomor;
 
                 /*Handling tipe data*/
-                if (cin.fail())
-                {                // nomor bukan integer
-                    cin.clear(); // clear input buffer
-                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                    throw std::invalid_argument("Input salah! tolong integer ya!");
-                }
+                // if (cin.fail())
+                // {                // nomor bukan integer
+                //     cin.clear(); // clear input buffer
+                //     cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                //     throw std::invalid_argument("Input salah! tolong integer ya!");
+                // }
                 cout << "Kuantitas : ";
                 cin >> amount;
-                if (cin.fail())
-                {
-                    cin.clear();
-                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                    throw std::invalid_argument("Input salah! tolong integer ya!");
-                }
+                // if (cin.fail())
+                // {
+                //     cin.clear();
+                //     cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                //     throw std::invalid_argument("Input salah! tolong integer ya!");
+                // }
                 if (amount > this->inventory.calcEmptySpace())
                     throw InventorySizeNotValidException();
                 Item *beli = Toko::beliItemToko(nomor, amount, this->money);
+
                 /* Masih butuh handling restriksi pembelian , ex : walikota gk bisa beli bangunan
                 if (this.id == 1 && beli.isBangunan())
                     throw RoleNotValid();
@@ -284,25 +275,9 @@ void Player::BELI()
 
                 valid = true;
             }
-            catch (const InventorySizeNotValidException &e)
+            catch (...)
             {
-                cout << e.what() << endl;
-            }
-            catch (const std::invalid_argument &e)
-            {
-                cout << e.what() << endl;
-            }
-            catch (const NumberNotValid &e)
-            {
-                cout << e.what() << endl;
-            }
-            catch (const AmountNotValid &e)
-            {
-                cout << e.what() << endl;
-            }
-            catch (const GuldenInvalid &e)
-            {
-                cout << e.what() << " Ayo perbanyak gulden mu!" << endl;
+                cout << "Invalid input!" << endl;
             }
         }
     }
@@ -357,23 +332,30 @@ void Player::JUAL()
                             throw SlotEmptyException();
                     }
                 }
+                int total_money = 0;
 
                 for (int i = 0; i < finalslots.size(); i++)
                 {
-
                     Item *newitem = this->inventory.getItem(finalslots[i]);
+                    total_money += newitem->getPRICE();
                     Toko::addItem(newitem);
                     this->inventory.remove(finalslots[i]);
                 }
                 valid = true;
+                setMoney(this->money += total_money);
+                cout << "Barang anda berhasil terjual! Uang anda bertambah " << total_money << " gulden! gacor!!!" << endl;
             }
-            catch (const IndexNotValidException &e)
+            catch (InvalidIndexException &e)
             {
-                cout << e.what() << '\n';
+                cout << e.what() << endl;
             }
-            catch (const SlotEmptyException &e)
+            catch (GuldenInvalid &e)
             {
-                cout << e.what() << "\n";
+                cout << e.what() << endl;
+            }
+            catch (...)
+            {
+                cout << "Invalid input!" << '\n';
             }
         }
     }
