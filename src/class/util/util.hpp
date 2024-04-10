@@ -4,20 +4,22 @@
 #include "../../std.hpp"
 #include "utilException.hpp"
 
-class Util {
-    public:
-        static void clearScreen();
-        static void printTitle();
+class Util
+{
+public:
+    static void clearScreen();
+    static void printTitle();
 
-        static vector<string> split(string str, char delimiter = ' ');
+    static vector<string> split(string str, char delimiter = ' ');
 
-        static bool isNumber(char c);
-        static bool isLetterLower(char c);
-        static bool isLetterUpper(char c);
+    static bool isNumber(char c);
+    static bool isLetterLower(char c);
+    static bool isLetterUpper(char c);
+    static vector<string> inputMultiplePetak(const string &str);
 
-        // A01 -> {0, 0}
-        static vector<int> idxToInt(string idx);
-        static int stringToInt(string num);
+    // A01 -> {0, 0}
+    static vector<int> idxToInt(string idx);
+    static int stringToInt(string num);
 };
 
 #endif

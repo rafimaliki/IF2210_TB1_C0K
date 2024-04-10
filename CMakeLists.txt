@@ -16,6 +16,7 @@ set(SOURCE_FILES
     src/class/game_object/item/bangunan/bangunan.cpp
     src/class/game_object/item/product/product.cpp
     src/class/game_object/player/player.cpp
+    src/class/game_object/toko/toko.cpp
     src/class/game_object/player/walikota/walikota.cpp
     src/class/game_object/player/petani/petani.cpp
     src/class/game_object/player/peternak/peternak.cpp)

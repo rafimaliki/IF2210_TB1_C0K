@@ -1,12 +1,15 @@
 #include "game.hpp"
 
-Game::Game() {
+Game::Game()
+{
     this->is_running = false;
 }
 
-void Game::start() {
+void Game::start()
+{
 
-    try {
+    try
+    {
 
         loadConfig();
         Command::initCommand();
@@ -14,42 +17,52 @@ void Game::start() {
         Util::printTitle();
 
         string choice;
-        do {
+        do
+        {
             cout << "\nApakah Anda ingin memuat state? (Y/N): ";
             cin >> choice;
 
-            if (choice == "Y" or choice == "y"){
+            if (choice == "Y" or choice == "y")
+            {
                 Game::loadSaveFile();
-            } else {
+            }
+            else
+            {
                 Game::startNewGame();
             }
 
         } while (!(choice == "Y" or choice == "y") && !(choice == "N" or choice == "n"));
 
         this->is_running = true;
-
-    } catch (FailReadFileException &e) {
+    }
+    catch (FailReadFileException &e)
+    {
         cout << RED << e.what() << RESET << endl;
-    } catch (...) {
+    }
+    catch (...)
+    {
         cout << RED << "FAIL!" << RESET << endl;
     }
 }
 
-void Game::startNewGame(){
-    Player* walikota = new Walikota("Walikota", 50, 40);
-    Player* petani1 = new Petani("Pak Tani", 50, 40);
-    Player* peternak1 = new Peternak("Tukang Sapi", 50, 40);
+void Game::startNewGame()
+{
+    Player *walikota = new Walikota("Walikota", 50, 40);
+    Player *petani1 = new Petani("Pak Tani", 50, 40);
+    Player *peternak1 = new Peternak("Tukang Sapi", 50, 40);
 
     cout << "Memulai New Game!" << endl;
-    cout << "\nGiliran player " << Player::players[0]->getName() << endl; 
+    cout << "\nGiliran player " << Player::players[0]->getName() << endl;
 }
 
-void Game::loadConfig() {
+void Game::loadConfig()
+{
     // cout << "Loading config...\n" << endl;
     GameConfig::loadGameConfig();
 }
 
-void Game::loadSaveFile() {
+void Game::loadSaveFile()
+{
 
     cout << "Masukkan lokasi berkas state : ";
 
@@ -60,7 +73,8 @@ void Game::loadSaveFile() {
     Game::startNewGame();
 }
 
-string Game::inputCommand() {
+string Game::inputCommand()
+{
     string command;
     cout << BOLD << "> ";
     cin >> command;
@@ -68,32 +82,45 @@ string Game::inputCommand() {
     return command;
 }
 
-void Game::executeCommand(string command) {
+void Game::executeCommand(string command)
+{
 
-    if (command == "EXIT") {
+    if (command == "EXIT")
+    {
         this->is_running = false;
         return;
     }
-    
-    try {
+
+    try
+    {
         Command::execute(command);
-    } catch (NoPermissionException& e) {
-        cout << RED << e.what() << command << "\n" << RESET << endl;
-    } catch (InvalidCommandException& e) {
+    }
+    catch (NoPermissionException &e)
+    {
+        cout << RED << e.what() << command << "\n"
+             << RESET << endl;
+    }
+    catch (InvalidCommandException &e)
+    {
         cout << RED << e.what() << RESET << endl;
-    } catch (const exception& e){
+    }
+    catch (const exception &e)
+    {
         cout << e.what() << endl;
     }
 }
 
-void Game::checkWin() {
+void Game::checkWin()
+{
     // cout << "\nChecking win...\n" << endl;
 }
 
-void Game::printWinner() {
+void Game::printWinner()
+{
     cout << "Printing winner..." << endl;
 }
 
-bool Game::isRunning() {
+bool Game::isRunning()
+{
     return is_running;
 }
