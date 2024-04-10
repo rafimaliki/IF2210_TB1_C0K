@@ -11,7 +11,7 @@ Player::Player(string name, int money, int body_weight) : id(Player::player_coun
                                                           body_weight(body_weight),
                                                           inventory(GameConfig::miscConfig.getINVENTORY_SIZE()[0], GameConfig::miscConfig.getINVENTORY_SIZE()[1], "PENYIMPANAN")
 {
-    players.push_back(this);
+    addPlayer(this);
     player_count++;
 }
 
@@ -51,8 +51,7 @@ void Player::next()
     {
         current_player_idx = 0;
     }
-    cout << "Giliran player " << getCurrentPlayer()->name << endl
-         << endl;
+    cout << "Giliran player " << getCurrentPlayer()->name << endl << endl;
 }
 
 void Player::printLahan() {}
@@ -70,6 +69,22 @@ void Player::addAnimal(Item *item) {}
 void Player::addItem(Item *item)
 {
     this->inventory.add(item);
+}
+
+void Player::addPlayer(Player *player){
+    bool added = false, beforeCurr = false;
+    vector<Player*> newPlayerVec;
+    for (int i = 0; i < players.size(); i++){
+        if ((*player < players[i]) && (!added)){
+            newPlayerVec.push_back(player);
+            added = true;
+        }
+        newPlayerVec.push_back(players[i]);
+    }
+    if (!added){
+        newPlayerVec.push_back(player);
+    }
+    players = newPlayerVec;
 }
 
 bool Player::haveFood()
@@ -116,6 +131,20 @@ string Player::getName()
     return name;
 }
 
+string Player::convertLowercase(string str) {
+    string lowerCase = "";
+    int i = 0;
+    while (str[i] != '\0'){
+        if ((str[i] >= 'A') && (str[i] <= 'Z')){
+            lowerCase += str[i] + 32;
+        } else {
+            lowerCase += str[i];
+        }
+        i++;
+    }
+    return lowerCase;
+}
+
 /* Game command related methods */
 
 void Player::NEXT()
@@ -132,8 +161,7 @@ void Player::NEXT()
         current_player_idx = 0;
     }
 
-    cout << "Giliran player " << getCurrentPlayer()->name << endl
-         << endl;
+    cout << "Giliran player " << getCurrentPlayer()->name << endl << endl;
 }
 void Player::CETAK_PENYIMPANAN()
 {
@@ -415,6 +443,23 @@ void Player::SIMPAN()
 void Player::TAMBAH_PEMAIN()
 {
     throw NoPermissionException();
+}
+
+/* Operator overloading */
+bool Player::operator<(Player* other){
+    string currName = name;
+    currName = convertLowercase(currName);
+    string otherName = other->getName();
+    otherName = convertLowercase(otherName);
+    if (currName < otherName){
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool Player::operator>(Player* other){
+    return !(*this < other);
 }
 
 /* Cheat Commands */

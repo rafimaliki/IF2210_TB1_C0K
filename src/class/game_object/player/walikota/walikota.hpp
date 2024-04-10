@@ -1,7 +1,11 @@
 #ifndef WALIKOTA_HPP
 #define WALIKOTA_HPP
 
+#include <limits>
+#include <algorithm>
 #include "../player.hpp"
+#include "../petani/petani.hpp"
+#include "../peternak/peternak.hpp"
 #include "../../item/bangunan/bangunan.hpp"
 #include "walikotaexception.hpp"
 
@@ -28,6 +32,9 @@ class Walikota : public Player {
         void cancelUseMoney(int amount);
         void useIngredients(string nama, vector<Bangunan*> daftar_bangunan);
         void bangunBangunan(string nama, vector<Bangunan*> daftar_bangunan);
+        string inputJenisPemain();
+        string inputPemainBaru();
+        void addNewPlayer(string namaPemainBaru, string jenisPemainBaru);
 
         string getType();
 };
