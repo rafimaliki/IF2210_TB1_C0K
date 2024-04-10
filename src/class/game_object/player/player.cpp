@@ -145,13 +145,16 @@ void Player::MAKAN(){
     string slot;
     bool valid = false;
 
+    vector<int> idx;
+    Item* food;
+
     while (!valid){
         try {
             cout << "Slot: ";
             cin >> slot;
 
-            vector<int> idx = Util::idxToInt(slot);
-            Item* food = this->inventory.getItem(idx[0], idx[1]);
+            idx = Util::idxToInt(slot);
+            food = this->inventory.getItem(idx[0], idx[1]);
 
             this->eat(food);
 
