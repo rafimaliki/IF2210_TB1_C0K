@@ -112,12 +112,20 @@ void Game::executeCommand(string command)
 
 void Game::checkWin()
 {
-    // cout << "\nChecking win...\n" << endl;
+    int win_gold = GameConfig::miscConfig.getWIN_GOLD_NUMBER();
+    int win_weight = GameConfig::miscConfig.getWIN_WEIGHT_NUMBER();
+
+    if (Player::getCurrentPlayer()->getMoney() >= win_gold && Player::getCurrentPlayer()->getWeight() >= win_weight)
+    {
+        printWinner();
+        this->is_running = false;
+    }
 }
 
 void Game::printWinner()
 {
-    cout << "Printing winner..." << endl;
+    cout << "Player " << Player::getCurrentPlayer()->getName() << " menang!" << endl;
+    cout << "Mengakhiri permainan" << endl;
 }
 
 bool Game::isRunning()

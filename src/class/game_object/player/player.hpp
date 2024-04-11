@@ -49,6 +49,7 @@ public:
 
     virtual string getType();
     int getMoney();
+    int getWeight();
     void setMoney(int money);
     string getName();
 

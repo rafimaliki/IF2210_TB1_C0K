@@ -155,7 +155,7 @@ int main()
         // inv.printItem(0, 1);
 
         game.executeCommand(game.inputCommand());
-        game.checkWin();
+        // game.checkWin();
 
         /* Kalo win bakal ngubah state Running ke false dan set variabel winner : player& */
 
@@ -169,8 +169,6 @@ int main()
         //     GameConfig::recipeConfig[i].print();
         // }
     }
-
-    game.printWinner();
 
     return 0;
 }

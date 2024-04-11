@@ -106,6 +106,10 @@ int Player::getMoney()
     return money;
 }
 
+int Player::getWeight(){
+    return body_weight;
+}
+
 void Player::setMoney(int money)
 {
     this->money = money;
