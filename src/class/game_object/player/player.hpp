@@ -43,6 +43,7 @@ public:
     void addItem(Item *item);
     virtual void addPlant(Plant *item);
     virtual void addAnimal(Item *item);
+    void addPlayer(Player *player);
 
     bool haveFood();
     void eat(Item *food);
@@ -52,6 +53,7 @@ public:
     int getWeight();
     void setMoney(int money);
     string getName();
+    string convertLowercase(string str);
 
     /* Game command related methods */
     virtual void NEXT();
@@ -70,6 +72,10 @@ public:
     // virtual void MUAT();
     virtual void SIMPAN();
     virtual void TAMBAH_PEMAIN();
+
+    /* Operator overloading */
+    bool operator<(Player* other);
+    bool operator>(Player* other);
 
     /* Cheat Commands */
     virtual void SET();

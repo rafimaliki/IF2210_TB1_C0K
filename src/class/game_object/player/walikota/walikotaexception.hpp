@@ -24,5 +24,26 @@ class NotEnoughItemException : public exception {
         }
 };
 
+class InvalidPlayerTypeException : public exception {
+    public:
+        const char* what() const throw(){
+            return "Hanya boleh menambahkan pemain dengan tipe Petani/Peternak";
+        }
+};
+
+class EmptyNameException : public exception {
+    public:
+        const char* what() const throw(){
+            return "Nama pemain minimal 1 huruf!";
+        }
+};
+
+class InvalidPlayerNameException : public exception {
+    public:
+        const char* what() const throw(){
+            return "Pemain dengan nama tersebut sudah ada!";
+        }
+};
+
 
 #endif

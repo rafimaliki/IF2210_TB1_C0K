@@ -92,23 +92,23 @@ int main()
     p3->setPlanted(true);
     a1->setIsInCage(true);
 
-    Player::players[0]->addItem(pr1);
-    Player::players[0]->addItem(pr2);
+    Player::players[2]->addItem(pr1);
+    Player::players[2]->addItem(pr2);
     // Player::players[0]->addItem(pr3);
     // Player::players[0]->addItem(pr4);
     // Player::players[0]->addItem(pr5);
 
-    Player::players[1]->addPlant(p1);
-    Player::players[1]->addPlant(p2);
-    Player::players[1]->addPlant(p3);
-    Player::players[1]->addItem(p4);
+    Player::players[0]->addPlant(p1);
+    Player::players[0]->addPlant(p2);
+    Player::players[0]->addPlant(p3);
+    Player::players[0]->addItem(p4);
 
-    Player::players[2]->addAnimal(a1);
-    Player::players[2]->addItem(a2);
-    Player::players[2]->addItem(a3);
-    Player::players[2]->addItem(a4);
+    Player::players[1]->addAnimal(a1);
+    Player::players[1]->addItem(a2);
+    Player::players[1]->addItem(a3);
+    Player::players[1]->addItem(a4);
 
-    Player::players[1]->getLadang()->remove(0, 1);
+    Player::players[0]->getLadang()->remove(0, 1);
 
     // cout << GameConfig::recipeConfig[0].getNAME() << endl;
     // cout << GameConfig::recipeConfig[0].getINGREDIENTS()[0].getNAME() << endl;

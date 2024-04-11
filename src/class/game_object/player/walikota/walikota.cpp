@@ -65,7 +65,32 @@ void Walikota::BANGUN(){  /* BELUM IMPLEMENTASI */
 }
 
 void Walikota::TAMBAH_PEMAIN(){  /* BELUM IMPLEMENTASI */
-    cout << YELLOW << "\nCommand TAMBAH_PEMAIN belum diimplementasikan!\n" << RESET << endl;
+    bool valid;
+    string namaPemainBaru, jenisPemainBaru;
+
+    while (!valid){
+        try {
+            useMoney(50);
+            jenisPemainBaru = inputJenisPemain();
+            namaPemainBaru = inputPemainBaru();
+            addNewPlayer(namaPemainBaru, jenisPemainBaru);
+            cout << "Pemain baru ditambahkan!" << endl;
+            cout << "Selamat datang \"" << namaPemainBaru << "\" di kota ini!" << endl << endl;
+            valid = true;
+        } catch (NotEnoughMoneyException& e){
+            cout << e.what() << endl << endl;
+            valid = true;
+        } catch (InvalidPlayerTypeException& e){
+            cout << e.what() << endl << endl;
+            cancelUseMoney(50);
+        } catch (EmptyNameException& e){
+            cout << e.what() << endl << endl;
+            cancelUseMoney(50);
+        } catch (InvalidPlayerNameException& e){
+            cout << e.what() << endl << endl;
+            cancelUseMoney(50);
+        }
+    }
 }
 
 int Walikota::HITUNG_PAJAK(int idx){
@@ -241,6 +266,61 @@ void Walikota::bangunBangunan(string nama, vector<Bangunan*> daftar_bangunan){
     }
     Item* bangunanBaru = new Bangunan(idx + 1);
     addItem(bangunanBaru);
+}
+
+string Walikota::inputJenisPemain(){
+    string newPlayerType;
+    cout << "Masukkan jenis pemain: ";
+    cin >> newPlayerType;
+
+    newPlayerType = convertLowercase(newPlayerType);
+
+    if ((newPlayerType != "petani") && (newPlayerType != "peternak")){
+        throw InvalidPlayerTypeException();
+    }
+
+    return newPlayerType;
+}
+
+string Walikota::inputPemainBaru(){
+    string newPlayerName, copy, otherName;
+    cout << "Masukkan nama pemain: ";
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    getline(cin, newPlayerName);
+
+    if (newPlayerName == ""){
+        throw EmptyNameException();
+    }
+
+    copy = convertLowercase(newPlayerName);
+
+    for (int i = 0; i < players.size(); i++){
+        otherName = players[i]->getName();
+        otherName = convertLowercase(otherName);
+        if (copy == otherName){
+            throw InvalidPlayerNameException();
+        }
+    }
+
+    return newPlayerName;
+}
+
+void Walikota::addNewPlayer(string namaPemainBaru, string jenisPemainBaru){
+    int oldIdx = current_player_idx, newIdx;
+    if (jenisPemainBaru == "petani"){
+        Player* petaniBaru = new Petani(namaPemainBaru, 50, 40);
+    } else {
+        Player* peternakBaru = new Peternak(namaPemainBaru, 50, 40);
+    }
+    
+    for (int i = 0; i < players.size(); i++){
+        if (name == players[i]->getName()){
+            newIdx = i;
+        }
+    }
+    if (newIdx > oldIdx){
+        current_player_idx++;
+    }
 }
 
 string Walikota::getType(){
