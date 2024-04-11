@@ -18,6 +18,7 @@ public:
     static int plantCount;
 
     Plant(int ID);
+    Plant(int ID, int Age);
     // ~Plant();
     void print();
     ItemConfig* getConfig();
@@ -25,6 +26,8 @@ public:
     void printKODE_HURUF();
     bool isReadyToHarvest();
     string getTYPE();
+    void setAge(int Age);
+    int getAge();
 
     static void AgeAllPlants();
 

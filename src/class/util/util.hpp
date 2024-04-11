@@ -19,6 +19,7 @@ public:
 
     // A01 -> {0, 0}
     static vector<int> idxToInt(string idx);
+    static string IntToIdx(vector<int> idx);
     static int stringToInt(string num);
 };
 

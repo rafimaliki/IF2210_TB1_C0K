@@ -1,8 +1,8 @@
 #include "../../std.hpp"
 
-class FailReadFileException : public exception {
+class InvalidFileException : public exception {
     public:
         const char* what() const noexcept override {
-            return "FAIL!";
+            return "Invalid File Name\n";
         }
 };

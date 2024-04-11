@@ -8,166 +8,63 @@ int main()
     Game game;
     game.start();
 
-    /*
-    di dalam game.start() manggil
-        game.loadConfig();
-        game.loadSaveFile();
-        dan ngubah state Running ke true
-    */
 
-    cout << endl;
-    Plant *p1 = new Plant(1);
-    Item *p4 = new Plant(4);
+    /* players[0] = Petani1 */
 
-    Plant *p2 = new Plant(2);
-    Plant *p3 = new Plant(3);
-    Item *a1 = new Animal(1);
-    Item *a2 = new Animal(2);
-    Item *a3 = new Animal(3);
-    Item *a4 = new Animal(4);
+    Item* P0_a1 = new Plant(1); Player::players[0]->addItem(P0_a1);
+    Item* P0_a2 = new Plant(2); Player::players[0]->addItem(P0_a2);
+    Item* P0_a3 = new Plant(2); Player::players[0]->addItem(P0_a3);
+    Item* P0_a4 = new Plant(4); Player::players[0]->addItem(P0_a3);
 
-    Item *pr1 = new Product(1);
-    Item *pr2 = new Product(5);
-    Item *pr3 = new Product(6);
-    Item *pr4 = new Product(7);
-    Item *pr5 = new Product(17);
+    Plant* P0_a5 = new Plant(5, 7); P0_a5->setPlanted(true); Player::players[0]->addPlant(P0_a5);
+    Plant* P0_a6 = new Plant(5); P0_a6->setPlanted(true); Player::players[0]->addPlant(P0_a6);
+    Plant* P0_a7 = new Plant(7, 7); P0_a7->setPlanted(true); Player::players[0]->addPlant(P0_a7);
 
-    Item *bg1 = new Bangunan(1);
-    Item *bg2 = new Bangunan(2);
-    Item *bg3 = new Bangunan(3);
-    Item *bg4 = new Bangunan(4);
+    Item* P0_pr1 = new Product(1); Player::players[0]->addItem(P0_pr1);
+    Item* P0_pr2 = new Product(2); Player::players[0]->addItem(P0_pr2);
+    Item* P0_pr3 = new Product(3); Player::players[0]->addItem(P0_pr3);
+    Item* P0_b1 = new Bangunan(2); Player::players[0]->addItem(P0_b1);
 
-    // cout << "Id: " << p1->getID() << endl;
-    // cout << "Kode Huruf: " << p1->getKODE_HURUF() << endl;
-    // cout << "Nama: " << p1->getNAME() << endl;
-    // cout << "Harga: " << p1->getPRICE() << endl;
-    // cout << "Tipe: " << p1->getTYPE() << endl;
-    // cout << "Durasi Panen: " << p1->getDURATION_TO_HARVEST() << endl;
-    // cout << endl;
-    // cout << "Id: " << a1->getID() << endl;
-    // cout << "Kode Huruf: " << a1->getKODE_HURUF() << endl;
-    // cout << "Nama: " << a1->getNAME() << endl;
-    // cout << "Harga: " << a1->getPRICE() << endl;
-    // cout << "Tipe: " << a1->getTYPE() << endl;
-    // cout << "Berat harvest: " << a1->getWEIGHT_TO_HARVEST() << endl;
-    // cout << endl;
-    // cout << "Id: " << pr1->getID() << endl;
-    // cout << "Kode Huruf: " << pr1->getKODE_HURUF() << endl;
-    // cout << "Nama: " << pr1->getNAME() << endl;
-    // cout << "Harga: " << pr1->getPRICE() << endl;
-    // cout << "Tipe: " << pr1->getTYPE() << endl;
-    // cout << "Origin: " << pr1->getORIGIN() << endl;
-    // cout << "Added Weight: " << pr1->getADDED_WEIGHT() << endl;
 
-    // TOKO
+    /* Players[1] = Peternak1 */
 
-    // PETANI BELI TUMBUHAN ID 1
+    Item* p1_a1 = new Animal(1); Player::players[1]->addItem(p1_a1);
+    Item* p1_a2 = new Animal(2); Player::players[1]->addItem(p1_a2);
+    Item* p1_a3 = new Animal(2); Player::players[1]->addItem(p1_a3);
+    Item* p1_a4 = new Animal(4); Player::players[1]->addItem(p1_a3);
 
-    // item* p = new Plant(1); -> masukin ke Inventory Petani
+    Animal* p1_a5 = new Animal(5); p1_a5->setIsInCage(true); Player::players[1]->addAnimal(p1_a5);
+    Animal* p1_a6 = new Animal(5, 15); p1_a6->setIsInCage(true); Player::players[1]->addAnimal(p1_a6);
+    Animal* p1_a7 = new Animal(7, 15); p1_a7->setIsInCage(true); Player::players[1]->addAnimal(p1_a7);
 
-    // saat petani mau TANAM
+    Item* p1_pr1 = new Product(6); Player::players[1]->addItem(p1_pr1);
+    Item* p1_pr2 = new Product(7); Player::players[1]->addItem(p1_pr2);
+    Item* p1_pr3 = new Product(16); Player::players[1]->addItem(p1_pr3);
+    Item* p1_b1 = new Bangunan(1); Player::players[1]->addItem(p1_b1);
 
-    // get id = 1
-    // plant* p = new Plant(1); -> masukin ke ladang
 
-    // Inventory<Item> inv(GameConfig::miscConfig.INVENTORY_sIZE[0], GameConfig::miscConfig.INVENTORY_sIZE[1], "PENYIMPANAN");
-    // Inventory<Item> inv(5, 5, "PENYIMPANAN");
-    // inv.add(p1);
-    // inv.add(a1);
+    /* Players[2] = Walikota */
 
-    Item *i = new Product(1);
-    Item *b = new Bangunan(2);
+    Item* p2_pr1 = new Product(4); Player::players[2]->addItem(p2_pr1);
+    Item* p2_pr2 = new Product(5); Player::players[2]->addItem(p2_pr2);
+    Item* p2_pr3 = new Product(8); Player::players[2]->addItem(p2_pr3);
+    Item* p2_b1 = new Bangunan(3); Player::players[2]->addItem(p2_b1);
+    Item* p2_b2 = new Bangunan(4); Player::players[2]->addItem(p2_b2);
 
-    Toko::addItem(i);
-    Toko::addItem(i);
-    Toko::addItem(i);
-    Toko::addItem(pr3);
-    Toko::addItem(pr4);
-    Toko::addItem(b);
-    Toko::addItem(b);
-    // Toko::displayToko();
 
-    p1->setPlanted(true);
-    p2->setPlanted(true);
-    p3->setPlanted(true);
-    a1->setIsInCage(true);
+    /* Toko */
 
-    Player::players[2]->addItem(pr1);
-    Player::players[2]->addItem(pr2);
-    // Player::players[0]->addItem(pr3);
-    // Player::players[0]->addItem(pr4);
-    // Player::players[0]->addItem(pr5);
-
-    Player::players[0]->addPlant(p1);
-    Player::players[0]->addPlant(p2);
-    Player::players[0]->addPlant(p3);
-    Player::players[0]->addItem(p4);
-
-    Player::players[1]->addAnimal(a1);
-    Player::players[1]->addItem(a2);
-    Player::players[1]->addItem(a3);
-    Player::players[1]->addItem(a4);
-
-    Player::players[0]->getLadang()->remove(0, 1);
-
-    // cout << GameConfig::recipeConfig[0].getNAME() << endl;
-    // cout << GameConfig::recipeConfig[0].getINGREDIENTS()[0].getNAME() << endl;
-    // cout << GameConfig::recipeConfig[0].getINGREDIENTS()[0].getQUANTITY() << endl;
-
-    // bg1->print();
-    // bg2->print();
-    // bg3->print();
-    // bg4->print();
+    Item* t_p1 = new Product(1); Toko::addItem(t_p1);
+    Item* t_p2 = new Product(1); Toko::addItem(t_p2);
+    Item* t_p3 = new Product(2); Toko::addItem(t_p3);
+    Item* t_p4 = new Bangunan(4); Toko::addItem(t_p4);
 
     while (game.isRunning())
-    {
+    {   
+        string command = game.inputCommand();
+        game.executeCommand(command);
 
-        // cout << "is food: " << pr1->isFood() << endl;
-        // cout << "is food: " << pr2->isFood() << endl;
-        // cout << "is food: " << pr3->isFood() << endl;
-
-        // pr1->print();
-        // pr2->print();
-        // pr3->print();
-
-        // Player::players[1]->getLadang()->printItem(0, 0);
-        // Player::players[1]->getLadang()->getItem("A01")->print();
-        // Player::players[1]->getLadang()->getItem("B01")->print();
-        // Player::players[1]->getLadang()->print();
-
-        /*
-                            NOTES
-            Khusus plant dan animal perlu atribut tambahan yang membedakan apakah
-            dia udah di tanam/peternakan atau di inventory doang
-
-            Kalo di tanam/peternakan, dia bakal nge-age/bisa dikasi makan setiap turn
-            Kalo di inventory, dia gbs nge-age/dikasi makan
-        */
-
-        // Plant::plants[0]->print();
-        // cout << endl;
-        // Plant::plants[1]->print();
-
-        // inv.print();
-        // cout << "\nInventory[0,0]: " << endl;
-        // inv.printItem(0, 0);
-        // cout << "\nInventory[0,1]: " << endl;
-        // inv.printItem(0, 1);
-
-        game.executeCommand(game.inputCommand());
-        // game.checkWin();
-
-        /* Kalo win bakal ngubah state Running ke false dan set variabel winner : player& */
-
-        /*
-           Tes print config dari main
-           Semua file yang include item_config.hpp harusnya bisa akses ini
-        */
-
-        // cout << "\n\x1b[32mRECIPE Config: \x1b[0m\n" << endl;
-        // for (int i = 0; i < int(GameConfig::recipeConfig.size()) ; i++){
-        //     GameConfig::recipeConfig[i].print();
-        // }
+        game.checkWin();
     }
 
     return 0;

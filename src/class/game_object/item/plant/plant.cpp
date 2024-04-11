@@ -10,6 +10,13 @@ Plant::Plant(int ID) : Item(), config(&GameConfig::plantConfig[ID-1]) {
     Plant::plantCount++;
 }
 
+Plant::Plant(int ID, int Age) : Item(), config(&GameConfig::plantConfig[ID-1]) {
+    this->Age = Age;
+    this->isPlanted = false;
+    Plant::plants.push_back(this);
+    Plant::plantCount++;
+}
+
 void Plant::print(){
     this->config->print();
     cout << "AGE: " << this->Age << endl;
@@ -53,4 +60,12 @@ bool Plant::isReadyToHarvest(){
 
 string Plant::getTYPE(){
     return this->config->getTYPE();
+}
+
+void Plant::setAge(int Age){
+    this->Age = Age;
+}
+
+int Plant::getAge(){
+    return this->Age;
 }

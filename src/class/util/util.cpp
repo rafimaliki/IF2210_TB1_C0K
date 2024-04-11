@@ -19,7 +19,7 @@ void Util::printTitle()
             " ▒ ░▒░ ░  ▒   ▒▒ ░  ░▒ ░ ▒░   ░ ░░   ░ ░  ░░ ░▒  ░ ░    ░       ░  ░      ░  ░ ▒ ▒░   ░ ▒ ▒░ ░ ░░   ░ ▒░\n"
             " ░  ░░ ░  ░   ▒     ░░   ░      ░░     ░   ░  ░  ░    ░         ░      ░   ░ ░ ░ ▒  ░ ░ ░ ▒     ░   ░ ░ \n"
             " ░  ░  ░      ░  ░   ░           ░     ░  ░      ░                     ░       ░ ░      ░ ░           ░ \n"
-            "                                ░                                                                       \n";
+            "                                ░                                                                       \n" << endl;
 }
 
 vector<string> Util::split(string str, char delimiter)
@@ -126,6 +126,19 @@ vector<int> Util::idxToInt(string idx)
     {
         throw InvalidIndexException();
     }
+
+    return result;
+}
+
+string Util::IntToIdx(vector<int> idx)
+{
+    string result = "";
+
+    result += (char)(idx[1] + 'A');
+    if (idx[0] <= 8){
+        result += "0";
+    }
+    result += to_string(idx[0] + 1);
 
     return result;
 }

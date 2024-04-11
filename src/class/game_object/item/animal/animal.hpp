@@ -18,6 +18,7 @@ public:
     static int animalCount;
 
     Animal(int ID);
+    Animal(int ID, int weight);
     // ~Animal();
     void print();
     ItemConfig* getConfig();
@@ -27,6 +28,7 @@ public:
 
     void Feed(Item* product);
     int getWeight();
+    void setWeight(int weight);
 };
 
 

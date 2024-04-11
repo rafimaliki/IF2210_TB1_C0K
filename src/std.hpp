@@ -8,12 +8,16 @@
 #include <map>
 #include <exception>
 #include <algorithm>
+#include <fstream>
 
+using std::ifstream;
+using std::getline;
 using std::cout;
 using std::cin;
 using std::endl;
 using std::vector;
 using std::string;
+using std::to_string;
 using std::array;
 using std::map;
 using std::exception;

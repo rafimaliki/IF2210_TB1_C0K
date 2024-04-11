@@ -58,6 +58,8 @@ public:
     bool isEmpty(int j, int i);
     bool isEmpty(string idx);
 
+    int count();
+
     T *getItem(int i, int j);
     T *getItem(string idx);
 
@@ -288,6 +290,24 @@ bool Inventory<T>::isEmpty(string idx)
     {
         throw IndexNotValidException();
     }
+}
+
+template <class T>
+int Inventory<T>::count()
+{
+    int count = 0;
+
+    for (int i = 0; i < this->height; i++)
+    {
+        for (int j = 0; j < this->width; j++)
+        {
+            if (!this->isEmpty(i, j))
+            {
+                count++;
+            }
+        }
+    }
+    return count;
 }
 
 template <class T>

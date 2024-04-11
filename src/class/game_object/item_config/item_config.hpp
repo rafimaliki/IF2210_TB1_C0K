@@ -2,7 +2,7 @@
 #define ITEM_CONFIG_HPP
 
 #include "../../../std.hpp"
-#include "../../muat/config_reader.hpp"
+#include "../../muat/file_reader.hpp"
 
 class Ingredient {
     private:
@@ -110,19 +110,19 @@ class MiscConfig {
         int WIN_GOLD_NUMBER;
         int WIN_WEIGHT_NUMBER;
         array<int, 2> INVENTORY_SIZE;
-        array<int, 2> LAHAN_SIZE;
+        array<int, 2> LADANG_SIZE;
         array<int, 2> PETERNAKAN_SIZE;
 
     public:
         MiscConfig();
-        MiscConfig(int WIN_GOLD_NUMBER, int WIN_WEIGHT_NUMBER, array<int, 2> INVENTORY_SIZE, array<int, 2> LAHAN_SIZE, array<int, 2> PETERNAKAN_SIZE);
+        MiscConfig(int WIN_GOLD_NUMBER, int WIN_WEIGHT_NUMBER, array<int, 2> INVENTORY_SIZE, array<int, 2> LADANG_SIZE, array<int, 2> PETERNAKAN_SIZE);
         static MiscConfig ReadMiscConfig(vector<vector<string>> Config);
         void print();
 
         int getWIN_GOLD_NUMBER();
         int getWIN_WEIGHT_NUMBER();
         array<int, 2> getINVENTORY_SIZE();
-        array<int, 2> getLadang_SIZE();
+        array<int, 2> getLADANG_SIZE();
         array<int, 2> getPETERNAKAN_SIZE();
 };
 

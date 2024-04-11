@@ -10,6 +10,13 @@ Animal::Animal(int ID) : Item(), config(&GameConfig::animalConfig[ID-1]) {
     Animal::animalCount++;
 }
 
+Animal::Animal(int ID, int weight) : Item(), config(&GameConfig::animalConfig[ID-1]) {
+    this->weight = weight;
+    this->isInCage = false;
+    Animal::animals.push_back(this);
+    Animal::animalCount++;
+}
+
 void Animal::print(){
     this->config->print();
     cout << "WEIGHT: " << this->weight << endl;
@@ -45,4 +52,8 @@ void Animal::Feed(Item* product){
 
 int Animal::getWeight(){
     return this->weight;
+}
+
+void Animal::setWeight(int weight){
+    this->weight = weight;
 }

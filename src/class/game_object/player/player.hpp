@@ -42,7 +42,7 @@ public:
 
     void addItem(Item *item);
     virtual void addPlant(Plant *item);
-    virtual void addAnimal(Item *item);
+    virtual void addAnimal(Animal *item);
     void addPlayer(Player *player);
 
     bool haveFood();

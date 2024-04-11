@@ -223,11 +223,11 @@ vector<Ingredient> RecipeConfig::getINGREDIENTS(){
 MiscConfig::MiscConfig(){
 }
 
-MiscConfig::MiscConfig(int WIN_GOLD_NUMBER, int WIN_WEIGHT_NUMBER, array<int, 2> INVENTORY_SIZE, array<int, 2> LAHAN_SIZE, array<int, 2> PETERNAKAN_SIZE){
+MiscConfig::MiscConfig(int WIN_GOLD_NUMBER, int WIN_WEIGHT_NUMBER, array<int, 2> INVENTORY_SIZE, array<int, 2> LADANG_SIZE, array<int, 2> PETERNAKAN_SIZE){
     this->WIN_GOLD_NUMBER = WIN_GOLD_NUMBER;
     this->WIN_WEIGHT_NUMBER = WIN_WEIGHT_NUMBER;
     this->INVENTORY_SIZE = INVENTORY_SIZE;
-    this->LAHAN_SIZE = LAHAN_SIZE;
+    this->LADANG_SIZE = LADANG_SIZE;
     this->PETERNAKAN_SIZE = PETERNAKAN_SIZE;
 }
 
@@ -240,7 +240,7 @@ void MiscConfig::print(){
     cout << "WIN_GOLD_NUMBER: " << this->WIN_GOLD_NUMBER << endl;
     cout << "WIN_WEIGHT_NUMBER: " << this->WIN_WEIGHT_NUMBER << endl;
     cout << "INVENTORY_SIZE: " << this->INVENTORY_SIZE[0] << "x" << this->INVENTORY_SIZE[1] << endl;
-    cout << "LAHAN_SIZE: " << this->LAHAN_SIZE[0] << "x" << this->LAHAN_SIZE[1] << endl;
+    cout << "LADANG_SIZE: " << this->LADANG_SIZE[0] << "x" << this->LADANG_SIZE[1] << endl;
     cout << "PETERNAKAN_SIZE: " << this->PETERNAKAN_SIZE[0] << "x" << this->PETERNAKAN_SIZE[1] << endl;
 }
 
@@ -256,8 +256,8 @@ array<int, 2> MiscConfig::getINVENTORY_SIZE(){
     return this->INVENTORY_SIZE;
 }
 
-array<int, 2> MiscConfig::getLadang_SIZE(){
-    return this->LAHAN_SIZE;
+array<int, 2> MiscConfig::getLADANG_SIZE(){
+    return this->LADANG_SIZE;
 }
 
 array<int, 2> MiscConfig::getPETERNAKAN_SIZE(){
@@ -280,74 +280,51 @@ void GameConfig::loadGameConfig(){
 
     string SUCCESS = GREEN + "SUCCES!\n" + RESET; 
 
-    // Tambah try catch disini untuk setiap config file
-
-
     /* Animal Config */
 
     cout << "\nReading Animal Config ";
-    ConfigReader animal_config("config/animal.txt");
+    FileReader animal_config("config/animal.txt");
 
     vector<vector<string>> animal_Config = animal_config.readConfig();
     GameConfig::setAnimalConfig(AnimalConfig::ReadAnimalConfig(animal_Config));
     
-    // cout << "\n\x1b[32mANIMAL Config: \x1b[0m\n" << endl;
-    // for (int i = 0; i < int(GameConfig::animalConfig.size()) ; i++){
-    //     GameConfig::animalConfig[i].print();
-    // }
     cout << SUCCESS;
-
 
     /* Plant Config */
     cout << "Reading Plant Config ";
-    ConfigReader plant_config("config/plant.txt");
+    FileReader plant_config("config/plant.txt");
 
     vector<vector<string>> plant_Config = plant_config.readConfig();
     GameConfig::setPlantConfig(PlantConfig::ReadPlantConfig(plant_Config));
 
-    // cout << "\n\x1b[32mPLANT Config: \x1b[0m\n" << endl;
-    // for (int i = 0; i < int(GameConfig::plantConfig.size()) ; i++){
-    //     GameConfig::plantConfig[i].print();
-    // }
     cout << SUCCESS;
 
 
     /* Product Config */
     cout << "Reading Product Config ";
-    ConfigReader product_config("config/product.txt");
+    FileReader product_config("config/product.txt");
 
     vector<vector<string>> product_Config = product_config.readConfig();
 
     GameConfig::setProductConfig(ProductConfig::ReadProductConfig(product_Config));
 
-    // cout << "\n\x1b[32mPRODUCT Config: \x1b[0m\n" << endl;
-    // for (int i = 0; i < int(GameConfig::productConfig.size()) ; i++){
-    //     GameConfig::productConfig[i].print();
-    // }
     cout << SUCCESS;
 
     /* Recipe Config */
     cout << "Reading Recipe Config ";
-    ConfigReader recipe_config("config/recipe.txt");
+    FileReader recipe_config("config/recipe.txt");
 
     vector<vector<string>> recipe_Config = recipe_config.readConfig();
     GameConfig::setRecipeConfig(RecipeConfig::ReadRecipeConfig(recipe_Config));
 
-    // cout << "\n\x1b[32mRECIPE Config: \x1b[0m\n" << endl;
-    // for (int i = 0; i < int(GameConfig::recipeConfig.size()) ; i++){
-    //     GameConfig::recipeConfig[i].print();
-    // }
     cout << SUCCESS;
 
     /* Misc Config */
     cout << "Reading Misc Config ";
-    ConfigReader misc_config("config/misc.txt");
+    FileReader misc_config("config/misc.txt");
 
     vector<vector<string>> misc_Config = misc_config.readConfig();
     GameConfig::setMiscConfig(MiscConfig::ReadMiscConfig(misc_Config));
-
-    // cout << "\n\x1b[32mMISC Config: \x1b[0m\n" << endl;
-    // GameConfig::miscConfig.print();
 
     cout << SUCCESS;
 }

@@ -12,6 +12,7 @@
 #include "../game_object/player/walikota/walikota.hpp"
 #include "../game_object/player/petani/petani.hpp"
 #include "../game_object/player/peternak/peternak.hpp"
+#include "../simpan/simpan.hpp"
 
 class Game
 {
@@ -29,6 +30,7 @@ public:
     void loadConfig();
     void loadSaveFile();
     void startNewGame();
+    void saveGame();
 
     string inputCommand();
     void executeCommand(string command);

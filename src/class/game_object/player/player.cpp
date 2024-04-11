@@ -65,7 +65,7 @@ Inventory<Animal> *Player::getPeternakan()
     return nullptr;
 }
 void Player::addPlant(Plant *item) {}
-void Player::addAnimal(Item *item) {}
+void Player::addAnimal(Animal *item) {}
 void Player::addItem(Item *item)
 {
     this->inventory.add(item);
@@ -370,7 +370,7 @@ void Player::JUAL()
 {
     if (this->inventory.calcEmptySpace() == this->inventory.height * this->inventory.width)
     {
-        cout << "Lu miskin gk punya apa apa di inventory, mau jual apa" << endl;
+        cout << "Inventory kamu kosong" << endl;
     }
     else
     {

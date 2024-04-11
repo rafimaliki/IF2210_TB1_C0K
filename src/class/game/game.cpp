@@ -19,14 +19,14 @@ void Game::start()
         string choice;
         do
         {
-            cout << "\nApakah Anda ingin memuat state? (Y/N): ";
+            cout << "Apakah Anda ingin memuat state? (Y/N): ";
             cin >> choice;
 
             if (choice == "Y" or choice == "y")
             {
                 Game::loadSaveFile();
             }
-            else
+            else if (choice == "N" or choice == "n")
             {
                 Game::startNewGame();
             }
@@ -48,16 +48,15 @@ void Game::start()
 void Game::startNewGame()
 {
     Player *walikota = new Walikota("Walikota", 50, 40);
-    Player *petani1 = new Petani("Pak Tani", 50, 40);
-    Player *peternak1 = new Peternak("Tukang Sapi", 50, 40);
+    Player *petani1 = new Petani("Petani1", 50, 40);
+    Player *peternak1 = new Peternak("Peternak1", 50, 40);
 
     cout << "Memulai New Game!" << endl;
-    cout << "\nGiliran player " << Player::players[0]->getName() << endl;
+    cout << "\nGiliran player " << Player::players[0]->getName() << endl << endl;
 }
 
 void Game::loadConfig()
 {
-    // cout << "Loading config...\n" << endl;
     GameConfig::loadGameConfig();
 }
 
@@ -83,16 +82,17 @@ string Game::inputCommand()
 }
 
 void Game::executeCommand(string command)
-{
-
-    if (command == "EXIT")
-    {
-        this->is_running = false;
-        return;
-    }
-
+{   
     try
     {
+        if (command == "EXIT") {
+            this->is_running = false;
+            return;
+        } else if (command == "SIMPAN") {
+            Simpan::saveGame();
+            this->is_running = false;
+            return;
+        }
         Command::execute(command);
     }
     catch (NoPermissionException &e)

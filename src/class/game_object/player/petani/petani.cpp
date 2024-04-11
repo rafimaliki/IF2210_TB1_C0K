@@ -6,7 +6,7 @@
 using namespace std;
 
 Petani::Petani(string name, int money, int body_weight) : Player(name, money, body_weight)
-, lahan(GameConfig::miscConfig.getLadang_SIZE()[0], GameConfig::miscConfig.getLadang_SIZE()[1], "LADANG"){}
+, lahan(GameConfig::miscConfig.getLADANG_SIZE()[0], GameConfig::miscConfig.getLADANG_SIZE()[1], "LADANG"){}
 
 void Petani::printLahan(){
     this->lahan.print();

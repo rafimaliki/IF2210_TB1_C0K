@@ -1,6 +1,1 @@
-clear &&
-cd build && 
-cmake .. && 
-make && 
-cd .. && 
-./bin/main
+clear && cd build && cmake .. && make && cd .. && ./bin/main
