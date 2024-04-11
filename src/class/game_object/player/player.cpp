@@ -87,6 +87,19 @@ void Player::addPlayer(Player *player){
     players = newPlayerVec;
 }
 
+int Player::getWealth(){
+    int totalWealth = money;
+    for (int i = 0; i < inventory.height; i++){
+        for (int j = 0; j < inventory.width; j++){
+            if (!inventory.isEmpty(i, j)){
+                totalWealth += inventory.getItem(i, j)->getPRICE();
+            }
+        }
+    }
+
+    return totalWealth;
+}
+
 bool Player::haveFood()
 {
     for (int i = 0; i < GameConfig::miscConfig.getINVENTORY_SIZE()[0]; i++)

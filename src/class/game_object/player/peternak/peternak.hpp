@@ -13,6 +13,7 @@ class Peternak : public Player {
         void printPeternakan();
         void addAnimal(Animal* item);
         Inventory<Animal>* getPeternakan();
+        int getWealth();
 
         /* Game command related methods */
         void CETAK_PETERNAKAN();

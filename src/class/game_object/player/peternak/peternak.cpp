@@ -19,6 +19,19 @@ Inventory<Animal>* Peternak::getPeternakan(){
     return &this->peternakan;
 }
 
+int Peternak::getWealth(){
+    int totalWealth = Player::getWealth();
+    for (int i = 0; i < peternakan.height; i++){
+        for (int j = 0; j < peternakan.width; j++){
+            if (!peternakan.isEmpty(i, j)){
+                totalWealth += peternakan.getItem(i, j)->getPRICE();
+            }
+        }
+    }
+
+    return totalWealth;
+}
+
 /* Game command related methods */
 
 void Peternak::CETAK_PETERNAKAN(){  

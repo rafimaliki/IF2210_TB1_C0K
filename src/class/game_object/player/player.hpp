@@ -44,6 +44,7 @@ public:
     virtual void addPlant(Plant *item);
     virtual void addAnimal(Animal *item);
     void addPlayer(Player *player);
+    virtual int getWealth();
 
     bool haveFood();
     void eat(Item *food);
