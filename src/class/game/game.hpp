@@ -13,6 +13,7 @@
 #include "../game_object/player/petani/petani.hpp"
 #include "../game_object/player/peternak/peternak.hpp"
 #include "../simpan/simpan.hpp"
+#include "../muat/muat.hpp"
 
 class Game
 {
@@ -27,10 +28,7 @@ public:
     Game();
 
     void start();
-    void loadConfig();
-    void loadSaveFile();
     void startNewGame();
-    void saveGame();
 
     string inputCommand();
     void executeCommand(string command);

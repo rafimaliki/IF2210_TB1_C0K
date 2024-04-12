@@ -31,7 +31,7 @@ bool Simpan::isValidName(){
         return false;
     }
 
-    ofstream file;
+    ifstream file;
     file.open(filename);
 
     // cek folder valid dengan cara membuka file
@@ -176,7 +176,7 @@ void Simpan::saveGame()
 {   
     string filename;
 
-    cout << "\nMasukkan Masukkan lokasi berkas state : ";
+    cout << "\nMasukkan lokasi berkas state : ";
     cin >> filename;
 
     Simpan simpan(filename);

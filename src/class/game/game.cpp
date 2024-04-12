@@ -11,7 +11,7 @@ void Game::start()
     try
     {
 
-        loadConfig();
+        GameConfig::loadGameConfig();
         Command::initCommand();
 
         Util::printTitle();
@@ -23,8 +23,14 @@ void Game::start()
             cin >> choice;
 
             if (choice == "Y" or choice == "y")
-            {
-                Game::loadSaveFile();
+            {   
+                try {
+                    Muat::loadSaveFile();
+                    
+                } catch (FailReadFileException &e) {
+                    cout << RED << e.what() << RESET << endl;
+                }
+                Game::startNewGame();
             }
             else if (choice == "N" or choice == "n")
             {
@@ -55,22 +61,6 @@ void Game::startNewGame()
     cout << "\nGiliran player " << Player::players[0]->getName() << endl << endl;
 }
 
-void Game::loadConfig()
-{
-    GameConfig::loadGameConfig();
-}
-
-void Game::loadSaveFile()
-{
-
-    cout << "Masukkan lokasi berkas state : ";
-
-    string lokasi;
-    cin >> lokasi;
-
-    cout << "\nFile tidak ditemukan!" << endl;
-    Game::startNewGame();
-}
 
 string Game::inputCommand()
 {

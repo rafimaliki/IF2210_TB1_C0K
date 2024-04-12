@@ -5,11 +5,11 @@
 #include "file_readerException.hpp"
 
 class FileReader {
-private:
+protected:
     string filename;
 public:
     FileReader(const string& filename);
-    vector<vector<string>> readConfig();
+    vector<vector<string>> readFile();
 };
 
 #endif

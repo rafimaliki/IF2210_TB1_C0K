@@ -285,7 +285,7 @@ void GameConfig::loadGameConfig(){
     cout << "\nReading Animal Config ";
     FileReader animal_config("config/animal.txt");
 
-    vector<vector<string>> animal_Config = animal_config.readConfig();
+    vector<vector<string>> animal_Config = animal_config.readFile();
     GameConfig::setAnimalConfig(AnimalConfig::ReadAnimalConfig(animal_Config));
     
     cout << SUCCESS;
@@ -294,7 +294,7 @@ void GameConfig::loadGameConfig(){
     cout << "Reading Plant Config ";
     FileReader plant_config("config/plant.txt");
 
-    vector<vector<string>> plant_Config = plant_config.readConfig();
+    vector<vector<string>> plant_Config = plant_config.readFile();
     GameConfig::setPlantConfig(PlantConfig::ReadPlantConfig(plant_Config));
 
     cout << SUCCESS;
@@ -304,7 +304,7 @@ void GameConfig::loadGameConfig(){
     cout << "Reading Product Config ";
     FileReader product_config("config/product.txt");
 
-    vector<vector<string>> product_Config = product_config.readConfig();
+    vector<vector<string>> product_Config = product_config.readFile();
 
     GameConfig::setProductConfig(ProductConfig::ReadProductConfig(product_Config));
 
@@ -314,7 +314,7 @@ void GameConfig::loadGameConfig(){
     cout << "Reading Recipe Config ";
     FileReader recipe_config("config/recipe.txt");
 
-    vector<vector<string>> recipe_Config = recipe_config.readConfig();
+    vector<vector<string>> recipe_Config = recipe_config.readFile();
     GameConfig::setRecipeConfig(RecipeConfig::ReadRecipeConfig(recipe_Config));
 
     cout << SUCCESS;
@@ -323,7 +323,7 @@ void GameConfig::loadGameConfig(){
     cout << "Reading Misc Config ";
     FileReader misc_config("config/misc.txt");
 
-    vector<vector<string>> misc_Config = misc_config.readConfig();
+    vector<vector<string>> misc_Config = misc_config.readFile();
     GameConfig::setMiscConfig(MiscConfig::ReadMiscConfig(misc_Config));
 
     cout << SUCCESS;

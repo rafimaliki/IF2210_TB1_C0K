@@ -2,7 +2,7 @@
 
 FileReader::FileReader(const string& filename) : filename(filename) {}
 
-vector<vector<string>> FileReader::readConfig() {
+vector<vector<string>> FileReader::readFile() {
     
     vector<vector<string>> lines;
 
