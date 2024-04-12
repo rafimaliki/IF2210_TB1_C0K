@@ -59,21 +59,17 @@ void Peternak::CETAK_PETERNAKAN(){
 
 }
 void Peternak::TERNAK(){ 
-    // Cek apakah peternakan penuh
     try{
         this->isPeternakanPenuh();
+        this->isAnimalEmpty();
     } catch (PeternakanPenuhException& e){
         cout << RED << e.what() << RESET <<endl;
         return;
-    }
-    // Cek apakah ada hewan di inventory
-    try{
-        this->isAnimalEmpty();
-    } catch (InventoryNoFoodException& e){
+    }catch (InventoryNoFoodException& e){
         cout << RED << e.what() << RESET <<endl;
         return;
     }
-
+    
     cout << "Pilih hewan dari penyimpanan" << endl << endl;
 
     this->inventory.print();
