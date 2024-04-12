@@ -65,10 +65,19 @@ void Toko::displayToko()
     }
     else
     {
-        cout << setw(3) << "No" << setw(20) << "Nama" << setw(10) << "Harga" << setw(15) << "Jumlah" << endl;
+    
+        int maxNameWidth = 0;
         for (int i = 0; i < n_product + n_bangunan; i++)
         {
-            cout << setw(3) << n_animal + n_plant + 1 + i << setw(20) << list_item[i].getItem()->getNAME() << setw(10) << list_item[i].getItem()->getPRICE() << "(" << setw(3) << list_item[i].getAmount() << ")" << endl;
+            int nameWidth = list_item[i].getItem()->getNAME().size();
+            if (nameWidth > maxNameWidth)
+                maxNameWidth = nameWidth;
+        }
+
+        cout << setw(3) << "No" << setw(maxNameWidth + 5) << "Nama" << setw(10) << "Harga" << setw(10) << "Jumlah" << endl;
+        for (int i = 0; i < n_product + n_bangunan; i++)
+        {
+            cout << setw(3) << n_animal + n_plant + 1 + i << setw(maxNameWidth + 5) << list_item[i].getItem()->getNAME() << setw(10) << list_item[i].getItem()->getPRICE() << setw(10) << "(" << list_item[i].getAmount() << ")" << endl;
         }
     }
 }
