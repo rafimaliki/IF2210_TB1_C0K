@@ -312,9 +312,10 @@ void Player::BELI()
                     throw RoleNotValid();
                 Item *beli = Toko::beliItemToko(nomor, amount, this->money);
                 this->money -= (amount * beli->getPRICE());
+                this->inventory.print();
                 cout << "Selamat Anda berhasil membeli " << amount << " " << beli->getNAME() << ". Uang Anda tersisa " << this->money << " gulden. " << endl;
                 cout << "Pilih slot untuk menyimpan barang yang Anda beli!" << endl;
-                this->inventory.print();
+
 
                 /*Sesi Pemilihan Petak*/
                 bool petak_valid = false;
@@ -327,7 +328,7 @@ void Player::BELI()
                         cout << "Petak: ";
                         getline(cin, slotstring);
                         vector<string> result_petak = Util::inputMultiplePetak(slotstring);
-                        bool valid_slot = true; // Atur menjadi true agar masuk ke loop pertama
+                        bool valid_slot = true; 
                         while (result_petak.size() != amount || valid_slot)
                         {
                             valid_slot = false;
@@ -369,6 +370,9 @@ void Player::BELI()
             }
             catch (GuldenInvalid &e)
             {
+                cout << e.what() << endl;
+            }
+            catch(InventorySizeNotValidException &e){
                 cout << e.what() << endl;
             }
             catch (...)

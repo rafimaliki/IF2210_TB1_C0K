@@ -1,4 +1,5 @@
 #include "toko.hpp"
+#include <iomanip> // Untuk setw()
 
 // Define the static members
 int Toko::n_plant = 0;
@@ -40,20 +41,35 @@ void Toko::displayToko()
     Toko::n_plant = GameConfig::plantConfig.size();
     Toko::n_animal = GameConfig::animalConfig.size();
 
-    cout << "[=======SECTION TUMBUHAN======]" << endl;
+
+    cout << "[============ SECTION TUMBUHAN ============]" << endl;
+    cout << setw(3) << "No" << setw(20) << "Nama" << setw(10) << "Harga" << endl;
     for (int i = 0; i < n_plant; i++)
     {
-        cout << i + 1 << ". " << GameConfig::plantConfig[i].getNAME() << " - " << GameConfig::plantConfig[i].getPRICE() << endl;
+        cout << setw(3) << i + 1 << setw(20) << GameConfig::plantConfig[i].getNAME() << setw(10) << GameConfig::plantConfig[i].getPRICE() << endl;
     }
-    cout << "[========SECTION HEWAN======]" << endl;
+
+
+    cout << "[============ SECTION HEWAN ============]" << endl;
+    cout << setw(3) << "No" << setw(20) << "Nama" << setw(10) << "Harga" << endl;
     for (int i = 0; i < n_animal; i++)
     {
-        cout << n_plant + i + 1 << ". " << GameConfig::animalConfig[i].getNAME() << " - " << GameConfig::animalConfig[i].getPRICE() << endl;
+        cout << setw(3) << n_plant + i + 1 << setw(20) << GameConfig::animalConfig[i].getNAME() << setw(10) << GameConfig::animalConfig[i].getPRICE() << endl;
     }
-    cout << "[========SECTION PRODUK&BANGUNAN ======]" << endl;
-    for (int i = 0; i < n_product + n_bangunan; i++)
+
+    
+    cout << "[============ SECTION PRODUK&BANGUNAN ============]" << endl;
+    if (n_product + n_bangunan <= 0)
     {
-        cout << n_animal + n_plant + 1 + i << ". " << list_item[i].getItem()->getNAME() << " - " << list_item[i].getItem()->getPRICE() << "(" << list_item[i].getAmount() << ")" << endl;
+        cout << BLUE << " - Belum ada stok produk maupun bangunan di toko - " << RESET << endl;
+    }
+    else
+    {
+        cout << setw(3) << "No" << setw(20) << "Nama" << setw(10) << "Harga" << setw(15) << "Jumlah" << endl;
+        for (int i = 0; i < n_product + n_bangunan; i++)
+        {
+            cout << setw(3) << n_animal + n_plant + 1 + i << setw(20) << list_item[i].getItem()->getNAME() << setw(10) << list_item[i].getItem()->getPRICE() << "(" << setw(3) << list_item[i].getAmount() << ")" << endl;
+        }
     }
 }
 bool Toko::checkValidItem(Item *item)

@@ -60,7 +60,7 @@ PlantConfig::PlantConfig(int ID, string KODE_HURUF, string NAME, string TYPE, in
 vector<PlantConfig> PlantConfig::ReadPlantConfig(vector<vector<string>> Config){
     vector<PlantConfig> plantConfig;
     for (const auto& row : Config) {
-        PlantConfig plant(stoi(row[0]), row[1], row[2], row[3], stoi(row[4]), stoi(row[5]));
+        PlantConfig plant(stoi(row[0]), row[1], row[2], row[3], stoi(row[5]), stoi(row[4]));
         plantConfig.push_back(plant);
     }
     return plantConfig;
@@ -93,7 +93,7 @@ AnimalConfig::AnimalConfig(int ID, string KODE_HURUF, string NAME, string TYPE, 
 vector<AnimalConfig> AnimalConfig::ReadAnimalConfig(vector<vector<string>> Config){
     vector<AnimalConfig> animalConfig;
     for (const auto& row : Config) {
-        AnimalConfig animal(stoi(row[0]), row[1], row[2], row[3], stoi(row[4]), stoi(row[5]));
+        AnimalConfig animal(stoi(row[0]), row[1], row[2], row[3], stoi(row[5]), stoi(row[4]));
         animalConfig.push_back(animal);
     }
     return animalConfig;
