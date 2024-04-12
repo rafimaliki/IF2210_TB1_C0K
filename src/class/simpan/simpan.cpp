@@ -135,7 +135,7 @@ string Simpan::convertTokoToString()
         temp_result += Toko::list_item[i].getItem()->getNAME() + " " + to_string(Toko::list_item[i].getAmount()) + "\n";
     }
 
-    result += to_string(count) + "\n" + temp_result;
+    result += to_string(count_toko_entry) + "\n" + temp_result;
 
     return result;
 }

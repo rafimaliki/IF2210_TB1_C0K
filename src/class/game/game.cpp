@@ -10,13 +10,14 @@ void Game::start()
 
     try
     {
-
         GameConfig::loadGameConfig();
         Command::initCommand();
 
         Util::printTitle();
 
         string choice;
+        bool valid = false;
+        
         do
         {
             cout << "Apakah Anda ingin memuat state? (Y/N): ";
@@ -24,20 +25,27 @@ void Game::start()
 
             if (choice == "Y" or choice == "y")
             {   
-                try {
+                try 
+                {
                     Muat::loadSaveFile();
-                    
-                } catch (FailReadFileException &e) {
+                    cout << "Giliran player " << Player::players[0]->getName() << endl << endl;
+                } catch (FailReadFileException &e)
+                {
                     cout << RED << e.what() << RESET << endl;
                 }
-                Game::startNewGame();
+                catch (...)
+                {
+                    cout << RED << "FAIL!" << RESET << endl;
+                }
+                valid = true;
             }
             else if (choice == "N" or choice == "n")
             {
                 Game::startNewGame();
+                valid = true;
             }
 
-        } while (!(choice == "Y" or choice == "y") && !(choice == "N" or choice == "n"));
+        } while ((!(choice == "Y" or choice == "y") && !(choice == "N" or choice == "n")) || !valid);
 
         this->is_running = true;
     }

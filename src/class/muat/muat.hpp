@@ -24,6 +24,8 @@ class Muat : public FileReader {
         string getFilename();
         static void loadSaveFile();
         void spawnObject();
+
+        static string composeName(vector<string>);
 };
 
 

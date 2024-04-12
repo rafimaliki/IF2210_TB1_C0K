@@ -134,11 +134,11 @@ string Util::IntToIdx(vector<int> idx)
 {
     string result = "";
 
-    result += (char)(idx[1] + 'A');
-    if (idx[0] <= 8){
+    result += (char)(idx[0] + 'A');
+    if (idx[1] <= 8){
         result += "0";
     }
-    result += to_string(idx[0] + 1);
+    result += to_string(idx[1] + 1);
 
     return result;
 }
