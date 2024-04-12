@@ -232,7 +232,7 @@ MiscConfig::MiscConfig(int WIN_GOLD_NUMBER, int WIN_WEIGHT_NUMBER, array<int, 2>
 }
 
 MiscConfig MiscConfig::ReadMiscConfig(vector<vector<string>> Config){
-    MiscConfig miscConfig(stoi(Config[0][0]), stoi(Config[1][0]), {stoi(Config[2][0]), stoi(Config[2][1])}, {stoi(Config[3][0]), stoi(Config[3][1])}, {stoi(Config[4][0]), stoi(Config[4][1])});
+    MiscConfig miscConfig(stoi(Config[0][0]), stoi(Config[1][0]), {stoi(Config[2][1]), stoi(Config[2][0])}, {stoi(Config[3][1]), stoi(Config[3][0])}, {stoi(Config[4][1]), stoi(Config[4][0])});
     return miscConfig;
 }
 

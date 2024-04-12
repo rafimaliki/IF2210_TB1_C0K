@@ -31,7 +31,7 @@ bool Simpan::isValidName(){
         return false;
     }
 
-    ifstream file;
+    ofstream file;
     file.open(filename);
 
     // cek folder valid dengan cara membuka file

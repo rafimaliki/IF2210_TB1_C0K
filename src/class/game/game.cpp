@@ -28,6 +28,7 @@ void Game::start()
                 try 
                 {
                     Muat::loadSaveFile();
+                    valid = true;
                     cout << "Giliran player " << Player::players[0]->getName() << endl << endl;
                 } catch (FailReadFileException &e)
                 {
@@ -37,7 +38,6 @@ void Game::start()
                 {
                     cout << RED << "FAIL!" << RESET << endl;
                 }
-                valid = true;
             }
             else if (choice == "N" or choice == "n")
             {
