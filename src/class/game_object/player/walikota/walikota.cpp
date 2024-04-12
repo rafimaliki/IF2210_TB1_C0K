@@ -95,16 +95,8 @@ void Walikota::TAMBAH_PEMAIN(){  /* BELUM IMPLEMENTASI */
 
 int Walikota::HITUNG_PAJAK(int idx){
     int tax;
-    int wealth = players[idx]->getMoney();
-    Inventory<Item>* playerInventory = players[idx]->getInventory();
-    // Loop setiap inventory pemain
-    for (int i = 0; i < playerInventory->height; i++){
-        for (int j = 0; j < playerInventory->width; j++){
-            if (!playerInventory->isEmpty(i, j)){
-                wealth += playerInventory->getItem(i, j)->getPRICE();
-            }
-        }
-    }
+    int wealth = players[idx]->getWealth();
+    cout << "Kekayaan player " << players[idx]->getName() << " adalah " << wealth << " gulden." << endl;
 
     int KKP = wealth;
     if (players[idx]->getType() == "Petani"){

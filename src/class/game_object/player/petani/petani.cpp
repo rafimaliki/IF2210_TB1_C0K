@@ -20,6 +20,19 @@ Inventory<Plant>* Petani::getLadang(){
     return &this->lahan;
 }
 
+int Petani::getWealth(){
+    int totalWealth = Player::getWealth();
+    for (int i = 0; i < lahan.height; i++){
+        for (int j = 0; j < lahan.width; j++){
+            if (!lahan.isEmpty(i, j)){
+                totalWealth += lahan.getItem(i, j)->getPRICE();
+            }
+        }
+    }
+
+    return totalWealth;
+}
+
 /* Game command related methods */
 
 void Petani::CETAK_LADANG(){
