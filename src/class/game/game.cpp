@@ -13,11 +13,9 @@ void Game::start(){
         Game::loadGameData();
 
         this->is_running = true;
-
     } catch (FailReadFileException &e) { 
         Util::printColor(e.what(), RED);
-    }
-     catch (InvalidDataException &e) {
+    } catch (InvalidDataException &e) {
         Util::printColor(e.what(), RED);
     }
 }
@@ -49,14 +47,11 @@ void Game::executeCommand(){
         } else {
             Command::execute(this->command);
         }
-    }
-    catch (NoPermissionException &e){   
+    } catch (NoPermissionException &e){   
         Util::printColor(e.what() + this->command + "\n", RED); cout << endl;
-    }
-    catch (InvalidCommandException &e){   
+    } catch (InvalidCommandException &e){   
         Util::printColor(e.what(), RED); cout << endl;
-    }
-    catch (const exception &e){
+    } catch (const exception &e){
         cout << e.what() << endl;
     }
 }
@@ -89,8 +84,7 @@ void Game::loadGameData(){
         cout << "Apakah Anda ingin memuat state? (Y/N): ";
         cin >> choice;
 
-        if (choice == "Y" or choice == "y")
-        {   
+        if (choice == "Y") {   
             try {
                 Muat::loadSaveFile();
                 valid = true;
@@ -99,11 +93,9 @@ void Game::loadGameData(){
             } catch (const exception &e){
                 Util::printColor(e.what(), RED);
             }
-        }
-        else if (choice == "N" or choice == "n") {
+        } else if (choice == "N") {
             Game::startNewGame();
             valid = true;
         }
-
-    } while ((!(choice == "Y" or choice == "y") && !(choice == "N" or choice == "n")) || !valid);
+    } while ((!(choice == "Y") && !(choice == "N")) || !valid);
 }
