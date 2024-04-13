@@ -35,9 +35,6 @@ public:
     void printWinner();
 
     bool isRunning();
-
-    /* MUAT */ /* BELUM IMPLEMENTASI */
-               // void MUAT();
 };
 
 #endif
