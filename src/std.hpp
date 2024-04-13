@@ -10,6 +10,8 @@
 #include <algorithm>
 #include <fstream>
 #include <utility>
+#include <cctype>
+#include <limits>
 
 using std::ifstream;
 using std::ofstream;
