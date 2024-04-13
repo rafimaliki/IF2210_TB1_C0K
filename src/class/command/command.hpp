@@ -4,6 +4,8 @@
 #include "../../std.hpp"
 #include "commandException.hpp"
 #include "../game_object/player/player.hpp"
+#include "../game/game.hpp"
+#include "../file/simpan/simpan.hpp"
 
 class Command {
     private:

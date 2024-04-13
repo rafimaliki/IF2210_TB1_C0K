@@ -208,60 +208,38 @@ void Player::BANGUN()
 {
     throw NoPermissionException();
 }
-void Player::MAKAN()
-{
-
-    if (!this->haveFood())
-    {
+void Player::MAKAN() {
+    if (!this->haveFood()) {
         throw DontHaveFoodException();
     }
 
     cout << "Pilih makanan dari penyimpanan" << endl;
     this->inventory.print();
 
-    string msg = "Silahkan masukan slot yang berisi makanan.\n";
-
-    string slot;
+    string slot, msg = "Silahkan masukan slot yang berisi makanan.\n";
     bool valid = false;
-
-    vector<int> idx;
     Item *food;
 
-    while (!valid)
-    {
-        try
-        {
+    while (!valid) {
+        try {
             cout << "Slot: ";
             cin >> slot;
 
-            idx = Util::idxToInt(slot);
-            food = this->inventory.getItem(idx[0], idx[1]);
-
+            food = this->inventory.getItem(slot);
             this->eat(food);
 
             cout << "\nDengan lahapnya, kamu memakanan hidangan itu" << endl;
-            cout << "Alhasil, berat badan kamu naik menjadi " << this->body_weight << endl
-                 << endl;
+            cout << "Alhasil, berat badan kamu naik menjadi " << this->body_weight << endl << endl;
 
-            this->inventory.remove(idx[0], idx[1]);
-
+            this->inventory.remove(slot);
             valid = true;
-        }
-        catch (InvalidIndexException &e)
-        {
-            cout << RED << e.what() << RESET << endl;
-        }
-        catch (IsEmptySlotException &e)
-        {
-            cout << endl
-                 << e.what() << endl
-                 << msg << endl;
-        }
-        catch (NotFoodException &e)
-        {
-            cout << endl
-                 << e.what() << endl
-                 << msg << endl;
+
+        } catch (InvalidIndexException &e){
+            cout << RED << e.what() << RESET << endl << endl;
+        } catch (IsEmptySlotException &e) {
+            cout << endl << e.what() << endl << msg << endl;
+        } catch (NotFoodException &e) { 
+            cout << endl << e.what() << endl << msg << endl;
         }
     }
 }
