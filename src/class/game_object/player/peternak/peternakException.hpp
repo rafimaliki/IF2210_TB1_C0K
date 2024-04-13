@@ -1,6 +1,6 @@
 #include "../../../../std.hpp"
 
-// class IndexNotValidException : public exception {
+// class InvalidIndexException : public exception {
 // public:
 //     const char* what() const noexcept override {
 //         return "Index not valid";

@@ -99,7 +99,7 @@ void Petani::TANAM(){
                 cin >> slot;
             }
             valid = true;
-        } catch (IndexNotValidException& e){
+        } catch (InvalidIndexException& e){
             cout << RED << e.what() << RESET << endl << endl; ;
         }
     }
@@ -137,7 +137,7 @@ void Petani::TANAM(){
                 cin >> slot_tanah;
             }
             valid = true;
-        } catch (IndexNotValidException& e){
+        } catch (InvalidIndexException& e){
             cout << RED << e.what() << RESET << endl << endl; ;
         }
     }

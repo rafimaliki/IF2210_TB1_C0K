@@ -5,7 +5,7 @@ class InvalidIndexException : public exception
 public:
     const char *what() const noexcept override
     {
-        return "Invalid Index!\n";
+        return "Invalid Index!";
     }
 };
 

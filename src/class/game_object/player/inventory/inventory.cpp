@@ -76,7 +76,7 @@ void Inventory<T>::add(T *item, int i, int j)
 {
     if (i >= this->height || j >= this->width || i < 0 || j < 0)
     {
-        throw IndexNotValidException();
+        throw InvalidIndexException();
     }
     else if (!this->isEmpty(i, j))
     {
@@ -100,7 +100,7 @@ void Inventory<T>::remove(int i, int j)
 {
     if (i >= this->height || j >= this->width || i < 0 || j < 0)
     {
-        throw IndexNotValidException();
+        throw InvalidIndexException();
     }
     else if (this->isEmpty(i, j))
     {
@@ -198,7 +198,7 @@ void Inventory<T>::printItem(int i, int j)
 {   
     if (i >= this->height || j >= this->width || i < 0 || j < 0)
     {
-        throw IndexNotValidException();
+        throw InvalidIndexException();
     }
     else if (this->isEmpty(i, j))
     {
@@ -212,7 +212,7 @@ bool Inventory<T>::isEmpty(int i, int j)
 {   
     if (i >= this->height || j >= this->width || i < 0 || j < 0)
     {
-        throw IndexNotValidException();
+        throw InvalidIndexException();
     }
 
     return this->grid[i][j].getAmount() == 0;
@@ -273,7 +273,7 @@ T *Inventory<T>::getItem(int i, int j)
 {
     if (i >= this->height || j >= this->width || i < 0 || j < 0)
     {
-        throw IndexNotValidException();
+        throw InvalidIndexException();
     }
     else if (this->isEmpty(i, j))
     {

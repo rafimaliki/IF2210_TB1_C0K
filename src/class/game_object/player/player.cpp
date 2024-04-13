@@ -358,7 +358,7 @@ void Player::BELI()
                         petak_valid = true;
                         cout << GREEN << "Sukses!" << RESET << endl;
                     }
-                    catch (IndexNotValidException &e)
+                    catch (InvalidIndexException &e)
                     {
                         cout << e.what() << endl;
                     }
