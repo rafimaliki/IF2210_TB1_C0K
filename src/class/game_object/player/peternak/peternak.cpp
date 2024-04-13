@@ -167,65 +167,7 @@ void Peternak::KASIH_MAKAN(){
     
 
     // Pilih petak tanah
-
-    string slot_tanah;
-    bool valid = false;
-    
-    CETAK_PETERNAKAN();
-    
-    bool herbivore_food = isOnlyHerbivoreFood();
-
-    bool carnivore_food = isOnlyCarnivoreFood();
-    while (!valid){
-        try {
-
-            cout << "Petak kandang: ";
-            cin >> slot_tanah;
-            bool flag = false;
-            // cek flag sebelum mulai loop
-            if(!this->peternakan.isEmpty(slot_tanah)){
-                string tipe = this->peternakan.getItem(slot_tanah)->getTYPE();
-
-                if (tipe == "OMNIVORE" && (herbivore_food || carnivore_food)){
-                    flag = true;
-                } else if (tipe == "HERBIVORE" && herbivore_food){
-                    flag = true;
-                } else if (tipe == "CARNIVORE" && carnivore_food){
-                    flag = true;
-                }
-            }
-
-            while (this->peternakan.isEmpty(slot_tanah) || !flag){
-                if(!this->peternakan.isEmpty(slot_tanah)){
-                    string tipe = this->peternakan.getItem(slot_tanah)->getTYPE();
-
-                    if (!(tipe == "HERBIVORE" && herbivore_food)){
-                        cout << "\nHewan ini herbivora dan hanya ada makanan karnivora di inventory" << endl;
-                        cout << "Silahkan masukan petak tanah yang benar" << endl;
-                        cout << "\nPetak tanah: ";
-                        cin >> slot_tanah;
-                    } else if (!(tipe == "CARNIVORE" && carnivore_food)){
-                        cout << "\nHewan ini karnivora dan hanya ada makanan herbivora di inventory" << endl;
-                        cout << "Silahkan masukan petak tanah yang benar" << endl;
-                        cout << "\nPetak tanah: ";
-                        cin >> slot_tanah;
-                    }else{
-                        flag = true;
-                    }
-                }else{
-                    cout << "\n Petak itu tidak ada hewannya" << endl;
-                    
-                    cout << "Silahkan masukan petak tanah yang ada hewannya" << endl;
-
-                    cout << "\nPetak tanah: ";
-                    cin >> slot_tanah;
-                }
-            }
-            valid = true;
-        } catch (InvalidIndexException& e){
-            cout << RED << e.what() << RESET << endl << endl; ;
-        }
-    }
+    string slot_tanah = inputSlotTanahKasihMakan();
 
     // Pilih hewan
     Animal* animal = this->peternakan.getItem(slot_tanah);
@@ -236,73 +178,18 @@ void Peternak::KASIH_MAKAN(){
     string animal_type = animal->getTYPE();
     
     // Mencari tipe makanan untuk hewan
-    string food_type;
-    if(animal_type == "HERBIVORE"){
-        food_type = "PRODUCT_FRUIT_PLANT";
-    }else{
-        food_type = "PRODUCT_ANIMAL";
-    }
-    this->inventory.print();
-    string slot;
-    valid = false;
+    string food_type = checkAnimalFoodType(animal_type);
 
-    while (!valid){
-        try {
+    // Input slot makanan dari inventory
+    string slot = inputSlotInventoryKasihMakan(animal_type,food_type);
 
-            cout << "Slot: ";
-            cin >> slot;
-            bool flag = false;
-            // cek flag sebelum mulai loop
-            if(!this->inventory.isEmpty(slot) && animal_type == "OMNIVORE" && this->inventory.getItem(slot)->isFood()){
-                flag = true;
-            }else if(!this->inventory.isEmpty(slot) && this->inventory.getItem(slot)->getTYPE() == food_type){
-                flag = true;
-            }
-            
-            while (this->inventory.isEmpty(slot) || !this->inventory.getItem(slot)->isFood() || !flag){
-                if (this->inventory.isEmpty(slot)){
-                    cout << "\nKamu mengambil harapan kosong dari penyimpanan." << endl;
-                    cout << "Silahkan masukan slot berisi makanan dari penyimpanan." << endl;
 
-                    cout << "\nSlot: ";
-                    cin >> slot;
-                } else if(!this->inventory.getItem(slot)->isFood()){
-                    cout << "\nBerbahaya jika kamu memberi makan ternak kamu dengan itu" << endl;
-                    cout << "Silahkan masukan slot berisi makanan yang benar." << endl;
-
-                    cout << "\nSlot: ";
-                    cin >> slot;
-                }else if(animal_type != "OMNIVORE"){
-                    if (this->inventory.getItem(slot)->getTYPE() != food_type){
-                        cout << "\nHewan ini tidak bisa makan itu" << endl;
-                        cout << "Silahkan masukan slot berisi makanan yang benar." << endl;
-
-                        cout << "\nSlot: ";
-                        cin >> slot;
-                    }else{
-                        flag = true;
-                    }
-                }else{
-                    flag = true;
-                }
-            }
-            valid = true;
-        } catch (InvalidIndexException& e){
-            cout << RED << e.what() << RESET << endl << endl; ;
-        }
-    }
-    
     Product* food = new Product(this->inventory.getItem(slot)->getConfig()->getID());
     this->inventory.remove(slot);
 
-
     // Kasih makan ternak
     animal->Feed(food);
-
-
     cout << animal->getNAME() << " sudah diberi makan dan beratnya menjadi " << animal->getWeight() << endl;
-
-    
 }
 
 
@@ -559,8 +446,8 @@ void Peternak::isInventoryMemadai(int n){
 }
 
 void Peternak::isAnimalFoodEmpty(){
-    bool herbivore_food = isOnlyHerbivoreFood();
-    bool carnivore_food = isOnlyCarnivoreFood();
+    bool herbivore_food = isHerbivoreFoodReady();
+    bool carnivore_food = isCarnivoreFoodReady();
 
     bool herbivore = false;
     bool carnivore = false;
@@ -588,33 +475,186 @@ void Peternak::isAnimalFoodEmpty(){
     } else if (carnivore_food && !herbivore_food && !carnivore && !omnivore && herbivore){
         throw HerbivoreAnimalDontHaveFood();
     }
-
 }
 
-bool Peternak::isOnlyHerbivoreFood(){
+bool Peternak::isHerbivoreFoodReady(){
     for(int i = 0; i < this->inventory.getHeight(); i++){
         for(int j = 0; j < this->inventory.getWidth(); j++){
             if (!this->inventory.isEmpty(i, j)){
-                if (this->inventory.getItem(i, j)->getTYPE() != "PRODUCT_FRUIT_PLANT"){
-                    return false;
+                if (this->inventory.getItem(i, j)->getTYPE() == "PRODUCT_FRUIT_PLANT"){
+                    return true;
                 }
             }
         }
     }
 
-    return true;
+    return false;
 }
 
-bool Peternak::isOnlyCarnivoreFood(){
+bool Peternak::isCarnivoreFoodReady(){
     for(int i = 0; i < this->inventory.getHeight(); i++){
         for(int j = 0; j < this->inventory.getWidth(); j++){
             if (!this->inventory.isEmpty(i, j)){
-                if (this->inventory.getItem(i, j)->getTYPE() != "PRODUCT_ANIMAL"){
-                    return false;
+                if (this->inventory.getItem(i, j)->getTYPE() == "PRODUCT_ANIMAL"){
+                    return true;
                 }
             }
         }
     }
 
-    return true;
+    return false;
+}
+
+bool Peternak::cekKondisiHewanSebelumLoop(string slot_tanah,bool herbivore_food,bool carnivore_food){
+    bool flag = false;
+    if(!this->peternakan.isEmpty(slot_tanah)){
+        string tipe = this->peternakan.getItem(slot_tanah)->getTYPE();
+        if(tipe == "HERBIVORE" && herbivore_food){
+            flag = true;
+        }else if(tipe == "CARNIVORE" && carnivore_food){
+            flag = true;
+        }else if(tipe == "OMNIVORE" && (herbivore_food || carnivore_food)){
+            flag = true;
+        }
+    }
+
+    return flag;
+}
+
+bool Peternak::cekKondisiHewan(string tipe,bool herbivore_food,bool carnivore_food){
+    bool flag = false;
+    if (tipe == "HERBIVORE" && !herbivore_food){
+        cout << "\nHewan ini herbivora dan hanya ada makanan karnivora di inventory" << endl;
+        cout << "Silahkan masukan petak tanah yang benar" << endl;
+    } else if (tipe == "CARNIVORE" && !carnivore_food){
+        cout << "\nHewan ini karnivora dan hanya ada makanan herbivora di inventory" << endl;
+        cout << "Silahkan masukan petak tanah yang benar" << endl;
+    }else{
+        flag = true;
+    }
+
+    return flag;
+}
+
+string Peternak::checkAnimalFoodType(string animalType){
+    string food_type;
+    if(animalType == "HERBIVORE"){
+        food_type = "PRODUCT_FRUIT_PLANT";
+    }else{
+        food_type = "PRODUCT_ANIMAL";
+    }
+    return food_type;
+}
+
+bool Peternak::checkFoodforAnimalBeforeLoop(string slot, string animal_type,string food_type){
+    bool flag = false;
+    if(!this->inventory.isEmpty(slot) && animal_type == "OMNIVORE" && this->inventory.getItem(slot)->isFood()){
+        flag = true;
+    }else if(!this->inventory.isEmpty(slot) && this->inventory.getItem(slot)->getTYPE() == food_type){
+        flag = true;
+    }
+
+    return flag;
+
+}
+
+string Peternak::inputSlotTanahKasihMakan(){
+    string slot_tanah;
+    bool valid = false;
+    
+    CETAK_PETERNAKAN();
+    
+    bool herbivore_food = isHerbivoreFoodReady();
+    bool carnivore_food = isCarnivoreFoodReady();
+
+    while (!valid){
+        try {
+            cout << "Petak kandang: ";
+            cin >> slot_tanah;
+            bool flag = false;
+            // cek flag sebelum mulai loop
+            if(!this->peternakan.isEmpty(slot_tanah)){
+                string tipe = this->peternakan.getItem(slot_tanah)->getTYPE();
+                if(tipe == "HERBIVORE" && herbivore_food){
+                    flag = true;
+                }else if(tipe == "CARNIVORE" && carnivore_food){
+                    flag = true;
+                }else if(tipe == "OMNIVORE" && (herbivore_food || carnivore_food)){
+                    flag = true;
+                }
+            }
+
+            while (this->peternakan.isEmpty(slot_tanah) || !flag){
+                if(!this->peternakan.isEmpty(slot_tanah)){
+                    string tipe = this->peternakan.getItem(slot_tanah)->getTYPE();
+                    flag = cekKondisiHewan(tipe,herbivore_food,carnivore_food);
+
+                    if (!flag){
+                        cout << "\nPetak tanah: ";
+                        cin >> slot_tanah;
+                    }
+                }else{
+                    cout << "\nPetak itu tidak ada hewannya" << endl;
+                    cout << "Silahkan masukan petak tanah yang ada hewannya" << endl;
+                    cout << "\nPetak tanah: ";
+                    cin >> slot_tanah;
+                }
+            }
+            valid = true;
+        } catch (InvalidIndexException& e){
+            cout << RED << e.what() << RESET << endl << endl; ;
+        }
+    }
+
+    return slot_tanah;
+}
+
+string Peternak::inputSlotInventoryKasihMakan(string animal_type,string food_type){
+    this->inventory.print();
+    string slot;
+    bool valid = false;
+
+    while (!valid){
+        try {
+
+            cout << "Slot: ";
+            cin >> slot;
+            bool flag = false;
+            // cek flag sebelum mulai loop
+            flag = checkFoodforAnimalBeforeLoop(slot,animal_type,food_type);
+            
+            while (this->inventory.isEmpty(slot) || !this->inventory.getItem(slot)->isFood() || !flag){
+                if (this->inventory.isEmpty(slot)){
+                    cout << "\nKamu mengambil harapan kosong dari penyimpanan." << endl;
+                    cout << "Silahkan masukan slot berisi makanan dari penyimpanan." << endl;
+
+                    cout << "\nSlot: ";
+                    cin >> slot;
+                } else if(!this->inventory.getItem(slot)->isFood()){
+                    cout << "\nBerbahaya jika kamu memberi makan ternak kamu dengan itu" << endl;
+                    cout << "Silahkan masukan slot berisi makanan yang benar." << endl;
+
+                    cout << "\nSlot: ";
+                    cin >> slot;
+                }else if(animal_type != "OMNIVORE"){
+                    if (this->inventory.getItem(slot)->getTYPE() != food_type){
+                        cout << "\nHewan ini tidak bisa makan itu" << endl;
+                        cout << "Silahkan masukan slot berisi makanan yang benar." << endl;
+
+                        cout << "\nSlot: ";
+                        cin >> slot;
+                    }else{
+                        flag = true;
+                    }
+                }else{
+                    flag = true;
+                }
+            }
+            valid = true;
+        } catch (InvalidIndexException& e){
+            cout << RED << e.what() << RESET << endl << endl; ;
+        }
+    }
+
+    return slot;
 }

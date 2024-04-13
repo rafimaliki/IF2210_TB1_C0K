@@ -286,7 +286,7 @@ void Player::BELI()
                     throw InventorySizeNotValidException();
                 /*Walikota beli buiding*/
 
-                if (Toko::getItemToko(nomor)->getTYPE() == "" && this->id == 1)
+                if (Toko::getItemToko(nomor)->getTYPE() == "" && this->getType() == "Walikota")
                     throw RoleNotValid();
                 Item *beli = Toko::beliItemToko(nomor, amount, this->money);
                 this->money -= (amount * beli->getPRICE());
@@ -397,7 +397,7 @@ void Player::JUAL()
                 {
                     if (this->inventory.isEmpty(finalslots[i]))
                         throw IsEmptySlotException();
-                    if (this->inventory.getItem(finalslots[i])->getTYPE() == "" && this->id != 1)
+                    if (this->inventory.getItem(finalslots[i])->getTYPE() == "" && !(this->getType() == "Walikota"))
                         throw RoleNotValid();
                 }
                 int total_money = 0;
