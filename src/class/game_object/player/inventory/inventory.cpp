@@ -76,7 +76,7 @@ void Inventory<T>::add(T *item, int i, int j)
 {
     if (i >= this->height || j >= this->width || i < 0 || j < 0)
     {
-        throw InvalidIndexException();
+        throw IndexNotValidException();
     }
     else if (!this->isEmpty(i, j))
     {
@@ -98,7 +98,11 @@ void Inventory<T>::add(T *item, string idx)
 template <class T>
 void Inventory<T>::remove(int i, int j)
 {
-    if (this->isEmpty(i, j))
+    if (i >= this->height || j >= this->width || i < 0 || j < 0)
+    {
+        throw IndexNotValidException();
+    }
+    else if (this->isEmpty(i, j))
     {
         cout << "Slot kosong!" << endl;
     }
@@ -191,13 +195,26 @@ void Inventory<T>::print()
 
 template <class T>
 void Inventory<T>::printItem(int i, int j)
-{
+{   
+    if (i >= this->height || j >= this->width || i < 0 || j < 0)
+    {
+        throw IndexNotValidException();
+    }
+    else if (this->isEmpty(i, j))
+    {
+        throw IsEmptySlotException();
+    }
     this->getItem(i, j)->print();
 }
 
 template <class T>
 bool Inventory<T>::isEmpty(int i, int j)
-{
+{   
+    if (i >= this->height || j >= this->width || i < 0 || j < 0)
+    {
+        throw IndexNotValidException();
+    }
+
     return this->grid[i][j].getAmount() == 0;
 }
 
@@ -256,7 +273,7 @@ T *Inventory<T>::getItem(int i, int j)
 {
     if (i >= this->height || j >= this->width || i < 0 || j < 0)
     {
-        throw InvalidIndexException();
+        throw IndexNotValidException();
     }
     else if (this->isEmpty(i, j))
     {
@@ -268,22 +285,8 @@ T *Inventory<T>::getItem(int i, int j)
 template <class T>
 T *Inventory<T>::getItem(string idx)
 {
-    try
-    {
-        int j = idx[0] - 'A';
-        int i = stoi(idx.substr(1)) - 1;
-
-        if (i >= this->height || j >= this->width || i < 0 || j < 0)
-        {
-            throw IndexNotValidException();
-        }
-
-        return this->grid[i][j].getItem();
-    }
-    catch (...)
-    {
-        throw IndexNotValidException();
-    }
+    vector<int> index = Util::idxToInt(idx);
+    return getItem(index[0], index[1]);
 }
 
 template class Inventory<Item>;
