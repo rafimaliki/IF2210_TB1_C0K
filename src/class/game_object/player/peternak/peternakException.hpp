@@ -65,3 +65,10 @@ public:
         return "Inventory tidak memadai";
     }
 };
+
+class InventoryPeternakPenuhException : public std::exception {
+public:
+    const char* what() const noexcept override {
+        return "Inventory peternak penuh";
+    }
+};

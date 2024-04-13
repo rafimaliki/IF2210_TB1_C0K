@@ -185,7 +185,7 @@ void Petani::PANEN(){
                 if(this->lahan.getItem(i, j)->isReadyToHarvest()){
                     string kode_tanaman = this->lahan.getItem(i, j)->getKODE_HURUF();
                     if(temp_siap_panen.find(kode_tanaman) == temp_siap_panen.end()){
-                    temp_siap_panen[kode_tanaman] = 1;
+                        temp_siap_panen[kode_tanaman] = 1;
                     }else{
                         temp_siap_panen[kode_tanaman]++;
                     }

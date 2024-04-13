@@ -37,6 +37,10 @@ class Peternak : public Player {
         bool cekKondisiHewanSebelumLoop(string slot_tanah,bool herbivore_food,bool carnivore_food);
         string inputSlotTanahKasihMakan();
         string inputSlotInventoryKasihMakan(string animal_type,string food_type);
+        string inputSlotTanahTernak();
+        string inputSlotInventoryTernak();
+        void isInventoryPeternakPenuh();
+        void findAnimaltoHarvest();
 };
 
 #endif
