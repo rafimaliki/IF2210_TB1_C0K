@@ -19,6 +19,7 @@ class Game
 {
 private:
     bool is_running;
+    string command;
     
 public:
     Game();
@@ -26,8 +27,9 @@ public:
     void start();
     void startNewGame();
 
-    string inputCommand();
-    void executeCommand(string command);
+    void inputCommand();
+    void executeCommand();
+    void loadGameData();
 
     void checkWin();
     void printWinner();

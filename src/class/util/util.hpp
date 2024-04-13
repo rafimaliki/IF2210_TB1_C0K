@@ -21,6 +21,10 @@ public:
     static vector<int> idxToInt(string idx);
     static string IntToIdx(vector<int> idx);
     static int stringToInt(string num);
+
+    // printcolor
+    static void printColor(string text, string color);
+    static void printError();
 };
 
 #endif

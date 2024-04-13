@@ -35,5 +35,6 @@ const string BLUE = "\033[1;34m";
 const string MAGENTA = "\033[1;35m";
 const string CYAN = "\033[1;36m";
 const string RESET  = "\033[0m";
+const string ERROR = RED + "Terjadi kesalahan lain" + RESET;
 
 #endif
