@@ -8,3 +8,4 @@ Peternak1 Peternak 40 50
 Walikota Walikota 40 50
 0
 0
+0

@@ -30,7 +30,7 @@ void Game::start()
                     Muat::loadSaveFile();
                     valid = true;
                     cout << "Giliran player " << Player::players[0]->getName() << endl << endl;
-                } catch (FailReadFileException &e)
+                } catch (const exception &e)
                 {
                     cout << RED << e.what() << RESET << endl;
                 }

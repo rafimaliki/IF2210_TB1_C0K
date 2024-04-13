@@ -9,8 +9,10 @@
 #include <exception>
 #include <algorithm>
 #include <fstream>
+#include <utility>
 
 using std::ifstream;
+using std::ofstream;
 using std::getline;
 using std::cout;
 using std::cin;
@@ -21,6 +23,7 @@ using std::to_string;
 using std::array;
 using std::map;
 using std::exception;
+using std::pair;
 
 #include "class/util/util.hpp"
 

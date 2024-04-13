@@ -8,17 +8,18 @@ set(SOURCE_FILES
     src/class/util/util.cpp
     src/class/game/game.cpp
     src/class/command/command.cpp
-    src/class/muat/file_reader.cpp
-    src/class/muat/muat.cpp
-    src/class/simpan/simpan.cpp
+    src/class/file/file_reader.cpp
+    src/class/file/muat/muat.cpp
+    src/class/file/simpan/simpan.cpp
     src/class/game_object/item_config/item_config.cpp
     src/class/game_object/item/item.cpp
     src/class/game_object/item/plant/plant.cpp
     src/class/game_object/item/animal/animal.cpp
     src/class/game_object/item/bangunan/bangunan.cpp
     src/class/game_object/item/product/product.cpp
-    src/class/game_object/player/player.cpp
     src/class/game_object/toko/toko.cpp
+    src/class/game_object/player/player.cpp
+    src/class/game_object/player/inventory/inventory.cpp
     src/class/game_object/player/walikota/walikota.cpp
     src/class/game_object/player/petani/petani.cpp
     src/class/game_object/player/peternak/peternak.cpp)

@@ -2,7 +2,7 @@
 #define ITEM_CONFIG_HPP
 
 #include "../../../std.hpp"
-#include "../../muat/file_reader.hpp"
+#include "../../file/file_reader.hpp"
 
 class Ingredient {
     private:

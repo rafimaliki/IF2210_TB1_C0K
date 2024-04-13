@@ -34,7 +34,7 @@ class Item
         bool isPlant();
         bool isAnimal();
 
-        static vector<string> getTYPE_IDbyNAME(string name);
+        static pair<string, int> getTYPE_IDbyNAME(string name);
 
 
 };

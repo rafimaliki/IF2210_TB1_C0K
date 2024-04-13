@@ -23,7 +23,7 @@ public:
 
 #endif
 
-class InventorySizeNotValidException : public std::exception
+class InventorySizeNotValidException : public exception
 {
 public:
     const char *what() const noexcept override
@@ -32,11 +32,11 @@ public:
     }
 };
 
-class SlotEmptyException : public std::exception
+class SlotIsNotEmptyException : public exception
 {
 public:
     const char *what() const noexcept override
     {
-        return "Slot is empty!";
+        return "Slot sudah terisi.";
     }
 };

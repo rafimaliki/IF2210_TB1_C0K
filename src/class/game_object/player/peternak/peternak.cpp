@@ -21,8 +21,8 @@ Inventory<Animal>* Peternak::getPeternakan(){
 
 int Peternak::getWealth(){
     int totalWealth = Player::getWealth();
-    for (int i = 0; i < peternakan.height; i++){
-        for (int j = 0; j < peternakan.width; j++){
+    for (int i = 0; i < peternakan.getHeight(); i++){
+        for (int j = 0; j < peternakan.getWidth(); j++){
             if (!peternakan.isEmpty(i, j)){
                 totalWealth += peternakan.getItem(i, j)->getPRICE();
             }
@@ -37,8 +37,8 @@ int Peternak::getWealth(){
 void Peternak::CETAK_PETERNAKAN(){  
     this->peternakan.print();
     cout << endl;
-    int height = this->peternakan.height;
-    int width = this->peternakan.width;
+    int height = this->peternakan.getHeight();
+    int width = this->peternakan.getWidth();
     for (int i = 0 ;i < height; i++){
         for (int j = 0; j < width; j++){
             if (!this->peternakan.isEmpty(i, j)){
@@ -165,8 +165,8 @@ void Peternak::KASIH_MAKAN(){
     bool herbivore_food = false;
     bool carnivore_food = false;
 
-    for(int i = 0; i < this->inventory.height; i++){
-        for(int j = 0; j < this->inventory.width; j++){
+    for(int i = 0; i < this->inventory.getHeight(); i++){
+        for(int j = 0; j < this->inventory.getWidth(); j++){
             if (!this->inventory.isEmpty(i, j)){
                 if (this->inventory.getItem(i, j)->getTYPE() == "PRODUCT_FRUIT_PLANT"){
                     herbivore_food = true;
@@ -181,8 +181,8 @@ void Peternak::KASIH_MAKAN(){
     bool carnivore = false;
     bool omnivore = false;
 
-    for(int i = 0; i < this->peternakan.height; i++){
-        for(int j = 0; j < this->peternakan.width; j++){
+    for(int i = 0; i < this->peternakan.getHeight(); i++){
+        for(int j = 0; j < this->peternakan.getWidth(); j++){
             if (!this->peternakan.isEmpty(i, j)){
                 if (this->peternakan.getItem(i, j)->getTYPE() == "HERBIVORE"){
                     herbivore = true;
@@ -366,11 +366,11 @@ void Peternak::PANEN(){
     }
 
     //Cari hewan yang siap di panen
-    for(int i = 0 ; i < this->peternakan.height; i++){
-        for(int j = 0 ; j < this->peternakan.width; j++){
-            if(this->peternakan.grid[i][j].getItem() != nullptr){
-                if(this->peternakan.grid[i][j].getItem()->isReadyToHarvest()){
-                    string kode_tanaman = this->peternakan.grid[i][j].getItem()->getConfig()->getKODE_HURUF();
+    for(int i = 0 ; i < this->peternakan.getHeight(); i++){
+        for(int j = 0 ; j < this->peternakan.getWidth(); j++){
+            if(!this->peternakan.isEmpty(i,j)){
+                if(this->peternakan.getItem(i, j)->isReadyToHarvest()){
+                    string kode_tanaman = this->peternakan.getItem(i, j)->getKODE_HURUF();
                     if(temp_siap_panen.find(kode_tanaman) == temp_siap_panen.end()){
                     temp_siap_panen[kode_tanaman] = 1;
                     }else{
@@ -545,14 +545,14 @@ void Peternak::isPeternakanPenuh(){
 }
 
 void Peternak::isPeternakanKosong(){
-    if(this->peternakan.calcEmptySpace() == this->peternakan.height * this->peternakan.width){
+    if(this->peternakan.calcEmptySpace() == this->peternakan.getHeight() * this->peternakan.getWidth()){
         throw PeternakanKosongException();
     }
 }
 
 void Peternak::isFoodEmpty(){
-    for (int i = 0 ; i < this->inventory.height;i++){
-        for (int j = 0; j < this->inventory.width; j++){
+    for (int i = 0 ; i < this->inventory.getHeight();i++){
+        for (int j = 0; j < this->inventory.getWidth(); j++){
             if (!this->inventory.isEmpty(i, j) && this->inventory.getItem(i, j)->isFood()){
                 return;
             }
@@ -562,8 +562,8 @@ void Peternak::isFoodEmpty(){
 }
 
 void Peternak::isAnimalEmpty(){
-    for (int i = 0 ; i < this->inventory.height;i++){
-        for (int j = 0; j < this->inventory.width; j++){
+    for (int i = 0 ; i < this->inventory.getHeight();i++){
+        for (int j = 0; j < this->inventory.getWidth(); j++){
             if (!this->inventory.isEmpty(i, j) && this->inventory.getItem(i, j)->isAnimal()){
                 return;
             }
@@ -575,10 +575,10 @@ void Peternak::isAnimalEmpty(){
 void Peternak::isHarvestReady(){
     //Cek apakah ada tanaman yang bisa dipanen
     bool flag = false;
-    for(int i = 0 ; i < this->peternakan.height; i++){
-        for(int j = 0 ; j < this->peternakan.width; j++){
-            if(this->peternakan.grid[i][j].getItem() != nullptr){
-                if(this->peternakan.grid[i][j].getItem()->isReadyToHarvest()){
+    for(int i = 0 ; i < this->peternakan.getHeight(); i++){
+        for(int j = 0 ; j < this->peternakan.getWidth(); j++){
+            if(!this->peternakan.isEmpty(i,j)){
+                if(this->peternakan.getItem(i, j)->isReadyToHarvest()){
                     flag = true;
                     break;
                 }
