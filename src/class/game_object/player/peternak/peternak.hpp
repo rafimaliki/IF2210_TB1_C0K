@@ -27,10 +27,16 @@ class Peternak : public Player {
         void isHarvestReady();
         void isInventoryMemadai(int n);
         void isAnimalFoodEmpty();
-        bool isOnlyHerbivoreFood();
-        bool isOnlyCarnivoreFood();
+        bool isHerbivoreFoodReady();
+        bool isCarnivoreFoodReady();
         string getType();
         void pilihKandangMakan(string slot_tanah,bool valid);
+        bool cekKondisiHewan(string tipe,bool herbivore_food,bool carnivore_food);
+        string checkAnimalFoodType(string animalType);
+        bool checkFoodforAnimalBeforeLoop(string slot, string animal_type,string food_type);
+        bool cekKondisiHewanSebelumLoop(string slot_tanah,bool herbivore_food,bool carnivore_food);
+        string inputSlotTanahKasihMakan();
+        string inputSlotInventoryKasihMakan(string animal_type,string food_type);
 };
 
 #endif
