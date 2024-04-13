@@ -65,11 +65,11 @@ void Peternak::TERNAK(){
     } catch (PeternakanPenuhException& e){
         cout << RED << e.what() << RESET <<endl;
         return;
-    }catch (InventoryNoFoodException& e){
+    }catch (InventoryNoAnimalException& e){
         cout << RED << e.what() << RESET <<endl;
         return;
     }
-    
+
     cout << "Pilih hewan dari penyimpanan" << endl << endl;
 
     this->inventory.print();
@@ -146,78 +146,37 @@ void Peternak::TERNAK(){
 
 
 void Peternak::KASIH_MAKAN(){ 
-    // Cek apakah peternakan kosong
+    // Cek apakah peternakan kosong atau inventory kosong
     try{
         isPeternakanKosong();
+        isFoodEmpty();
+        isAnimalFoodEmpty();
+        
     } catch (PeternakanKosongException& e){
         cout << RED << e.what() << RESET <<endl;
         return;
-    }
-
-    // Cek apakah ada makanan di inventory
-    try{
-        isFoodEmpty();
-    } catch (InventoryNoFoodException& e){
+    }catch (InventoryNoFoodException& e){
         cout << RED << e.what() << RESET <<endl;
         return;
-    }
-
-    bool herbivore_food = false;
-    bool carnivore_food = false;
-
-    for(int i = 0; i < this->inventory.height; i++){
-        for(int j = 0; j < this->inventory.width; j++){
-            if (!this->inventory.isEmpty(i, j)){
-                if (this->inventory.getItem(i, j)->getTYPE() == "PRODUCT_FRUIT_PLANT"){
-                    herbivore_food = true;
-                } else if (this->inventory.getItem(i, j)->getTYPE() == "PRODUCT_ANIMAL"){
-                    carnivore_food = true;
-                }
-            }
-        }
-    }
-
-    bool herbivore = false;
-    bool carnivore = false;
-    bool omnivore = false;
-
-    for(int i = 0; i < this->peternakan.height; i++){
-        for(int j = 0; j < this->peternakan.width; j++){
-            if (!this->peternakan.isEmpty(i, j)){
-                if (this->peternakan.getItem(i, j)->getTYPE() == "HERBIVORE"){
-                    herbivore = true;
-                    cout << "HERBIVORE" << endl;
-                } else if (this->peternakan.getItem(i, j)->getTYPE() == "CARNIVORE"){
-                    carnivore = true;
-                    cout << "CARNIVORE" << endl;
-                }else if (this->peternakan.getItem(i, j)->getTYPE() == "OMNIVORE"){
-                    omnivore = true;
-                    cout << "OMNIVORE" << endl;
-                }
-            }
-        }
-    }
-
-    // Cek apakah inventory hanya berisi makanan herbivora atau karnivora
-    try{
-        if (herbivore_food && !herbivore && !omnivore && !carnivore_food && carnivore){
-            throw CarnivoreAnimalDontHaveFood();
-        } else if (carnivore_food && !herbivore_food && !carnivore && !omnivore && herbivore){
-            throw HerbivoreAnimalDontHaveFood();
-        }
-    } catch (CarnivoreAnimalDontHaveFood& e){
+    }catch (CarnivoreAnimalDontHaveFood& e){
         cout << RED << e.what() << RESET <<endl;
         return;
     } catch (HerbivoreAnimalDontHaveFood& e){
         cout << RED << e.what() << RESET <<endl;
         return;
     }
+    
 
+    // Pilih petak tanah
 
     string slot_tanah;
     bool valid = false;
     
     CETAK_PETERNAKAN();
+    
+    bool herbivore_food = isOnlyHerbivoreFood();
+
+    bool carnivore_food = isOnlyCarnivoreFood();
     while (!valid){
         try {
 
@@ -346,6 +305,8 @@ void Peternak::KASIH_MAKAN(){
 
     
 }
+
+
 void Peternak::PANEN(){ 
     // Temp map untuk menyimpan hewan yang siap dipanen
     map<string, int> temp_siap_panen;
@@ -569,7 +530,7 @@ void Peternak::isAnimalEmpty(){
             }
         }
     }
-    throw InventoryNoFoodException();
+    throw InventoryNoAnimalException();
 }
 
 void Peternak::isHarvestReady(){
@@ -596,4 +557,65 @@ void Peternak::isInventoryMemadai(int n){
     if(this->inventory.calcEmptySpace() < n){
         throw InventoryTidakMemadaiException();
     }
+}
+
+void Peternak::isAnimalFoodEmpty(){
+    bool herbivore_food = isOnlyHerbivoreFood();
+    bool carnivore_food = isOnlyCarnivoreFood();
+
+    bool herbivore = false;
+    bool carnivore = false;
+    bool omnivore = false;
+
+    for(int i = 0; i < this->peternakan.height; i++){
+        for(int j = 0; j < this->peternakan.width; j++){
+            if (!this->peternakan.isEmpty(i, j)){
+                if (this->peternakan.getItem(i, j)->getTYPE() == "HERBIVORE"){
+                    herbivore = true;
+                    cout << "HERBIVORE" << endl;
+                } else if (this->peternakan.getItem(i, j)->getTYPE() == "CARNIVORE"){
+                    carnivore = true;
+                    cout << "CARNIVORE" << endl;
+                }else if (this->peternakan.getItem(i, j)->getTYPE() == "OMNIVORE"){
+                    omnivore = true;
+                    cout << "OMNIVORE" << endl;
+                }
+            }
+        }
+    }
+
+    if (herbivore_food && !herbivore && !omnivore && !carnivore_food && carnivore){
+        throw CarnivoreAnimalDontHaveFood();
+    } else if (carnivore_food && !herbivore_food && !carnivore && !omnivore && herbivore){
+        throw HerbivoreAnimalDontHaveFood();
+    }
+
+}
+
+bool Peternak::isOnlyHerbivoreFood(){
+    for(int i = 0; i < this->inventory.height; i++){
+        for(int j = 0; j < this->inventory.width; j++){
+            if (!this->inventory.isEmpty(i, j)){
+                if (this->inventory.getItem(i, j)->getTYPE() != "PRODUCT_FRUIT_PLANT"){
+                    return false;
+                }
+            }
+        }
+    }
+
+    return true;
+}
+
+bool Peternak::isOnlyCarnivoreFood(){
+    for(int i = 0; i < this->inventory.height; i++){
+        for(int j = 0; j < this->inventory.width; j++){
+            if (!this->inventory.isEmpty(i, j)){
+                if (this->inventory.getItem(i, j)->getTYPE() != "PRODUCT_ANIMAL"){
+                    return false;
+                }
+            }
+        }
+    }
+
+    return true;
 }
