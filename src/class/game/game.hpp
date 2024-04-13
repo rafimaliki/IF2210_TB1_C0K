@@ -12,26 +12,24 @@
 #include "../game_object/player/walikota/walikota.hpp"
 #include "../game_object/player/petani/petani.hpp"
 #include "../game_object/player/peternak/peternak.hpp"
-#include "../simpan/simpan.hpp"
-#include "../muat/muat.hpp"
+#include "../file/simpan/simpan.hpp"
+#include "../file/muat/muat.hpp"
 
 class Game
 {
 private:
     bool is_running;
-
-    // vector<Player> players;
-    // Player& current_player;
-
-    // GameConfig config; // GameConfig gw ubah jadi static member class GameConfig aja biar gak circular include
+    string command;
+    
 public:
     Game();
 
     void start();
     void startNewGame();
 
-    string inputCommand();
-    void executeCommand(string command);
+    void inputCommand();
+    void executeCommand();
+    void loadGameData();
 
     void checkWin();
     void printWinner();

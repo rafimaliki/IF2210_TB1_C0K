@@ -1,51 +1,46 @@
 #include "simpan.hpp"
 
-Simpan::Simpan(string filename) : filename(filename) {}
+Simpan::Simpan(string filename) : FileReader(filename) {}
 
-bool Simpan::isValidName(){
+bool Simpan::tryWriteFile(){
+    ofstream file(filename);
 
-    // check dua char pertama "./" bukan
-    if ((filename.length() <= 2) || filename.substr(0, 2) != "./"){
-        return false;
-    } 
-
-    // menghilangkan "./" dari filename
-    this->filename = this->filename.erase(0, 2);
-
-    bool haveSlash = false;
-    bool haveFolderName = false;
-    bool haveFileName = false;
-
-    // cek apakah ada folder name dan file name
-    for (int i = 0; i < filename.length(); i++) {
-        if (filename[i] != '/' && !haveSlash && !haveFileName) {
-            haveFolderName = true;
-        } else if (filename[i] == '/' && haveFolderName && !haveSlash && !haveFileName) {
-            haveSlash = true;
-        } else if (filename[i] != '/' && haveFolderName && haveSlash && !haveFileName) {
-            haveFileName = true;
-        }
-    }
-
-    if (!haveFileName) {
-        return false;
-    }
-
-    ofstream file;
-    file.open(filename);
-
-    // cek folder valid dengan cara membuka file
     if (!file.is_open()) {
         return false;
     } else {
         file.close();
+        return true;
     }
-
-    return true;
 }
 
-string Simpan::convertLadangToString(Inventory<Plant>* ladang)
-{
+void Simpan::writeToFile(string data){
+    ofstream file;
+    file.open(this->filename);
+    file << data;
+    file.close();
+}
+
+void Simpan::saveGame(){   
+    string filename;
+
+    cout << "\nMasukkan lokasi berkas state : ";
+    cin >> filename;
+
+    Simpan simpan(filename);
+
+    if (!simpan.isValidName() || !simpan.tryWriteFile()) {
+        throw FailReadFileException();
+    }
+
+    string data = Simpan::convertGameDataToString();
+
+    simpan.writeToFile(data);
+
+    cout << GREEN << "State berhasil disimpan\n" << RESET << endl;
+}
+
+
+string Simpan::convertLadangToString(Inventory<Plant>* ladang){
     string result = "";
 
     // jumlah item di ladang
@@ -66,8 +61,7 @@ string Simpan::convertLadangToString(Inventory<Plant>* ladang)
     return result;
 }
 
-string Simpan::convertPeterknakanToString(Inventory<Animal>* peternakan)
-{
+string Simpan::convertPeterknakanToString(Inventory<Animal>* peternakan){
     string result = "";
 
     // jumlah item di peternakan
@@ -88,8 +82,7 @@ string Simpan::convertPeterknakanToString(Inventory<Animal>* peternakan)
     return result;
 }
 
-string Simpan::convertPlayerToString(Player* player)
-{
+string Simpan::convertPlayerToString(Player* player){
     string result = "";
 
     // nama role weight money
@@ -122,8 +115,7 @@ string Simpan::convertPlayerToString(Player* player)
     return result;
 }
 
-string Simpan::convertTokoToString()
-{
+string Simpan::convertTokoToString(){
     string result = "";
     string temp_result = "";
 
@@ -140,15 +132,14 @@ string Simpan::convertTokoToString()
     return result;
 }
 
-string Simpan::convertGameDataToString()
-{   
+string Simpan::convertGameDataToString(){   
     string result = "";
 
     // jumlah player
     int player_count = Player::player_count;
     result += to_string(player_count) + "\n";
     
-    // convert data layer ke string
+    // convert data player ke string
     for (int i = 0; i < Player::player_count; i++) {
         result += Simpan::convertPlayerToString(Player::players[i]);
     }
@@ -162,33 +153,5 @@ string Simpan::convertGameDataToString()
     }
 
     return result;
-}
-
-void Simpan::writeToFile(string data)
-{
-    ofstream file;
-    file.open(this->filename);
-    file << data;
-    file.close();
-}
-
-void Simpan::saveGame()
-{   
-    string filename;
-
-    cout << "\nMasukkan lokasi berkas state : ";
-    cin >> filename;
-
-    Simpan simpan(filename);
-
-    if (!simpan.isValidName()) {
-       throw InvalidFileException();
-    }
-
-    string data = Simpan::convertGameDataToString();
-
-    simpan.writeToFile(data);
-
-    cout << "State berhasil disimpan\n" << endl;
 }
 

@@ -8,8 +8,12 @@ class FileReader {
 protected:
     string filename;
 public:
-    FileReader(const string& filename);
+    // constructor
+    FileReader(string filename);
+
+    // method
     vector<vector<string>> readFile();
+    bool isValidName();
 };
 
 #endif

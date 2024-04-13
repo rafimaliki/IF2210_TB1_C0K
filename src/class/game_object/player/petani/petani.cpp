@@ -22,8 +22,8 @@ Inventory<Plant>* Petani::getLadang(){
 
 int Petani::getWealth(){
     int totalWealth = Player::getWealth();
-    for (int i = 0; i < lahan.height; i++){
-        for (int j = 0; j < lahan.width; j++){
+    for (int i = 0; i < lahan.getHeight(); i++){
+        for (int j = 0; j < lahan.getWidth(); j++){
             if (!lahan.isEmpty(i, j)){
                 totalWealth += lahan.getItem(i, j)->getPRICE();
             }
@@ -44,11 +44,11 @@ void Petani::CETAK_LADANG(){
     this->lahan.print();
 
     //Cari ada tanaman apa saja di ladang
-    for(int i = 0 ; i < this->lahan.height; i++){
-        for(int j = 0 ; j < this->lahan.width; j++){
-            if(this->lahan.grid[i][j].getItem() != nullptr){
-                string nama_tanaman = this->lahan.grid[i][j].getItem()->getConfig()->getNAME();
-                string kode_tanaman = this->lahan.grid[i][j].getItem()->getConfig()->getKODE_HURUF();
+    for(int i = 0 ; i < this->lahan.getHeight(); i++){
+        for(int j = 0 ; j < this->lahan.getWidth(); j++){
+            if(!this->lahan.isEmpty(i,j)){
+                string nama_tanaman = this->lahan.getItem(i, j)->getNAME();
+                string kode_tanaman = this->lahan.getItem(i, j)->getKODE_HURUF();
                 if(temp_tanaman_unik.find(kode_tanaman) == temp_tanaman_unik.end()){
                     temp_tanaman_unik[kode_tanaman] = nama_tanaman;
                 }
@@ -99,7 +99,7 @@ void Petani::TANAM(){
                 cin >> slot;
             }
             valid = true;
-        } catch (IndexNotValidException& e){
+        } catch (InvalidIndexException& e){
             cout << RED << e.what() << RESET << endl << endl; ;
         }
     }
@@ -137,7 +137,7 @@ void Petani::TANAM(){
                 cin >> slot_tanah;
             }
             valid = true;
-        } catch (IndexNotValidException& e){
+        } catch (InvalidIndexException& e){
             cout << RED << e.what() << RESET << endl << endl; ;
         }
     }
@@ -179,11 +179,11 @@ void Petani::PANEN(){
     }
 
     //Cari tanaman yang siap dipanen
-    for(int i = 0 ; i < this->lahan.height; i++){
-        for(int j = 0 ; j < this->lahan.width; j++){
-            if(this->lahan.grid[i][j].getItem() != nullptr){
-                if(this->lahan.grid[i][j].getItem()->isReadyToHarvest()){
-                    string kode_tanaman = this->lahan.grid[i][j].getItem()->getConfig()->getKODE_HURUF();
+    for(int i = 0 ; i < this->lahan.getHeight(); i++){
+        for(int j = 0 ; j < this->lahan.getWidth(); j++){
+            if(!this->lahan.isEmpty(i,j)){
+                if(this->lahan.getItem(i, j)->isReadyToHarvest()){
+                    string kode_tanaman = this->lahan.getItem(i, j)->getKODE_HURUF();
                     if(temp_siap_panen.find(kode_tanaman) == temp_siap_panen.end()){
                     temp_siap_panen[kode_tanaman] = 1;
                     }else{
@@ -365,10 +365,10 @@ void Petani::isLahanPenuh(){
 void Petani::isPanenAvailable(){
     //Cek apakah ada tanaman yang bisa dipanen
     bool flag = false;
-    for(int i = 0 ; i < this->lahan.height; i++){
-        for(int j = 0 ; j < this->lahan.width; j++){
-            if(this->lahan.grid[i][j].getItem() != nullptr){
-                if(this->lahan.grid[i][j].getItem()->isReadyToHarvest()){
+    for(int i = 0 ; i < this->lahan.getHeight(); i++){
+        for(int j = 0 ; j < this->lahan.getWidth(); j++){
+            if(!this->lahan.isEmpty(i,j)){
+                if(this->lahan.getItem(i, j)->isReadyToHarvest()){
                     flag = true;
                     break;
                 }

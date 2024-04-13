@@ -154,3 +154,13 @@ int Util::stringToInt(string num)
         throw NotNumberException();
     }
 }
+
+void Util::printColor(string text, string color)
+{
+    cout << color << text << RESET;
+}
+
+void Util::printError()
+{
+    cout << ERROR << endl;
+}

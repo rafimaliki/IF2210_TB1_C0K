@@ -89,8 +89,8 @@ void Player::addPlayer(Player *player){
 
 int Player::getWealth(){
     int totalWealth = money;
-    for (int i = 0; i < inventory.height; i++){
-        for (int j = 0; j < inventory.width; j++){
+    for (int i = 0; i < inventory.getHeight(); i++){
+        for (int j = 0; j < inventory.getWidth(); j++){
             if (!inventory.isEmpty(i, j)){
                 totalWealth += inventory.getItem(i, j)->getPRICE();
             }
@@ -312,9 +312,10 @@ void Player::BELI()
                     throw RoleNotValid();
                 Item *beli = Toko::beliItemToko(nomor, amount, this->money);
                 this->money -= (amount * beli->getPRICE());
+                this->inventory.print();
                 cout << "Selamat Anda berhasil membeli " << amount << " " << beli->getNAME() << ". Uang Anda tersisa " << this->money << " gulden. " << endl;
                 cout << "Pilih slot untuk menyimpan barang yang Anda beli!" << endl;
-                this->inventory.print();
+
 
                 /*Sesi Pemilihan Petak*/
                 bool petak_valid = false;
@@ -327,7 +328,7 @@ void Player::BELI()
                         cout << "Petak: ";
                         getline(cin, slotstring);
                         vector<string> result_petak = Util::inputMultiplePetak(slotstring);
-                        bool valid_slot = true; // Atur menjadi true agar masuk ke loop pertama
+                        bool valid_slot = true; 
                         while (result_petak.size() != amount || valid_slot)
                         {
                             valid_slot = false;
@@ -357,7 +358,7 @@ void Player::BELI()
                         petak_valid = true;
                         cout << GREEN << "Sukses!" << RESET << endl;
                     }
-                    catch (IndexNotValidException &e)
+                    catch (InvalidIndexException &e)
                     {
                         cout << e.what() << endl;
                     }
@@ -371,6 +372,9 @@ void Player::BELI()
             {
                 cout << e.what() << endl;
             }
+            catch(InventorySizeNotValidException &e){
+                cout << e.what() << endl;
+            }
             catch (...)
             {
                 cout << "Invalid input!" << endl;
@@ -381,7 +385,7 @@ void Player::BELI()
 
 void Player::JUAL()
 {
-    if (this->inventory.calcEmptySpace() == this->inventory.height * this->inventory.width)
+    if (this->inventory.calcEmptySpace() == this->inventory.getHeight() * this->inventory.getWidth())
     {
         cout << "Inventory kamu kosong" << endl;
     }
@@ -414,7 +418,7 @@ void Player::JUAL()
                 for (int i = 0; i < finalslots.size(); i++)
                 {
                     if (this->inventory.isEmpty(finalslots[i]))
-                        throw SlotEmptyException();
+                        throw IsEmptySlotException();
                     if (this->inventory.getItem(finalslots[i])->getTYPE() == "" && this->id != 1)
                         throw RoleNotValid();
                 }
@@ -531,14 +535,15 @@ void Player::GIVE()
     cout << "1. Plant" << endl;
     cout << "2. Animal" << endl;
     cout << "3. Product" << endl;
+    cout << "4. Building" << endl;
 
     int choice;
     string input;
-    cout << "\nPilih (1-3): ";
+    cout << "\nPilih (1-4): ";
     cin >> input;
     choice = Util::stringToInt(input);
 
-    if (choice < 1 || choice > 3)
+    if (choice < 1 || choice > 4)
     {
         cout << "Gagal!\n"
              << endl;
@@ -605,6 +610,26 @@ void Player::GIVE()
         }
 
         item = new Product(choice);
+    }
+
+    else if (choice == 4){
+        cout << "\nDaftar bangunan:" << endl;
+        for (int i = 0; i < int(GameConfig::recipeConfig.size()); i++)
+        {
+            cout << i + 1 << ". " << GameConfig::recipeConfig[i].getNAME() << endl;
+        }
+        cout << "\nPilih (1-" << GameConfig::recipeConfig.size() << "): ";
+        cin >> input;
+        choice = Util::stringToInt(input);
+
+        if (choice < 0 || choice > int(GameConfig::recipeConfig.size()))
+        {
+            cout << "Gagal!\n"
+                 << endl;
+            return;
+        }
+
+        item = new Bangunan(choice);
     }
 
     Player::getCurrentPlayer()->addItem(item);

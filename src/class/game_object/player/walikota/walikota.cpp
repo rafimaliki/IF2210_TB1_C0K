@@ -197,11 +197,11 @@ void Walikota::useIngredients(string nama, vector<Bangunan*> daftar_bangunan){
         available_ingredient.push_back(0);
     }
 
-    for (int i = 0; i < inventory.height; i++){
-        for (int j = 0; j < inventory.width; j++){
-            if (inventory.grid[i][j].getAmount() != 0){
+    for (int i = 0; i < inventory.getHeight(); i++){
+        for (int j = 0; j < inventory.getWidth(); j++){
+            if (!inventory.isEmpty(i, j)){
                 for (int k = 0; k < ingredient_name.size(); k++){
-                    if (inventory.grid[i][j].getItem()->getNAME() == ingredient_name[k]){
+                    if (inventory.getItem(i,j)->getNAME() == ingredient_name[k]){
                         available_ingredient[k]++;
                         location_list.push_back({i, j});
                     }
@@ -236,7 +236,7 @@ void Walikota::useIngredients(string nama, vector<Bangunan*> daftar_bangunan){
         for (int i = 0; i < location_list.size(); i++){
             if ((location_list[i][0] != -1) && (location_list[i][1] != -1)){
                 for (int j = 0; j < ingredient_name.size(); j++){
-                    if ((inventory.grid[location_list[i][0]][location_list[i][1]].getItem()->getNAME() == ingredient_name[j]) && (ingredient_quantity[j] > 0)){
+                    if ((inventory.getItem(location_list[i][0], location_list[i][1])->getNAME() == ingredient_name[j]) && (ingredient_quantity[j] > 0)){
                         ingredient_quantity[j]--;
                         inventory.remove(location_list[i][0], location_list[i][1]);
                         location_list[i][0] = -1;

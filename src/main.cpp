@@ -4,15 +4,15 @@
 
 int main()
 {
-    Game game;
-    game.start();
- 
-    while (game.isRunning())
-    {   
-        string command = game.inputCommand();
-        game.executeCommand(command);
+    Game HarvestMoon; 
 
-        game.checkWin();
+    HarvestMoon.start();
+
+    while (HarvestMoon.isRunning())
+    {   
+        HarvestMoon.inputCommand();
+        HarvestMoon.executeCommand();
+        HarvestMoon.checkWin();
     }
 
     return 0;
