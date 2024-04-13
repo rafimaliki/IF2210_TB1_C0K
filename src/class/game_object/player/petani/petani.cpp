@@ -1,9 +1,4 @@
 #include "petani.hpp"
-#include "petaniException.hpp"
-#include  <cctype>
-#include <limits>
-
-using namespace std;
 
 Petani::Petani(string name, int money, int body_weight) : Player(name, money, body_weight)
 , lahan(GameConfig::miscConfig.getLADANG_SIZE()[0], GameConfig::miscConfig.getLADANG_SIZE()[1], "LADANG"){}
@@ -215,27 +210,21 @@ void Petani::PANEN(){
 
     // OPSIONAL SELAIN LANGSUNG RETURN
     while(!valid){
-        try{
-            cout << "\nNomor tanaman yang ingin dipanen: ";
-            cin >> input;
+     
+        cout << "\nNomor tanaman yang ingin dipanen: ";
+        cin >> input;
 
-            // Mengonversi input menjadi integer
-            pilihan_tanaman = stoi(input);
+        // Mengonversi input menjadi integer
+        pilihan_tanaman = Util::stringToInt(input);
 
-            
-
-            if (pilihan_tanaman < 1 || pilihan_tanaman > temp_siap_panen.size()) {
-                cout << RED << "Pilihan tidak valid" << RESET << endl;
-                valid = false;
-            } else {
-                valid = true;
-            }
-
-        }
-        catch (const exception &e){
-            cout << RED << "Error: Input harus berupa integer" << RESET << endl;
+        if (pilihan_tanaman < 1 || pilihan_tanaman > temp_siap_panen.size()) {
+            cout << RED << "Pilihan tidak valid" << RESET << endl;
+            valid = false;
+        } else {
+            valid = true;
         }
 
+        
         //Membersihkan input buffer
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -265,26 +254,22 @@ void Petani::PANEN(){
 
     //OPSIONAL TANPA RETURN LANGSUNG 
     while(!valid){
-        try{
-            cout << "\nBerapa petak yang ingin dipanen: ";
-            cin >> input;
+        cout << "\nBerapa petak yang ingin dipanen: ";
+        cin >> input;
 
-            // Mengonversi input menjadi integer
-            banyak_petak = stoi(input);
+        // Mengonversi input menjadi integer
+        banyak_petak = Util::stringToInt(input);
 
-            
+        
 
-            if (banyak_petak < 1 || banyak_petak > nPetak) {
-                cout << RED << "Pilihan tidak valid" << RESET << endl;
-                valid = false;
-            } else {
-                valid = true;
-            }
-
+        if (banyak_petak < 1 || banyak_petak > nPetak) {
+            cout << RED << "Pilihan tidak valid" << RESET << endl;
+            valid = false;
+        } else {
+            valid = true;
         }
-        catch (const exception &e){
-            cout << RED << "Error: Input harus berupa integer" << RESET << endl;
-        }
+
+     
 
         //Membersihkan input buffer
         cin.clear();
@@ -388,4 +373,3 @@ void Petani::isInventoryMemadai(int n){
     }
 }
 
-//Mapping tanaman ke produk tanaman
