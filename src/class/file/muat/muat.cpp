@@ -132,9 +132,9 @@ Player* Muat::spawnPlayer(vector<string> vec){
 }
 
 Item* Muat::spawnItem(string name){
-    pair<string, int> type_id = Item::getTYPE_IDbyNAME(name);
-    string type = type_id.first;
-    int id = type_id.second;
+    vector<string> type_id = Item::getTYPE_IDbyNAME(name);
+    string type = type_id[0];
+    int id = stoi(type_id[1]);
 
     Item* item;
 
@@ -153,8 +153,8 @@ Item* Muat::spawnItem(string name){
 }
 
 Plant* Muat::spawnPlant(string name, int age){
-    pair<string, int> type_id = Item::getTYPE_IDbyNAME(name);
-    int id = type_id.second;
+    vector<string> type_id = Item::getTYPE_IDbyNAME(name);
+    int id = stoi(type_id[1]);
 
     Plant* plant = new Plant(id, age);
     plant->setPlanted(true);
@@ -162,8 +162,8 @@ Plant* Muat::spawnPlant(string name, int age){
 }
 
 Animal* Muat::spawnAnimal(string name, int weight){
-    pair<string, int> type_id = Item::getTYPE_IDbyNAME(name);
-    int id = type_id.second;
+    vector<string> type_id = Item::getTYPE_IDbyNAME(name);
+    int id = stoi(type_id[1]);
 
     Animal* animal = new Animal(id, weight);
     animal->setIsInCage(true);
