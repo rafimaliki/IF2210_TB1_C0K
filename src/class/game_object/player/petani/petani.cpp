@@ -296,6 +296,7 @@ void Petani::PANEN()
     catch (InventoryTidakMemadaiException &e)
     {
         cout << RED << e.what() << RESET << endl;
+        return;
     }
 
     string petak_to_harvest;
@@ -433,14 +434,14 @@ void Petani::cetakSiapPanen(map<string, int> harvestablePlant)
     }
 }
 
-void Petani::cetakHasilPanen(string kode_tanaman, int nPetak, string letak_panen[])
+void Petani::cetakHasilPanen(string kode_tanaman, int banyak_petak, string letak_panen[])
 {
-    cout << nPetak << " petak tanaman " << kode_tanaman << " pada petak ";
-    for (int i = 0; i < nPetak - 1; i++)
+    cout << banyak_petak << " petak tanaman " << kode_tanaman << " pada petak ";
+    for (int i = 0; i < banyak_petak - 1; i++)
     {
         cout << letak_panen[i] << ", ";
     }
-    cout << letak_panen[nPetak - 1] << " telah dipanen!" << endl;
+    cout << letak_panen[banyak_petak - 1] << " telah dipanen!" << endl;
 } 
 
 void Petani::isTanamanAda()
