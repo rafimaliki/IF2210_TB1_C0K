@@ -183,9 +183,6 @@ void Inventory<T>::print()
     }
     cout << PLUS << endl
          << endl;
-
-    cout << "Total slot kosong: " << this->calcEmptySpace() << endl
-         << endl;
 }
 
 template <class T>

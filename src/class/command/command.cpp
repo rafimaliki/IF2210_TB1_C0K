@@ -22,7 +22,6 @@ void Command::initCommand(){
     addCommand("BELI", &Player::BELI);
     addCommand("JUAL", &Player::JUAL);
     addCommand("PANEN", &Player::PANEN);
-    addCommand("SIMPAN", &Player::SIMPAN);
     addCommand("TAMBAH_PEMAIN", &Player::TAMBAH_PEMAIN);
 }
 

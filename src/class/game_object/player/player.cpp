@@ -44,17 +44,22 @@ Player *Player::getCurrentPlayer()
 }
 
 void Player::printLahan() {}
+
 Inventory<Plant> *Player::getLadang()
 {
     return nullptr;
 }
+
 void Player::printPeternakan() {}
+
 Inventory<Animal> *Player::getPeternakan()
 {
     return nullptr;
 }
+
 void Player::addPlant(Plant *item) {}
 void Player::addAnimal(Animal *item) {}
+
 void Player::addItem(Item *item)
 {
     this->inventory.add(item);
@@ -169,9 +174,12 @@ void Player::NEXT()
 
     cout << "Giliran player " << getCurrentPlayer()->name << endl << endl;
 }
+
 void Player::CETAK_PENYIMPANAN()
 {
     this->inventory.print();
+    cout << "Total slot kosong: " << this->inventory.calcEmptySpace() << endl
+         << endl;
 }
 void Player::PUNGUT_PAJAK()
 {
@@ -419,15 +427,9 @@ void Player::JUAL()
 
 void Player::PANEN()
 {
-    cout << RED << "\nTidak memiliki akses ke command PANEN!\n"
-         << RESET << endl;
+    throw NoPermissionException();
 }
 
-void Player::SIMPAN()
-{ /* BELUM IMPLEMENTASI */
-    cout << YELLOW << "\nCommand SIMPAN belum diimplementasikan!\n"
-         << RESET << endl;
-}
 void Player::TAMBAH_PEMAIN()
 {
     throw NoPermissionException();
