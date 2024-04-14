@@ -71,7 +71,16 @@ vector<string> Util::inputMultiplePetak(const string &str)
 
     return results;
 }
-
+bool Util::isSameElement(vector<string> v){
+    for (int i = 0; i < v.size() - 1; i++)
+    {
+        if (v[i] == v[i+1]) {
+            return true;
+        }
+    }
+    return false;
+    
+}
 bool Util::isValidChar(char c)
 {
     return ((c >= ' ' && c <= '~') || (c == '\n'));
