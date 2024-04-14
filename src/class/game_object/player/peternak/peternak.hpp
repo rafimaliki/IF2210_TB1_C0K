@@ -40,7 +40,12 @@ class Peternak : public Player {
         string inputSlotTanahTernak();
         string inputSlotInventoryTernak();
         void isInventoryPeternakPenuh();
-        void findAnimaltoHarvest(map<string, int> temp_siap_panen);
+        void findAnimaltoHarvest(map<string, int> &temp_siap_panen);
+        void printAnimaltoHarvest(map<string, int> temp_siap_panen);
+        void chooseAnimalToHarvest(int &hewan_pilihan, int &banyak_petak, map<string, int> temp_siap_panen, Inventory<Animal> peternakan,string &input);
+        void getKodeHewan(int hewan_pilihan, string &kode_hewan, map<string, int> temp_siap_panen,int &nPetak,int& count);
+        void inputPetakPanen(string &input, int &banyak_petak, int nPetak, string kode_hewan);
+        void panenHewan(int nPetak, int banyak_petak,string &petak_to_harvest,int ID,string *letak_panen,string kode_hewan);
         
 };
 
