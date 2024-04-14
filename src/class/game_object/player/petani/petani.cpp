@@ -155,48 +155,28 @@ void Petani::PANEN(){
     //TEMP MAP untuk menyimpan tanaman yang siap dipanen
     map<string,int> temp_siap_panen;
 
-    //CEK INVENTORY
-    if(this->inventory.isFull()){
-        cout << RED << "Inventory Penuh ! Silahkan kosongkan terlebih dahulu" << RESET << endl;
-        return;
-    }
-
-
-    this->CETAK_LADANG();
-
-
-
+ 
     try{
+        this->isiInventoryPenuh();
+        this->CETAK_LADANG();
         this->isPanenAvailable();
+    } catch (InventoryPenuhException& e){
+        cout << RED << e.what() << RESET << endl;
+        return;
     } catch (PanenTidakTersediaException& e){
         cout << RED << e.what() << RESET << endl;
         return;
     }
 
+
+
     //Cari tanaman yang siap dipanen
-    for(int i = 0 ; i < this->lahan.getHeight(); i++){
-        for(int j = 0 ; j < this->lahan.getWidth(); j++){
-            if(!this->lahan.isEmpty(i,j)){
-                if(this->lahan.getItem(i, j)->isReadyToHarvest()){
-                    string kode_tanaman = this->lahan.getItem(i, j)->getKODE_HURUF();
-                    if(temp_siap_panen.find(kode_tanaman) == temp_siap_panen.end()){
-                        temp_siap_panen[kode_tanaman] = 1;
-                    }else{
-                        temp_siap_panen[kode_tanaman]++;
-                    }
-                }
-            }
-        }
-    }
+    this->findHarvestablePlant(temp_siap_panen);
 
     //Print tanaman yang siap dipanen
     cout << " Pilih tanaman siap panen yang kamu miliki " << endl;
 
-    int i = 1;
-    for(auto it = temp_siap_panen.begin(); it != temp_siap_panen.end();it++){
-            cout << i << ". " << it->first << " (" << it->second << " petak siap panen)" << endl;
-            i++;
-        }
+    cetakSiapPanen(temp_siap_panen);
 
 
     //Pilih Tanaman
@@ -208,7 +188,7 @@ void Petani::PANEN(){
 
     
 
-    // OPSIONAL SELAIN LANGSUNG RETURN
+
     while(!valid){
      
         cout << "\nNomor tanaman yang ingin dipanen: ";
@@ -252,7 +232,7 @@ void Petani::PANEN(){
 
     valid = false;
 
-    //OPSIONAL TANPA RETURN LANGSUNG 
+
     while(!valid){
         cout << "\nBerapa petak yang ingin dipanen: ";
         cin >> input;
@@ -373,3 +353,34 @@ void Petani::isInventoryMemadai(int n){
     }
 }
 
+void Petani::isiInventoryPenuh(){
+    if(this->inventory.isFull()){
+        throw InventoryPenuhException();
+    }
+}
+
+void Petani::findHarvestablePlant(map<string,int>& harvestablePlant){
+    //Cari tanaman yang siap dipanen
+    for(int i = 0 ; i < this->lahan.getHeight(); i++){
+        for(int j = 0 ; j < this->lahan.getWidth(); j++){
+            if(!this->lahan.isEmpty(i,j)){
+                if(this->lahan.getItem(i, j)->isReadyToHarvest()){
+                    string kode_tanaman = this->lahan.getItem(i, j)->getKODE_HURUF();
+                    if(harvestablePlant.find(kode_tanaman) == harvestablePlant.end()){
+                        harvestablePlant[kode_tanaman] = 1;
+                    }else{
+                        harvestablePlant[kode_tanaman]++;
+                    }
+                }
+            }
+        }
+    }
+}
+
+void Petani::cetakSiapPanen(map<string,int>& harvestablePlant){
+    int i = 1;
+    for(auto it = harvestablePlant.begin(); it != harvestablePlant.end();it++){
+            cout << i << ". " << it->first << " (" << it->second << " petak siap panen)" << endl;
+            i++;
+        }
+}

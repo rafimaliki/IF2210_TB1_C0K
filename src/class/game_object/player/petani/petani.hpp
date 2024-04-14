@@ -17,10 +17,6 @@ class Petani : public Player {
         Inventory<Plant>* getLadang();
         int getWealth();
 
-        // void pungut_pajak();
-        // void bangun_bangunan();
-        // void tambah_pemain();
-        // void jual();
         /* Game command related methods */
         void CETAK_LADANG();
         void TANAM();
@@ -28,10 +24,12 @@ class Petani : public Player {
         void isLahanPenuh();
         void isPanenAvailable();
         void isInventoryMemadai(int n);
-        
+        void isiInventoryPenuh();
+        void findHarvestablePlant(map<string,int>& harvestablePlant);
+        void cetakSiapPanen(map<string,int>& harvestablePlant);
 
         string getType();
-        // void MUAT();
+
 };
 
 #endif
