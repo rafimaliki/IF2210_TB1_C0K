@@ -29,11 +29,13 @@ void Walikota::PUNGUT_PAJAK(){
     setMoney(money + total_taxes);
 }
 
-void Walikota::BANGUN(){  /* BELUM IMPLEMENTASI */
+void Walikota::BANGUN(){
     string namaBangunan, cekLanjut;
-    vector<Bangunan*> daftar_bangunan = getDaftarBangunan();
+    vector<RecipeConfig> daftar_bangunan = getDaftarRecipe();
     bool valid = false, lanjut = false;
     int price = 0;
+
+    cout << "Ukuran daftar bangunan: " << daftar_bangunan.size() << endl;
 
     cout << "Resep bangunan yang ada adalah sebagai berikut." << endl;
     showRecipe(daftar_bangunan);
@@ -64,7 +66,7 @@ void Walikota::BANGUN(){  /* BELUM IMPLEMENTASI */
     }
 }
 
-void Walikota::TAMBAH_PEMAIN(){  /* BELUM IMPLEMENTASI */
+void Walikota::TAMBAH_PEMAIN(){
     bool valid;
     string namaPemainBaru, jenisPemainBaru;
 
@@ -96,7 +98,6 @@ void Walikota::TAMBAH_PEMAIN(){  /* BELUM IMPLEMENTASI */
 int Walikota::HITUNG_PAJAK(int idx){
     int tax;
     int wealth = players[idx]->getWealth();
-    cout << "Kekayaan player " << players[idx]->getName() << " adalah " << wealth << " gulden." << endl;
 
     int KKP = wealth;
     if (players[idx]->getType() == "Petani"){
@@ -118,30 +119,30 @@ int Walikota::HITUNG_PAJAK(int idx){
     return tax;
 }
 
-vector<Bangunan*> Walikota::getDaftarBangunan(){
-    return Bangunan::daftar_bangunan;
+vector<RecipeConfig> Walikota::getDaftarRecipe(){
+    return GameConfig::recipeConfig;
 }
 
-void Walikota::showRecipe(vector<Bangunan*> daftar_bangunan){
+void Walikota::showRecipe(vector<RecipeConfig> daftar_bangunan){
     for (int i = 0; i < daftar_bangunan.size(); i++){
-        cout << (i + 1) << ". " << daftar_bangunan[i]->getConfig()->getNAME() << " ";
+        cout << (i + 1) << ". " << daftar_bangunan[i].getNAME() << " ";
         cout << "(";
-        cout << daftar_bangunan[i]->getConfig()->getPRICE() << " gulden";
-        for (int j = 0; j < daftar_bangunan[i]->getConfig()->getINGREDIENTS().size(); j++){
-            cout << ", " << daftar_bangunan[i]->getConfig()->getINGREDIENTS()[j].getNAME() << " " << daftar_bangunan[i]->getConfig()->getINGREDIENTS()[j].getQUANTITY();
+        cout << daftar_bangunan[i].getPRICE() << " gulden";
+        for (int j = 0; j < daftar_bangunan[i].getINGREDIENTS().size(); j++){
+            cout << ", " << daftar_bangunan[i].getINGREDIENTS()[j].getNAME() << " " << daftar_bangunan[i].getINGREDIENTS()[j].getQUANTITY();
         }
         cout << ")" << endl;
     }
     cout << endl;
 }
 
-string Walikota::inputNama(vector<Bangunan*> daftar_bangunan){
+string Walikota::inputNama(vector<RecipeConfig> daftar_bangunan){
     bool found = false;
     string nama;
     cout << "Bangunan yang ingin dibangun: ";
     cin >> nama;
     for (int i = 0; i < daftar_bangunan.size(); i++){
-        if (daftar_bangunan[i]->getConfig()->getNAME() == nama){
+        if (daftar_bangunan[i].getNAME() == nama){
             found = true;
         }
     }
@@ -153,10 +154,10 @@ string Walikota::inputNama(vector<Bangunan*> daftar_bangunan){
     }
 }
 
-int Walikota::getBangunanPrice(string nama, vector<Bangunan*> daftar_bangunan){
+int Walikota::getBangunanPrice(string nama, vector<RecipeConfig> daftar_bangunan){
     for (int i = 0; i < daftar_bangunan.size(); i++){
-        if (daftar_bangunan[i]->getConfig()->getNAME() == nama){
-            return daftar_bangunan[i]->getConfig()->getPRICE();
+        if (daftar_bangunan[i].getNAME() == nama){
+            return daftar_bangunan[i].getPRICE();
         }
     }
     return -1;
@@ -174,7 +175,7 @@ void Walikota::cancelUseMoney(int amount){
     money += amount;
 }
 
-void Walikota::useIngredients(string nama, vector<Bangunan*> daftar_bangunan){
+void Walikota::useIngredients(string nama, vector<RecipeConfig> daftar_bangunan){
     int idx;
     vector<string> ingredient_name;
     vector<int> ingredient_quantity, available_ingredient;
@@ -182,15 +183,15 @@ void Walikota::useIngredients(string nama, vector<Bangunan*> daftar_bangunan){
     bool notEnough = false;
 
     for (int i = 0; i < daftar_bangunan.size(); i++){
-        if (daftar_bangunan[i]->getConfig()->getNAME() == nama){
+        if (daftar_bangunan[i].getNAME() == nama){
             idx = i;
         }
     }
 
 
-    for (int i = 0; i < daftar_bangunan[idx]->getConfig()->getINGREDIENTS().size(); i++){
-        ingredient_name.push_back(daftar_bangunan[idx]->getConfig()->getINGREDIENTS()[i].getNAME());
-        ingredient_quantity.push_back(daftar_bangunan[idx]->getConfig()->getINGREDIENTS()[i].getQUANTITY());
+    for (int i = 0; i < daftar_bangunan[idx].getINGREDIENTS().size(); i++){
+        ingredient_name.push_back(daftar_bangunan[idx].getINGREDIENTS()[i].getNAME());
+        ingredient_quantity.push_back(daftar_bangunan[idx].getINGREDIENTS()[i].getQUANTITY());
     }
 
     for (int i = 0; i < ingredient_quantity.size(); i++){
@@ -249,10 +250,10 @@ void Walikota::useIngredients(string nama, vector<Bangunan*> daftar_bangunan){
     }
 }
 
-void Walikota::bangunBangunan(string nama, vector<Bangunan*> daftar_bangunan){
+void Walikota::bangunBangunan(string nama, vector<RecipeConfig> daftar_bangunan){
     int idx;
     for (int i = 0; i < daftar_bangunan.size(); i++){
-        if (daftar_bangunan[i]->getConfig()->getNAME() == nama){
+        if (daftar_bangunan[i].getNAME() == nama){
             idx = i;
         }
     }
