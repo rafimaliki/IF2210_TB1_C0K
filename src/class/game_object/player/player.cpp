@@ -304,7 +304,7 @@ void Player::BELI()
                         getline(cin, slotstring);
                         vector<string> result_petak = Util::inputMultiplePetak(slotstring);
                         bool valid_slot = true; 
-                        while (result_petak.size() != amount || valid_slot)
+                        while (result_petak.size() != amount || valid_slot|| Util::isSameElement(result_petak))
                         {
                             valid_slot = false;
                             for (const string &petak : result_petak)
@@ -315,9 +315,9 @@ void Player::BELI()
                                     break;
                                 }
                             }
-                            if (result_petak.size() != amount || valid_slot)
+                            if (result_petak.size() != amount || valid_slot || Util::isSameElement(result_petak))
                             {
-                                cout << RED << "Slot tidak tersedia / amount tidak sesuai, input ulang" << RESET << endl;
+                                cout << RED << "Slot tidak tersedia / amount tidak sesuai , input ulang" << RESET << endl;
                                 cout << "Petak: ";
                                 getline(cin, slotstring);
                                 result_petak = Util::inputMultiplePetak(slotstring);
@@ -396,6 +396,8 @@ void Player::JUAL()
                         throw IsEmptySlotException();
                     if (this->inventory.getItem(finalslots[i])->getTYPE() == "" && !(this->getType() == "Walikota"))
                         throw RoleNotValid();
+                    if(Util::isSameElement(finalslots)) 
+                        throw InvalidIndexException();
                 }
                 int total_money = 0;
                 for (int i = 0; i < finalslots.size(); i++)

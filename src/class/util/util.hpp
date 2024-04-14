@@ -17,6 +17,7 @@ public:
     static bool isLetterLower(char c);
     static bool isLetterUpper(char c);
     static vector<string> inputMultiplePetak(const string &str);
+    static bool isSameElement(vector<string>);
 
     // A01 -> {0, 0}
     static vector<int> idxToInt(string idx);
