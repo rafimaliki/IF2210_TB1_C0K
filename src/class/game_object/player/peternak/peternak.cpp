@@ -152,6 +152,12 @@ void Peternak::PANEN(){
     inputPetakPanen(input,banyak_petak,nPetak,kode_hewan);
 
     //hitung inventory apakah cukup atau tidak
+
+    // jika yang dipilih adalah ayam atau bebek maka tambahkan 1 telur
+    if(ID == 6 || ID == 7){
+        banyak_petak +=1;
+    }
+
     this->isInventoryMemadai(banyak_petak);
 
     string petak_to_harvest;
@@ -621,10 +627,17 @@ void Peternak::panenHewan(int nPetak, int banyak_petak,string &petak_to_harvest,
 
                 //add item ke inventory
                 ID = this->peternakan.getItem(petak_to_harvest)->getConfig()->getID();
-                Item *item = new Product(ID);
-
+                int offset = GameConfig::plantConfig.size();
+                Item *item = new Product(ID + offset);
                 this->addItem(item);
 
+                if(this->peternakan.getItem(petak_to_harvest)->getNAME() == "CHICKEN"){
+                    Item *egg = new Product(16);
+                    this->addItem(egg);
+                }else if(this->peternakan.getItem(petak_to_harvest)->getNAME() == "DUCK"){
+                    Item *egg = new Product(17);
+                    this->addItem(egg);
+                }
                 this->getPeternakan()->remove(petak_to_harvest);
 
 
