@@ -44,17 +44,22 @@ Player *Player::getCurrentPlayer()
 }
 
 void Player::printLahan() {}
+
 Inventory<Plant> *Player::getLadang()
 {
     return nullptr;
 }
+
 void Player::printPeternakan() {}
+
 Inventory<Animal> *Player::getPeternakan()
 {
     return nullptr;
 }
+
 void Player::addPlant(Plant *item) {}
 void Player::addAnimal(Animal *item) {}
+
 void Player::addItem(Item *item)
 {
     this->inventory.add(item);
@@ -169,9 +174,12 @@ void Player::NEXT()
 
     cout << "Giliran player " << getCurrentPlayer()->name << endl << endl;
 }
+
 void Player::CETAK_PENYIMPANAN()
 {
     this->inventory.print();
+    cout << "Total slot kosong: " << this->inventory.calcEmptySpace() << endl
+         << endl;
 }
 void Player::PUNGUT_PAJAK()
 {
@@ -296,7 +304,7 @@ void Player::BELI()
                         getline(cin, slotstring);
                         vector<string> result_petak = Util::inputMultiplePetak(slotstring);
                         bool valid_slot = true; 
-                        while (result_petak.size() != amount || valid_slot)
+                        while (result_petak.size() != amount || valid_slot|| Util::isSameElement(result_petak))
                         {
                             valid_slot = false;
                             for (const string &petak : result_petak)
@@ -307,9 +315,9 @@ void Player::BELI()
                                     break;
                                 }
                             }
-                            if (result_petak.size() != amount || valid_slot)
+                            if (result_petak.size() != amount || valid_slot || Util::isSameElement(result_petak))
                             {
-                                cout << RED << "Slot tidak tersedia / amount tidak sesuai, input ulang" << RESET << endl;
+                                cout << RED << "Slot tidak tersedia / amount tidak sesuai , input ulang" << RESET << endl;
                                 cout << "Petak: ";
                                 getline(cin, slotstring);
                                 result_petak = Util::inputMultiplePetak(slotstring);
@@ -388,6 +396,8 @@ void Player::JUAL()
                         throw IsEmptySlotException();
                     if (this->inventory.getItem(finalslots[i])->getTYPE() == "" && !(this->getType() == "Walikota"))
                         throw RoleNotValid();
+                    if(Util::isSameElement(finalslots)) 
+                        throw InvalidIndexException();
                 }
                 int total_money = 0;
                 for (int i = 0; i < finalslots.size(); i++)
@@ -419,15 +429,9 @@ void Player::JUAL()
 
 void Player::PANEN()
 {
-    cout << RED << "\nTidak memiliki akses ke command PANEN!\n"
-         << RESET << endl;
+    throw NoPermissionException();
 }
 
-void Player::SIMPAN()
-{ /* BELUM IMPLEMENTASI */
-    cout << YELLOW << "\nCommand SIMPAN belum diimplementasikan!\n"
-         << RESET << endl;
-}
 void Player::TAMBAH_PEMAIN()
 {
     throw NoPermissionException();

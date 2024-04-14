@@ -302,9 +302,9 @@ void Walikota::addNewPlayer(string namaPemainBaru, string jenisPemainBaru){
     int oldIdx = current_player_idx;
     int newIdx;
     if (jenisPemainBaru == "petani"){
-        Player* petaniBaru = new Petani(namaPemainBaru, 50, 40);
+        Player* petaniBaru = new Petani(namaPemainBaru, 50, 0);
     } else {
-        Player* peternakBaru = new Peternak(namaPemainBaru, 50, 40);
+        Player* peternakBaru = new Peternak(namaPemainBaru, 50, 0);
     }
     
     for (int i = 0; i < players.size(); i++){

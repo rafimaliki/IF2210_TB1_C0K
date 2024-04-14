@@ -70,8 +70,6 @@ public:
     virtual void BELI();
     virtual void JUAL();
     virtual void PANEN();
-    // virtual void MUAT();
-    virtual void SIMPAN();
     virtual void TAMBAH_PEMAIN();
 
     /* Operator overloading */
