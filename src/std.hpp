@@ -9,7 +9,7 @@
 #include <exception>
 #include <algorithm>
 #include <fstream>
-#include <utility>
+// #include <utility>
 #include <cctype>
 #include <limits>
 
@@ -25,7 +25,7 @@ using std::to_string;
 using std::array;
 using std::map;
 using std::exception;
-using std::pair;
+// using std::pair;
 
 #include "class/util/util.hpp"
 
