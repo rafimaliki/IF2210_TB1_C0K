@@ -1,5 +1,5 @@
 3
-Petani1 Petani 40 50
+Petani1 Petani 40 50    
 8
 TEAK_TREE
 SANDALWOOD_TREE

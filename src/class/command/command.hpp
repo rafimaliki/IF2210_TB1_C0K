@@ -14,6 +14,7 @@ class Command {
     public:
         static void addCommand(const string& command, void (Player::*function)());
         static void initCommand();
+        static void initCheat();
         static void execute(const string& command);
 };
 

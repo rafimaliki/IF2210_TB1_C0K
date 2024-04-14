@@ -43,17 +43,6 @@ Player *Player::getCurrentPlayer()
     return players[current_player_idx];
 }
 
-void Player::next()
-{
-    cout << "Turn player " << getCurrentPlayer()->name << "berakhir" << endl;
-    current_player_idx++;
-    if (current_player_idx >= player_count)
-    {
-        current_player_idx = 0;
-    }
-    cout << "Giliran player " << getCurrentPlayer()->name << endl << endl;
-}
-
 void Player::printLahan() {}
 Inventory<Plant> *Player::getLadang()
 {
@@ -619,4 +608,77 @@ void Player::GIVE()
 void Player::STATS()
 {
     this->printStats();
+}
+
+void Player::DELETE(){
+
+    if (this->getType() == "Walikota"){
+        DELETE_INVENTORY();
+
+    }  else if (this->getType() == "Petani"){
+
+        string choice;
+        cout << "\n1. Penyimpanan" << endl;
+        cout << "2. Ladang" << endl;
+        cout << "Pilih yang ingin dihapus: ";
+        cin >> choice;
+
+        if (choice == "1"){
+            DELETE_INVENTORY();
+        } else if (choice == "2"){
+            DELETE_LADANG();
+        } else {
+            return;
+        }
+
+    } else if (this->getType() == "Peternak"){
+
+        string choice;
+        cout << "\n1. Penyimpanan" << endl;
+        cout << "2. Peternakan" << endl;
+        cout << "Pilih yang ingin dihapus: ";
+        cin >> choice;
+
+        if (choice == "1"){
+            DELETE_INVENTORY();
+        } else if (choice == "2"){
+            DELETE_PETERNAKAN();
+        } else {
+            return;
+        }
+
+    }
+
+    cout << "Sukses!\n"
+         << endl;
+}
+
+void Player::DELETE_INVENTORY(){
+    this->inventory.print();
+
+    string slot;
+    cout << "\nPilih slot yang ingin dihapus: ";
+
+    cin >> slot;
+    this->inventory.remove(slot);
+}
+
+void Player::DELETE_LADANG(){
+    this->getLadang()->print();
+
+    string slot;
+    cout << "\nPilih slot yang ingin dihapus: ";
+
+    cin >> slot;
+    this->getLadang()->remove(slot);
+}
+
+void Player::DELETE_PETERNAKAN(){
+    this->getPeternakan()->print();
+
+    string slot;
+    cout << "\nPilih slot yang ingin dihapus: ";
+
+    cin >> slot;
+    this->getPeternakan()->remove(slot);
 }

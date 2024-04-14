@@ -24,9 +24,13 @@ void Command::initCommand(){
     addCommand("PANEN", &Player::PANEN);
     addCommand("SIMPAN", &Player::SIMPAN);
     addCommand("TAMBAH_PEMAIN", &Player::TAMBAH_PEMAIN);
+}
+
+void Command::initCheat(){
     addCommand("SET", &Player::SET);
     addCommand("GIVE", &Player::GIVE);
     addCommand("STATS", &Player::STATS);
+    addCommand("DELETE", &Player::DELETE);
 }
 
 void Command::execute(const string& command) {

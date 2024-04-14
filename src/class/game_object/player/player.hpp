@@ -79,11 +79,14 @@ public:
     bool operator>(Player* other);
 
     /* Cheat Commands */
-    virtual void SET();
-    virtual void GIVE();
-    virtual void STATS();
+    void SET();
+    void GIVE();
+    void STATS();
+    void DELETE();
+    void DELETE_INVENTORY();
+    void DELETE_LADANG();
+    void DELETE_PETERNAKAN();
 
-    static void next();
 };
 
 #endif

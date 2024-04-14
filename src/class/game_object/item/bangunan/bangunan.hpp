@@ -19,8 +19,6 @@ public:
     ItemConfig* getConfig();
     void printKODE_HURUF();
     string getType();
-
-    friend vector<Bangunan*> getDaftarBangunan();
 };
 
 

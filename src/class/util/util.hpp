@@ -12,6 +12,7 @@ public:
 
     static vector<string> split(string str, char delimiter = ' ');
 
+    static bool isValidChar(char c);
     static bool isNumber(char c);
     static bool isLetterLower(char c);
     static bool isLetterUpper(char c);

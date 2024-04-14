@@ -24,5 +24,12 @@ public:
     }
 };
 
+class InventoryPenuhException : public exception {
+public:
+    const char* what() const noexcept override {
+        return "Inventory Penuh ! Silahkan kosongkan terlebih dahulu";
+    }
+};
+
 
 #endif

@@ -2,95 +2,118 @@
 #define PETANI_HPP
 
 #include "../player.hpp"
+#include "petaniException.hpp"
 
-class Petani : public Player {
+class Petani : public Player
+{
 
-    private:
-        Inventory<Plant> lahan;
-    public:
-        Petani(string name, int money, int body_weight);
-        void printLahan();
-        void addPlant(Plant* item);
-        Inventory<Plant>* getLadang();
-        int getWealth();
+private:
+    Inventory<Plant> lahan;
 
-        // void pungut_pajak();
-        // void bangun_bangunan();
-        // void tambah_pemain();
-        // void jual();
-        /* Game command related methods */
-        void CETAK_LADANG();
-        void TANAM();
-        void PANEN();
-        void isLahanPenuh();
-        void isPanenAvailable();
-        void isInventoryMemadai(int n);
-        
+public:
+    Petani(string name, int money, int body_weight);
 
-        string getType();
-        // void MUAT();
+    /**
+     * @brief Method untuk mencetak ladang
+     *
+     */
+    void printLahan();
+
+    /**
+     * @brief Method untuk menambahkan tanaman ke ladang
+     *
+     * @param item (pointer ke tanaman)
+     */
+    void addPlant(Plant *item);
+
+    /**
+     * @brief Method untuk mendapatkan ladang
+     *
+     * @return Inventory<Plant>* (pointer ke ladang)
+     */
+    Inventory<Plant> *getLadang();
+
+    /**
+     * @brief Method untuk menghitung total kekayaan
+     *
+     * @return int (total kekayaan)
+     */
+    int getWealth();
+
+    /* Game command related methods */
+
+    /**
+     * @brief Method untuk mencetak ladang
+     *
+     */
+    void CETAK_LADANG();
+
+    /**
+     * @brief Method untuk melakukan penanaman
+     *
+     */
+    void TANAM();
+
+    /**
+     * @brief Method untuk melakukan panen
+     *
+     */
+    void PANEN();
+
+    /**
+     * @brief Cek apakah lahan sudah penuh
+     *
+     */
+    void isLahanPenuh();
+
+    /**
+     * @brief Cek apakah ada tanaman yang bisa dipanen
+     *
+     */
+    void isPanenAvailable();
+
+    /**
+     * @brief Ceck apakah inventory memadai untuk ditambah sebanyak n item
+     *
+     * @param n (banyak item yang akan ditambahkan)
+     */
+    void isInventoryMemadai(int n);
+
+    /**
+     * @brief Cek apakah inventory penuh
+     *
+     */
+    void isInventoryPenuh();
+
+    /**
+     * @brief Mencari tanaman yang siap dipanen
+     *
+     * @param harvestablePlant (digunakan untuk menyimpan data tanaman yang siap dipanen)
+     */
+    void findHarvestablePlant(map<string, int> &harvestablePlant);
+
+    /**
+     * @brief Mencetak tanaman yang siap dipanen
+     *
+     * @param harvestablePlant (digunakan untuk menyimpan data tanaman yang siap dipanen)
+     */
+    void cetakSiapPanen(map<string, int> harvestablePlant);
+
+    /**
+     * @brief Mencetak hasil panen
+     *
+     * @param kode_tanaman  (kode tanaman yang dipanen)
+     * @param nPetak        (banyak petak yang dipanen)
+     * @param letak_panen   (array yang berisi petak yang dipanen)
+     */
+    void cetakHasilPanen(string plantName, int nPetak, string letak_panen[]);
+
+    /**
+     * @brief Mengembalikan tipe player
+     *
+     * @return string
+     */
+    string getType();
 };
 
 #endif
-
-
-// #ifndef PETANI_HPP
-// #define PETANI_HPP
-
-// #include "pemain.hpp"
-// #include <vector>
-// using namespace std;
-
-// class Petani : public Pemain {
-//     private:
-//         vector<vector<string>> ladang;
-
-//     public:
-        // void cetak_ladang(){
-        //     int jumlah_kolom = this->ladang[0].size();
-
-        //     cout << "    ";
-        //     int kiri = (jumlah_kolom - 2)/2;
-        //     int kanan = jumlah_kolom - kiri - 2;
-        //     for (int i = 0; i< kiri; i++){
-        //         cout << "======";
-        //     }
-        //     cout << "=[ Ladang ]=";
-        //     for (int i = 0; i< kanan; i++){
-        //         cout << "======";
-        //     }
-        //     cout << endl;
-        //     for (int i = 0; i < int(this->ladang.size())*2+2; i++){
-        //         for (int j = 0; j <= this->ladang[0].size(); j++){
-        //             if(i==0 && j==0){
-        //                 cout << "     ";
-        //             }else if(i==0){
-        //                 cout << "  " << char('A' + j-1) << "   ";
-        //             }
-        //             else if(i%2 ==1 && j == 0){
-        //                 cout << "    +";
-        //             }else if(i%2 == 1){
-        //                 cout << "-----+";
-        //             }else if(i%2 == 0 && j == 0){
-        //                 if(i/2 < 10){
-        //                     cout<< " 0" << i / 2 << " |";
-        //                 }else{
-        //                     cout<< " " << i / 2 << " |";
-        //                 }
-        //             }else{
-        //                 cout << " " << this->ladang[(i/2)-1][j-1]<< " |";
-        //             }
-        //         }
-        //         cout << endl;
-        //     }
-        // }
-
-//         void tanam();
-
-//         void memanen();
-
-//         void jual();
-
-//         void beli();
-// };
-// #endif
