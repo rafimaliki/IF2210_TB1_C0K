@@ -40,7 +40,8 @@ class Peternak : public Player {
         string inputSlotTanahTernak();
         string inputSlotInventoryTernak();
         void isInventoryPeternakPenuh();
-        void findAnimaltoHarvest();
+        void findAnimaltoHarvest(map<string, int> temp_siap_panen);
+        
 };
 
 #endif
