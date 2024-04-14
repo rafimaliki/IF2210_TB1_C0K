@@ -21,7 +21,7 @@ bool Item::isPlant(){
 }
 
 bool Item::isAnimal(){
-    return (this->getTYPE() == "CARNIVORE" || this->getTYPE() == "HERBIVORE");
+    return (this->getTYPE() == "CARNIVORE" || this->getTYPE() == "HERBIVORE" || this->getTYPE() == "OMNIVORE");
 }
 
 /* GETTER */
