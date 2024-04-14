@@ -37,7 +37,7 @@ vector<string> Util::split(string str, char delimiter)
             splitted.push_back(temp);
             temp = "";
         }
-        else if (str[i] != delimiter)
+        else if ((str[i] != delimiter) && Util::isValidChar(str[i]))
         {
             temp += str[i];
         }
@@ -52,13 +52,13 @@ vector<string> Util::split(string str, char delimiter)
 }
 vector<string> Util::inputMultiplePetak(const string &str)
 {
-    std::vector<std::string> results;
+    vector<string> results;
 
     auto parts = split(str, ',');
     for (const auto &part : parts)
     {
 
-        std::string cleanPart;
+        string cleanPart;
         for (char ch : part)
         {
             if (ch != ' ')
@@ -70,6 +70,11 @@ vector<string> Util::inputMultiplePetak(const string &str)
     }
 
     return results;
+}
+
+bool Util::isValidChar(char c)
+{
+    return ((c >= ' ' && c <= '~') || (c == '\n'));
 }
 bool Util::isNumber(char c)
 {
