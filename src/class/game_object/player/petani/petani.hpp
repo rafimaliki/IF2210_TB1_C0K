@@ -64,7 +64,7 @@ public:
      * @brief Cek apakah lahan sudah penuh
      *
      */
-    void isLahanPenuh();
+    bool isLahanPenuh();
 
     /**
      * @brief Cek apakah ada tanaman yang bisa dipanen
@@ -109,7 +109,11 @@ public:
     void cetakHasilPanen(string plantName, int nPetak, string letak_panen[]);
 
     
-    void isTanamanAda();
+    bool isTanamanAda();
+
+    int getPlantID(string slot);
+
+    void tanamTanaman(string slot_inventory,int ID, string slot_tanah);
 
     string getType();
 };

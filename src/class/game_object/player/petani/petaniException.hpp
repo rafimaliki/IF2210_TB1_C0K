@@ -38,4 +38,24 @@ public:
     }
 };
 
+class bukanTanamanException : public exception {
+public:
+    const char* what() const noexcept override {
+        return "Apa yang kamu lakukan?!! Kamu mencoba untuk menanam itu?!!";
+    }
+};
+
+class ambilSlotKosongException : public exception {
+public:
+    const char* what() const noexcept override {
+        return "Kamu mengambil harapan kosong dari penyimpanan.";
+    }
+};
+
+class lahanSudahDitanamiException : public exception {
+public:
+    const char* what() const noexcept override {
+        return "Lahan itu sudah ditanami";
+    }
+};
 #endif
