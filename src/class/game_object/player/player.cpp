@@ -396,6 +396,8 @@ void Player::JUAL()
                         throw IsEmptySlotException();
                     if (this->inventory.getItem(finalslots[i])->getTYPE() == "" && !(this->getType() == "Walikota"))
                         throw RoleNotValid();
+                    if(Util::isSameElement(finalslots)) 
+                        throw InvalidIndexException();
                 }
                 int total_money = 0;
                 for (int i = 0; i < finalslots.size(); i++)
