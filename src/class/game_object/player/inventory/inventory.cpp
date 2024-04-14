@@ -98,18 +98,13 @@ void Inventory<T>::add(T *item, string idx)
 template <class T>
 void Inventory<T>::remove(int i, int j)
 {
-    if (i >= this->height || j >= this->width || i < 0 || j < 0)
-    {
+    if (i >= this->height || j >= this->width || i < 0 || j < 0){
         throw InvalidIndexException();
+    } else if (this->isEmpty(i, j)){
+        throw IsEmptySlotException();
     }
-    else if (this->isEmpty(i, j))
-    {
-        cout << "Slot kosong!" << endl;
-    }
-    else
-    {
-        this->grid[i][j] = InventoryEntry<T>();
-    }
+   
+    this->grid[i][j] = InventoryEntry<T>();
 }
 
 template <class T>

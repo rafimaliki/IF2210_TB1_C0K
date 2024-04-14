@@ -9,10 +9,11 @@ void Game::start(){
     try {
         GameConfig::loadGameConfig();
         Command::initCommand();
+                                      Command::initCheat();
         Util::printTitle();
         Game::loadGameData();
 
-        this->is_running = true;
+        this->is_running = true; 
     } catch (FailReadFileException &e) { 
         Util::printColor(e.what(), RED);
     } catch (InvalidDataException &e) {
@@ -96,6 +97,10 @@ void Game::loadGameData(){
         } else if (choice == "N") {
             Game::startNewGame();
             valid = true;
-        }
+        } 
+        // else if (choice == "ENABLE_CHEAT"){ // Enable cheat easter egg <GIVE, SET, DELETE, STATS> method
+        //     Command::initCheat();
+        //     Util::printColor("Cheat enabled!\n", GREEN);
+        // }
     } while ((!(choice == "Y") && !(choice == "N")) || !valid);
 }
