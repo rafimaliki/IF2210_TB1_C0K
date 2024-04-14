@@ -23,6 +23,7 @@ private:
     
 public:
     Game();
+    ~Game();
 
     void start();
     void startNewGame();
@@ -35,6 +36,7 @@ public:
     void printWinner();
 
     bool isRunning();
+    void destroyObject();
 };
 
 #endif
