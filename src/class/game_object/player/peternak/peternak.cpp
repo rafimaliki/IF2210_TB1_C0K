@@ -147,18 +147,16 @@ void Peternak::PANEN(){
 
     //get id dari hewan untuk mapping dari hewan ke produk hewan
     int ID = 0;
-    
 
     inputPetakPanen(input,banyak_petak,nPetak,kode_hewan);
 
     //hitung inventory apakah cukup atau tidak
-
     // jika yang dipilih adalah ayam atau bebek maka tambahkan 1 telur
-    if(ID == 6 || ID == 7){
-        banyak_petak +=1;
+    if(kode_hewan == "CHK" || kode_hewan == "DCK"){
+        this->isInventoryMemadai(banyak_petak*2);
+    }else{
+        this->isInventoryMemadai(banyak_petak);
     }
-
-    this->isInventoryMemadai(banyak_petak);
 
     string petak_to_harvest;
     string letak_panen[nPetak];
@@ -582,7 +580,6 @@ void Peternak::getKodeHewan(int hewan_pilihan, string &kode_hewan, map<string, i
 
 void Peternak::inputPetakPanen(string &input, int &banyak_petak, int nPetak, string kode_hewan){
     bool valid = false;
-    cout << "nPetak: " << nPetak << endl;
     //OPSIONAL TANPA RETURN LANGSUNG 
     while(!valid){
         try{
@@ -606,7 +603,6 @@ void Peternak::inputPetakPanen(string &input, int &banyak_petak, int nPetak, str
         //Membersihkan input buffer
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
     }
 }
 
