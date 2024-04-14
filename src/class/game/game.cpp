@@ -9,7 +9,7 @@ void Game::start(){
     try {
         GameConfig::loadGameConfig();
         Command::initCommand();
-                                      Command::initCheat();
+        Command::initCheat();
         Util::printTitle();
         Game::loadGameData();
 
@@ -19,6 +19,42 @@ void Game::start(){
     } catch (InvalidDataException &e) {
         Util::printColor(e.what(), RED);
     }
+}
+
+Game::~Game(){
+    destroyObject();
+}
+
+void Game::destroyObject(){
+    // destroy player 
+    for (int i = 0; i < Player::players.size(); i++){
+        delete Player::players[i];
+    }
+    Player::players.clear();
+
+    // destroy plant
+    for (int i = 0; i < Plant::plants.size(); i++){
+        delete Plant::plants[i];
+    }
+    Plant::plants.clear();
+
+    // destroy animal
+    for (int i = 0; i < Animal::animals.size(); i++){
+        delete Animal::animals[i];
+    }
+    Animal::animals.clear();
+
+    // destroy bangunan
+    for (int i = 0; i < Bangunan::daftar_bangunan.size(); i++){
+        delete Bangunan::daftar_bangunan[i];
+    }
+    Bangunan::daftar_bangunan.clear();
+
+    // destroy product 
+    for (int i = 0; i < Product::products.size(); i++){
+        delete Product::products[i];
+    }
+    Product::products.clear();
 }
 
 void Game::startNewGame(){
