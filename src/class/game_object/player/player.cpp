@@ -285,8 +285,10 @@ void Player::BELI()
 
                 if (Toko::getItemToko(nomor)->getTYPE() == "" && this->getType() == "Walikota")
                     throw RoleNotValid();
+
+                /*Sudah valid disini, gulden bisa diubah*/
                 Item *beli = Toko::beliItemToko(nomor, amount, this->money);
-                this->money -= (amount * beli->getPRICE());
+                this->setMoney(this->money -= (amount * beli->getPRICE()));
                 this->inventory.print();
                 cout << "Selamat Anda berhasil membeli " << amount << " " << beli->getNAME() << ". Uang Anda tersisa " << this->money << " gulden. " << endl;
                 cout << "Pilih slot untuk menyimpan barang yang Anda beli!" << endl;

@@ -53,6 +53,10 @@ int Item::getADDED_WEIGHT(){
     return this->getConfig()->getADDED_WEIGHT();
 }
 
+bool Item::operator==(Item* item){
+
+    return getConfig()->getKODE_HURUF() == item->getConfig()->getKODE_HURUF();    
+}
 vector<string> Item::getTYPE_IDbyNAME(string name){
 
     vector<string> result;
@@ -84,6 +88,7 @@ vector<string> Item::getTYPE_IDbyNAME(string name){
             return result;
         }
     }
+
 
     // throw InvalidTypeException();
     return result;

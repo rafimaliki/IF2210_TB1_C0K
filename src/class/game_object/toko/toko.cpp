@@ -85,7 +85,7 @@ bool Toko::checkValidItem(Item *item)
 {
     for (int i = 0; i < list_item.size(); i++)
     {
-        if (list_item[i].getItem()->getKODE_HURUF() == item->getKODE_HURUF())
+        if (*list_item[i].getItem() == item)
         {
             return true;
         }
@@ -108,7 +108,8 @@ void Toko::addItem(Item *item)
         {
             for (int i = 0; i < list_item.size(); i++)
             {
-                if (list_item[i].getItem()->getKODE_HURUF() == item->getKODE_HURUF())
+                int tes = list_item[i].getItem() == item;
+                if (*list_item[i].getItem() == item)
                 {
                     list_item[i].tambahAmount(1);
                 }

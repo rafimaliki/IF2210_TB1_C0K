@@ -21,14 +21,19 @@ class Item
 
         /* GETTER */
         virtual int getID();
-        virtual string getKODE_HURUF();
+        virtual string getKODE_HURUF() ;
         virtual string getNAME();
         virtual int getPRICE();
-        virtual string getTYPE();
+        virtual string getTYPE() ;
         virtual int getDURATION_TO_HARVEST();
         virtual int getWEIGHT_TO_HARVEST();
         virtual string getORIGIN();
         virtual int getADDED_WEIGHT();
+
+        /*OVERLOAD*/
+        bool operator==(Item*);
+
+
 
         bool isFood();
         bool isPlant();
