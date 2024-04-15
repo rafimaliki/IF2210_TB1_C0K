@@ -31,5 +31,11 @@ public:
     }
 };
 
+class InventoryTidakAdaTanamanException : public exception {
+public:
+    const char* what() const noexcept override {
+        return "Inventory tidak ada tanaman";
+    }
+};
 
 #endif

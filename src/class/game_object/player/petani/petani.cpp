@@ -71,15 +71,23 @@ void Petani::CETAK_LADANG()
 void Petani::TANAM()
 {
 
-    // Cek Apakah Lahan sudah Penuh
     try
     {
         this->isLahanPenuh();
+        this->isTanamanAda();
     }
     catch (LahanPenuhException &e)
     {
         cout << RED << e.what() << RESET << endl;
+        return;
     }
+    catch (InventoryTidakAdaTanamanException &e)
+    {
+        cout << RED << e.what() << RESET << endl;
+        return;
+    }
+
+   
 
     cout << "Pilih tanaman dari penyimpanan " << endl;
 
@@ -93,7 +101,8 @@ void Petani::TANAM()
     {
         try
         {
-
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cout << "Slot: ";
             cin >> slot;
 
@@ -287,6 +296,7 @@ void Petani::PANEN()
     catch (InventoryTidakMemadaiException &e)
     {
         cout << RED << e.what() << RESET << endl;
+        return;
     }
 
     string petak_to_harvest;
@@ -424,12 +434,36 @@ void Petani::cetakSiapPanen(map<string, int> harvestablePlant)
     }
 }
 
-void Petani::cetakHasilPanen(string kode_tanaman, int nPetak, string letak_panen[])
+void Petani::cetakHasilPanen(string kode_tanaman, int banyak_petak, string letak_panen[])
 {
-    cout << nPetak << " petak tanaman " << kode_tanaman << " pada petak ";
-    for (int i = 0; i < nPetak - 1; i++)
+    cout << banyak_petak << " petak tanaman " << kode_tanaman << " pada petak ";
+    for (int i = 0; i < banyak_petak - 1; i++)
     {
         cout << letak_panen[i] << ", ";
     }
-    cout << letak_panen[nPetak - 1] << " telah dipanen!" << endl;
+    cout << letak_panen[banyak_petak - 1] << " telah dipanen!" << endl;
 } 
+
+void Petani::isTanamanAda()
+{
+    bool flag = false;
+    for (int i = 0; i < this->inventory.getHeight(); i++)
+    {
+        for (int j = 0; j < this->inventory.getWidth(); j++)
+        {
+            if (this->inventory.isEmpty(i, j) || !this->inventory.getItem(i, j)->isPlant())
+            {
+                continue;
+            }
+            else
+            {
+                flag = true;
+                break;
+            }
+        }
+    }
+    if (!flag)
+    {
+        throw InventoryTidakAdaTanamanException();
+    }
+}

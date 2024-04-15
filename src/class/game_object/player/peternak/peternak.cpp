@@ -147,12 +147,16 @@ void Peternak::PANEN(){
 
     //get id dari hewan untuk mapping dari hewan ke produk hewan
     int ID = 0;
-    
 
     inputPetakPanen(input,banyak_petak,nPetak,kode_hewan);
 
     //hitung inventory apakah cukup atau tidak
-    this->isInventoryMemadai(banyak_petak);
+    // jika yang dipilih adalah ayam atau bebek maka tambahkan 1 telur
+    if(kode_hewan == "CHK" || kode_hewan == "DCK"){
+        this->isInventoryMemadai(banyak_petak*2);
+    }else{
+        this->isInventoryMemadai(banyak_petak);
+    }
 
     string petak_to_harvest;
     string letak_panen[nPetak];
@@ -576,7 +580,6 @@ void Peternak::getKodeHewan(int hewan_pilihan, string &kode_hewan, map<string, i
 
 void Peternak::inputPetakPanen(string &input, int &banyak_petak, int nPetak, string kode_hewan){
     bool valid = false;
-    cout << "nPetak: " << nPetak << endl;
     //OPSIONAL TANPA RETURN LANGSUNG 
     while(!valid){
         try{
@@ -600,7 +603,6 @@ void Peternak::inputPetakPanen(string &input, int &banyak_petak, int nPetak, str
         //Membersihkan input buffer
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
     }
 }
 
@@ -621,10 +623,17 @@ void Peternak::panenHewan(int nPetak, int banyak_petak,string &petak_to_harvest,
 
                 //add item ke inventory
                 ID = this->peternakan.getItem(petak_to_harvest)->getConfig()->getID();
-                Item *item = new Product(ID);
-
+                int offset = GameConfig::plantConfig.size();
+                Item *item = new Product(ID + offset);
                 this->addItem(item);
 
+                if(this->peternakan.getItem(petak_to_harvest)->getNAME() == "CHICKEN"){
+                    Item *egg = new Product(16);
+                    this->addItem(egg);
+                }else if(this->peternakan.getItem(petak_to_harvest)->getNAME() == "DUCK"){
+                    Item *egg = new Product(17);
+                    this->addItem(egg);
+                }
                 this->getPeternakan()->remove(petak_to_harvest);
 
 

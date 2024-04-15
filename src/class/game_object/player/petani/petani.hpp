@@ -108,11 +108,9 @@ public:
      */
     void cetakHasilPanen(string plantName, int nPetak, string letak_panen[]);
 
-    /**
-     * @brief Mengembalikan tipe player
-     *
-     * @return string
-     */
+    
+    void isTanamanAda();
+
     string getType();
 };
 
