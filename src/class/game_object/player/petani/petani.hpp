@@ -77,7 +77,7 @@ public:
      *
      * @param n (banyak item yang akan ditambahkan)
      */
-    void isInventoryMemadai(int n);
+    bool isInventoryMemadai(int n);
 
     /**
      * @brief Cek apakah inventory penuh
@@ -114,6 +114,16 @@ public:
     int getPlantID(string slot);
 
     void tanamTanaman(string slot_inventory,int ID, string slot_tanah);
+
+    void isPilihanTanamanValid(int pilihan_tanaman,map<string, int> siap_panen);
+
+    void panenTanaman(string petak_to_harvest,string kode_tanaman);
+
+    void tambahProduk(string petak_to_harvest);
+
+    void isBanyakPetakValid(int nPetak,int banyak_petak);
+
+    void ambilKodeTanaman(map<string, int> siap_panen,string* kode_tanaman,int* nPetak,int pilihan_tanaman);
 
     string getType();
 };
