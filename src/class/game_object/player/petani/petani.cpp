@@ -71,23 +71,14 @@ void Petani::CETAK_LADANG()
 void Petani::TANAM()
 {
 
-    try
+    if (this->isLahanPenuh())
     {
-        this->isLahanPenuh();
-        this->isTanamanAda();
+        throw LahanPenuhException();
     }
-    catch (LahanPenuhException &e)
+    else if (!isTanamanAda())
     {
-        cout << RED << e.what() << RESET << endl;
-        return;
+        throw InventoryTidakAdaTanamanException();
     }
-    catch (InventoryTidakAdaTanamanException &e)
-    {
-        cout << RED << e.what() << RESET << endl;
-        return;
-    }
-
-   
 
     cout << "Pilih tanaman dari penyimpanan " << endl;
 
@@ -95,49 +86,37 @@ void Petani::TANAM()
     this->inventory.print();
 
     string slot;
+    int ID;
     bool valid = false;
 
     while (!valid)
     {
         try
         {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cout << "Slot: ";
             cin >> slot;
 
-            while (this->inventory.isEmpty(slot) || !this->inventory.getItem(slot)->isPlant())
-            {
-                if (this->inventory.isEmpty(slot))
-                {
-                    cout << "\nKamu mengambil harapan kosong dari penyimpanan." << endl;
-                }
-                else
-                {
-                    cout << "\nApa yang kamu lakukan?!! Kamu mencoba untuk menanam itu?!!" << endl;
-                }
-                cout << "Silahkan masukan slot yang berisi tanaman." << endl;
-
-                cout << "\nSlot: ";
-                cin >> slot;
-            }
+            ID = getPlantID(slot);
             valid = true;
         }
         catch (InvalidIndexException &e)
         {
-            cout << RED << e.what() << RESET << endl
-                 << endl;
-            ;
+            cout << RED << e.what() << RESET << endl;
+        }
+        catch (ambilSlotKosongException &e)
+        {
+            cout << RED << e.what() << RESET << endl;
+        }
+        catch (bukanTanamanException &e)
+        {
+            cout << RED << e.what() << RESET << endl;
         }
     }
 
-    // get ID from slot
-    int ID = this->inventory.getItem(slot)->getConfig()->getID();
+    cout << "\nKamu memilih " << this->inventory.getItem(slot)->getConfig()->getNAME() << "\n"
+         << endl;
 
-    cout << "\nKamu memilih " << this->inventory.getItem(slot)->getConfig()->getNAME() << endl;
-
-    // PRINT LADANG
-    cout << endl;
+    // Print Lahan
     this->lahan.print();
 
     // Pilih lokasi tanam
@@ -148,40 +127,20 @@ void Petani::TANAM()
     {
         try
         {
-
             cout << "Petak tanah: ";
             cin >> slot_tanah;
-
-            while (!this->lahan.isEmpty(slot_tanah))
-            {
-                cout << "\n Lahan itu sudah ditanami ! ." << endl;
-
-                cout << "Silahkan masukan petak tanah yang masih kosong." << endl;
-
-                cout << "\nPetak tanah: ";
-                cin >> slot_tanah;
-            }
+            tanamTanaman(slot, ID, slot_tanah);
             valid = true;
         }
         catch (InvalidIndexException &e)
         {
-            cout << RED << e.what() << RESET << endl
-                 << endl;
-            ;
+            cout << RED << e.what() << RESET << endl;
+        }
+        catch (lahanSudahDitanamiException &e)
+        {
+            cout << RED << e.what() << RESET << endl;
         }
     }
-
-    // Tanam Tanamannya
-    Plant *tanaman = new Plant(ID);
-    tanaman->setPlanted(true);
-
-    this->lahan.add(tanaman, slot_tanah);
-
-    cout << "\nCangkul, cangkul, cangkul yang dalam~!" << endl;
-    cout << tanaman->getConfig()->getNAME() << " berhasil ditanam!" << endl;
-
-    // Hilangin tanaman dari inventory
-    this->inventory.remove(slot);
 }
 
 void Petani::PANEN()
@@ -225,40 +184,20 @@ void Petani::PANEN()
     {
         cout << "\nNomor tanaman yang ingin dipanen: ";
         cin >> input;
-        // Mengonversi input menjadi integer
+        
         pilihan_tanaman = Util::stringToInt(input);
 
-        if (pilihan_tanaman < 1 || pilihan_tanaman > temp_siap_panen.size())
-        {
-            cout << RED << "Pilihan tidak valid" << RESET << endl;
-            valid = false;
-        }
-        else
-        {
-            valid = true;
-        }
-
+        isPilihanTanamanValid(pilihan_tanaman, temp_siap_panen);
+        valid = true;
         // Membersihkan input buffer
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
 
-    // Pilih Petak
-    int count = 0;
     int nPetak;
     string kode_tanaman;
 
-    //
-    for (auto it = temp_siap_panen.begin(); it != temp_siap_panen.end(); it++)
-    {
-        if (count == pilihan_tanaman - 1)
-        {
-            nPetak = it->second;
-            kode_tanaman = it->first;
-            break;
-        }
-        count++;
-    }
+    ambilKodeTanaman(temp_siap_panen,&kode_tanaman,&nPetak,pilihan_tanaman);
 
     // get id dari tanaman untuk mapping dari tanaman ke produk tanaman
     int ID = 0;
@@ -273,14 +212,11 @@ void Petani::PANEN()
         // Mengonversi input menjadi integer
         banyak_petak = Util::stringToInt(input);
 
-        if (banyak_petak < 1 || banyak_petak > nPetak)
-        {
-            cout << RED << "Pilihan tidak valid" << RESET << endl;
-            valid = false;
-        }
-        else
-        {
+        try{
+            isBanyakPetakValid(nPetak,banyak_petak);
             valid = true;
+        }catch(terlaluBanyakPetakException &e){
+            cout << RED << e.what() << RESET << endl;
         }
 
         // Membersihkan input buffer
@@ -289,14 +225,8 @@ void Petani::PANEN()
     }
 
     // hitung inventory apakah cukup atau tidak
-    try
-    {
-        this->isInventoryMemadai(banyak_petak);
-    }
-    catch (InventoryTidakMemadaiException &e)
-    {
-        cout << RED << e.what() << RESET << endl;
-        return;
+    if(this->isInventoryMemadai(banyak_petak)){
+        throw InventoryTidakMemadaiException();
     }
 
     string petak_to_harvest;
@@ -313,29 +243,29 @@ void Petani::PANEN()
                 cout << "Petak ke-" << i + 1 << " : ";
                 cin >> petak_to_harvest;
 
-                while ((this->lahan.isEmpty(petak_to_harvest)) || this->lahan.getItem(petak_to_harvest)->getConfig()->getKODE_HURUF() != kode_tanaman || !this->lahan.getItem(petak_to_harvest)->isReadyToHarvest())
-                {
-                    cout << RED << "Petak tidak valid" << RESET << endl;
-                    cout << "Petak ke-" << i + 1 << " : ";
-                    cin >> petak_to_harvest;
-                }
+                panenTanaman(petak_to_harvest, kode_tanaman);
 
-                // add item ke inventory
-                ID = this->lahan.getItem(petak_to_harvest)->getConfig()->getID();
-                Item *item = new Product(ID);
-
-                this->addItem(item);
-
-                this->getLadang()->remove(petak_to_harvest);
-
+    
                 // Simpan kordinat panen
                 letak_panen[i] = petak_to_harvest;
 
                 valid = true;
             }
-            catch (...)
+            catch (InvalidIndexException &e)
             {
-                cout << RED << "Input tidak valid" << RESET << endl;
+                cout << RED << e.what() << RESET << endl;
+            }
+            catch (tanamanBelumTumbuhException &e)
+            {
+                cout << RED << e.what() << RESET << endl;
+            }
+            catch (bukanTanamanYangDiambilException &e)
+            {
+                cout << RED << e.what() << RESET << endl;
+            }
+            catch (panenDiLahanKosongException &e)
+            {
+                cout << RED << e.what() << RESET << endl;
             }
         }
     }
@@ -349,12 +279,9 @@ string Petani::getType()
     return "Petani";
 }
 
-void Petani::isLahanPenuh()
+bool Petani::isLahanPenuh()
 {
-    if (this->lahan.calcEmptySpace() == 0)
-    {
-        throw LahanPenuhException();
-    }
+    return (this->lahan.calcEmptySpace() == 0);
 }
 
 void Petani::isPanenAvailable()
@@ -382,12 +309,9 @@ void Petani::isPanenAvailable()
     }
 }
 
-void Petani::isInventoryMemadai(int n)
+bool Petani::isInventoryMemadai(int n)
 {
-    if (this->inventory.calcEmptySpace() < n)
-    {
-        throw InventoryTidakMemadaiException();
-    }
+    return (this->inventory.calcEmptySpace() < n);
 }
 
 void Petani::isInventoryPenuh()
@@ -442,9 +366,9 @@ void Petani::cetakHasilPanen(string kode_tanaman, int banyak_petak, string letak
         cout << letak_panen[i] << ", ";
     }
     cout << letak_panen[banyak_petak - 1] << " telah dipanen!" << endl;
-} 
+}
 
-void Petani::isTanamanAda()
+bool Petani::isTanamanAda()
 {
     bool flag = false;
     for (int i = 0; i < this->inventory.getHeight(); i++)
@@ -462,8 +386,98 @@ void Petani::isTanamanAda()
             }
         }
     }
-    if (!flag)
+    return flag;
+}
+
+int Petani::getPlantID(string slot)
+{
+    if (this->inventory.isEmpty(slot))
     {
-        throw InventoryTidakAdaTanamanException();
+        throw ambilSlotKosongException();
+    }
+    else if (!this->inventory.getItem(slot)->isPlant())
+    {
+        throw bukanTanamanException();
+    }
+    else
+    {
+        return this->inventory.getItem(slot)->getConfig()->getID();
+    }
+}
+
+void Petani::tanamTanaman(string slot_inventory, int ID, string slot_tanah)
+{
+
+    if (!this->lahan.isEmpty(slot_tanah))
+    {
+        throw lahanSudahDitanamiException();
+    }
+
+    Plant *tanaman = new Plant(ID);
+    tanaman->setPlanted(true);
+
+    this->lahan.add(tanaman, slot_tanah);
+
+    cout << "\nCangkul, cangkul, cangkul yang dalam~!" << endl;
+    cout << tanaman->getConfig()->getNAME() << " berhasil ditanam!" << endl;
+
+    // Hilangin tanaman dari inventory
+    this->inventory.remove(slot_inventory);
+}
+
+void Petani::isPilihanTanamanValid(int pilihan_tanaman,map<string, int> siap_panen)
+{
+    if (pilihan_tanaman < 1 || pilihan_tanaman > siap_panen.size())
+    {
+        throw pilihanTanamanException();
+    }
+}
+
+void Petani::isBanyakPetakValid(int nPetak,int banyak_petak)
+{
+    if (banyak_petak < 1 || banyak_petak > nPetak)
+    {
+        throw terlaluBanyakPetakException();
+    }
+}
+
+void Petani::tambahProduk(string petak_to_harvest)
+{
+    
+    int ID = this->lahan.getItem(petak_to_harvest)->getConfig()->getID();
+    Item *item = new Product(ID);
+    this->addItem(item);
+}
+
+void Petani::panenTanaman(string petak_to_harvest,string kode_tanaman)
+{
+    
+    if(this->lahan.isEmpty(petak_to_harvest)){
+        throw panenDiLahanKosongException();
+    }
+    else if(this->lahan.getItem(petak_to_harvest)->getConfig()->getKODE_HURUF() != kode_tanaman){
+        throw bukanTanamanYangDiambilException();
+    }else if(!this->lahan.getItem(petak_to_harvest)->isReadyToHarvest()){
+        throw tanamanBelumTumbuhException();
+    }
+
+    // add item ke inventory
+    tambahProduk(petak_to_harvest);
+
+    this->getLadang()->remove(petak_to_harvest);
+}
+
+void Petani::ambilKodeTanaman(map<string, int> siap_panen,string* kode_tanaman,int* nPetak,int pilihan_tanaman)
+{
+    int count = 0;
+    for (auto it = siap_panen.begin(); it != siap_panen.end(); it++)
+    {
+        if (count == pilihan_tanaman - 1)
+        {
+            *nPetak = it->second;
+            *kode_tanaman = it->first;
+            break;
+        }
+        count++;
     }
 }
