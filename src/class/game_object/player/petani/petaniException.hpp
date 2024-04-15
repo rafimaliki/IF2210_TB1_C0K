@@ -38,4 +38,60 @@ public:
     }
 };
 
+class bukanTanamanException : public exception {
+public:
+    const char* what() const noexcept override {
+        return "Apa yang kamu lakukan?!! Kamu mencoba untuk menanam itu?!!";
+    }
+};
+
+class ambilSlotKosongException : public exception {
+public:
+    const char* what() const noexcept override {
+        return "Kamu mengambil harapan kosong dari penyimpanan.";
+    }
+};
+
+class lahanSudahDitanamiException : public exception {
+public:
+    const char* what() const noexcept override {
+        return "Lahan itu sudah ditanami";
+    }
+};
+
+class pilihanTanamanException : public exception {
+public:
+    const char* what() const noexcept override {
+        return "Pilihan tanaman tidak valid";
+    }
+};
+
+class tanamanBelumTumbuhException : public exception {
+public:
+    const char* what() const noexcept override {
+        return "Tanaman belum bisa dipanen";
+    }
+};
+
+class bukanTanamanYangDiambilException : public exception {
+public:
+    const char* what() const noexcept override {
+        return "Itu bukan tanaman yang akan kamu panen!!";
+    }
+};
+
+class panenDiLahanKosongException : public exception {
+public:
+    const char* what() const noexcept override {
+        return "Kamu mencoba untuk memanen lahan kosong";
+    }
+};
+
+class terlaluBanyakPetakException : public exception {
+public:
+    const char* what() const noexcept override {
+        return "Terlalu banyak petak";
+    }
+};
+
 #endif

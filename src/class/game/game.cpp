@@ -89,7 +89,7 @@ void Game::executeCommand(){
     } catch (InvalidCommandException &e){   
         Util::printColor(e.what(), RED); cout << endl;
     } catch (const exception &e){
-        cout << e.what() << endl;
+        Util::printColor(e.what(), RED); cout << endl;
     }
 }
 

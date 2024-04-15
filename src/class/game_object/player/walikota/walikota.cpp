@@ -46,8 +46,8 @@ void Walikota::BANGUN(){
             cin >> cekLanjut;
             if (cekLanjut == "YA"){
                 namaBangunan = inputNama(daftar_bangunan);
-                price = getBangunanPrice(namaBangunan, daftar_bangunan);
-                useMoney(price);
+                // price = getBangunanPrice(namaBangunan, daftar_bangunan);
+                // useMoney(price);
                 useIngredients(namaBangunan, daftar_bangunan);
                 bangunBangunan(namaBangunan, daftar_bangunan);
                 cout << namaBangunan << " berhasil dibangun dan telah menjadi hak milik walikota!" << endl << endl;
@@ -57,11 +57,11 @@ void Walikota::BANGUN(){
             valid = true;
         } catch (InvalidBuildingNameException& e){
             cout << e.what() << endl << endl;
-        } catch (NotEnoughMoneyException& e){
-            cout << e.what() << endl << endl;
+        // } catch (NotEnoughMoneyException& e){
+        //     cout << e.what() << endl << endl;
         } catch (NotEnoughItemException& e){
             cout << e.what() << endl << endl;
-            cancelUseMoney(price);
+            // cancelUseMoney(price);
         }
     }
 }
