@@ -56,19 +56,19 @@ string Inventory<T>::getTitle()
 
 template <class T>
 void Inventory<T>::add(T *item)
-{
-    for (int i = 0; i < this->height; i++)
-    {
-        for (int j = 0; j < this->width; j++)
-        {
-            if (this->grid[i][j].getAmount() == 0)
-            {
+{   
+    if (this->isFull()){
+        throw InventoryFullException();
+    }
+
+    for (int i = 0; i < this->height; i++){
+        for (int j = 0; j < this->width; j++){
+            if (this->grid[i][j].getAmount() == 0){
                 this->grid[i][j] = InventoryEntry<T>(item);
                 return;
             }
         }
     }
-    cout << "Inventory is full!" << endl;
 }
 
 template <class T>
@@ -93,6 +93,12 @@ void Inventory<T>::add(T *item, string idx)
 {   
     vector<int> index = Util::idxToInt(idx);
     add(item, index[0], index[1]);
+}
+
+template <class T>
+void Inventory<T>::operator+=(T *item)
+{
+    add(item);
 }
 
 template <class T>

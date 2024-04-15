@@ -44,11 +44,12 @@ void Muat::spawnObject(){
         string job = this->data[row][this->data[row].size()-3]; row++;
 
         int num_inventory = stoi(this->data[row][0]); row++;
+        Inventory<Item>* inventory = new_player->getInventory();
 
         // Spawning player inventory
         for (int j = 0; j < num_inventory; j++){
             Item* item = Muat::spawnItem(this->data[row][0]); row++;
-            new_player->addItem(item);
+            (*inventory) += item;
         }
 
         // Spawning ladang

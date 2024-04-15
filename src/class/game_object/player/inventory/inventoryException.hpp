@@ -31,3 +31,12 @@ public:
         return "Slot sudah terisi.";
     }
 };
+
+class InventoryFullException : public exception
+{
+public:
+    const char *what() const noexcept override
+    {
+        return "Inventory sudah penuh.";
+    }
+};

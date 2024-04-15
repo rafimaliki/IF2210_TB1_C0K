@@ -53,6 +53,7 @@ public:
     void add(T *item);
     void add (T *item, int i, int j);
     void add(T *item, string idx);
+    void operator+=(T *item);
 
     void remove(int i, int j);
     void remove(string idx);
