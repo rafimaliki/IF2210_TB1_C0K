@@ -70,7 +70,6 @@ void Petani::CETAK_LADANG()
 
 void Petani::TANAM()
 {
-
     try
     {
         this->isLahanPenuh();
@@ -86,7 +85,6 @@ void Petani::TANAM()
         cout << RED << e.what() << RESET << endl;
         return;
     }
-
    
 
     cout << "Pilih tanaman dari penyimpanan " << endl;
