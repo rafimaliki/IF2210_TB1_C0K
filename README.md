@@ -4,6 +4,8 @@ Repository Tugas Besar 1 Pemrograman Berorientasi Objek 2023/2024
 ## Deskripsi
 Harvest Moon, merupakan sebuah gim berbasis Command Line Interface (CLI) yang dibangun menggunakan bahasa C++ dengan mengaplikasikan konsep pemrograman berbasis objek.
 
+![Harvest Moon](images/Screenshot 2024-04-16 135808.png)
+
 ## Keperluan
 1.  Linux / Windows Subsystem for Linux (WSL)
 2.  G++ versi 11, 14 atau 17.
