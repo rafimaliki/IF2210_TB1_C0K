@@ -9,6 +9,11 @@ Harvest Moon, merupakan sebuah gim berbasis Command Line Interface (CLI) yang di
 ## Keperluan
 1.  Linux / Windows Subsystem for Linux (WSL)
 2.  G++ versi 11, 14 atau 17.
+3.  CMake (min versi 3.22.1)
+```
+sudo apt install g++
+sudo apt install cmake
+```
 
 ## Cara Main
  
